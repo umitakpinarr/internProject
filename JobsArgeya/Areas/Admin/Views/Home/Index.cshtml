@@ -1,0 +1,56 @@
+﻿@model List<AppliesViewModel>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section Styles {
+    <link href="~/panel/assets/css/vendor/dataTables.bootstrap5.css" rel="stylesheet" type="text/css" />
+    <link href="~/panel/assets/css/vendor/responsive.bootstrap5.css" rel="stylesheet" type="text/css" />
+}
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <table id="example" class="table dt-responsive nowrap w-100" width="100%">
+                <thead>
+                    <tr>
+                        <th>Adı Soyadı</th>
+                        <th>Telefonu</th>
+                        <th>E-Maili</th>
+                        <th>Cinsiyeti</th>
+                        <th>Üniversitesi</th>
+                        <th>Bölümü</th>
+                        <th>Özgeçmişi</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (AppliesViewModel apply in Model)
+                    {
+                    <tr>
+                        <!--<td>@apply.id</td>-->
+                        <td>@apply.fullName</td>
+                        <td>@apply.phone</td>
+                        <td>@apply.email</td>
+                        <td>@apply.gender</td>
+                        <td>@apply.university</td>
+                        <td>@apply.faculty</td>
+                        <td>@apply.resume</td>
+                        <td><a href="~/uploads/@apply.cvPath" class="btn btn-primary">Görüntüle</a> <a href="/deleteapply" class="btn btn-danger">Sil</a></td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/panel/assets/js/vendor/jquery.dataTables.min.js"></script>
+    <script src="~/panel/assets/js/vendor/dataTables.bootstrap5.js"></script>
+    <script src="~/panel/assets/js/vendor/dataTables.responsive.min.js"></script>
+    <script src="~/panel/assets/js/vendor/responsive.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+}

@@ -35,6 +35,6 @@ namespace JobsArgeya.Models
         [Required(ErrorMessage = "Lütfen özgeçmişinizi girin..")]
         [StringLength(255)]
         public string resume { get; set; }
-        public List<IFormFile> cvPath { get; set; }
+        public string cvPath { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model UsersModel
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -37,17 +38,17 @@
                                 <p class="text-muted mb-4">Panele giriş yapabilmek için kullanıcı adı ve şifre giriniz.</p>
                             </div>
 
-                            <form action="#">
+                            <form action="/admin/login/index" method="post">
 
                                 <div class="mb-3">
                                     <label for="emailaddress" class="form-label">Kullanıcı Adı</label>
-                                    <input class="form-control" type="email" id="emailaddress" required="" placeholder="Kullanıcı Adı">
+                                    <input class="form-control" id="emailaddress" asp-for="email" required="" placeholder="Kullanıcı Adı">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Şifre</label>
                                     <div class="input-group input-group-merge">
-                                        <input type="password" id="password" class="form-control" placeholder="Şifre">
+                                        <input type="password" id="password" asp-for="password" class="form-control" placeholder="Şifre">
                                         <div class="input-group-text" data-password="false">
                                             <span class="password-eye"></span>
                                         </div>

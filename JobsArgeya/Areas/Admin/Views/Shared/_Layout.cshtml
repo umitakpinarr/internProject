@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>CMS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/panel/assets/images/favicon.ico">
+
+    <!-- App css -->
+    <link href="~/panel/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/panel/assets/css/app.min.css" rel="stylesheet" type="text/css" id="light-style" />
+    <link href="~/panel/assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
+    @RenderSection("Styles", required: false)
+</head>
+
+<body class="loading" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
+    <!-- Begin page -->
+    <div class="wrapper">
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="leftside-menu">
+
+            <!-- LOGO -->
+            <a href="/admin/home/index" class="logo text-center logo-light">
+                <span class="logo-lg">
+                    <img src="https://argeya.com/Content/img/logos/logo.svg" alt="" height="50">
+                </span>
+                <span class="logo-sm">
+                    <img src="https://argeya.com/Content/img/logos/logo.svg" alt="" height="50">
+                </span>
+            </a>
+
+            <!-- LOGO -->
+            <a href="/admin/home/index" class="logo text-center logo-dark">
+                <span class="logo-lg">
+                    <img src="~/panel/assets/images/logo-dark.png" alt="" height="50">
+                </span>
+                <span class="logo-sm">
+                    <img src="~/panel/assets/images/logo_sm_dark.png" alt="" height="50">
+                </span>
+            </a>
+
+            <div class="h-100" id="leftside-menu-container" data-simplebar>
+
+                <!--- Sidemenu -->
+                <ul class="side-nav">
+
+                    <li class="side-nav-title side-nav-item">Navigation</li>
+
+                    <li class="side-nav-item">
+                        <a href="/admin/home/index" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                            <i class="uil-home-alt"></i>
+                            <span>Başvurular</span>
+                        </a>
+                        <a href="/admin/home/index" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                            <i class="uil-home-alt"></i>
+                            <span>İlan İşlemleri</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Sidebar -left -->
+
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="content-page">
+            <div class="content">
+                <!-- Topbar Start -->
+                <div class="navbar-custom">
+                    <ul class="list-unstyled topbar-menu float-end mb-0">
+                        <li class="dropdown notification-list d-lg-none">
+                            <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <i class="dripicons-search noti-icon"></i>
+                            </a>
+
+                        </li>
+
+                        <li class="dropdown notification-list">
+                            <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+                               aria-expanded="false">
+                                <span class="account-user-avatar">
+                                    <img src="~/panel/assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
+                                </span>
+                                <span>
+                                    <span class="account-user-name">@(User?.Claims?.FirstOrDefault(x=> x.Type == "fullName")?.Value??"")</span>
+                                    <span class="account-position">@(User?.Claims?.FirstOrDefault(x => x.Type == "roleName")?.Value??"")</span>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="mdi mdi-lifebuoy me-1"></i>
+                                    <span>Ayarlar</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="/yonetim/login/signout" class="dropdown-item notify-item">
+                                    <i class="mdi mdi-logout me-1"></i>
+                                    <span>Çıkış Yap</span>
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+                    <button class="button-menu-mobile open-left">
+                        <i class="mdi mdi-menu"></i>
+                    </button>
+
+                </div>
+                <!-- end Topbar -->
+                <!-- Start Content-->
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <div class="page-title-right">
+                                </div>
+                                <h4 class="page-title">Ana Sayfa</h4>
+                                @RenderBody()
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                </div> <!-- container -->
+
+            </div> <!-- content -->
+            <!-- Footer Start -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <script>document.write(new Date().getFullYear())</script> © Argeya
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-md-end footer-links d-none d-md-block">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- end Footer -->
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+
+    </div>
+    <!-- END wrapper -->
+    <!-- Right Sidebar -->
+    <!-- /End-bar -->
+    <!-- bundle -->
+    <script src="~/panel/assets/js/vendor.min.js"></script>
+    <script src="~/panel/assets/js/app.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

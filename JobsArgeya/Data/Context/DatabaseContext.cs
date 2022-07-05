@@ -12,6 +12,9 @@ namespace JobsArgeya.Data.Context
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
         public DbSet<Apply> Applies { get; set; }
+        public DbSet<Jobs> Jobs { get; set; }
+        public DbSet<Users> Users { get; set; }
+        public DbSet<Settings> Settings { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

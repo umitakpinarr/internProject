@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Kariyer";
+}
+@model ApplyModel
+<div class="job-apply-form" >
+    <form asp-action="Apply" method="post" enctype="multipart/form-data">
+        <div class="form-group" style="margin-bottom:10px;">
+            <label asp-for="fullName">Adınız ve Soydınız:</label>
+            <input asp-for="fullName" class="form-control" required>
+        </div>
+        <div class="form-group" style="margin-bottom:10px;">
+            <label asp-for="phone">Telefon Numaranız:</label>
+            <input asp-for="phone" class="form-control" required>
+        </div>
+        <div class="form-group" style="margin-bottom:10px;">
+            <label asp-for="email">E-Mail Adresiniz:</label>
+            <input type="email" class="form-control" asp-for="email" required>
+        </div>
+        <div class="form-group" style="margin-bottom:10px;">
+            <label>Cinsiyetiniz</label>
+            <select asp-for="gender" class="form-control" required>
+                <option value="">Lütfen Bir Seçim Yapınız!</option>
+                <option value="N">Belirtmek İstemiyorum</option>
+                <option value="M">Erkek</option>
+                <option value="F">Kadın</option>
+            </select>
+        </div>
+        <div class="form-group" style="margin-bottom:10px;">
+            <label asp-for="university">Okuduğunuz/Mezun Olduğunuz Okul:</label>
+            <input asp-for="university" class="form-control" required>
+        </div>
+        <div class="form-group" style="margin-bottom:10px;">
+            <label asp-for="faculty">Okuduğunuz/Mezun Olduğunuz Bölüm:</label>
+            <input asp-for="faculty" class="form-control" required>
+        </div>
+        <div class="form-group" style="margin-bottom:10px;">
+            <label asp-for="resume">Özgeçmiş:</label>
+            <textarea asp-for="resume" class="form-control" required></textarea>
+        </div>
+        <div class="form-group" style="margin-bottom:10px;">
+            <label for="formFile">CV Yükle</label>
+            <input type="file" class="form-control-file" name="formFile">
+        </div>
+        <button type="submit" class="btn btn-danger w-100">Başvur</button>
+    </form>
+</div>

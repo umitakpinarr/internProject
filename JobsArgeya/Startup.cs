@@ -66,6 +66,10 @@ namespace JobsArgeya
                 endpoints.MapAreaControllerRoute("Admin", "Admin", "Admin/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapAreaControllerRoute("AdminLogin", "Admin", "/yonetim/{controller=login}/{action=Index}");
                 endpoints.MapAreaControllerRoute("Logout", "Admin", "/yonetim/{controller=login}/{action=SignOut}");
+
+                endpoints.MapAreaControllerRoute("List", "Admin", "Admin/{controller=Jobs}/{action=List}");
+                endpoints.MapAreaControllerRoute("List", "Admin", "Admin/{controller=Jobs}/{action=Add}");
+                endpoints.MapAreaControllerRoute("List", "Admin", "Admin/{controller=Jobs}/{action=Edit}");
             });
         }
     }

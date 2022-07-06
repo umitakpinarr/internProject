@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace JobsArgeya.Data.Entities
+namespace JobsArgeya.Areas.Admin.Models
 {
-    public class Jobs
+    public class JobsModel
     {
-        public int id { get; set; }
         public string jobTitle { get; set; }
         public string jobContent { get; set; }
         public string jobKeywords { get; set; }

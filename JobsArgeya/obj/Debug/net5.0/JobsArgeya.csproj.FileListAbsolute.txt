@@ -388,3 +388,7 @@ C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\JobsArgeya.
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\ref\JobsArgeya.dll
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\JobsArgeya.pdb
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\JobsArgeya.genruntimeconfig.cache
+C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\JobsArgeya.csproj.AssemblyReference.cache
+C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Jobs\Add.cshtml.g.cs
+C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Jobs\Edit.cshtml.g.cs
+C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Jobs\List.cshtml.g.cs

@@ -47,6 +47,10 @@ namespace JobsArgeya.Areas.Admin.Models
         [Required(ErrorMessage = "Lütfen Linkedin adresi girin..")]
         [StringLength(255)]
         public string linkedin { get; set; }
-        public List<IFormFile> siteLogo { get; set; }
+        public string smtpServer { get; set; }
+        public string smtpUsername { get; set; }
+        public string smtpPassword { get; set; }
+        public string smtpPort { get; set; }
+        public string logo { get; set; }
     }
 }

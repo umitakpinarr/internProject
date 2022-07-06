@@ -370,7 +370,11 @@ C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\JobsArgeya.
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\JobsArgeya.TagHelpers.output.cache
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\JobsArgeya.RazorCoreGenerate.cache
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Home\Index.cshtml.g.cs
+C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Jobs\Add.cshtml.g.cs
+C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Jobs\Edit.cshtml.g.cs
+C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Jobs\List.cshtml.g.cs
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Login\Index.cshtml.g.cs
+C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Settings\Index.cshtml.g.cs
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\_ViewImports.cshtml.g.cs
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
@@ -389,6 +393,3 @@ C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\ref\JobsArg
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\JobsArgeya.pdb
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\JobsArgeya.genruntimeconfig.cache
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\JobsArgeya.csproj.AssemblyReference.cache
-C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Jobs\Add.cshtml.g.cs
-C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Jobs\Edit.cshtml.g.cs
-C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Jobs\List.cshtml.g.cs

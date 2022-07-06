@@ -22,7 +22,22 @@ namespace JobsArgeya.Areas.Admin.Controllers
         }
         public IActionResult List()
         {
-            return View();
+            List<Jobs> dbJobs = _databaseContext.Jobs.ToList();
+            List<JobsViewModel> allJobs = new List<JobsViewModel>();
+
+            foreach (Jobs jobs in dbJobs)
+            {
+                JobsViewModel jobsVm = new JobsViewModel();
+                jobsVm.id = jobs.id;
+                jobsVm.jobTitle = jobs.jobTitle;
+                jobsVm.jobKeywords = jobs.jobKeywords;
+                jobsVm.jobDescription = jobs.jobDescription;
+                jobsVm.jobContent = jobs.jobContent;
+
+                allJobs.Add(jobsVm);
+            }
+
+            return View(allJobs);
         }
         [HttpGet]
         public IActionResult Add()
@@ -31,7 +46,12 @@ namespace JobsArgeya.Areas.Admin.Controllers
         }
         [HttpGet]
         public IActionResult Edit()
-        {
+        {   /*TO DO*/
+            /* Güncelleme yapıyor lakin sayfa ilk yüklendiğinde veriler boş geliyor. 
+             * ilgili veriler inputlara çekilemiyor */
+            /*Jobs dbJobs = _databaseContext.Jobs.Where(x => x.id == id).FirstOrDefault();
+
+            return View(dbJobs);*/
             return View();
         }
         [HttpPost]
@@ -49,6 +69,25 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 _databaseContext.SaveChanges();
                 return Redirect(Request.Headers["Referer"].ToString());
             }
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
+        [HttpPost]
+        public IActionResult Edit(JobsModel jobsModel, int id)
+        {
+            var dbJobs = _databaseContext.Jobs.Where(x => x.id == id).FirstOrDefault();
+            dbJobs.jobTitle = jobsModel.jobTitle;
+            dbJobs.jobKeywords = jobsModel.jobKeywords;
+            dbJobs.jobDescription = jobsModel.jobDescription;
+            dbJobs.jobContent = jobsModel.jobContent;
+            _databaseContext.SaveChanges();
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
+        public IActionResult Delete(int id)
+        {
+            var job = _databaseContext.Jobs.Where(x => x.id == id).FirstOrDefault();
+            _databaseContext.Jobs.Remove(job);
+            _databaseContext.SaveChanges();
+
             return Redirect(Request.Headers["Referer"].ToString());
         }
     }

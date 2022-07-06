@@ -50,5 +50,14 @@ namespace JobsArgeya.Areas.Admin.Controllers
 
             return View(allApplies);
         }
+
+        public IActionResult Delete(int id)
+        {
+            var apply = _databaseContext.Applies.Where(x => x.id == id).FirstOrDefault();
+            _databaseContext.Applies.Remove(apply);
+            _databaseContext.SaveChanges();
+
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
     }
 }

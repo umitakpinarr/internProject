@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace JobsArgeya.Areas.Admin.Models
 {
-    public class JobsModel
+    public class JobsViewModel
     {
         public int id { get; set; }
         public string jobTitle { get; set; }

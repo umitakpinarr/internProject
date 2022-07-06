@@ -3,14 +3,16 @@ using JobsArgeya.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace JobsArgeya.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220706095243_InitialCreate3")]
+    partial class InitialCreate3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,10 +87,49 @@ namespace JobsArgeya.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("key")
+                    b.Property<string>("adress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("value")
+                    b.Property<string>("description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("facebook")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("instagram")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("keywords")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("linkedin")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("logo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("smtpPassword")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("smtpPort")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("smtpServer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("smtpUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("twitter")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");

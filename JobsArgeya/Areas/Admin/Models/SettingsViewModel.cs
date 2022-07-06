@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace JobsArgeya.Data.Entities
+namespace JobsArgeya.Areas.Admin.Models
 {
-    public class Settings
+    public class SettingsViewModel
     {
-        public int id { get; set; }
+        public string id { get; set; }
         public string key { get; set; }
         public string value { get; set; }
     }

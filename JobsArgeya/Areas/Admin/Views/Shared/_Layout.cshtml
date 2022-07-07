@@ -125,7 +125,21 @@
                             <div class="page-title-box">
                                 <div class="page-title-right">
                                 </div>
-                                <h4 class="page-title">Ana Sayfa</h4>
+                                <h4 class="page-title">@ViewData["CmsTitle"]</h4>
+
+                                @if (TempData["successMessage"] != null)
+                                {
+                                    <div class="alert alert-success" role="alert">
+                                        @TempData["successMessage"]
+                                    </div>
+                                }
+                                @if (TempData["dangerMessage"] != null)
+                                {
+                                    <div class="alert alert-danger" role="alert">
+                                        @TempData["dangerMessage"]
+                                    </div>
+                                }
+
                                 @RenderBody()
                             </div>
                         </div>

@@ -54,10 +54,35 @@ namespace JobsArgeya.Areas.Admin.Controllers
         public IActionResult Delete(int id)
         {
             var apply = _databaseContext.Applies.Where(x => x.id == id).FirstOrDefault();
-            _databaseContext.Applies.Remove(apply);
-            _databaseContext.SaveChanges();
-
+            
+            if (apply != null)
+            {
+                _databaseContext.Applies.Remove(apply);
+                _databaseContext.SaveChanges();
+                TempData["successMessage"] = "Başvuru başarıyla silindi.";
+            }
+            else
+            {
+                TempData["dangerMessage"] = "Başvuru silinirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
+            }
             return Redirect(Request.Headers["Referer"].ToString());
+        }
+        public IActionResult ApplyDetail(int id)
+        {
+            Apply dbApply = _databaseContext.Applies.Where(x => x.id == id).FirstOrDefault();
+            AppliesViewModel applyDetail = new AppliesViewModel();
+
+            applyDetail.id = dbApply.id;
+            applyDetail.fullName = dbApply.fullName;
+            applyDetail.phone = dbApply.phone;
+            applyDetail.email = dbApply.email;
+            applyDetail.gender = dbApply.gender;
+            applyDetail.university = dbApply.university;
+            applyDetail.faculty = dbApply.faculty;
+            applyDetail.resume = dbApply.resume;
+            applyDetail.cvPath = dbApply.cvPath;
+
+            return View(applyDetail);
         }
     }
 }

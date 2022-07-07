@@ -1,10 +1,17 @@
-﻿@{
+﻿@model JobsModel
+@{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["CmsTitle"] = "İlan Oluştur";
 }
 @section Styles {
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <style>
+        /*Textbox*/
+        .ck-editor__editable {
+            min-height: 500px;
+            max-height: 500px;
+        }
+    </style>
 }
-@model JobsModel
 <div class="col-12">
     <div class="card">
         <div class="card-body">
@@ -32,14 +39,12 @@
 </div>
 @section Scripts {
     <script src="~/panel/assets/js/vendor/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
     <script>
-        $(document).ready(function () {
-            $('#jobContent').summernote({
-                height: 300,                 // set editor height
-                minHeight: null,             // set minimum height of editor
-                maxHeight: null,             // set maximum height of editor
+        ClassicEditor
+            .create(document.querySelector('#jobContent'))
+            .catch(error => {
+                console.error(error);
             });
-        });
     </script>
 }

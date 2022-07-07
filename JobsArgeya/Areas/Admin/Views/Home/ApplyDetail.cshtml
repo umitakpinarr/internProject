@@ -1,0 +1,65 @@
+﻿@model AppliesViewModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["CmsTitle"] = "Başvuru Detayı";
+}
+<div class="row">
+    <div class="col-xl-4 col-lg-5">
+        <div class="card text-center">
+            <div class="card-body">
+                <div class="text-start mt-3">
+                    <p class="mb-2 font-13">
+                        <strong>Adı Soyadı :</strong> <span class="ms-2">
+                            @Model.fullName
+                        </span>
+                    </p>
+
+                    <p class="mb-2 font-13">
+                        <strong>Telefon :</strong><span class="ms-2">
+                            @Model.phone
+                        </span>
+                    </p>
+
+                    <p class="mb-2 font-13">
+                        <strong>Email :</strong><span class="ms-2">
+                            @Model.email
+                        </span>
+                    </p>
+
+                    <p class="mb-2 font-13">
+                        <strong>Cinsiyet :</strong><span class="ms-2">
+                            @Model.gender
+                        </span>
+                    </p>
+
+                    <p class="mb-2 font-13">
+                        <strong>Üniversite :</strong><span class="ms-2">
+                            @Model.university
+                        </span>
+                    </p>
+
+                    <p class="mb-2 font-13">
+                        <strong>Bölüm :</strong><span class="ms-2">
+                            @Model.faculty
+                        </span>
+                    </p>
+                    <hr />
+                    <h4 class="header-title mt-0 mb-3">Özgeçmiş</h4>
+                    <p class="text-muted font-13">
+                        @Model.resume
+                    </p>
+
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card -->
+
+    </div> <!-- end col-->
+
+    <div class="col-xl-8 col-lg-7">
+        <div class="card">
+            <div class="card-body" style="height:800px;">
+                <iframe src="/uploads/@Model.cvPath" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>
+            </div> <!-- end card body -->
+        </div> <!-- end card -->
+    </div> <!-- end col -->
+</div>

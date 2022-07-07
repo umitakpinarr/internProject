@@ -1,6 +1,7 @@
 ﻿@model List<AppliesViewModel>
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["CmsTitle"] = "Başvurular";
 }
 @section Styles {
     <link href="~/panel/assets/css/vendor/dataTables.bootstrap5.css" rel="stylesheet" type="text/css" />
@@ -25,16 +26,16 @@
                 <tbody>
                     @foreach (AppliesViewModel apply in Model)
                     {
-                    <tr>
-                        <td>@apply.fullName</td>
-                        <td>@apply.phone</td>
-                        <td>@apply.email</td>
-                        <td>@apply.gender</td>
-                        <td>@apply.university</td>
-                        <td>@apply.faculty</td>
-                        <td><p style="word-wrap: break-word;">@apply.resume</p></td>
-                        <td><a href="~/uploads/@apply.cvPath" class="btn btn-primary">Görüntüle</a> <a href="/admin/home/delete/@apply.id" class="btn btn-danger">Sil</a></td>
-                    </tr>
+                        <tr>
+                            <td>@apply.fullName</td>
+                            <td>@apply.phone</td>
+                            <td>@apply.email</td>
+                            <td>@apply.gender</td>
+                            <td>@apply.university</td>
+                            <td>@apply.faculty</td>
+                            <td><p style="word-wrap: break-word;">@apply.resume</p></td>
+                            <td><a href="/admin/home/applydetail/@apply.id" class="btn btn-primary">Görüntüle</a> <a href="/admin/home/delete/@apply.id" class="btn btn-danger">Sil</a></td>
+                        </tr>
                     }
                 </tbody>
             </table>

@@ -1,67 +1,73 @@
 ﻿@model List<SettingsViewModel>
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["CmsTitle"] = "Site Ayarları";
 }
 <div class="col-12">
     <div class="card">
         <div class="card-body">
-            <form action="/admin/settings/index" method="post">
+            <form action="/admin/settings/index" method="post" enctype="multipart/form-data">
                 <div class="form-group" style="margin-bottom:10px;">
                     <label for="title">Site Başlığı</label>
-                    <input class="form-control" type="text" value="@Model[0].value" name="title" id="title" placeholder="Site Başlığı">
+                    <input class="form-control" type="text" value="@Model[0].title" name="title" id="title" placeholder="Site Başlığı">
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
                     <label for="keywords">Site Anahtar Kelimeleri</label>
-                    <input class="form-control" type="text" value="@Model[1].value" name="keywords" id="keywords" placeholder="Site Anahtar Kelime">
+                    <input class="form-control" type="text" value="@Model[0].keywords" name="keywords" id="keywords" placeholder="Site Anahtar Kelime">
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
                     <label for="description">Site Açıklama</label>
-                    <input class="form-control" type="text" value="@Model[2].value" name="description" id="description" placeholder="Site Açıklama">
+                    <input class="form-control" type="text" value="@Model[0].description" name="description" id="description" placeholder="Site Açıklama">
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
                     <label for="phone">Telefon</label>
-                    <input class="form-control" type="text" value="@Model[3].value" name="phone" id="phone" placeholder="Telefon">
+                    <input class="form-control" type="text" value="@Model[0].email" name="phone" id="phone" placeholder="Telefon">
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
                     <label for="jobDescription">E-Mail</label>
-                    <input class="form-control" type="text" value="@Model[4].value" name="email" id="email" placeholder="Email">
+                    <input class="form-control" type="text" value="@Model[0].phone" name="email" id="email" placeholder="Email">
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
                     <label for="adress">Adres</label>
-                    <input class="form-control" type="text" value="@Model[5].value" name="adress" id="adress" placeholder="Adres">
+                    <input class="form-control" type="text" value="@Model[0].adress" name="adress" id="adress" placeholder="Adres">
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
                     <label for="facebook">Facebook Adresi</label>
-                    <input class="form-control" type="text" value="@Model[6].value" name="facebook" id="facebook" placeholder="Facebook Adresi">
+                    <input class="form-control" type="text" value="@Model[0].facebook" name="facebook" id="facebook" placeholder="Facebook Adresi">
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
                     <label for="instagram">Instagram Adresi</label>
-                    <input class="form-control" type="text" value="@Model[7].value" name="instagram" id="instagram" placeholder="Instagram Adresi">
+                    <input class="form-control" type="text" value="@Model[0].instagram" name="instagram" id="instagram" placeholder="Instagram Adresi">
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
                     <label for="twitter">Twitter Adresi</label>
-                    <input class="form-control" type="text" value="@Model[8].value" name="twitter" id="twitter" placeholder="Twitter Adresi">
+                    <input class="form-control" type="text" value="@Model[0].twitter" name="twitter" id="twitter" placeholder="Twitter Adresi">
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
                     <label for="linkedin">Linkedin Adresi</label>
-                    <input class="form-control" type="text" value="@Model[9].value" name="linkedin" id="linkedin" placeholder="Linkedin Adresi">
+                    <input class="form-control" type="text" value="@Model[0].linkedin" name="linkedin" id="linkedin" placeholder="Linkedin Adresi">
                 </div>
                 <hr />
                 <div class="form-group" style="margin-bottom:10px;">
                     <label for="smtpServer">SMTP Sunucusu</label>
-                    <input class="form-control" type="text" value="@Model[10].value" name="smtpServer" id="smtpServer" placeholder="SMTP Sunucusu">
+                    <input class="form-control" type="text" value="@Model[0].smtpServer" name="smtpServer" id="smtpServer" placeholder="SMTP Sunucusu">
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
                     <label for="smtpUsername">SMTP Kullanıcı Adı</label>
-                    <input class="form-control" type="text" value="@Model[11].value" name="smtpUsername" id="smtpUsername" placeholder="SMTP Kullanıcı Adı">
+                    <input class="form-control" type="text" value="@Model[0].smtpUsername" name="smtpUsername" id="smtpUsername" placeholder="SMTP Kullanıcı Adı">
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
                     <label for="smtpPassword">SMTP Şifresi</label>
-                    <input class="form-control" type="text" value="@Model[12].value" name="smtpPassword" id="smtpPassword" placeholder="SMTP Şifresi">
+                    <input class="form-control" type="text" value="@Model[0].smtpPassword" name="smtpPassword" id="smtpPassword" placeholder="SMTP Şifresi">
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
                     <label for="smtpPort">SMTP Port</label>
-                    <input class="form-control" type="text" value="@Model[13].value" name="smtpPort" id="smtpPort" placeholder="SMTP Port">
+                    <input class="form-control" type="text" value="@Model[0].smtpPort" name="smtpPort" id="smtpPort" placeholder="SMTP Port">
+                </div>
+                <hr />
+                <div class="form-group">
+                    <label for="logo">Site Logo</label>
+                    <input type="file" class="form-control-file" id="logo" name="logo">
                 </div>
                 <br />
                 <button type="submit" class="btn btn-danger w-100">Ayarları Kaydet</button>

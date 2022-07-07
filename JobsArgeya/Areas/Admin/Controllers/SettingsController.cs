@@ -7,6 +7,8 @@ using JobsArgeya.Areas.Admin.Models;
 using JobsArgeya.Data.Entities;
 using JobsArgeya.Data.Context;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace JobsArgeya.Areas.Admin.Controllers
 {
@@ -29,8 +31,21 @@ namespace JobsArgeya.Areas.Admin.Controllers
             foreach (Settings settings in dbSettings)
             {
                 SettingsViewModel settingsVm = new SettingsViewModel();
-                settingsVm.key = settings.key;
-                settingsVm.value = settings.value;
+                settingsVm.title = settings.title;
+                settingsVm.keywords = settings.keywords;
+                settingsVm.description = settings.description;
+                settingsVm.email = settings.email;
+                settingsVm.phone = settings.phone;
+                settingsVm.adress = settings.adress;
+                settingsVm.facebook = settings.facebook;
+                settingsVm.instagram = settings.instagram;
+                settingsVm.twitter = settings.twitter;
+                settingsVm.linkedin = settings.linkedin;
+                settingsVm.smtpServer = settings.smtpServer;
+                settingsVm.smtpUsername = settings.smtpUsername;
+                settingsVm.smtpPassword = settings.smtpPassword;
+                settingsVm.smtpPort = settings.smtpPort;
+                settingsVm.logo = settings.logo;
 
                 allSettings.Add(settingsVm);
             }
@@ -39,11 +54,66 @@ namespace JobsArgeya.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(SettingsModel settings)
+        public IActionResult Index(SettingsModel settings, IFormFile logo)
         {
             List<Settings> dbSettings = _databaseContext.Settings.ToList();
-            
-            return View();
+            List<SettingsViewModel> allSettings = new List<SettingsViewModel>();
+
+            if (logo.ContentType == " image/jpeg" || logo.ContentType == "image/png" || logo.ContentType == "image/svg+xml." && logo != null && logo.Length > 0)
+            {
+                /*Dosya uzantısını alıyoruz*/
+                var extension = Path.GetExtension(logo.FileName);
+                /*Benzersiz bir dosya adı alıp uzantıyla birleştiriyoruz*/
+                var fileName = Guid.NewGuid() + extension;
+                /*Dosyanın yükleneceği klasörün yolu*/
+                var path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + fileName;
+                /*Dosya oluşturuluyor*/
+                FileStream stream = new FileStream(path, FileMode.Create);
+                logo.CopyTo(stream);
+
+                /*Db den gelen veriler settingsVM e atanıyor*/
+                foreach (Settings setting in dbSettings)
+                {
+                    SettingsViewModel settingsVm = new SettingsViewModel();
+                    settingsVm.title = settings.title;
+                    settingsVm.keywords = settings.keywords;
+                    settingsVm.description = settings.description;
+                    settingsVm.email = settings.email;
+                    settingsVm.phone = settings.phone;
+                    settingsVm.adress = settings.adress;
+                    settingsVm.facebook = settings.facebook;
+                    settingsVm.instagram = settings.instagram;
+                    settingsVm.twitter = settings.twitter;
+                    settingsVm.linkedin = settings.linkedin;
+                    settingsVm.smtpServer = settings.smtpServer;
+                    settingsVm.smtpUsername = settings.smtpUsername;
+                    settingsVm.smtpPassword = settings.smtpPassword;
+                    settingsVm.smtpPort = settings.smtpPort;
+                    settingsVm.logo = fileName;
+
+                    allSettings.Add(settingsVm);
+                }
+                /* Ayar Update */
+                var db = _databaseContext.Settings.Where(x => x.id == 1).FirstOrDefault();
+                db.title = allSettings[0].title;
+                db.keywords = allSettings[0].keywords;
+                db.description = allSettings[0].description;
+                db.email = allSettings[0].email;
+                db.phone = allSettings[0].phone;
+                db.adress = allSettings[0].adress;
+                db.facebook = allSettings[0].facebook;
+                db.instagram = allSettings[0].instagram;
+                db.twitter = allSettings[0].twitter;
+                db.linkedin = allSettings[0].linkedin;
+                db.smtpServer = allSettings[0].smtpServer;
+                db.smtpUsername = allSettings[0].smtpUsername;
+                db.smtpPassword = allSettings[0].smtpPassword;
+                db.smtpPort = allSettings[0].smtpPort;
+                db.logo = fileName;
+                _databaseContext.SaveChanges();
+            }
+            TempData["successMessage"] = "Site ayarları başarıyla güncellendi.";
+            return View(allSettings);
         }
     }
 }

@@ -45,19 +45,22 @@ namespace JobsArgeya.Areas.Admin.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Edit()
-        {   /*TO DO*/
-            /* Güncelleme yapıyor lakin sayfa ilk yüklendiğinde veriler boş geliyor. 
-             * ilgili veriler inputlara çekilemiyor */
-            /*Jobs dbJobs = _databaseContext.Jobs.Where(x => x.id == id).FirstOrDefault();
+        public IActionResult Edit(int id)
+        {   
+            Jobs dbJobs = _databaseContext.Jobs.Where(x => x.id == id).FirstOrDefault();
+            JobsModel jobDetail = new JobsModel();
 
-            return View(dbJobs);*/
-            return View();
+            jobDetail.jobTitle = dbJobs.jobTitle;
+            jobDetail.jobKeywords = dbJobs.jobKeywords;
+            jobDetail.jobDescription = dbJobs.jobDescription;
+            jobDetail.jobContent = dbJobs.jobContent;
+
+            return View(jobDetail);
         }
         [HttpPost]
         public IActionResult Add(JobsModel jobsModel)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _databaseContext.Jobs.Add(new Jobs
                 {
@@ -67,27 +70,42 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     jobContent = jobsModel.jobContent
                 });
                 _databaseContext.SaveChanges();
+                TempData["successMessage"] = "İlan başarıyla eklendi.";
                 return Redirect(Request.Headers["Referer"].ToString());
             }
+            TempData["dangerMessage"] = "İlan eklenirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
             return Redirect(Request.Headers["Referer"].ToString());
         }
         [HttpPost]
         public IActionResult Edit(JobsModel jobsModel, int id)
         {
-            var dbJobs = _databaseContext.Jobs.Where(x => x.id == id).FirstOrDefault();
-            dbJobs.jobTitle = jobsModel.jobTitle;
-            dbJobs.jobKeywords = jobsModel.jobKeywords;
-            dbJobs.jobDescription = jobsModel.jobDescription;
-            dbJobs.jobContent = jobsModel.jobContent;
-            _databaseContext.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                var dbJobs = _databaseContext.Jobs.Where(x => x.id == id).FirstOrDefault();
+                dbJobs.jobTitle = jobsModel.jobTitle;
+                dbJobs.jobKeywords = jobsModel.jobKeywords;
+                dbJobs.jobDescription = jobsModel.jobDescription;
+                dbJobs.jobContent = jobsModel.jobContent;
+                _databaseContext.SaveChanges();
+                TempData["successMessage"] = "İlan başarıyla güncellendi.";
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+            TempData["dangerMessage"] = "İlan güncellenirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
             return Redirect(Request.Headers["Referer"].ToString());
         }
         public IActionResult Delete(int id)
         {
             var job = _databaseContext.Jobs.Where(x => x.id == id).FirstOrDefault();
-            _databaseContext.Jobs.Remove(job);
-            _databaseContext.SaveChanges();
-
+            if (job != null)
+            {
+                _databaseContext.Jobs.Remove(job);
+                _databaseContext.SaveChanges();
+                TempData["successMessage"] = "İlan başarıyla silindi.";
+            }
+            else
+            {
+                TempData["dangerMessage"] = "İlan silinirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
+            }
             return Redirect(Request.Headers["Referer"].ToString());
         }
     }

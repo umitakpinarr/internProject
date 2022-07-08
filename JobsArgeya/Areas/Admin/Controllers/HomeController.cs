@@ -65,7 +65,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
             {
                 TempData["dangerMessage"] = "Başvuru silinirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
             }
-            return Redirect(Request.Headers["Referer"].ToString());
+            return Redirect("/admin/home/index");
         }
         public IActionResult ApplyDetail(int id)
         {

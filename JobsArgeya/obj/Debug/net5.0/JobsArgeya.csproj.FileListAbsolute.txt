@@ -394,3 +394,6 @@ C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\JobsArgeya.
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\JobsArgeya.genruntimeconfig.cache
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\JobsArgeya.csproj.AssemblyReference.cache
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Home\ApplyDetail.cshtml.g.cs
+C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Views\Shared\Components\Header\Default.cshtml.g.cs
+C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Views\Shared\Components\Footer\Default.cshtml.g.cs
+C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Mail\Index.cshtml.g.cs

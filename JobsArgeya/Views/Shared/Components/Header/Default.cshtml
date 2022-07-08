@@ -1,0 +1,60 @@
+﻿@model SettingsModel
+<div class="toolbar-area hidden-md">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="toolbar-contact">
+                    <ul>
+                        <li><i class="flaticon-email"></i><a href="mailto:@Model.email">@Model.email</a></li>
+                        <li><i class="flaticon-call"></i><a href="tel:@Model.phone">@Model.phone</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="toolbar-sl-share">
+                    <ul>
+                        <li><a href="@Model.facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="@Model.instagram"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="@Model.twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="@Model.linkedin"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<header id="rs-header" class="rs-header">
+    <div class="menu-area menu-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="logo-area">
+                        <a href="/"><img src="/uploads/@Model.logo" alt="logo" style="max-height:40px; height:40px;"></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-right">
+                    <div class="rs-menu-area">
+                        <div class="main-menu">
+                            <div class="mobile-menu">
+                                <a class="rs-menu-toggle" style="color: #dc3545 !important;">
+                                    <i class="fa fa-bars"></i>
+                                </a>
+                            </div>
+                            <nav class="rs-menu pr-65">
+                                <ul class="nav-menu">
+                                    <li>
+                                        <a href="/">Ana Sayfa</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="https://argeya.com/tr/iletisim">Bize Ulaşın</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

@@ -2,7 +2,19 @@
     ViewData["Title"] = "Kariyer";
 }
 @model ApplyModel
-<div class="job-apply-form" >
+@if (TempData["successMessage"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["successMessage"]
+    </div>
+}
+@if (TempData["dangerMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["dangerMessage"]
+    </div>
+}
+<div class="job-apply-form">
     <form asp-action="Apply" method="post" enctype="multipart/form-data">
         <div class="form-group" style="margin-bottom:10px;">
             <label asp-for="fullName">Adınız ve Soydınız:</label>

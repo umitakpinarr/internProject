@@ -12,17 +12,13 @@
     <link rel="apple-touch-icon" href="~/favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="~/favicon.png">
     <!-- Bootstrap v4.4.1 css -->
-    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- font-awesome css -->
     <link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.min.css">
     <!-- animate css -->
     <link rel="stylesheet" type="text/css" href="~/assets/css/animate.css">
     <!-- aos css -->
     <link rel="stylesheet" type="text/css" href="~/assets/css/aos.css">
-    <!-- owl.carousel css -->
-    <link rel="stylesheet" type="text/css" href="~/assets/css/owl.carousel.css">
-    <!-- slick css -->
-    <link rel="stylesheet" type="text/css" href="~/assets/css/slick.css">
     <!-- off canvas css -->
     <link rel="stylesheet" type="text/css" href="~/assets/css/off-canvas.css">
     <!-- linea-font css -->
@@ -54,75 +50,12 @@
     <!--End preloader here -->
     <!--Full width header Start-->
     <div class="full-width-header">
-        <!-- Toolbar Start -->
-        <div class="toolbar-area hidden-md">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="toolbar-contact">
-                            <ul>
-                                <li><i class="flaticon-email"></i><a href="mailto:iletisim@argeya.com">iletisim@argeya.com</a></li>
-                                <li><i class="flaticon-call"></i><a href="tel:+905355111210">+90 535 511 12 10</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="toolbar-sl-share">
-                            <ul>
-                                <li><a href="https://www.facebook.com/argeyacom"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="https://www.instagram.com/argeyacom/"><i class="fa fa-instagram"></i></a></li>
-                                <li><a href="https://twitter.com/argeyacom"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="https://www.linkedin.com/company/argeya/"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <!-- Toolbar End -->
         <!--Header Start-->
-        <header id="rs-header" class="rs-header">
-            <!-- Menu Start -->
-            <div class="menu-area menu-sticky">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-9">
-                            <div class="logo-area">
-                                <a href="/"><img src="assets/logo.svg" alt="logo" style="max-height:50px; height:50px;" ></a>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 text-right">
-                            <div class="rs-menu-area">
-                                <div class="main-menu">
-                                    <div class="mobile-menu">
-                                        <a class="rs-menu-toggle" style="color: #dc3545 !important;">
-                                            <i class="fa fa-bars"></i>
-                                        </a>
-                                    </div>
-                                    <nav class="rs-menu pr-65">
-                                        <ul class="nav-menu">
-                                            <li>
-                                                <a href="/">Kariyer</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="/contact">Bize Ulaşın</a>
-                                            </li>
-                                        </ul> <!-- //.nav-menu -->
-                                    </nav>
-                                </div> <!-- //.main-menu -->
-                                <div class="expand-btn-inner">
-                                    <ul>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Menu End -->
-        </header>
+        @await Component.InvokeAsync("Header")
         <!--Header End-->
+    </div>
     </div>
     <!--Full width header End-->
     <!-- Main content Start -->
@@ -139,85 +72,16 @@
         <!-- Profile Section -->
         <section class="profile-section orange-color pt-100 pb-100 md-pt-70 md-pb-70">
             <div class="container">
-                            @RenderBody()
+                @RenderBody()
 
             </div>
         </section>
-
+        <footer id="rs-footer" class="rs-footer">
+            @await Component.InvokeAsync("Footer");
+        </footer>
     </div>
     <!-- Main content End -->
     <!-- Footer Start -->
-    <footer id="rs-footer" class="rs-footer">
-        <div class="container">
-            <div class="footer-newsletter">
-                <div class="row y-middle">
-                    <div class="col-md-6 sm-mb-26">
-                        <h3 class="title white-color mb-0">Mail Aboneliği</h3>
-                    </div>
-                    <div class="col-md-6 text-right">
-                        <form class="newsletter-form">
-                            <input type="email" name="email" placeholder="E-Mail Adresiniz" required="">
-                            <button type="submit"><i class="fa fa-paper-plane"></i></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-content pt-62 pb-79 md-pb-64 sm-pt-48">
-                <div class="row">
-                    <div class="col-lg-4 col-md-12 col-sm-12 footer-widget md-mb-39">
-                        <div class="about-widget pr-15">
-                            <div class="logo-part">
-                                <a href="/"><img src="assets/footer.png" alt="Footer Logo"></a>
-                            </div>
-                            <p class="desc">2003 yılından bu yana yazılım sektöründe edindiğimiz tecrübe ve severek yaptığımız yazılımlarla, 2012 yılında Alanya merkezli başlatmış olduğumuz Argeya Yazılım Ltd. şirketimizle, Türkiye genelinde ve dünyanın farklı ülkelerine hizmet verebilir konuma ulaşmış bulunmaktayız. Kendimizi adımıza yakışır şekilde, araştırmacı, daima yeniliklere açık ve girişimci bir şirket olarak tanımlamaktayız.</p>
-                            <div class="btn-part">
-                                <a class="readon" href="https://argeya.com/tr/hakkimizda">Hakkımızda</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12 md-mb-32 footer-widget">
-                        <h4 class="widget-title">İletişim</h4>
-                        <ul class="address-widget pr-40">
-                            <li>
-                                <i class="flaticon-location"></i>
-                                <div class="desc">Güllerpınarı Mahallesi, Akay Sokak. No:12 / 1, 07400 Alanya / Antalya</div>
-                            </li>
-                            <li>
-                                <i class="flaticon-call"></i>
-                                <div class="desc">
-                                    <a href="tel:+905355111210">+90 535 511 12 10</a>
-                                </div>
-                            </li>
-                            <li>
-                                <i class="flaticon-email"></i>
-                                <div class="desc">
-                                    <a href="mailto:iletisim@argeya.com">iletisim@argeya.com</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="row y-middle">
-                    <div class="col-lg-6 col-md-8 sm-mb-21">
-                        <div class="copyright">
-                            <p>© Copyright 2022 Argeya. All Rights Reserved.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-4 text-right sm-text-center">
-                        <ul class="footer-social">
-                            <li><a href="https://www.facebook.com/argeyacom"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="https://www.instagram.com/argeyacom/"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="https://twitter.com/argeyacom"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="https://www.linkedin.com/company/argeya/"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
     <!-- Footer End -->
     <!-- start scrollUp  -->
     <div id="scrollUp">
@@ -229,15 +93,11 @@
     <!-- jquery latest version -->
     <script src="~/assets/js/jquery.min.js"></script>
     <!-- Bootstrap v4.4.1 js -->
-    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <!-- Menu js -->
     <script src="~/assets/js/rsmenu-main.js"></script>
     <!-- op nav js -->
     <script src="~/assets/js/jquery.nav.js"></script>
-    <!-- owl.carousel js -->
-    <script src="~/assets/js/owl.carousel.min.js"></script>
-    <!-- Slick js -->
-    <script src="~/assets/js/slick.min.js"></script>
     <!-- isotope.pkgd.min js -->
     <script src="~/assets/js/isotope.pkgd.min.js"></script>
     <!-- imagesloaded.pkgd.min js -->
@@ -263,5 +123,19 @@
     <script src="~/assets/js/contact.form.js"></script>
     <!-- main js -->
     <script src="~/assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    @if (TempData["successMessage"] != null)
+    {
+<script>
+            swal("Başarılı", "@Html.Raw(@TempData["successMessage"])", "success");
+</script>
+    }
+    @if (TempData["dangerMessage"] != null)
+    {
+<script>
+            swal("Başarısız", "@Html.Raw(@TempData["dangerMessage"])", "error");
+</script>
+    }
 </body>
 </html>

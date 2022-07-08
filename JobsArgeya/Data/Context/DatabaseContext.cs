@@ -15,6 +15,7 @@ namespace JobsArgeya.Data.Context
         public DbSet<Jobs> Jobs { get; set; }
         public DbSet<Users> Users { get; set; }
         public DbSet<Settings> Settings { get; set; }
+        public DbSet<MailSubscribers> MailSubscribers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

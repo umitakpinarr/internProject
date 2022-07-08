@@ -49,13 +49,19 @@ namespace JobsArgeya.Areas.Admin.Controllers
         {   
             Jobs dbJobs = _databaseContext.Jobs.Where(x => x.id == id).FirstOrDefault();
             JobsModel jobDetail = new JobsModel();
-
-            jobDetail.jobTitle = dbJobs.jobTitle;
-            jobDetail.jobKeywords = dbJobs.jobKeywords;
-            jobDetail.jobDescription = dbJobs.jobDescription;
-            jobDetail.jobContent = dbJobs.jobContent;
-
-            return View(jobDetail);
+            if (dbJobs != null)
+            {
+                jobDetail.jobTitle = dbJobs.jobTitle;
+                jobDetail.jobKeywords = dbJobs.jobKeywords;
+                jobDetail.jobDescription = dbJobs.jobDescription;
+                jobDetail.jobContent = dbJobs.jobContent;
+                return View(jobDetail);
+            }
+            else
+            {
+                TempData["dangerMessage"] = "Tanımsız ilan bilgisi. Lütfen tekrar deneyiniz.";
+            }
+            return Redirect("/admin/home/index");
         }
         [HttpPost]
         public IActionResult Add(JobsModel jobsModel)
@@ -106,7 +112,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
             {
                 TempData["dangerMessage"] = "İlan silinirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
             }
-            return Redirect(Request.Headers["Referer"].ToString());
+            return Redirect("/admin/jobs/list");
         }
     }
 }

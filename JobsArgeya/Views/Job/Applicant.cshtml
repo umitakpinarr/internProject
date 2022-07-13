@@ -1,0 +1,71 @@
+﻿@model List<JobsViewModel>
+
+@{
+    ViewData["Title"] = "CV'ni Gönder";
+    ViewData["BreadcrumbTitle"] = "CV'ni Gönder";
+}
+
+@if (TempData["successMessage"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["successMessage"]
+    </div>
+}
+@if (TempData["dangerMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["dangerMessage"]
+    </div>
+}
+<div class="job-apply-form">
+    <form action="/Job/Applicant" method="post" enctype="multipart/form-data">
+        <div class="form-group" style="margin-bottom:10px;">
+            <label name="fullName">Adınız ve Soydınız:</label>
+            <input name="fullName" class="form-control" required>
+        </div>
+        <div class="form-group" style="margin-bottom:10px;">
+            <label name="phone">Telefon Numaranız:</label>
+            <input name="phone" class="form-control" required>
+        </div>
+        <div class="form-group" style="margin-bottom:10px;">
+            <label name="email">E-Mail Adresiniz:</label>
+            <input type="email" class="form-control" name="email" required>
+        </div>
+        <div class="form-group" style="margin-bottom:10px;">
+            <label>Cinsiyetiniz</label>
+            <select name="gender" class="form-control" required>
+                <option value="">Lütfen Bir Seçim Yapınız!</option>
+                <option value="Belirtilmemiş">Belirtmek İstemiyorum</option>
+                <option value="Erkek">Erkek</option>
+                <option value="Kadın">Kadın</option>
+            </select>
+        </div>
+        <div class="form-group" style="margin-bottom:10px;">
+            <label name="university">Okuduğunuz/Mezun Olduğunuz Okul:</label>
+            <input name="university" class="form-control" required>
+        </div>
+        <div class="form-group" style="margin-bottom:10px;">
+            <label name="faculty">Okuduğunuz/Mezun Olduğunuz Bölüm:</label>
+            <input name="faculty" class="form-control" required>
+        </div>
+        <div class="form-group" style="margin-bottom:10px;">
+            <label>Başvuracağınız İlan</label>
+            <select name="jobId" class="form-control" required>
+                <option>Lütfen Bir Seçim Yapınız!</option>
+                @foreach (JobsViewModel jobs in Model)
+                {
+                    <option value="@jobs.id">@jobs.jobTitle</option>
+                }
+            </select>
+        </div>
+        <div class="form-group" style="margin-bottom:10px;">
+            <label name="resume">Özgeçmiş:</label>
+            <textarea name="resume" class="form-control" required></textarea>
+        </div>
+        <div class="form-group" style="margin-bottom:10px;">
+            <label for="formFile">CV Yükle</label>
+            <input type="file" class="form-control-file" name="formFile">
+        </div>
+        <button type="submit" class="btn btn-danger w-100">Başvur</button>
+    </form>
+</div>

@@ -3,8 +3,9 @@
 <head>
     <!-- meta tag -->
     <meta charset="utf-8">
-    <title>@ViewData["Title"] - JobsArgeya</title>
-    <meta name="description" content="">
+    <title>@ViewData["Title"] - Argeya Yazılım</title>
+    <meta name="description" content="@ViewData["PageDescription"]">
+    <meta name="keywords" content="@ViewData["PageKeywords"]">
     <!-- responsive tag -->
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -64,7 +65,8 @@
         <div class="rs-breadcrumbs bg-3" style="background-image: url('/uploads/breadcrumb.jpg'); ">
             <div class="container">
                 <div class="content-part text-center pt-160 pb-160">
-                    <h1 class="breadcrumbs-title white-color mb-0">Kariyer</h1>
+                    <h1 class="breadcrumbs-title white-color mb-2">@ViewData["BreadcrumbTitle"]</h1>
+                    <h5 class="white-color">@Html.Raw(@ViewData["BreadcrumbSubTitle"])</h5>
                 </div>
             </div>
         </div>

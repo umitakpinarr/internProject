@@ -7,12 +7,14 @@ using JobsArgeya.Areas.Admin.Models;
 using Microsoft.AspNetCore.Hosting;
 using JobsArgeya.Data.Context;
 using JobsArgeya.Data.Entities;
+using Slugify;
 
 namespace JobsArgeya.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class JobsController : Controller
     {
+        SlugHelper helper = new SlugHelper();
         private readonly DatabaseContext _databaseContext;
         private IWebHostEnvironment _hostingEnvironment;
         public JobsController(DatabaseContext databaseContext, IWebHostEnvironment environment)
@@ -73,7 +75,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     jobTitle = jobsModel.jobTitle,
                     jobKeywords = jobsModel.jobKeywords,
                     jobDescription = jobsModel.jobDescription,
-                    jobContent = jobsModel.jobContent
+                    jobContent = jobsModel.jobContent,
+                    jobSlug = helper.GenerateSlug(jobsModel.jobTitle)
                 });
                 _databaseContext.SaveChanges();
                 TempData["successMessage"] = "İlan başarıyla eklendi.";
@@ -92,6 +95,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 dbJobs.jobKeywords = jobsModel.jobKeywords;
                 dbJobs.jobDescription = jobsModel.jobDescription;
                 dbJobs.jobContent = jobsModel.jobContent;
+                dbJobs.jobSlug = helper.GenerateSlug(jobsModel.jobTitle);
                 _databaseContext.SaveChanges();
                 TempData["successMessage"] = "İlan başarıyla güncellendi.";
                 return Redirect(Request.Headers["Referer"].ToString());

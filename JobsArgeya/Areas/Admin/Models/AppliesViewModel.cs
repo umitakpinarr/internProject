@@ -16,6 +16,6 @@ namespace JobsArgeya.Areas.Admin.Models
         public string faculty { get; set; }
         public string resume { get; set; }
         public string cvPath { get; set; }
-
+        public int? jobId { get; set; }
     }
 }

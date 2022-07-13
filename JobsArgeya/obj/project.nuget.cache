@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2UKREGfnHkoUqgxx0WeWVLg4B9xXl2SpMDBrN0qi5ugehG0TOhhEtlqa6IciTZ95LfZwxnMmBUvl5tofBYGySw==",
+  "dgSpecHash": "F53pmtQKj9+iwpff7TNnL/LSAocpd+W/9Mptpv7KuO3ARufs5pUQOthXDbk+E2NrgCzqculLqA8QWE3dzwuXkA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Freeman\\source\\repos\\JobsArgeya\\JobsArgeya\\JobsArgeya.csproj",
   "expectedPackageFiles": [
@@ -44,6 +44,7 @@
     "C:\\Users\\Freeman\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\Freeman\\.nuget\\packages\\newtonsoft.json\\10.0.1\\newtonsoft.json.10.0.1.nupkg.sha512",
     "C:\\Users\\Freeman\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
+    "C:\\Users\\Freeman\\.nuget\\packages\\slugify.core\\3.0.0\\slugify.core.3.0.0.nupkg.sha512",
     "C:\\Users\\Freeman\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\Freeman\\.nuget\\packages\\system.collections.concurrent\\4.3.0\\system.collections.concurrent.4.3.0.nupkg.sha512",
     "C:\\Users\\Freeman\\.nuget\\packages\\system.collections.immutable\\5.0.0\\system.collections.immutable.5.0.0.nupkg.sha512",

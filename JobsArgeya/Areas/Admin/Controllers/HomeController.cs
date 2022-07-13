@@ -44,6 +44,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 applyVm.faculty = apply.faculty;
                 applyVm.resume = apply.resume;
                 applyVm.cvPath = apply.cvPath;
+                applyVm.jobId = apply.jobId;
 
                 allApplies.Add(applyVm);
             }

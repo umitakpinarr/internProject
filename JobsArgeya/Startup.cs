@@ -27,11 +27,12 @@ namespace JobsArgeya
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddDbContext<DatabaseContext>(options => { options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")); });
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            {
                 options.LoginPath = "/admin/login";
                 options.LogoutPath = "/admin/logout";
             });
@@ -61,8 +62,13 @@ namespace JobsArgeya
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
+                    name: "index",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                /*endpoints.MapControllerRoute(
+                    name: "jobDetail",
+                    pattern: "{controller=JobDetail}/{action=Index}/{slug?}");*/
+
                 endpoints.MapAreaControllerRoute("Admin", "Admin", "Admin/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapAreaControllerRoute("AdminLogin", "Admin", "/yonetim/{controller=login}/{action=Index}");
                 endpoints.MapAreaControllerRoute("Logout", "Admin", "/yonetim/{controller=login}/{action=SignOut}");

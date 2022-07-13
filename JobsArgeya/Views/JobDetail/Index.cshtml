@@ -1,0 +1,12 @@
+﻿@model JobsViewModel
+@{
+    ViewData["Title"] = Model.jobTitle;
+    ViewData["BreadcrumbTitle"] = Model.jobTitle;
+    ViewData["PageDescription"] = Model.jobDescription;
+    ViewData["PageKeywords"] = Model.jobKeywords;
+}
+<div>
+    <h2 style="text-align:center;">İş İlanı Hakkında</h2>
+    <p>@Html.Raw(@Model.jobContent)</p>
+    <a href="/job/applicant/@Model.jobSlug" class="btn btn-block btn-danger">Başvur</a>
+</div>

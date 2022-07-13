@@ -397,3 +397,7 @@ C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Areas
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Views\Shared\Components\Header\Default.cshtml.g.cs
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Views\Shared\Components\Footer\Default.cshtml.g.cs
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Mail\Index.cshtml.g.cs
+C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Views\Shared\Components\JobsList\Default.cshtml.g.cs
+C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Views\JobDetail\Index.cshtml.g.cs
+C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\bin\Debug\net5.0\Slugify.Core.dll
+C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Views\Job\Applicant.cshtml.g.cs

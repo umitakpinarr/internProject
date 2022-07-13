@@ -12,5 +12,6 @@ namespace JobsArgeya.Areas.Admin.Models
         public string jobContent { get; set; }
         public string jobKeywords { get; set; }
         public string jobDescription { get; set; }
+        public string? jobSlug { get; set; }
     }
 }

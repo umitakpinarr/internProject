@@ -401,3 +401,6 @@ C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Views
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Views\JobDetail\Index.cshtml.g.cs
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\bin\Debug\net5.0\Slugify.Core.dll
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Views\Job\Applicant.cshtml.g.cs
+C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\bin\Debug\net5.0\MailKit.dll
+C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\bin\Debug\net5.0\MimeKit.dll
+C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\bin\Debug\net5.0\BouncyCastle.Crypto.dll

@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using JobsArgeya.Data.Context;
+using JobsArgeya.Areas.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;

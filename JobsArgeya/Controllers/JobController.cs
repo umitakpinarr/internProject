@@ -10,6 +10,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using JobsArgeya.Areas.Admin.Models;
+using JobsArgeya.Areas.Classes;
+using Microsoft.Extensions.Configuration;
 
 namespace JobsArgeya.Controllers
 {
@@ -18,10 +20,12 @@ namespace JobsArgeya.Controllers
         ApplyModel model = new ApplyModel();
         private readonly DatabaseContext _databaseContext;
         private IWebHostEnvironment _hostingEnvironment;
-        public JobController(DatabaseContext databaseContext, IWebHostEnvironment environment)
+        private readonly IConfiguration _configuration;
+        public JobController(DatabaseContext databaseContext, IWebHostEnvironment environment, IConfiguration configuration)
         {
             _databaseContext = databaseContext;
             _hostingEnvironment = environment;
+            _configuration = configuration;
         }
         public IActionResult Index()
         {
@@ -30,9 +34,11 @@ namespace JobsArgeya.Controllers
         [HttpPost]
         public async Task<IActionResult> Apply(ApplyModel id, IFormFile formFile)
         {
+            
             if (ModelState.IsValid)
             {
-                if(formFile != null)
+                Mail mail = new Mail(_databaseContext, _configuration);
+                if (formFile != null)
                 {
                     if (formFile.ContentType == "application/pdf" && formFile.Length > 0)
                     {
@@ -59,6 +65,7 @@ namespace JobsArgeya.Controllers
                             cvPath = fileName
                         });
                         _databaseContext.SaveChanges();
+                        mail.SendMail(id.email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.");
                     }
                     TempData["successMessage"] = "Başvurunuz başarıyla oluşturuldu. En kısa zamanda size dönüş sağlayacağız.";
                 }
@@ -93,6 +100,7 @@ namespace JobsArgeya.Controllers
         [HttpPost]
         public IActionResult Applicant(ApplyModel apply, IFormFile formFile)
         {
+            Mail mail = new Mail(_databaseContext, _configuration);
             if (ModelState.IsValid)
             {
                 if (formFile != null)
@@ -122,7 +130,9 @@ namespace JobsArgeya.Controllers
                             cvPath = fileName,
                             jobId = apply.jobId
                         });
+                        mail.SendMail(apply.email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.");
                         _databaseContext.SaveChanges();
+
                     }
                     TempData["successMessage"] = "Başvurunuz başarıyla oluşturuldu. En kısa zamanda size dönüş sağlayacağız.";
                 }

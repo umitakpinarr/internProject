@@ -37,9 +37,29 @@ namespace JobsArgeya.Areas.Classes
             {
                 return dbName.jobContent.ToString();
             }
-            else
+            else if(parameter == 4)
             {
                 return dbName.jobSlug.ToString();
+            }
+            else
+            {
+                return "";
+            }
+        }
+        public string getSiteDetails(int parameter)
+        {
+            var dbSettings = _databaseContext.Settings.Where(x => x.id == 1).FirstOrDefault();
+            if(parameter == 0)
+            {
+                return dbSettings.keywords.ToString();
+            }
+            else if(parameter == 1)
+            {
+                return dbSettings.description.ToString();
+            }
+            else
+            {
+                return "";
             }
         }
     }

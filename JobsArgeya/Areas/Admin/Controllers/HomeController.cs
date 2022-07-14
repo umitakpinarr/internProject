@@ -83,18 +83,25 @@ namespace JobsArgeya.Areas.Admin.Controllers
         {
             Apply dbApply = _databaseContext.Applies.Where(x => x.id == id).FirstOrDefault();
             AppliesViewModel applyDetail = new AppliesViewModel();
+            if(dbApply != null)
+            {
+                applyDetail.id = dbApply.id;
+                applyDetail.fullName = dbApply.fullName;
+                applyDetail.phone = dbApply.phone;
+                applyDetail.email = dbApply.email;
+                applyDetail.gender = dbApply.gender;
+                applyDetail.university = dbApply.university;
+                applyDetail.faculty = dbApply.faculty;
+                applyDetail.resume = dbApply.resume;
+                applyDetail.cvPath = dbApply.cvPath;
 
-            applyDetail.id = dbApply.id;
-            applyDetail.fullName = dbApply.fullName;
-            applyDetail.phone = dbApply.phone;
-            applyDetail.email = dbApply.email;
-            applyDetail.gender = dbApply.gender;
-            applyDetail.university = dbApply.university;
-            applyDetail.faculty = dbApply.faculty;
-            applyDetail.resume = dbApply.resume;
-            applyDetail.cvPath = dbApply.cvPath;
-
-            return View(applyDetail);
+                return View(applyDetail);
+            }
+            else
+            {
+                TempData["dangerMessage"] = "Geçersiz kayıt! Lütfen tekrar deneyiniz.";
+            }
+            return Redirect("/admin/home/index");
         }
     }
 }

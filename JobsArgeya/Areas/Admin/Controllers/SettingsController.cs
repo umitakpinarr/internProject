@@ -9,10 +9,12 @@ using JobsArgeya.Data.Context;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JobsArgeya.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class SettingsController : Controller
     {
         private readonly DatabaseContext _databaseContext;

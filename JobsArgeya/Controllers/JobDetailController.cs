@@ -25,14 +25,21 @@ namespace JobsArgeya.Controllers
             /* Method parametresinin ismini değiştirince url deki slug değerini alamıyorum. 
              * Bundan ötürü default yapıdaki id değerini alıyorum. Route yapısını düzenledim ama işin içinden çıkamadım. */
             var jobDetail = _databaseContext.Jobs.Where(x => x.jobSlug == id).FirstOrDefault();
-            JobsViewModel jobsVm = new JobsViewModel();
-            jobsVm.id = jobDetail.id;
-            jobsVm.jobTitle = jobDetail.jobTitle;
-            jobsVm.jobKeywords = jobDetail.jobKeywords;
-            jobsVm.jobDescription = jobDetail.jobDescription;
-            jobsVm.jobContent = jobDetail.jobContent;
-            jobsVm.jobSlug = jobDetail.jobSlug;
-            return View(jobsVm);
+            if(jobDetail != null)
+            {
+                JobsViewModel jobsVm = new JobsViewModel();
+                jobsVm.id = jobDetail.id;
+                jobsVm.jobTitle = jobDetail.jobTitle;
+                jobsVm.jobKeywords = jobDetail.jobKeywords;
+                jobsVm.jobDescription = jobDetail.jobDescription;
+                jobsVm.jobContent = jobDetail.jobContent;
+                jobsVm.jobSlug = jobDetail.jobSlug;
+                return View(jobsVm);
+            }
+            else
+            {
+                return Redirect("/");
+            }
         }
     }
 }

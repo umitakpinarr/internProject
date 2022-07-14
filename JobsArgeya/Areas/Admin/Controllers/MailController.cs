@@ -1,6 +1,7 @@
 ﻿using JobsArgeya.Data.Context;
 using JobsArgeya.Data.Entities;
 using JobsArgeya.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace JobsArgeya.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class MailController : Controller
     {
         private readonly DatabaseContext _databaseContext;

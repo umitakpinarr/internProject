@@ -9,6 +9,7 @@ using JobsArgeya.Data.Entities;
 using JobsArgeya.Data.Context;
 using Microsoft.Extensions.Configuration;
 using JobsArgeya.Areas.Admin.Models;
+using JobsArgeya.Areas.Classes;
 
 namespace JobsArgeya.Areas.Admin.Controllers
 {
@@ -20,7 +21,6 @@ namespace JobsArgeya.Areas.Admin.Controllers
         private readonly DatabaseContext _databaseContext;
         private readonly IConfiguration _configuration;
 
-
         public HomeController(DatabaseContext databaseContext, IConfiguration configuration)
         {
             _databaseContext = databaseContext;
@@ -28,6 +28,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
+            /*Detayları çekmek için olşturduğum class ı türetip içersindeki methodlara erişeceğiz*/
+            GetDetails details = new GetDetails(_databaseContext, _configuration);
 
             List<Apply> dbApplies = _databaseContext.Applies.ToList();
             List<AppliesViewModel> allApplies = new List<AppliesViewModel>();
@@ -45,7 +47,16 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 applyVm.resume = apply.resume;
                 applyVm.cvPath = apply.cvPath;
                 applyVm.jobId = apply.jobId;
-
+                /*DB de jobId varsa classdaki methoda gidip ilgili id ile veritabanından jobTitle return ediliyor ve viewmodele basıyor*/
+                if (apply.jobId != null)
+                {
+                    applyVm.jobTitle = details.getJobName((int)apply.jobId, 0);
+                    applyVm.jobSlug = details.getJobName((int)apply.jobId, 4);
+                }
+                else
+                {
+                    applyVm.jobTitle = "Sadece CV göndermiş.";
+                }
                 allApplies.Add(applyVm);
             }
 

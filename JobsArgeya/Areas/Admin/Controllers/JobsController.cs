@@ -8,10 +8,12 @@ using Microsoft.AspNetCore.Hosting;
 using JobsArgeya.Data.Context;
 using JobsArgeya.Data.Entities;
 using Slugify;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JobsArgeya.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class JobsController : Controller
     {
         SlugHelper helper = new SlugHelper();

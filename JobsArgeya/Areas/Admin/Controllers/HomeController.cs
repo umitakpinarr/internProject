@@ -50,8 +50,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 /*DB de jobId varsa classdaki methoda gidip ilgili id ile veritabanından jobTitle return ediliyor ve viewmodele basıyor*/
                 if (apply.jobId != null)
                 {
-                    applyVm.jobTitle = details.getJobName((int)apply.jobId, 0);
-                    applyVm.jobSlug = details.getJobName((int)apply.jobId, 4);
+                    applyVm.jobTitle = details.getJobDetails((int)apply.jobId, 0);
+                    applyVm.jobSlug = details.getJobDetails((int)apply.jobId, 4);
                 }
                 else
                 {

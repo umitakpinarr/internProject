@@ -18,7 +18,7 @@ namespace JobsArgeya.Areas.Classes
             _configuration = configuration;
         }
 
-        public string getJobName(int jobId, int parameter)
+        public string getJobDetails(int jobId, int parameter)
         {
             var dbName = _databaseContext.Jobs.Where(x => x.id == jobId).FirstOrDefault();
             if(parameter == 0)

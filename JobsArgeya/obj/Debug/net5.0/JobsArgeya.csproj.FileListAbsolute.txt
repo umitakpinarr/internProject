@@ -404,3 +404,5 @@ C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Views
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\bin\Debug\net5.0\MailKit.dll
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\bin\Debug\net5.0\MimeKit.dll
 C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\bin\Debug\net5.0\BouncyCastle.Crypto.dll
+C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Mail\Send.cshtml.g.cs
+C:\Users\Freeman\source\repos\JobsArgeya\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Mail\SendSingleMail.cshtml.g.cs

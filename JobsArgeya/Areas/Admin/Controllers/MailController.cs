@@ -1,4 +1,5 @@
-﻿using JobsArgeya.Data.Context;
+﻿using JobsArgeya.Areas.Admin.Models;
+using JobsArgeya.Data.Context;
 using JobsArgeya.Data.Entities;
 using JobsArgeya.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JobsArgeya.Areas.Classes;
 using System.Threading.Tasks;
 
 namespace JobsArgeya.Areas.Admin.Controllers
@@ -40,6 +42,19 @@ namespace JobsArgeya.Areas.Admin.Controllers
             }
 
             return View(allSubscribers);
+        }
+        [HttpGet]
+        public IActionResult Send()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Send(SendMailModel MailCredentials)
+        {
+            Mail mail = new Mail(_databaseContext, _configuration);
+            mail.SendMailList(MailCredentials.MailSubject, MailCredentials.MailContent);
+            TempData["successMessage"] = "Mail listesine gönderim başarıyla sağlandı.";
+            return View();
         }
         public IActionResult Delete(int id)
         {

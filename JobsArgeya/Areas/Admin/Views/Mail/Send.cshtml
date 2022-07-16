@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["CmsTitle"] = "Mail Listesine Gönder";
+}
+@section Styles {
+    <style>
+        /*Textbox*/
+        .ck-editor__editable {
+            min-height: 500px;
+            max-height: 500px;
+        }
+    </style>
+}
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <form action="/admin/mail/send" method="post">
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="mailSubject">Mail Başlığı</label>
+                    <input class="form-control" id="mailSubject" name="mailSubject" type="text" placeholder="Mail Başlığı">
+                </div>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="mailContent">Mail İçeriği</label>
+                    <textarea id="mailContent" name="mailContent"></textarea>
+                </div>
+                <br />
+                <button type="submit" class="btn btn-danger w-100">Mail Gönder</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/panel/assets/js/vendor/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#mailContent'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+}

@@ -84,6 +84,7 @@ namespace JobsArgeya
                 endpoints.MapAreaControllerRoute("Settings", "Admin", "Admin/{controller=Settings}/{action=Index}");
 
                 endpoints.MapAreaControllerRoute("MailList", "Admin", "Admin/{controller=Mail}/{action=Index}");
+                //endpoints.MapAreaControllerRoute("MailSend", "Admin", "Admin/{controller=Mail}/{action=Send}");
                 endpoints.MapAreaControllerRoute("MailDelete", "Admin", "Admin/{controller=Mail}/{action=Delete}/{id?}");
             });
         }

@@ -23,6 +23,22 @@
           "lib/net5.0/MailKit.dll": {}
         }
       },
+      "MD5/2.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/MD5.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MD5.dll": {}
+        },
+        "contentFiles": {
+          "contentFiles/any/netstandard2.0/logo.ico": {
+            "buildAction": "Content",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.AspNetCore.Mvc.Razor.Extensions/5.0.17": {
         "type": "package",
         "dependencies": {
@@ -1853,6 +1869,23 @@
         "lib/netstandard2.1/MailKit.xml",
         "mailkit.3.3.0.nupkg.sha512",
         "mailkit.nuspec"
+      ]
+    },
+    "MD5/2.0.2": {
+      "sha512": "D/PN+bsu9o53dYNy2gWD7Kk97Z5oHWcQq41Fjgv7BN/UsSKeTCOJFZj2qazq0iosTIQ9fZE3/cC5TieMHDcpzw==",
+      "type": "package",
+      "path": "md5/2.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "content/logo.ico",
+        "contentFiles/any/netstandard2.0/logo.ico",
+        "lib/netstandard2.0/MD5.dll",
+        "license.txt",
+        "logo.png",
+        "md5.2.0.2.nupkg.sha512",
+        "md5.nuspec",
+        "readme.md"
       ]
     },
     "Microsoft.AspNetCore.Mvc.Razor.Extensions/5.0.17": {
@@ -6628,6 +6661,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "MD5 >= 2.0.2",
       "MailKit >= 3.3.0",
       "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation >= 5.0.17",
       "Microsoft.EntityFrameworkCore >= 5.0.17",
@@ -6677,6 +6711,10 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+          "MD5": {
+            "target": "Package",
+            "version": "[2.0.2, )"
+          },
           "MailKit": {
             "target": "Package",
             "version": "[3.3.0, )"

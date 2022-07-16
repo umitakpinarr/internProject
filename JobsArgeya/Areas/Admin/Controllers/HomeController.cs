@@ -103,5 +103,22 @@ namespace JobsArgeya.Areas.Admin.Controllers
             }
             return Redirect("/admin/home/index");
         }
+        [HttpPost]
+        public IActionResult Password(ChangePasswordModel model)
+        {
+            var dbUser = _databaseContext.Users.Where(x => x.id == 1).FirstOrDefault();
+            if(model.password == model.passwordVerify)
+            {
+                string passwordHashed = MD5Hash.Hash.Content(model.password);
+                dbUser.password = passwordHashed;
+                _databaseContext.SaveChanges();
+                TempData["successMessage"] = "Şifreniz başarıyla güncellendi.";
+            }
+            else
+            {
+                TempData["dangerMessage"] = "Şifreniz güncellenirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
+            }
+            return Redirect("/admin/home/index");
+        }
     }
 }

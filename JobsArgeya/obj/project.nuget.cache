@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "gw6fuaNdpPm0rcg+X9MIKVWnhXDxBuU+2EIidLHHpzEr0LewngG1lFkJ2aj1ukuJermZzEx6nu+vh6VJTuFBRw==",
+  "dgSpecHash": "qpg+5QS34gO+oB3cXle81MFNNR8EjxmvA9e6MqcnT/Hu1f86+LtPbB0UnawUq52v2IUZ5IvCnWq7i44A3xkaGg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Freeman\\source\\repos\\JobsArgeya\\JobsArgeya\\JobsArgeya.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Freeman\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Freeman\\.nuget\\packages\\mailkit\\3.3.0\\mailkit.3.3.0.nupkg.sha512",
+    "C:\\Users\\Freeman\\.nuget\\packages\\md5\\2.0.2\\md5.2.0.2.nupkg.sha512",
     "C:\\Users\\Freeman\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.extensions\\5.0.17\\microsoft.aspnetcore.mvc.razor.extensions.5.0.17.nupkg.sha512",
     "C:\\Users\\Freeman\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.runtimecompilation\\5.0.17\\microsoft.aspnetcore.mvc.razor.runtimecompilation.5.0.17.nupkg.sha512",
     "C:\\Users\\Freeman\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\5.0.17\\microsoft.aspnetcore.razor.language.5.0.17.nupkg.sha512",

@@ -63,10 +63,6 @@
                             <i class="dripicons-mail"></i>
                             <span>Mail Listesi</span>
                         </a>
-                        <a href="/admin/mail/sendsinglemail" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
-                            <i class="dripicons-mail"></i>
-                            <span>Mail Adresine Gönder</span>
-                        </a>
                         <a href="/admin/mail/send" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
                             <i class="dripicons-mail"></i>
                             <span>Mail Listesine Gönder</span>
@@ -110,6 +106,10 @@
                                 </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+                                <a href="#exampleModal" data-bs-toggle="modal" class="dropdown-item notify-item">
+                                    <i class="mdi mdi-key me-1"></i>
+                                    <span>Şifre Değiştir</span>
+                                </a>
                                 <!-- item-->
                                 <a href="/yonetim/login/signout" class="dropdown-item notify-item">
                                     <i class="mdi mdi-logout me-1"></i>
@@ -158,6 +158,40 @@
                 </div> <!-- container -->
 
             </div> <!-- content -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Şifre Değiştir</h5>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/admin/home/password" method="post">
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Şifre</label>
+                                    <div class="input-group input-group-merge">
+                                        <input type="password" id="password" name="password" class="form-control" placeholder="Yeni Şifreniz">
+                                        <div class="input-group-text" data-password="false">
+                                            <span class="password-eye"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="passwordVerify" class="form-label">Şifre Tekrar</label>
+                                    <div class="input-group input-group-merge">
+                                        <input type="password" id="passwordVerify" name="passwordVerify" class="form-control" placeholder="Yeni Şifreniz Tekrar">
+                                        <div class="input-group-text" data-password="false">
+                                            <span class="password-eye"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3 mb-0 text-center">
+                                    <button class="btn btn-primary" type="submit">Kaydet</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- Footer Start -->
             <footer class="footer">
                 <div class="container-fluid">

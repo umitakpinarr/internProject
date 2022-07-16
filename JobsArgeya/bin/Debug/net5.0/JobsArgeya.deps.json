@@ -33,6 +33,7 @@
     ".NETCoreApp,Version=v5.0": {
       "JobsArgeya/1.0.0": {
         "dependencies": {
+          "MD5": "2.0.2",
           "MailKit": "3.3.0",
           "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "5.0.17",
           "Microsoft.EntityFrameworkCore": "5.0.17",
@@ -348,6 +349,17 @@
         },
         "compile": {
           "lib/net5.0/MailKit.dll": {}
+        }
+      },
+      "MD5/2.0.2": {
+        "runtime": {
+          "lib/netstandard2.0/MD5.dll": {
+            "assemblyVersion": "2.0.2.0",
+            "fileVersion": "2.0.2.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/MD5.dll": {}
         }
       },
       "Microsoft.AspNetCore.Mvc.Razor.Extensions/5.0.17": {
@@ -3287,6 +3299,13 @@
       "sha512": "sha512-+TkmnfnicAgtwmPDiqZ/CvtLh7z36o44wjgvJzkbFXyGSnhVxmUWdvnzerA6EqslPTP9nK8aWqoQvr1uMpeHCw==",
       "path": "mailkit/3.3.0",
       "hashPath": "mailkit.3.3.0.nupkg.sha512"
+    },
+    "MD5/2.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-D/PN+bsu9o53dYNy2gWD7Kk97Z5oHWcQq41Fjgv7BN/UsSKeTCOJFZj2qazq0iosTIQ9fZE3/cC5TieMHDcpzw==",
+      "path": "md5/2.0.2",
+      "hashPath": "md5.2.0.2.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Mvc.Razor.Extensions/5.0.17": {
       "type": "package",

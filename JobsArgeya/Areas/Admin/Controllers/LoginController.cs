@@ -10,6 +10,7 @@ using JobsArgeya.Areas.Admin.Models;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using JobsArgeya.Areas.Classes;
 
 namespace JobsArgeya.Areas.Admin.Controllers
 {
@@ -33,7 +34,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(UsersModel user)
         {
-            Users dbUser = _databaseContext.Users.Where(u => u.email == user.email && u.password == user.password).FirstOrDefault();
+            string passwordHashed = MD5Hash.Hash.Content(user.password);
+            Users dbUser = _databaseContext.Users.Where(u => u.email == user.email && u.password == passwordHashed).FirstOrDefault();
 
             if(dbUser != null)
             {

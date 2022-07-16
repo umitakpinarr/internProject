@@ -9,5 +9,6 @@ namespace JobsArgeya.Data.Entities
     {
         public int id { get; set; }
         public string email { get; set; }
+        public string slug { get; set; }
     }
 }

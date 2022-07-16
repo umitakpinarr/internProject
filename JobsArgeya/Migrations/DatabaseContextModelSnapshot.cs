@@ -95,6 +95,9 @@ namespace JobsArgeya.Migrations
                     b.Property<string>("email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("slug")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("id");
 
                     b.ToTable("MailSubscribers");

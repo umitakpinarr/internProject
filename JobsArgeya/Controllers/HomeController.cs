@@ -36,7 +36,21 @@ namespace JobsArgeya.Controllers
             ViewData["PageDescription"] = details.getSiteDetails(1);
             return View();
         }
-
+        public IActionResult Unsubscribe(string id)
+        {
+            var subscriber = _databaseContext.MailSubscribers.Where(x => x.slug == id).FirstOrDefault();
+            if (subscriber != null && id != null)
+            {
+                _databaseContext.MailSubscribers.Remove(subscriber);
+                _databaseContext.SaveChanges();
+                TempData["successMessage"] = "Mail adresi listeden başarıyla silindi.";
+            }
+            else
+            {
+                TempData["dangerMessage"] = "Mail adresi listeden silinirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
+            }
+            return Redirect("/");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

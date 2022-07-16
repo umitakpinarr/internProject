@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using JobsArgeya.Areas.Admin.Models;
 using JobsArgeya.Areas.Classes;
 using Microsoft.Extensions.Configuration;
+using Slugify;
 
 namespace JobsArgeya.Controllers
 {
@@ -42,6 +43,7 @@ namespace JobsArgeya.Controllers
                 {
                     if (formFile.ContentType == "application/pdf" && formFile.Length > 0)
                     {
+                        SlugHelper helper = new SlugHelper();
                         /*Dosya uzantısını alıyoruz*/
                         var extension = Path.GetExtension(formFile.FileName);
                         /*Benzersiz bir dosya adı alıp uzantıyla birleştiriyoruz*/
@@ -64,6 +66,14 @@ namespace JobsArgeya.Controllers
                             resume = id.resume,
                             cvPath = fileName
                         });
+                        if (_databaseContext.MailSubscribers.Any(x => x.email != id.email))
+                        {
+                            _databaseContext.MailSubscribers.Add(new MailSubscribers
+                            {
+                                email = id.email,
+                                slug = helper.GenerateSlug(id.email)
+                            });
+                        }
                         _databaseContext.SaveChanges();
                         mail.SendMail(id.email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.");
                     }
@@ -100,6 +110,7 @@ namespace JobsArgeya.Controllers
         [HttpPost]
         public IActionResult Applicant(ApplyModel apply, IFormFile formFile)
         {
+            SlugHelper helper = new SlugHelper();
             Mail mail = new Mail(_databaseContext, _configuration);
             if (ModelState.IsValid)
             {
@@ -130,6 +141,14 @@ namespace JobsArgeya.Controllers
                             cvPath = fileName,
                             jobId = apply.jobId
                         });
+                        if(_databaseContext.MailSubscribers.Any(x=> x.email != apply.email))
+                        {
+                            _databaseContext.MailSubscribers.Add(new MailSubscribers
+                            {
+                                email = apply.email,
+                                slug = helper.GenerateSlug(apply.email)
+                            });
+                        }
                         mail.SendMail(apply.email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.");
                         _databaseContext.SaveChanges();
 

@@ -66,7 +66,11 @@ namespace JobsArgeya.Controllers
                             resume = id.resume,
                             cvPath = fileName
                         });
-                        if (_databaseContext.MailSubscribers.Any(x => x.email != id.email))
+                        if (_databaseContext.MailSubscribers.Any(x => x.email == id.email))
+                        {
+                            TempData["successMessage"] = "Başvurunuz başarıyla oluşturuldu. En kısa zamanda size dönüş sağlayacağız.";
+                        }
+                        else
                         {
                             _databaseContext.MailSubscribers.Add(new MailSubscribers
                             {
@@ -141,7 +145,11 @@ namespace JobsArgeya.Controllers
                             cvPath = fileName,
                             jobId = apply.jobId
                         });
-                        if(_databaseContext.MailSubscribers.Any(x=> x.email != apply.email))
+                        if (_databaseContext.MailSubscribers.Any(x => x.email == apply.email))
+                        {
+                            TempData["successMessage"] = "Başvurunuz başarıyla oluşturuldu. En kısa zamanda size dönüş sağlayacağız.";
+                        }
+                        else
                         {
                             _databaseContext.MailSubscribers.Add(new MailSubscribers
                             {
@@ -151,7 +159,6 @@ namespace JobsArgeya.Controllers
                         }
                         mail.SendMail(apply.email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.");
                         _databaseContext.SaveChanges();
-
                     }
                     TempData["successMessage"] = "Başvurunuz başarıyla oluşturuldu. En kısa zamanda size dönüş sağlayacağız.";
                 }

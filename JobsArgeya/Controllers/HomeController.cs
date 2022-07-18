@@ -1,7 +1,6 @@
 ﻿using JobsArgeya.Models;
 using JobsArgeya.Areas.Classes;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -9,18 +8,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using JobsArgeya.Data.Context;
-using JobsArgeya.Data.Entities;
 using Microsoft.Extensions.Configuration;
-using Microsoft.EntityFrameworkCore;
-using JobsArgeya.Areas.Admin.Models;
-
 
 namespace JobsArgeya.Controllers
 {
     public class HomeController : Controller
     {
         //private readonly ILogger<HomeController> _logger;
-        
+
         private readonly DatabaseContext _databaseContext;
         private readonly IConfiguration _configuration;
 
@@ -56,7 +51,7 @@ namespace JobsArgeya.Controllers
             }
             return Redirect("/");
         }
-       
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

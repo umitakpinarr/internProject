@@ -145,7 +145,7 @@ namespace JobsArgeya.Controllers
                             cvPath = fileName,
                             jobId = apply.jobId
                         });
-                        if (_databaseContext.MailSubscribers.Any(x => x.email == apply.email))
+                        if(_databaseContext.MailSubscribers.Any(x=> x.email == apply.email))
                         {
                             TempData["successMessage"] = "Başvurunuz başarıyla oluşturuldu. En kısa zamanda size dönüş sağlayacağız.";
                         }

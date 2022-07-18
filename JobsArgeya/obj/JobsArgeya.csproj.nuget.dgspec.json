@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Freeman\\Desktop\\internPorject-main\\JobsArgeya\\JobsArgeya.csproj": {}
+    "C:\\Users\\Freeman\\source\\repos\\JobsArgeya\\JobsArgeya\\JobsArgeya.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Freeman\\Desktop\\internPorject-main\\JobsArgeya\\JobsArgeya.csproj": {
+    "C:\\Users\\Freeman\\source\\repos\\JobsArgeya\\JobsArgeya\\JobsArgeya.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Freeman\\Desktop\\internPorject-main\\JobsArgeya\\JobsArgeya.csproj",
+        "projectUniqueName": "C:\\Users\\Freeman\\source\\repos\\JobsArgeya\\JobsArgeya\\JobsArgeya.csproj",
         "projectName": "JobsArgeya",
-        "projectPath": "C:\\Users\\Freeman\\Desktop\\internPorject-main\\JobsArgeya\\JobsArgeya.csproj",
+        "projectPath": "C:\\Users\\Freeman\\source\\repos\\JobsArgeya\\JobsArgeya\\JobsArgeya.csproj",
         "packagesPath": "C:\\Users\\Freeman\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Freeman\\Desktop\\internPorject-main\\JobsArgeya\\obj\\",
+        "outputPath": "C:\\Users\\Freeman\\source\\repos\\JobsArgeya\\JobsArgeya\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Freeman\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -71,10 +71,6 @@
             "Slugify.Core": {
               "target": "Package",
               "version": "[3.0.0, )"
-            },
-            "X.PagedList.Mvc.Core": {
-              "target": "Package",
-              "version": "[8.4.3, )"
             }
           },
           "imports": [

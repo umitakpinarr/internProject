@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "KRSK4CfPTQkREvfDgvX/n778Z8kZRblX5B+MlblZ7tUBZiU20vOrT4tKGDa0+Zi3m/JkaWVNVwCcX7RvpfevIg==",
+  "dgSpecHash": "qpg+5QS34gO+oB3cXle81MFNNR8EjxmvA9e6MqcnT/Hu1f86+LtPbB0UnawUq52v2IUZ5IvCnWq7i44A3xkaGg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Freeman\\Desktop\\internPorject-main\\JobsArgeya\\JobsArgeya.csproj",
+  "projectFilePath": "C:\\Users\\Freeman\\source\\repos\\JobsArgeya\\JobsArgeya\\JobsArgeya.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Freeman\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
-    "C:\\Users\\Freeman\\.nuget\\packages\\jetbrains.annotations\\2022.1.0\\jetbrains.annotations.2022.1.0.nupkg.sha512",
     "C:\\Users\\Freeman\\.nuget\\packages\\mailkit\\3.3.0\\mailkit.3.3.0.nupkg.sha512",
     "C:\\Users\\Freeman\\.nuget\\packages\\md5\\2.0.2\\md5.2.0.2.nupkg.sha512",
     "C:\\Users\\Freeman\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.extensions\\5.0.17\\microsoft.aspnetcore.mvc.razor.extensions.5.0.17.nupkg.sha512",
@@ -119,9 +118,7 @@
     "C:\\Users\\Freeman\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\Freeman\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Freeman\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\Freeman\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\Freeman\\.nuget\\packages\\x.pagedlist\\8.4.3\\x.pagedlist.8.4.3.nupkg.sha512",
-    "C:\\Users\\Freeman\\.nuget\\packages\\x.pagedlist.mvc.core\\8.4.3\\x.pagedlist.mvc.core.8.4.3.nupkg.sha512"
+    "C:\\Users\\Freeman\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

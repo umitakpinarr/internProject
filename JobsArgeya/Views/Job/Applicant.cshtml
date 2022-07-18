@@ -17,41 +17,22 @@
         @TempData["dangerMessage"]
     </div>
 }
-
-<section class="tools">
-    <div class="container">
-        <div class="t-row">
-            <div class="d-table-cell">
-                <a class="btn btn-outline-danger" style="margin-top:25px; margin-bottom:25px;" href="/home" title="Geri">
-                    <span style="line-height: 12px; font-size: 20px;">&#x2190;</span> Geri Git
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-<div class="container">
-    <div class="title text-center">
-        <h1>Başvuru Formu</h1>
-        <p>Gelişimin ve eğlencenin tadını aynı anda çıkarmak mı? Neden olmasın?
-            <br> Kendi başarı hikayeni, aynı dili konuştuğun bir ekiple birlikte yazmak ister misin?
-        </p>
-    </div>
-  <div class="job-apply-form">
+<div class="job-apply-form">
     <form action="/Job/Applicant" method="post" enctype="multipart/form-data">
         <div class="form-group" style="margin-bottom:10px;">
-            <label name="fullName"><b>Adınız ve Soydınız:</b></label>
+            <label name="fullName">Adınız ve Soydınız:</label>
             <input name="fullName" class="form-control" required>
         </div>
         <div class="form-group" style="margin-bottom:10px;">
-            <label name="phone"><b>Telefon Numaranız:</b></label>
+            <label name="phone">Telefon Numaranız:</label>
             <input name="phone" class="form-control" required>
         </div>
         <div class="form-group" style="margin-bottom:10px;">
-            <label name="email"><b>E-Mail Adresiniz:</b></label>
+            <label name="email">E-Mail Adresiniz:</label>
             <input type="email" class="form-control" name="email" required>
         </div>
         <div class="form-group" style="margin-bottom:10px;">
-            <label><b>Cinsiyetiniz</b></label>
+            <label>Cinsiyetiniz</label>
             <select name="gender" class="form-control" required>
                 <option value="">Lütfen Bir Seçim Yapınız!</option>
                 <option value="Belirtilmemiş">Belirtmek İstemiyorum</option>
@@ -60,15 +41,15 @@
             </select>
         </div>
         <div class="form-group" style="margin-bottom:10px;">
-            <label name="university"><b>Okuduğunuz/Mezun Olduğunuz Okul:</b></label>
+            <label name="university">Okuduğunuz/Mezun Olduğunuz Okul:</label>
             <input name="university" class="form-control" required>
         </div>
         <div class="form-group" style="margin-bottom:10px;">
-            <label name="faculty"><b>Okuduğunuz/Mezun Olduğunuz Bölüm:</b></label>
+            <label name="faculty">Okuduğunuz/Mezun Olduğunuz Bölüm:</label>
             <input name="faculty" class="form-control" required>
         </div>
         <div class="form-group" style="margin-bottom:10px;">
-            <label><b>Başvuracağınız İlan</b></label>
+            <label>Başvuracağınız İlan</label>
             <select name="jobId" class="form-control" required>
                 <option>Lütfen Bir Seçim Yapınız!</option>
                 @foreach (JobsViewModel jobs in Model)
@@ -78,14 +59,13 @@
             </select>
         </div>
         <div class="form-group" style="margin-bottom:10px;">
-            <label name="resume"><b>Özgeçmiş:</b></label>
+            <label name="resume">Özgeçmiş:</label>
             <textarea name="resume" class="form-control" required></textarea>
         </div>
         <div class="form-group" style="margin-bottom:10px;">
-            <label for="formFile"><b>CV Yükle</b></label>
+            <label for="formFile">CV Yükle</label>
             <input type="file" class="form-control-file" name="formFile">
         </div>
         <button type="submit" class="btn btn-danger w-100">Başvur</button>
     </form>
-  </div>
 </div>

@@ -1,28 +1,24 @@
 ﻿@model List<JobsViewModel>
 
-   
+    @foreach (JobsViewModel jobsVm in Model)
+    {
+    <div class="card" style="margin-bottom:10px;">
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
 
-    <div class="container shadow-sm p-3 mb-5 bg-body rounded">
-        <div class="container">
-            <h1 style="font-size:40px; margin-bottom:25px; margin-top:25px;">Açık Pozisyonlar</h1>
-            <ul class="responsive-table">
-                <table id="anaEkran" class="table table-hover text-end" style="border-collapse:separate; border-spacing: 0 15px; ">
-                    <tbody>
-                        @{ if (Model != null)
-                            {
-                                foreach (JobsViewModel jobsVm in Model)
-                                {
-                                    <tr>
-                                        <td class="container border" style="font-size:large; vertical-align:middle; font-weight:bold; text-align:left; padding:30px 50px 30px 50px"><a class="text-body" title="@jobsVm.jobTitle" href="/jobdetail/index/@jobsVm.jobSlug">@jobsVm.jobTitle</a></td>
-                                        <td class="container border" style="vertical-align:middle;"><a href="/jobdetail/index/@jobsVm.jobSlug" class="btn btn-danger" style="float:right; align-items:center; width:125px;" type="button" data-bs-target="#demo">İlanı İncele <span style="line-height:12px; font-size:17px;">&#x2192;</span></a></td>
-                                    </tr>
-                                }
-                            }
-                        }
-                    </tbody>
-                </table>
-            </ul>
+                    <div class="col-md-10">
+                        <h4>@jobsVm.jobTitle</h4>
+                    </div>
+
+                    <div class="col-md-2">
+                        <a href="/jobdetail/index/@jobsVm.jobSlug" class="btn btn-danger">İlanı İncele</a>
+                    </div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
-
-
+    
+    }

@@ -1,8 +1,7 @@
-﻿@model List<JobsViewModel>
-
+﻿@model ApplyModel
 @{
-    ViewData["Title"] = "CV'ni Gönder";
-    ViewData["BreadcrumbTitle"] = "CV'ni Gönder";
+    ViewData["Title"] = "Stajyerlik Başvurusu";
+    ViewData["BreadcrumbTitle"] = "Stajyerlik Başvurusu";
 }
 
 @if (TempData["successMessage"] != null)
@@ -16,6 +15,9 @@
     <div class="alert alert-danger" role="alert">
         @TempData["dangerMessage"]
     </div>
+}
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 }
 
 <section class="tools">
@@ -33,12 +35,12 @@
     <div class="title text-center">
         <h1>Başvuru Formu</h1>
         <p>
-            Gelişimin ve eğlencenin tadını aynı anda çıkarmak mı? Neden olmasın?
-            <br> Kendi başarı hikayeni, aynı dili konuştuğun bir ekiple birlikte yazmak ister misin?
+            Hem gelişmek hem de öğrenmek mi istiyorsun? Projeler geliştirip kendini iş hayatına alıştırmak mı istiyorsun?
+            <br />Önünde mükemmel duran bir fırsat var.
         </p>
     </div>
     <div class="job-apply-form">
-        <form action="/Job/Applicant" method="post" enctype="multipart/form-data">
+        <form action="/Job/Intern" method="post" enctype="multipart/form-data">
             <div class="form-group" style="margin-bottom:10px;">
                 <label name="fullName"><b>Adınız ve Soydınız:</b></label>
                 <input name="fullName" class="form-control" required>
@@ -61,26 +63,20 @@
                 </select>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="university"><b>Okuduğunuz/Mezun Olduğunuz Okul:</b></label>
+                <label name="university"><b>Okuduğunuz Okul:</b></label>
                 <input name="university" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="faculty"><b>Okuduğunuz/Mezun Olduğunuz Bölüm:</b></label>
+                <label name="faculty"><b>Okuduğunuz Bölüm:</b></label>
                 <input name="faculty" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label><b>Başvuracağınız İlan</b></label>
-                <select name="jobId" class="form-control" required>
-                    <option>Lütfen Bir Seçim Yapınız!</option>
-                    @foreach (JobsViewModel jobs in Model)
-                    {
-                        if (jobs.isActive == "true")
-                        {
-                            <option value="@jobs.id">@jobs.jobTitle</option>
-                        }
-
-                    }
-                </select>
+                <label for="internStartDate"><b>Staj Başlangıç Tarihiniz:</b></label>
+                <input class="form-control" id="internStartDate" name="internStartDate" autocomplete="off">
+            </div>
+            <div class="form-group" style="margin-bottom:10px;">
+                <label for="internEndDate"><b>Staj Bitiş Tarihiniz:</b></label>
+                <input class="form-control" id="internEndDate" name="internEndDate" autocomplete="off">
             </div>
             <div class="form-group" style="margin-bottom:10px;">
                 <label name="resume"><b>Özgeçmiş:</b></label>
@@ -101,3 +97,37 @@
         </form>
     </div>
 </div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function () {
+
+            $(function () {
+                $("#internStartDate").datepicker({
+                    minDate: 0,
+                    dateFormat: 'dd.mm.yy',
+                    monthNames: ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"],
+                    dayNamesMin: ["Pa", "Pt", "Sl", "Ça", "Pe", "Cu", "Ct"]
+                });
+                $("#internEndDate").datepicker({
+                    minDate: 0,
+                    dateFormat: 'dd.mm.yy',
+                    monthNames: ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"],
+                    dayNamesMin: ["Pa", "Pt", "Sl", "Ça", "Pe", "Cu", "Ct"]
+                });
+
+                $('#internStartDate').change(function () {
+                    startDate = $(this).datepicker('getDate');
+                    $("#internEndDate").datepicker("option", "minDate", startDate);
+                });
+                $('#internEndDate').change(function () {
+                    endDate = $(this).datepicker('getDate');
+                    $("#internStartDate").datepicker("option", "maxDate", endDate);
+                });
+            });
+        })
+    </script>
+
+}

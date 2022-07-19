@@ -110,6 +110,7 @@ namespace JobsArgeya.Controllers
                 JobsViewModel jobsVm = new JobsViewModel();
                 jobsVm.id = jobs.id;
                 jobsVm.jobTitle = jobs.jobTitle;
+                jobsVm.isActive = jobs.isActive;
 
                 allJobs.Add(jobsVm);
             }
@@ -157,6 +158,81 @@ namespace JobsArgeya.Controllers
                             cvPath = fileName,
                             createdAt = DateTime.Now,
                             jobId = apply.jobId
+                        });
+                        if (_databaseContext.MailSubscribers.Any(x => x.email == apply.email))
+                        {
+                            TempData["successMessage"] = "Başvurunuz başarıyla oluşturuldu. En kısa zamanda size dönüş sağlayacağız.";
+                        }
+                        else
+                        {
+                            _databaseContext.MailSubscribers.Add(new MailSubscribers
+                            {
+                                email = apply.email,
+                                slug = helper.GenerateSlug(apply.email)
+                            });
+                        }
+                        mail.SendMail(apply.email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.");
+                        _databaseContext.SaveChanges();
+                    }
+                    TempData["successMessage"] = "Başvurunuz başarıyla oluşturuldu. En kısa zamanda size dönüş sağlayacağız.";
+                }
+                else
+                {
+                    TempData["dangerMessage"] = "Başvurunuz oluşturulurken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
+                }
+
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+            TempData["dangerMessage"] = "Başvurunuz oluşturulurken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
+        [HttpGet]
+        public IActionResult Intern()
+        {
+            return View();
+        }
+        public IActionResult Intern(ApplyModel apply, IFormFile formFile)
+        {
+            CaptchaController captchaController = new CaptchaController();
+            if (!captchaController.IsValid(apply.captcha, HttpContext.Session))
+            {
+                TempData["dangerMessage"] = "Yanlış captcha girişi yaptınız. Lütfen tekrar deneyiniz.";
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+            SlugHelper helper = new SlugHelper();
+            Mail mail = new Mail(_databaseContext, _configuration);
+            if (ModelState.IsValid)
+            {
+                if (formFile != null)
+                {
+                    if (formFile.ContentType == "application/pdf" && formFile.Length > 0)
+                    {
+                        /*Dosya uzantısını alıyoruz*/
+                        var extension = Path.GetExtension(formFile.FileName);
+                        /*Benzersiz bir dosya adı alıp uzantıyla birleştiriyoruz*/
+                        var fileName = Guid.NewGuid() + extension;
+                        /*Dosyanın yükleneceği klasörün yolu*/
+                        var path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + fileName;
+                        /*Dosya oluşturuluyor*/
+                        FileStream stream = new FileStream(path, FileMode.Create);
+                        formFile.CopyTo(stream);
+
+                        /*DB Insert*/
+                        _databaseContext.Applies.Add(new Apply
+                        {
+                            fullName = apply.fullName,
+                            phone = apply.phone,
+                            email = apply.email,
+                            gender = apply.gender,
+                            university = apply.university,
+                            faculty = apply.faculty,
+                            resume = apply.resume,
+                            cvPath = fileName,
+                            jobId = apply.jobId,
+                            createdAt = DateTime.Now,
+                            isIntern = "1",
+                            internStartDate = apply.internStartDate,
+                            internEndDate = apply.internEndDate
                         });
                         if (_databaseContext.MailSubscribers.Any(x => x.email == apply.email))
                         {

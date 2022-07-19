@@ -1,6 +1,23 @@
 ﻿@model List<JobsViewModel>
 
 
+<div class="container shadow-sm p-3 mb-5 bg-body rounded">
+    <div class="container">
+        <h2 style="font-size:40px; margin-bottom:25px; margin-top:25px;" class="text-center">Kendine Uygun Pozisyona Başvur</h2>
+        <p style="text-align:center; margin-top:20px; margin-bottom:20px;">
+            Gelişimin ve eğlencenin tadını aynı anda çıkarmak mı? Neden olmasın? İstediğin Pozisyona mı başvurmak istiyorsun?
+            Kendi başarı hikayeni, aynı dili konuştuğun bir ekiple birlikte yazmak ister misin?
+            <strong>Hemen CV'ni ve başvuru formunu gönder.</strong>
+        </p>
+        <div class="row">
+            <div class="col">
+                <div class="text-center">
+                    <a href="/job" style="vertical-align: middle;" class="btn btn-danger btn-lg active w-50" title="Hemen Başvur">Hemen Başvur<span>&#128279;</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="container shadow-sm p-3 mb-5 bg-body rounded">
     <div class="container">
@@ -8,24 +25,39 @@
         <ul class="responsive-table">
             <table id="anaEkran" class="table table-hover text-end" style="border-collapse:separate; border-spacing: 0 15px; ">
                 <tbody>
-                    @{ 
-                        if (Model != null)
+                    @{ if (Model != null)
                         {
                             foreach (JobsViewModel jobsVm in Model)
                             {
-                                @if (jobsVm.isActive == "true")
-                                {
-                                    <tr>
-                                        <td class="container border" style="font-size:large; vertical-align:middle; font-weight:bold; text-align:left; padding:30px 50px 30px 50px"><a class="text-body" title="@jobsVm.jobTitle" href="/jobdetail/index/@jobsVm.jobSlug">@jobsVm.jobTitle</a></td>
-                                        <td class="container border" style="vertical-align:middle;"><a href="/jobdetail/index/@jobsVm.jobSlug" class="btn btn-danger" style="float:right; align-items:center; width:125px;" type="button" data-bs-target="#demo">İlanı İncele <span style="line-height:12px; font-size:17px;">&#x2192;</span></a></td>
-                                    </tr>
-                                } 
-                            }
-                        } 
-                      }
+            @if (jobsVm.isActive == "true")
+            {
+<tr>
+    <td class="container border" style="font-size:large; vertical-align:middle; font-weight:bold; text-align:left; padding:30px 50px 30px 50px"><a class="text-body" title="@jobsVm.jobTitle" href="/jobdetail/index/@jobsVm.jobSlug">@jobsVm.jobTitle</a></td>
+    <td class="container border" style="vertical-align:middle;"><a href="/jobdetail/index/@jobsVm.jobSlug" class="btn btn-danger" style="float:right; align-items:center; width:125px;" type="button" data-bs-target="#demo" title="@jobsVm.jobTitle">İlanı İncele <span style="line-height:12px; font-size:17px;">&#x2192;</span></a></td>
+</tr> } }
+                                } }
                 </tbody>
             </table>
         </ul>
+    </div>
+</div>
+
+<div class="container shadow-sm p-3 mb-5 bg-body rounded">
+    <div class="container">
+        <h3 style="font-size:40px; margin-bottom:25px; margin-top:25px;" class="text-center">Stajyerlik Başvurusu</h3>
+        <p style="text-align:center; margin-top:20px; margin-bottom:20px;">
+            Hem gelişmek hem de öğrenmek mi istiyorsun? Projeler geliştirip kendini iş hayatına alıştırmak mı istiyorsun?
+            Önünde mükemmel duran bir fırsat var.
+            <strong class="text-center"> Hemen staj başvurunu yap.</strong>
+            Aynı dili konuştuğun bu ekibin bir parçası ol.
+        </p>
+        <div class="row">
+            <div class="col">
+                <div class="text-center">
+                    <a href="/job/intern" style="vertical-align: middle;" class="btn btn-outline-danger btn-lg w-50" title="Hemen Başvur">Staj Başvurunu Yap<span>&#128279;</span></a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

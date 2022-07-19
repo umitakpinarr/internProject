@@ -20,26 +20,26 @@ namespace JobsArgeya.Business
 
         public string getJobDetails(int jobId, int parameter)
         {
-            var dbName = _databaseContext.Jobs.Where(x => x.id == jobId).FirstOrDefault();
+            var dbJob = _databaseContext.Jobs.Where(x => x.id == jobId).FirstOrDefault();
             if(parameter == 0)
             {
-                return dbName.jobTitle.ToString();
+                return dbJob.jobTitle.ToString();
             }
             else if(parameter == 1)
             {
-                return dbName.jobKeywords.ToString();
+                return dbJob.jobKeywords.ToString();
             }
             else if(parameter == 2)
             {
-                return dbName.jobDescription.ToString();
+                return dbJob.jobDescription.ToString();
             }
             else if(parameter == 3)
             {
-                return dbName.jobContent.ToString();
+                return dbJob.jobContent.ToString();
             }
             else if(parameter == 4)
             {
-                return dbName.jobSlug.ToString();
+                return dbJob.jobSlug.ToString();
             }
             else
             {

@@ -18,5 +18,8 @@ namespace JobsArgeya.Data.Entities
         public string cvPath { get; set; }
         public int? jobId { get; set; }
         public DateTime createdAt { get; set; }
+        public string? isIntern { get; set; }
+        public DateTime? internStartDate { get; set; }
+        public DateTime? internEndDate { get; set; }
     }
 }

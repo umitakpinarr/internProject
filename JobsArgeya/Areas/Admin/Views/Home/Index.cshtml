@@ -41,10 +41,12 @@
 
                     @if (@apply.jobId != null)
                     {
-                    <td><a href="/jobdetail/index/@apply.jobSlug" target="_blank">@apply.jobTitle</a></td> }
-                                    else
-                                    {
-                    <td>@apply.jobTitle</td>}
+                    <td><a href="/jobdetail/index/@apply.jobSlug" target="_blank">@apply.jobTitle</a></td> 
+                    }
+                    else
+                    {
+                    <td>@apply.jobTitle</td>
+                    }
 
 
                     <td><p style="word-wrap: break-word;">@apply.resume</p></td>

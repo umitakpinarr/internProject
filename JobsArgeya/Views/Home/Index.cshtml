@@ -1,25 +1,11 @@
 ﻿
-    @{ ViewData["Title"] = "Kariyer";
-         ViewData["BreadcrumbTitle"] = "Kariyer";
-         ViewData["BreadcrumbSubTitle"] = "Kodluyoruz ve dünyaya sunuyoruz! Bizimle birlikte bu dünyayı keşfetmek istersen başvurunu bekliyoruz. <br /> Hemen tanışalım ve sana Argeya'nın ayrıcalıklarından bahsedelim.";}
+@{ ViewData["Title"] = "Kariyer";
+    ViewData["BreadcrumbTitle"] = "Kariyer";
+    ViewData["BreadcrumbSubTitle"] = "Kodluyoruz ve dünyaya sunuyoruz! Bizimle birlikte bu dünyayı keşfetmek istersen başvurunu bekliyoruz. <br /> Hemen tanışalım ve sana Argeya'nın ayrıcalıklarından bahsedelim.";}
 
 
 
-   
 
 
-        @await Component.InvokeAsync("JobsList")
 
-
-        <p style="text-align:center; margin-top:20px; margin-bottom:20px;">
-            Gelişimin ve eğlencenin tadını aynı anda çıkarmak mı? Neden olmasın?
-            Kendi başarı hikayeni, aynı dili konuştuğun bir ekiple birlikte yazmak ister misin?
-        </p>
-        <div class="row">
-            <div class="col">
-                <div class="text-center">
-                    <a href="https://localhost:44367/job" style="vertical-align: middle;" class="btn btn-danger btn-lg active">Hemen Başvur</a>
-                </div>
-            </div>
-        </div>
-    </div>
+@await Component.InvokeAsync("JobsList")

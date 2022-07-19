@@ -54,9 +54,15 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     applyVm.jobTitle = details.getJobDetails((int)apply.jobId, 0);
                     applyVm.jobSlug = details.getJobDetails((int)apply.jobId, 4);
                 }
+                else if(apply.isIntern == "1")
+                {
+                    applyVm.internStartDate = apply.internStartDate;
+                    applyVm.internEndDate = apply.internEndDate;
+                    applyVm.jobTitle = "Stajyer Başvurusu";
+                }
                 else
                 {
-                    applyVm.jobTitle = "Sadece CV göndermiş.";
+                    applyVm.jobTitle = "Sadece CV Göndermiş";
                 }
                 allApplies.Add(applyVm);
             }
@@ -102,6 +108,13 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 {
                     applyDetail.jobTitle = details.getJobDetails((int)dbApply.jobId, 0);
                     applyDetail.jobSlug = details.getJobDetails((int)dbApply.jobId, 4);
+                }
+                else if (dbApply.isIntern == "1")
+                {
+                    applyDetail.isIntern = "1";
+                    applyDetail.internStartDate = dbApply.internStartDate;
+                    applyDetail.internEndDate = dbApply.internEndDate;
+                    applyDetail.jobTitle = "Stajyer Başvurusu";
                 }
                 else
                 {

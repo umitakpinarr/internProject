@@ -2468,3 +2468,4 @@ C:\Users\Freeman\Source\Repos\farukcakal\internProject\JobsArgeya\obj\Debug\net5
 C:\Users\Freeman\Source\Repos\farukcakal\internProject\JobsArgeya\obj\Debug\net5.0\ref\JobsArgeya.dll
 C:\Users\Freeman\Source\Repos\farukcakal\internProject\JobsArgeya\obj\Debug\net5.0\JobsArgeya.pdb
 C:\Users\Freeman\Source\Repos\farukcakal\internProject\JobsArgeya\obj\Debug\net5.0\JobsArgeya.genruntimeconfig.cache
+C:\Users\Freeman\Source\Repos\farukcakal\internProject\JobsArgeya\obj\Debug\net5.0\Razor\Views\Job\Intern.cshtml.g.cs

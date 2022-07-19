@@ -1,6 +1,6 @@
 ﻿@model AppliesViewModel
 @{ Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-                ViewData["CmsTitle"] = "Başvuru Detayı"; }
+    ViewData["CmsTitle"] = "Başvuru Detayı"; }
 <div class="row">
     <div class="col-xl-4 col-lg-5">
         <div class="card text-center">
@@ -51,6 +51,19 @@
                             <a href="/jobdetail/index/@Model.jobSlug">@Model.jobTitle</a>
                         </span>
                     </p>
+                    @if (Model.isIntern == "1")
+                    {
+                        <p class="mb-2 font-13">
+                            <strong>Staj Başlangıç Tarihi :</strong><span class="ms-2">
+                                @Model.internStartDate
+                            </span>
+                        </p>
+                        <p class="mb-2 font-13">
+                            <strong>Staj Bitiş Tarihi :</strong><span class="ms-2">
+                                @Model.internEndDate
+                            </span>
+                        </p>
+                    }
                     <hr />
                     <h4 class="header-title mt-0 mb-3">Özgeçmiş</h4>
                     <p class="text-muted font-13">

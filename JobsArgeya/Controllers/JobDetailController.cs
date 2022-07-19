@@ -39,7 +39,6 @@ namespace JobsArgeya.Controllers
             else
             {
                 TempData["dangerMessage"] = "İlan Bulunamadı";
-
             }
             return Redirect("/");
         }

@@ -41,6 +41,7 @@
     <link rel="stylesheet" type="text/css" href="~/style.css"> <!-- This stylesheet dynamically changed from style.less -->
     <!-- responsive css -->
     <link rel="stylesheet" type="text/css" href="~/assets/css/responsive.css">
+    @RenderSection("Styles", required: false)
 </head>
 <body class="defult-home">
 
@@ -129,15 +130,17 @@
 
     @if (TempData["successMessage"] != null)
     {
-<script>
+        <script>
             swal("Başarılı", "@Html.Raw(@TempData["successMessage"])", "success");
-</script>
+        </script>
     }
     @if (TempData["dangerMessage"] != null)
     {
-<script>
+        <script>
             swal("Başarısız", "@Html.Raw(@TempData["dangerMessage"])", "error");
-</script>
+        </script>
     }
 </body>
 </html>
+
+@RenderSection("Scripts", required: false)

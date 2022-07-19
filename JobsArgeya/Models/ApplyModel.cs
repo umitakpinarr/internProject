@@ -37,5 +37,8 @@ namespace JobsArgeya.Models
         public string resume { get; set; }
         public int? jobId { get; set; }
         public string captcha { get; set; }
+        public string? isIntern { get; set; }
+        public DateTime? internStartDate { get; set; }
+        public DateTime? internEndDate { get; set; }
     }
 }

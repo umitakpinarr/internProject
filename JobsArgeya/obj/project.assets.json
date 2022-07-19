@@ -6765,11 +6765,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Freeman\\Desktop\\internPorject-main\\JobsArgeya\\JobsArgeya.csproj",
+      "projectUniqueName": "C:\\Users\\Freeman\\Source\\Repos\\farukcakal\\internProject\\JobsArgeya\\JobsArgeya.csproj",
       "projectName": "JobsArgeya",
-      "projectPath": "C:\\Users\\Freeman\\Desktop\\internPorject-main\\JobsArgeya\\JobsArgeya.csproj",
+      "projectPath": "C:\\Users\\Freeman\\Source\\Repos\\farukcakal\\internProject\\JobsArgeya\\JobsArgeya.csproj",
       "packagesPath": "C:\\Users\\Freeman\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Freeman\\Desktop\\internPorject-main\\JobsArgeya\\obj\\",
+      "outputPath": "C:\\Users\\Freeman\\Source\\Repos\\farukcakal\\internProject\\JobsArgeya\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Freeman\\AppData\\Roaming\\NuGet\\NuGet.Config",

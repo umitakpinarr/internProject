@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Wjo3OcDau425ybFo6Iyy13w0Fy2xPbKNbpF8Aqz76qWuk2Y5VqQfiCj5QSmoTtg5Vl+ERCaS+Rq90BP9Iln3oQ==",
+  "dgSpecHash": "wDVdU4A/sPCLTJCV0iZHKPvGCkuiRfZK1cm5x56Yh4pQb+5Ibwf8WTS3+OCA5lBkQD6Jzv/lCOZuXRou9ulMSQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Freeman\\Desktop\\internPorject-main\\JobsArgeya\\JobsArgeya.csproj",
+  "projectFilePath": "C:\\Users\\Freeman\\Source\\Repos\\farukcakal\\internProject\\JobsArgeya\\JobsArgeya.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Freeman\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Freeman\\.nuget\\packages\\jetbrains.annotations\\2022.1.0\\jetbrains.annotations.2022.1.0.nupkg.sha512",

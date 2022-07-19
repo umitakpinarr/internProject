@@ -19,6 +19,7 @@
                         <th>Cinsiyeti</th>
                         <th>Üniversitesi</th>
                         <th>Bölümü</th>
+                        <th>Başvuru Tarihi</th>
                         <th>Başvurulan İlan</th>
                         <th>Özgeçmişi</th>
                         <th>İşlemler</th>
@@ -33,20 +34,21 @@
                         <td>@apply.email</td>
                         <td>@apply.gender</td>
                         <td>@apply.university</td>
-                        <td>@apply.faculty</td>
+                        <td>
+                            @apply.faculty
+                    </td>
+                    <td>@apply.createdAt</td>
 
-                        @if (@apply.jobId != null)
-                        {
-                            <td><a href="/jobdetail/index/@apply.jobSlug" target="_blank">@apply.jobTitle</a></td>
-                        }
-                        else
-                        {
-                            <td>@apply.jobTitle</td>
-                        }
+                    @if (@apply.jobId != null)
+                    {
+                    <td><a href="/jobdetail/index/@apply.jobSlug" target="_blank">@apply.jobTitle</a></td> }
+                                    else
+                                    {
+                    <td>@apply.jobTitle</td>}
 
 
-                        <td><p style="word-wrap: break-word;">@apply.resume</p></td>
-                        <td><a href="/admin/home/applydetail/@apply.id" class="btn btn-primary">Görüntüle</a> <a href="/admin/home/delete/@apply.id" class="btn btn-danger">Sil</a></td>
+                    <td><p style="word-wrap: break-word;">@apply.resume</p></td>
+                    <td><a href="/admin/home/applydetail/@apply.id" class="btn btn-primary">Görüntüle</a> <a href="/admin/home/delete/@apply.id" class="btn btn-danger">Sil</a></td>
                     </tr>
                     }
                 </tbody>

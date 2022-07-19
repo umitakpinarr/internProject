@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using JobsArgeya.Data.Context;
-using JobsArgeya.Areas.Classes;
+using JobsArgeya.Business;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +32,8 @@ namespace JobsArgeya
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddDbContext<DatabaseContext>(options => { options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")); });
+            services.AddMvc().AddSessionStateTempDataProvider();
+            services.AddSession();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
             {
                 options.LoginPath = "/admin/login";
@@ -59,7 +61,7 @@ namespace JobsArgeya
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -86,6 +88,8 @@ namespace JobsArgeya
                 endpoints.MapAreaControllerRoute("MailList", "Admin", "Admin/{controller=Mail}/{action=Index}");
                 //endpoints.MapAreaControllerRoute("MailSend", "Admin", "Admin/{controller=Mail}/{action=Send}");
                 endpoints.MapAreaControllerRoute("MailDelete", "Admin", "Admin/{controller=Mail}/{action=Delete}/{id?}");
+
+                endpoints.MapControllerRoute(name: "captcha", pattern: "argeya-captcha", defaults: new { controller = "captcha", action = "getImage" });
             });
         }
     }

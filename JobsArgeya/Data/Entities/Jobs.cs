@@ -13,5 +13,6 @@ namespace JobsArgeya.Data.Entities
         public string jobContent { get; set; }
         public string jobKeywords { get; set; }
         public string jobDescription { get; set; }
+        public string isActive { get; set; }
     }
 }

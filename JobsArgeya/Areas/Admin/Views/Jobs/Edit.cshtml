@@ -1,8 +1,6 @@
 ﻿@model JobsModel
-@{
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    ViewData["CmsTitle"] = "İlan Düzenle";
-}
+@{ Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["CmsTitle"] = "İlan Düzenle"; }
 @section Styles {
     <style>
         /*Textbox*/
@@ -18,6 +16,26 @@
         <div class="card-body">
             <form action="/admin/jobs/edit" method="post">
                 <input name="id" id="id" value="@Context.Request.RouteValues["id"]" hidden />
+                @if (Model.isActive == "true")
+                {
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" asp-for="isActive" checked>
+                    <label class="form-check-label" asp-for="isActive">
+                        Aktif İlan
+                    </label>
+                </div> 
+                }
+                else
+                {
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" asp-for="isActive">
+                    <label class="form-check-label" asp-for="isActive">
+                        Aktif İlan
+                    </label>
+                </div>
+                }
+
+                <br />
                 <div class="form-group" style="margin-bottom:10px;">
                     <label for="jobTitle">İlan Başlığı</label>
                     <input class="form-control" asp-for="jobTitle" type="text" placeholder="İlan Başlığı">

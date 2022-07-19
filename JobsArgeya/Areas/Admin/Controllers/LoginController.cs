@@ -10,7 +10,7 @@ using JobsArgeya.Areas.Admin.Models;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
-using JobsArgeya.Areas.Classes;
+using JobsArgeya.Business;
 
 namespace JobsArgeya.Areas.Admin.Controllers
 {

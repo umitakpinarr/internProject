@@ -17,5 +17,6 @@ namespace JobsArgeya.Data.Entities
         public string resume { get; set; }
         public string cvPath { get; set; }
         public int? jobId { get; set; }
+        public DateTime createdAt { get; set; }
     }
 }

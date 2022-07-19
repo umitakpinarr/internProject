@@ -59,6 +59,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 jobDetail.jobKeywords = dbJobs.jobKeywords;
                 jobDetail.jobDescription = dbJobs.jobDescription;
                 jobDetail.jobContent = dbJobs.jobContent;
+                jobDetail.isActive = dbJobs.isActive;
                 return View(jobDetail);
             }
             else
@@ -97,6 +98,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 dbJobs.jobKeywords = jobsModel.jobKeywords;
                 dbJobs.jobDescription = jobsModel.jobDescription;
                 dbJobs.jobContent = jobsModel.jobContent;
+                dbJobs.isActive = jobsModel.isActive;
                 dbJobs.jobSlug = helper.GenerateSlug(jobsModel.jobTitle);
                 _databaseContext.SaveChanges();
                 TempData["successMessage"] = "İlan başarıyla güncellendi.";

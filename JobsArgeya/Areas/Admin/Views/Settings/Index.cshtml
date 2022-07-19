@@ -64,6 +64,12 @@
                     <label for="smtpPort">SMTP Port</label>
                     <input class="form-control" type="text" value="@Model[0].smtpPort" name="smtpPort" id="smtpPort" placeholder="SMTP Port">
                 </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="useSSL" id="useSSL" @(Model[0].useSSL == "true" ? "checked" : "")>
+                    <label class="form-check-label" for="useSSL">
+                        SSL
+                    </label>
+                </div>
                 <hr />
                 <div class="form-group">
                     <label for="logo">Site Logo</label>

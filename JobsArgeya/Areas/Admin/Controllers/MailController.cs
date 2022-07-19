@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using JobsArgeya.Areas.Classes;
+using JobsArgeya.Business;
 using System.Threading.Tasks;
 
 namespace JobsArgeya.Areas.Admin.Controllers

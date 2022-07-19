@@ -10,7 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using JobsArgeya.Areas.Admin.Models;
-using JobsArgeya.Areas.Classes;
+using JobsArgeya.Business;
 using Microsoft.Extensions.Configuration;
 using Slugify;
 
@@ -35,7 +35,12 @@ namespace JobsArgeya.Controllers
         [HttpPost]
         public async Task<IActionResult> Apply(ApplyModel id, IFormFile formFile)
         {
-            
+            CaptchaController captchaController = new CaptchaController();
+            if (!captchaController.IsValid(id.captcha, HttpContext.Session))
+            {
+                TempData["dangerMessage"] = "Yanlış captcha girişi yaptınız. Lütfen tekrar deneyiniz.";
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
             if (ModelState.IsValid)
             {
                 Mail mail = new Mail(_databaseContext, _configuration);
@@ -64,6 +69,7 @@ namespace JobsArgeya.Controllers
                             university = id.university,
                             faculty = id.faculty,
                             resume = id.resume,
+                            createdAt = DateTime.Now,
                             cvPath = fileName
                         });
                         if (_databaseContext.MailSubscribers.Any(x => x.email == id.email))
@@ -79,7 +85,7 @@ namespace JobsArgeya.Controllers
                             });
                         }
                         _databaseContext.SaveChanges();
-                        mail.SendMail(id.email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır..");
+                        mail.SendMail(id.email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.");
                     }
                     TempData["successMessage"] = "Başvurunuz başarıyla oluşturuldu. En kısa zamanda size dönüş sağlayacağız.";
                 }
@@ -114,6 +120,12 @@ namespace JobsArgeya.Controllers
         [HttpPost]
         public IActionResult Applicant(ApplyModel apply, IFormFile formFile)
         {
+            CaptchaController captchaController = new CaptchaController();
+            if (!captchaController.IsValid(apply.captcha, HttpContext.Session))
+            {
+                TempData["dangerMessage"] = "Yanlış captcha girişi yaptınız. Lütfen tekrar deneyiniz.";
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
             SlugHelper helper = new SlugHelper();
             Mail mail = new Mail(_databaseContext, _configuration);
             if (ModelState.IsValid)
@@ -143,9 +155,10 @@ namespace JobsArgeya.Controllers
                             faculty = apply.faculty,
                             resume = apply.resume,
                             cvPath = fileName,
+                            createdAt = DateTime.Now,
                             jobId = apply.jobId
                         });
-                        if(_databaseContext.MailSubscribers.Any(x=> x.email == apply.email))
+                        if (_databaseContext.MailSubscribers.Any(x => x.email == apply.email))
                         {
                             TempData["successMessage"] = "Başvurunuz başarıyla oluşturuldu. En kısa zamanda size dönüş sağlayacağız.";
                         }

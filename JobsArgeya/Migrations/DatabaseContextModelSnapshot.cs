@@ -26,6 +26,9 @@ namespace JobsArgeya.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("createdAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("cvPath")
                         .HasColumnType("nvarchar(max)");
 
@@ -64,6 +67,9 @@ namespace JobsArgeya.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("isActive")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("jobContent")
                         .HasColumnType("nvarchar(max)");
@@ -153,6 +159,9 @@ namespace JobsArgeya.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("twitter")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("useSSL")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");

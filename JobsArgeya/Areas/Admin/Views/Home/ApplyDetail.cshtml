@@ -1,8 +1,6 @@
 ﻿@model AppliesViewModel
-@{
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    ViewData["CmsTitle"] = "Başvuru Detayı";
-}
+@{ Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+                ViewData["CmsTitle"] = "Başvuru Detayı"; }
 <div class="row">
     <div class="col-xl-4 col-lg-5">
         <div class="card text-center">
@@ -41,6 +39,16 @@
                     <p class="mb-2 font-13">
                         <strong>Bölüm :</strong><span class="ms-2">
                             @Model.faculty
+                        </span>
+                    </p>
+                    <p class="mb-2 font-13">
+                        <strong>Başvuru Tarihi :</strong><span class="ms-2">
+                            @Model.createdAt
+                        </span>
+                    </p>
+                    <p class="mb-2 font-13">
+                        <strong>Başvurulan İlan :</strong><span class="ms-2">
+                            <a href="/jobdetail/index/@Model.jobSlug">@Model.jobTitle</a>
                         </span>
                     </p>
                     <hr />

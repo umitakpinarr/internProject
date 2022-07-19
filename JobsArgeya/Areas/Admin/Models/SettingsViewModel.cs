@@ -22,6 +22,7 @@ namespace JobsArgeya.Areas.Admin.Models
         public string smtpUsername { get; set; }
         public string smtpPassword { get; set; }
         public string smtpPort { get; set; }
+        public string useSSL { get; set; }
         public string logo { get; set; }
     }
 }

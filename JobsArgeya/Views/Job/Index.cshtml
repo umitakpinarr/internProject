@@ -16,45 +16,74 @@
         @TempData["dangerMessage"]
     </div>
 }
-<div class="job-apply-form">
-    <form asp-action="Apply" method="post" enctype="multipart/form-data">
-        <div class="form-group" style="margin-bottom:10px;">
-            <label asp-for="fullName">Adınız ve Soydınız:</label>
-            <input asp-for="fullName" class="form-control" required>
+
+<section class="tools">
+    <div class="container">
+        <div class="t-row">
+            <div class="d-table-cell">
+                <a class="btn btn-outline-danger" style="margin-top:25px; margin-bottom:25px;" href="/home" title="Geri">
+                    <span style="line-height: 12px; font-size: 20px;">&#x2190;</span> Geri Git
+                </a>
+            </div>
         </div>
-        <div class="form-group" style="margin-bottom:10px;">
-            <label asp-for="phone">Telefon Numaranız:</label>
-            <input asp-for="phone" class="form-control" required>
-        </div>
-        <div class="form-group" style="margin-bottom:10px;">
-            <label asp-for="email">E-Mail Adresiniz:</label>
-            <input type="email" class="form-control" asp-for="email" required>
-        </div>
-        <div class="form-group" style="margin-bottom:10px;">
-            <label>Cinsiyetiniz</label>
-            <select asp-for="gender" class="form-control" required>
-                <option value="">Lütfen Bir Seçim Yapınız!</option>
-                <option value="Belirtilmemiş">Belirtmek İstemiyorum</option>
-                <option value="Erkek">Erkek</option>
-                <option value="Kadın">Kadın</option>
-            </select>
-        </div>
-        <div class="form-group" style="margin-bottom:10px;">
-            <label asp-for="university">Okuduğunuz/Mezun Olduğunuz Okul:</label>
-            <input asp-for="university" class="form-control" required>
-        </div>
-        <div class="form-group" style="margin-bottom:10px;">
-            <label asp-for="faculty">Okuduğunuz/Mezun Olduğunuz Bölüm:</label>
-            <input asp-for="faculty" class="form-control" required>
-        </div>
-        <div class="form-group" style="margin-bottom:10px;">
-            <label asp-for="resume">Özgeçmiş:</label>
-            <textarea asp-for="resume" class="form-control" required></textarea>
-        </div>
-        <div class="form-group" style="margin-bottom:10px;">
-            <label for="formFile">CV Yükle</label>
-            <input type="file" class="form-control-file" name="formFile">
-        </div>
-        <button type="submit" class="btn btn-danger w-100">Başvur</button>
-    </form>
+    </div>
+</section>
+<div class="container">
+    <div class="title text-center">
+        <h1>Başvuru Formu</h1>
+        <p>
+            Gelişimin ve eğlencenin tadını aynı anda çıkarmak mı? Neden olmasın?
+            <br> Kendi başarı hikayeni, aynı dili konuştuğun bir ekiple birlikte yazmak ister misin?
+        </p>
+    </div>
+  
+    <div class="job-apply-form">
+        <form asp-action="Apply" method="post" enctype="multipart/form-data">
+            <div class="form-group" style="margin-bottom:10px;">
+                <label asp-for="fullName"><b>Adınız ve Soydınız:</b></label>
+                <input asp-for="fullName" class="form-control" required>
+            </div>
+            <div class="form-group" style="margin-bottom:10px;">
+                <label asp-for="phone"><b>Telefon Numaranız:</b></label>
+                <input asp-for="phone" class="form-control" required>
+            </div>
+            <div class="form-group" style="margin-bottom:10px;">
+                <label asp-for="email"><b>E-Mail Adresiniz:</b></label>
+                <input type="email" class="form-control" asp-for="email" required>
+            </div>
+            <div class="form-group" style="margin-bottom:10px;">
+                <label><b>Cinsiyetiniz</b></label>
+                <select asp-for="gender" class="form-control" required>
+                    <option value="">Lütfen Bir Seçim Yapınız!</option>
+                    <option value="Belirtilmemiş">Belirtmek İstemiyorum</option>
+                    <option value="Erkek">Erkek</option>
+                    <option value="Kadın">Kadın</option>
+                </select>
+            </div>
+            <div class="form-group" style="margin-bottom:10px;">
+                <label asp-for="university"><b>Okuduğunuz/Mezun Olduğunuz Okul:</b></label>
+                <input asp-for="university" class="form-control" required>
+            </div>
+            <div class="form-group" style="margin-bottom:10px;">
+                <label asp-for="faculty"><b>Okuduğunuz/Mezun Olduğunuz Bölüm:</b></label>
+                <input asp-for="faculty" class="form-control" required>
+            </div>
+            <div class="form-group" style="margin-bottom:10px;">
+                <label asp-for="resume"><b>Özgeçmiş:</b></label>
+                <textarea asp-for="resume" class="form-control" required></textarea>
+            </div>
+            <div class="form-group" style="margin-bottom:10px;">
+                <label for="formFile"><b>CV Yükle</b></label>
+                <input type="file" class="form-control-file" name="formFile">
+            </div>
+            <div class="form-group" style="margin-bottom:10px;">
+                <img style="display: inline-block; width: 180px; height: 50px; " id="imgCaptcha" src="/argeya-captcha?@DateTime.Now.ToString("ddMMyyyyHHmmsss")" />
+                <a class="btn btn-sm small gray" style="display: inline-block; padding: 8px; cursor: pointer; vertical-align: top; background-color: #dc3545; color: #fff !important; text-decoration: none;" onclick="var today = new Date(); document.getElementById('imgCaptcha').src = '/argeya-captcha?r=' + today; return false;">
+                    <i class="fa fa-refresh" aria-hidden="true" style="font-size: 30px;"></i>
+                </a>
+                <input type="text" asp-for="captcha"/>
+            </div>
+            <button type="submit" class="btn btn-danger w-100">Başvur</button>
+        </form>
+    </div>
 </div>

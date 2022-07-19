@@ -47,6 +47,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 settingsVm.smtpUsername = settings.smtpUsername;
                 settingsVm.smtpPassword = settings.smtpPassword;
                 settingsVm.smtpPort = settings.smtpPort;
+                settingsVm.useSSL = settings.useSSL;
                 settingsVm.logo = settings.logo;
 
                 allSettings.Add(settingsVm);
@@ -93,6 +94,15 @@ namespace JobsArgeya.Areas.Admin.Controllers
                         settingsVm.smtpUsername = settings.smtpUsername;
                         settingsVm.smtpPassword = settings.smtpPassword;
                         settingsVm.smtpPort = settings.smtpPort;
+                        if(settings.useSSL == "on")
+                        {
+                            settingsVm.useSSL = "true";
+                        }
+                        else
+                        {
+                            settingsVm.useSSL = "false";
+                        }
+                        
                         settingsVm.logo = fileName;
 
                         allSettings.Add(settingsVm);
@@ -113,6 +123,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     db.smtpUsername = allSettings[0].smtpUsername;
                     db.smtpPassword = allSettings[0].smtpPassword;
                     db.smtpPort = allSettings[0].smtpPort;
+                    db.useSSL = allSettings[0].useSSL;
                     db.logo = fileName;
                     _databaseContext.SaveChanges();
                 }
@@ -136,6 +147,14 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     settingsVm.smtpUsername = settings.smtpUsername;
                     settingsVm.smtpPassword = settings.smtpPassword;
                     settingsVm.smtpPort = settings.smtpPort;
+                    if(settings.useSSL == "on")
+                    {
+                        settingsVm.useSSL = "true";
+                    }
+                    else
+                    {
+                        settingsVm.useSSL = "false";
+                    }
 
                     allSettings.Add(settingsVm);
                 }
@@ -155,6 +174,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 db.smtpUsername = allSettings[0].smtpUsername;
                 db.smtpPassword = allSettings[0].smtpPassword;
                 db.smtpPort = allSettings[0].smtpPort;
+                db.useSSL = allSettings[0].useSSL;
                 _databaseContext.SaveChanges();
             }
             

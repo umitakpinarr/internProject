@@ -9,7 +9,7 @@ using JobsArgeya.Data.Entities;
 using JobsArgeya.Data.Context;
 using Microsoft.Extensions.Configuration;
 using JobsArgeya.Areas.Admin.Models;
-using JobsArgeya.Areas.Classes;
+using JobsArgeya.Business;
 
 namespace JobsArgeya.Areas.Admin.Controllers
 {
@@ -46,6 +46,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 applyVm.faculty = apply.faculty;
                 applyVm.resume = apply.resume;
                 applyVm.cvPath = apply.cvPath;
+                applyVm.createdAt = apply.createdAt;
                 applyVm.jobId = apply.jobId;
                 /*DB de jobId varsa classdaki methoda gidip ilgili id ile veritabanından jobTitle return ediliyor ve viewmodele basıyor*/
                 if (apply.jobId != null)
@@ -81,6 +82,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
         }
         public IActionResult ApplyDetail(int id)
         {
+            GetDetails details = new GetDetails(_databaseContext, _configuration);
+
             Apply dbApply = _databaseContext.Applies.Where(x => x.id == id).FirstOrDefault();
             AppliesViewModel applyDetail = new AppliesViewModel();
             if(dbApply != null)
@@ -94,6 +97,16 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 applyDetail.faculty = dbApply.faculty;
                 applyDetail.resume = dbApply.resume;
                 applyDetail.cvPath = dbApply.cvPath;
+                applyDetail.createdAt = dbApply.createdAt;
+                if (dbApply.jobId != null)
+                {
+                    applyDetail.jobTitle = details.getJobDetails((int)dbApply.jobId, 0);
+                    applyDetail.jobSlug = details.getJobDetails((int)dbApply.jobId, 4);
+                }
+                else
+                {
+                    applyDetail.jobTitle = "Sadece CV göndermiş.";
+                }
 
                 return View(applyDetail);
             }

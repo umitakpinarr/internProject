@@ -33,6 +33,7 @@ namespace JobsArgeya.ViewComponents
                 jobsVm.jobDescription = jobs.jobDescription;
                 jobsVm.jobContent = jobs.jobContent;
                 jobsVm.jobSlug = jobs.jobSlug;
+                jobsVm.isActive = jobs.isActive;
 
                 allJobs.Add(jobsVm);
             }

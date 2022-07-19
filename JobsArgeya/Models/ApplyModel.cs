@@ -36,5 +36,6 @@ namespace JobsArgeya.Models
         [StringLength(255)]
         public string resume { get; set; }
         public int? jobId { get; set; }
+        public string captcha { get; set; }
     }
 }

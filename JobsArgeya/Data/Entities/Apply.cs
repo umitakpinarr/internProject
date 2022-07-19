@@ -21,5 +21,6 @@ namespace JobsArgeya.Data.Entities
         public string? isIntern { get; set; }
         public DateTime? internStartDate { get; set; }
         public DateTime? internEndDate { get; set; }
+        public int officeId { get; set; }
     }
 }

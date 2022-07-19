@@ -30,8 +30,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
         {
             /*Detayları çekmek için olşturduğum class ı türetip içersindeki methodlara erişeceğiz*/
             GetDetails details = new GetDetails(_databaseContext, _configuration);
-
-            List<Apply> dbApplies = _databaseContext.Applies.ToList();
+            int officeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "officeId").Value);
+            List <Apply> dbApplies = _databaseContext.Applies.Where(x=>x.officeId == officeId).ToList();
             List<AppliesViewModel> allApplies = new List<AppliesViewModel>();
 
             foreach (Apply apply in dbApplies)
@@ -72,7 +72,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
 
         public IActionResult Delete(int id)
         {
-            var apply = _databaseContext.Applies.Where(x => x.id == id).FirstOrDefault();
+            int officeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "officeId").Value);
+            var apply = _databaseContext.Applies.Where(x => x.id == id && x.officeId == officeId).FirstOrDefault();
             
             if (apply != null)
             {
@@ -89,8 +90,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
         public IActionResult ApplyDetail(int id)
         {
             GetDetails details = new GetDetails(_databaseContext, _configuration);
-
-            Apply dbApply = _databaseContext.Applies.Where(x => x.id == id).FirstOrDefault();
+            int officeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "officeId").Value);
+            Apply dbApply = _databaseContext.Applies.Where(x => x.id == id && x.officeId == officeId).FirstOrDefault();
             AppliesViewModel applyDetail = new AppliesViewModel();
             if(dbApply != null)
             {

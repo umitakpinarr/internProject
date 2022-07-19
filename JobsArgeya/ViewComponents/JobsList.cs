@@ -19,9 +19,10 @@ namespace JobsArgeya.ViewComponents
             _databaseContext = databaseContext;
             _hostingEnvironment = environment;
         }
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(string officeSlug)
         {
-            List<Jobs> dbJobs = _databaseContext.Jobs.ToList();
+            var dbOffice = _databaseContext.Offices.Where(x => x.officeSlug == officeSlug).FirstOrDefault();
+            List<Jobs> dbJobs = _databaseContext.Jobs.Where(x=> x.officeId == dbOffice.id).ToList();
             List<JobsViewModel> allJobs = new List<JobsViewModel>();
 
             foreach (Jobs jobs in dbJobs)

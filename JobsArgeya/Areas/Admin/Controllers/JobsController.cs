@@ -26,7 +26,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
         }
         public IActionResult List()
         {
-            List<Jobs> dbJobs = _databaseContext.Jobs.ToList();
+            int officeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "officeId").Value);
+            List<Jobs> dbJobs = _databaseContext.Jobs.Where(x=> x.officeId == officeId).ToList();
             List<JobsViewModel> allJobs = new List<JobsViewModel>();
 
             foreach (Jobs jobs in dbJobs)
@@ -50,8 +51,9 @@ namespace JobsArgeya.Areas.Admin.Controllers
         }
         [HttpGet]
         public IActionResult Edit(int id)
-        {   
-            Jobs dbJobs = _databaseContext.Jobs.Where(x => x.id == id).FirstOrDefault();
+        {
+            int officeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "officeId").Value);
+            Jobs dbJobs = _databaseContext.Jobs.Where(x => x.id == id && x.officeId == officeId).FirstOrDefault();
             JobsModel jobDetail = new JobsModel();
             if (dbJobs != null)
             {
@@ -71,6 +73,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Add(JobsModel jobsModel)
         {
+            int officeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "officeId").Value);
             if (ModelState.IsValid)
             {
                 _databaseContext.Jobs.Add(new Jobs
@@ -79,8 +82,10 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     jobKeywords = jobsModel.jobKeywords,
                     jobDescription = jobsModel.jobDescription,
                     jobContent = jobsModel.jobContent,
-                    jobSlug = helper.GenerateSlug(jobsModel.jobTitle)
-                });
+                    jobSlug = helper.GenerateSlug(jobsModel.jobTitle),
+                    isActive = "true",
+                    officeId = officeId
+            });
                 _databaseContext.SaveChanges();
                 TempData["successMessage"] = "İlan başarıyla eklendi.";
                 return Redirect(Request.Headers["Referer"].ToString());
@@ -93,7 +98,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var dbJobs = _databaseContext.Jobs.Where(x => x.id == id).FirstOrDefault();
+                int officeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "officeId").Value);
+                var dbJobs = _databaseContext.Jobs.Where(x => x.id == id && x.officeId == officeId).FirstOrDefault();
                 dbJobs.jobTitle = jobsModel.jobTitle;
                 dbJobs.jobKeywords = jobsModel.jobKeywords;
                 dbJobs.jobDescription = jobsModel.jobDescription;
@@ -109,7 +115,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
         }
         public IActionResult Delete(int id)
         {
-            var job = _databaseContext.Jobs.Where(x => x.id == id).FirstOrDefault();
+            int officeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "officeId").Value);
+            var job = _databaseContext.Jobs.Where(x => x.id == id && x.officeId == officeId).FirstOrDefault();
             if (job != null)
             {
                 _databaseContext.Jobs.Remove(job);

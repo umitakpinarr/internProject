@@ -27,7 +27,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<Settings> dbSettings = _databaseContext.Settings.ToList();
+            int officeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "officeId").Value);
+            List<Settings> dbSettings = _databaseContext.Settings.Where(x=> x.officeId == officeId).ToList();
             List<SettingsViewModel> allSettings = new List<SettingsViewModel>();
 
             foreach (Settings settings in dbSettings)
@@ -59,7 +60,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Index(SettingsModel settings, IFormFile logo)
         {
-            List<Settings> dbSettings = _databaseContext.Settings.ToList();
+            int officeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "officeId").Value);
+            List<Settings> dbSettings = _databaseContext.Settings.Where(x=> x.officeId == officeId).ToList();
             List<SettingsViewModel> allSettings = new List<SettingsViewModel>();
 
             if(logo != null)
@@ -108,7 +110,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                         allSettings.Add(settingsVm);
                     }
                     /* Ayar Update */
-                    var db = _databaseContext.Settings.Where(x => x.id == 1).FirstOrDefault();
+                    var db = _databaseContext.Settings.Where(x => x.officeId == officeId).FirstOrDefault();
                     db.title = allSettings[0].title;
                     db.keywords = allSettings[0].keywords;
                     db.description = allSettings[0].description;
@@ -159,7 +161,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     allSettings.Add(settingsVm);
                 }
                 /* Ayar Update */
-                var db = _databaseContext.Settings.Where(x => x.id == 1).FirstOrDefault();
+                var db = _databaseContext.Settings.Where(x => x.officeId == officeId).FirstOrDefault();
                 db.title = allSettings[0].title;
                 db.keywords = allSettings[0].keywords;
                 db.description = allSettings[0].description;

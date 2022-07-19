@@ -4,14 +4,16 @@ using JobsArgeya.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace JobsArgeya.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220719101451_InitialCreate15")]
+    partial class InitialCreate15
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,24 +124,6 @@ namespace JobsArgeya.Migrations
                     b.HasKey("id");
 
                     b.ToTable("MailSubscribers");
-                });
-
-            modelBuilder.Entity("JobsArgeya.Data.Entities.Offices", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("officeName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("officeSlug")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Offices");
                 });
 
             modelBuilder.Entity("JobsArgeya.Data.Entities.Settings", b =>

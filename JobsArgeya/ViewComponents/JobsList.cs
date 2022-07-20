@@ -19,12 +19,14 @@ namespace JobsArgeya.ViewComponents
             _databaseContext = databaseContext;
             _hostingEnvironment = environment;
         }
-        public IViewComponentResult Invoke(string officeSlug)
+        public IViewComponentResult Invoke()
         {
-            var dbOffice = _databaseContext.Offices.Where(x => x.officeSlug == officeSlug).FirstOrDefault();
-            List<Jobs> dbJobs = _databaseContext.Jobs.Where(x=> x.officeId == dbOffice.id).ToList();
+            string host = Request.Host.ToString();
+            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
+            List<Jobs> dbJobs = _databaseContext.Jobs.Where(x => x.officeId == dbOffice.id).ToList();
             List<JobsViewModel> allJobs = new List<JobsViewModel>();
-
+            var siteColor = _databaseContext.Settings.Where(x => x.officeId == dbOffice.id).Select(x => x.siteColor).FirstOrDefault();
+            ViewData["SiteColor"] = siteColor.ToString();
             foreach (Jobs jobs in dbJobs)
             {
                 JobsViewModel jobsVm = new JobsViewModel();

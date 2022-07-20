@@ -21,7 +21,9 @@ namespace JobsArgeya.ViewComponents
         }
         public IViewComponentResult Invoke()
         {
-            Settings dbSettings = _databaseContext.Settings.Where(x => x.id == 1).FirstOrDefault();
+            string host = Request.Host.ToString();
+            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
+            Settings dbSettings = _databaseContext.Settings.Where(x => x.officeId == dbOffice.id).FirstOrDefault();
             SettingsModel allSettings = new SettingsModel();
 
             allSettings.title = dbSettings.title;
@@ -38,6 +40,7 @@ namespace JobsArgeya.ViewComponents
             allSettings.smtpUsername = dbSettings.smtpUsername;
             allSettings.smtpPassword = dbSettings.smtpPassword;
             allSettings.smtpPort = dbSettings.smtpPort;
+            allSettings.siteColor = dbSettings.siteColor;
             allSettings.logo = dbSettings.logo;
 
             return View(allSettings);

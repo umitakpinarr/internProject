@@ -22,9 +22,13 @@ namespace JobsArgeya.Controllers
         [HttpGet]
         public IActionResult Index(string id)
         {
+            string host = Request.Host.ToString();
+            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
+            var siteColor = _databaseContext.Settings.Where(x => x.officeId == dbOffice.id).Select(x => x.siteColor).FirstOrDefault();
+            ViewData["SiteColor"] = siteColor.ToString();
             /* Method parametresinin ismini değiştirince url deki slug değerini alamıyorum. 
              * Bundan ötürü default yapıdaki id değerini alıyorum. Route yapısını düzenledim ama işin içinden çıkamadım. */
-            var jobDetail = _databaseContext.Jobs.Where(x => x.jobSlug == id).FirstOrDefault();
+            var jobDetail = _databaseContext.Jobs.Where(x => x.jobSlug == id && x.officeId == dbOffice.id).FirstOrDefault();
             if (jobDetail != null && jobDetail.isActive == "true")
             {
                 JobsViewModel jobsVm = new JobsViewModel();

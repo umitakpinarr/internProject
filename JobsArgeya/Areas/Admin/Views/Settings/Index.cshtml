@@ -3,6 +3,9 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     ViewData["CmsTitle"] = "Site Ayarları";
 }
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/3.4.0/css/bootstrap-colorpicker.css" integrity="sha512-HcfKB3Y0Dvf+k1XOwAD6d0LXRFpCnwsapllBQIvvLtO2KMTa0nI5MtuTv3DuawpsiA0ztTeu690DnMux/SuXJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+}
 <div class="col-12">
     <div class="card">
         <div class="card-body">
@@ -19,13 +22,19 @@
                     <label for="description">Site Açıklama</label>
                     <input class="form-control" type="text" value="@Model[0].description" name="description" id="description" placeholder="Site Açıklama">
                 </div>
+                <hr />
                 <div class="form-group" style="margin-bottom:10px;">
-                    <label for="phone">Telefon</label>
-                    <input class="form-control" type="text" value="@Model[0].email" name="phone" id="phone" placeholder="Telefon">
+                    <label for="siteColor">Site Renk</label>
+                    <input id="siteColor" name="siteColor" type="text" class="form-control" value="@Model[0].siteColor" />
+                </div>
+                <hr />
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="phone">Email</label>
+                    <input class="form-control" type="text" value="@Model[0].email" name="email" id="email" placeholder="Email">
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
-                    <label for="jobDescription">E-Mail</label>
-                    <input class="form-control" type="text" value="@Model[0].phone" name="email" id="email" placeholder="Email">
+                    <label for="jobDescription">Telefon</label>
+                    <input class="form-control" type="text" value="@Model[0].phone" name="phone" id="phone" placeholder="Telefon">
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
                     <label for="adress">Adres</label>
@@ -82,3 +91,11 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/3.4.0/js/bootstrap-colorpicker.min.js" integrity="sha512-94dgCw8xWrVcgkmOc2fwKjO4dqy/X3q7IjFru6MHJKeaAzCvhkVtOS6S+co+RbcZvvPBngLzuVMApmxkuWZGwQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(function () {
+            $('#siteColor').colorpicker();
+        });
+    </script>
+}

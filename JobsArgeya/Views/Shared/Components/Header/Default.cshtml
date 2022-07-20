@@ -1,5 +1,5 @@
 ﻿@model SettingsModel
-<div class="toolbar-area hidden-md">
+<div class="toolbar-area hidden-md" style="background: @Model.siteColor !important;">
     <div class="container">
         <div class="row">
             <div class="col-md-5">
@@ -36,7 +36,7 @@
                     <div class="rs-menu-area">
                         <div class="main-menu">
                             <div class="mobile-menu">
-                                <a class="rs-menu-toggle" style="color: #dc3545 !important;">
+                                <a class="rs-menu-toggle" style="color: @Model.siteColor !important;">
                                     <i class="fa fa-bars"></i>
                                 </a>
                             </div>
@@ -45,7 +45,6 @@
                                     <li>
                                         <a href="/">Açık Pozisyonlar</a>
                                     </li>
-
                                     <li>
                                         <a href="https://argeya.com/tr/iletisim">Bize Ulaşın</a>
                                     </li>

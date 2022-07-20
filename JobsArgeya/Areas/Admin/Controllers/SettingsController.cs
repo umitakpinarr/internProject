@@ -49,6 +49,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 settingsVm.smtpPassword = settings.smtpPassword;
                 settingsVm.smtpPort = settings.smtpPort;
                 settingsVm.useSSL = settings.useSSL;
+                settingsVm.siteColor = settings.siteColor;
                 settingsVm.logo = settings.logo;
 
                 allSettings.Add(settingsVm);
@@ -104,7 +105,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                         {
                             settingsVm.useSSL = "false";
                         }
-                        
+                        settingsVm.siteColor = settings.siteColor;
                         settingsVm.logo = fileName;
 
                         allSettings.Add(settingsVm);
@@ -126,6 +127,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     db.smtpPassword = allSettings[0].smtpPassword;
                     db.smtpPort = allSettings[0].smtpPort;
                     db.useSSL = allSettings[0].useSSL;
+                    db.siteColor = allSettings[0].siteColor;
                     db.logo = fileName;
                     _databaseContext.SaveChanges();
                 }
@@ -157,7 +159,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     {
                         settingsVm.useSSL = "false";
                     }
-
+                    settingsVm.siteColor = settings.siteColor;
                     allSettings.Add(settingsVm);
                 }
                 /* Ayar Update */
@@ -177,6 +179,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 db.smtpPassword = allSettings[0].smtpPassword;
                 db.smtpPort = allSettings[0].smtpPort;
                 db.useSSL = allSettings[0].useSSL;
+                db.siteColor = allSettings[0].siteColor;
                 _databaseContext.SaveChanges();
             }
             

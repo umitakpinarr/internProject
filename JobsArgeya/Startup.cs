@@ -67,7 +67,9 @@ namespace JobsArgeya
                 endpoints.MapControllerRoute(
                     name: "index",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+                /*endpoints.MapControllerRoute(
+                    name:"office",
+                    pattern:"{controller=Office}/{action=Index}/{id?}");*/
                 /*endpoints.MapControllerRoute(
                     name: "jobDetail",
                     pattern: "{controller=JobDetail}/{action=Index}/{slug?}");*/

@@ -30,6 +30,9 @@ namespace JobsArgeya.Controllers
         }
         public IActionResult Index()
         {
+            string host = Request.Host.ToString();
+            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
+            ViewData["SiteColor"] = _databaseContext.Settings.Where(x => x.officeId == dbOffice.id).Select(x => x.siteColor).FirstOrDefault();
             return View();
         }
         [HttpPost]
@@ -41,6 +44,10 @@ namespace JobsArgeya.Controllers
                 TempData["dangerMessage"] = "Yanlış captcha girişi yaptınız. Lütfen tekrar deneyiniz.";
                 return Redirect(Request.Headers["Referer"].ToString());
             }
+            /*Requestin geldiği domainin tespiti, ardından gelen domain bilgisine göre office bilgisinin çekilmesi*/
+            string host = Request.Host.ToString();
+            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
+
             if (ModelState.IsValid)
             {
                 Mail mail = new Mail(_databaseContext, _configuration);
@@ -70,7 +77,8 @@ namespace JobsArgeya.Controllers
                             faculty = id.faculty,
                             resume = id.resume,
                             createdAt = DateTime.Now,
-                            cvPath = fileName
+                            cvPath = fileName,
+                            officeId = dbOffice.id
                         });
                         if (_databaseContext.MailSubscribers.Any(x => x.email == id.email))
                         {
@@ -102,7 +110,10 @@ namespace JobsArgeya.Controllers
         [HttpGet]
         public IActionResult Applicant(string id)
         {
-            List<Jobs> dbJobs = _databaseContext.Jobs.ToList();
+            string host = Request.Host.ToString();
+            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
+            ViewData["SiteColor"] = _databaseContext.Settings.Where(x => x.officeId == dbOffice.id).Select(x => x.siteColor).FirstOrDefault();
+            List<Jobs> dbJobs = _databaseContext.Jobs.Where(x=> x.officeId == dbOffice.id).ToList();
             List<JobsViewModel> allJobs = new List<JobsViewModel>();
 
             foreach (Jobs jobs in dbJobs)
@@ -129,6 +140,10 @@ namespace JobsArgeya.Controllers
             }
             SlugHelper helper = new SlugHelper();
             Mail mail = new Mail(_databaseContext, _configuration);
+
+            /*Requestin geldiği domainin tespiti, ardından gelen domain bilgisine göre office bilgisinin çekilmesi*/
+            string host = Request.Host.ToString();
+            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
             if (ModelState.IsValid)
             {
                 if (formFile != null)
@@ -157,7 +172,8 @@ namespace JobsArgeya.Controllers
                             resume = apply.resume,
                             cvPath = fileName,
                             createdAt = DateTime.Now,
-                            jobId = apply.jobId
+                            jobId = apply.jobId,
+                            officeId = dbOffice.id
                         });
                         if (_databaseContext.MailSubscribers.Any(x => x.email == apply.email))
                         {
@@ -189,6 +205,9 @@ namespace JobsArgeya.Controllers
         [HttpGet]
         public IActionResult Intern()
         {
+            string host = Request.Host.ToString();
+            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
+            ViewData["SiteColor"] = _databaseContext.Settings.Where(x => x.officeId == dbOffice.id).Select(x => x.siteColor).FirstOrDefault();
             return View();
         }
         public IActionResult Intern(ApplyModel apply, IFormFile formFile)
@@ -201,6 +220,11 @@ namespace JobsArgeya.Controllers
             }
             SlugHelper helper = new SlugHelper();
             Mail mail = new Mail(_databaseContext, _configuration);
+
+            /*Requestin geldiği domainin tespiti, ardından gelen domain bilgisine göre office bilgisinin çekilmesi*/
+            string host = Request.Host.ToString();
+            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
+
             if (ModelState.IsValid)
             {
                 if (formFile != null)
@@ -232,7 +256,8 @@ namespace JobsArgeya.Controllers
                             createdAt = DateTime.Now,
                             isIntern = "1",
                             internStartDate = apply.internStartDate,
-                            internEndDate = apply.internEndDate
+                            internEndDate = apply.internEndDate,
+                            officeId = dbOffice.id
                         });
                         if (_databaseContext.MailSubscribers.Any(x => x.email == apply.email))
                         {

@@ -10,5 +10,6 @@ namespace JobsArgeya.Data.Entities
         public int id { get; set; }
         public string officeName { get; set; }
         public string officeSlug { get; set; }
+        public string officeDomain { get; set; }
     }
 }

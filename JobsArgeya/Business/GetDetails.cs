@@ -46,9 +46,10 @@ namespace JobsArgeya.Business
                 return "";
             }
         }
-        public string getSiteDetails(int parameter)
+        public string getSiteDetails(int parameter, string host)
         {
-            var dbSettings = _databaseContext.Settings.Where(x => x.id == 1).FirstOrDefault();
+            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
+            var dbSettings = _databaseContext.Settings.Where(x => x.officeId == dbOffice.id).FirstOrDefault();
             if(parameter == 0)
             {
                 return dbSettings.keywords.ToString();
@@ -56,6 +57,10 @@ namespace JobsArgeya.Business
             else if(parameter == 1)
             {
                 return dbSettings.description.ToString();
+            }
+            else if(parameter == 2)
+            {
+                return dbSettings.siteColor.ToString();
             }
             else
             {

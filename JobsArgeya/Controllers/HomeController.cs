@@ -1,18 +1,10 @@
 ﻿using JobsArgeya.Models;
 using JobsArgeya.Business;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using JobsArgeya.Data.Context;
-using JobsArgeya.Data.Entities;
 using Microsoft.Extensions.Configuration;
-using Microsoft.EntityFrameworkCore;
-using JobsArgeya.Areas.Admin.Models;
 
 
 namespace JobsArgeya.Controllers
@@ -36,9 +28,10 @@ namespace JobsArgeya.Controllers
 
         public IActionResult Index()
         {
+            string host = Request.Host.ToString();
             GetDetails details = new GetDetails(_databaseContext, _configuration);
-            ViewData["PageKeywords"] = details.getSiteDetails(0);
-            ViewData["PageDescription"] = details.getSiteDetails(1);
+            ViewData["PageKeywords"] = details.getSiteDetails(0, host);
+            ViewData["PageDescription"] = details.getSiteDetails(1, host);
             return View();
         }
         public IActionResult Unsubscribe(string id)

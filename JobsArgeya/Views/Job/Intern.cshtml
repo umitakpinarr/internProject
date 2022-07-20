@@ -24,7 +24,7 @@
     <div class="container">
         <div class="t-row">
             <div class="d-table-cell">
-                <a class="btn btn-outline-danger" style="margin-top:25px; margin-bottom:25px;" href="/" title="Geri">
+                <a class="btn btn-primary" style="margin-top:25px; margin-bottom:25px; background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];" href="/" title="Geri">
                     <span style="line-height: 12px; font-size: 20px;">&#x2190;</span> Geri Git
                 </a>
             </div>
@@ -84,7 +84,7 @@
             </div>
             <div class="form-group" style="margin-bottom:10px;">
                 <img style="display: inline-block; width: 180px; height: 50px; " id="imgCaptcha" src="/argeya-captcha?@DateTime.Now.ToString("ddMMyyyyHHmmsss")" />
-                <a class="btn btn-sm small gray" style="display: inline-block; padding: 8px; cursor: pointer; vertical-align: top; background-color: #dc3545; color: #fff !important; text-decoration: none;" onclick="var today = new Date(); document.getElementById('imgCaptcha').src = '/argeya-captcha?r=' + today; return false;">
+                <a class="btn btn-sm small gray" style="display: inline-block; padding: 8px; cursor: pointer; vertical-align: top; background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"]; color: #fff !important; text-decoration: none;" onclick="var today = new Date(); document.getElementById('imgCaptcha').src = '/argeya-captcha?r=' + today; return false;">
                     <i class="fa fa-refresh" aria-hidden="true" style="font-size: 30px;"></i>
                 </a>
                 <input type="text" name="captcha" id="captcha" />
@@ -93,7 +93,7 @@
                 <label for="formFile"><b>CV Yükle</b></label>
                 <input type="file" class="form-control-file" name="formFile">
             </div>
-            <button type="submit" class="btn btn-danger w-100">Başvur</button>
+            <button type="submit" class="btn btn-primary w-100" style="background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];">Başvur</button>
         </form>
     </div>
 </div>

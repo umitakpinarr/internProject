@@ -79,16 +79,6 @@ ul {
 .clear {
   clear: both;
 }
-::-moz-selection {
-  background: #dc3545;
-  text-shadow: none;
-  color: #ffffff;
-}
-::selection {
-  background: #dc3545;
-  text-shadow: none;
-  color: #ffffff;
-}
 .width-unset {
   width: unset !important;
 }
@@ -3643,7 +3633,6 @@ input[type=range]::-ms-fill-upper {
   display: inline-block;
   margin-right: 20px;
   padding: 13px 20px 11px 0;
-  border-right: 1px solid #dc3545;
   color: #fff;
   font-size: 14px;
 }
@@ -16057,9 +16046,6 @@ body .modal-backdrop {
 .rs-footer .footer-content .address-widget li i {
   float: left;
   padding-right: 25px;
-}
-.rs-footer .footer-content .address-widget li i:before {
-  color: #dc3545;
 }
 .rs-footer .footer-content .address-widget li .desc {
   color: #e0e0e0;

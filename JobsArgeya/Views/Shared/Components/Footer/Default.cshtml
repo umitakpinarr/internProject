@@ -8,7 +8,7 @@
             <div class="col-md-6 text-right">
                 <form class="newsletter-form" action="/mailsubscribe" method="post">
                     <input type="email" name="email" placeholder="E-Mail Adresiniz" required="">
-                    <button type="submit"><i class="fa fa-paper-plane"></i></button>
+                    <button type="submit" style="background-color:@Model.siteColor"><i class="fa fa-paper-plane"></i></button>
                 </form>
             </div>
         </div>
@@ -22,7 +22,7 @@
                     </div>
                     <p class="desc">@Model.description</p>
                     <div class="btn-part">
-                        <a class="readon" href="https://argeya.com/tr/hakkimizda">Hakkımızda</a>
+                        <a class="readon" href="https://argeya.com/tr/hakkimizda" style="background-color:@Model.siteColor">Hakkımızda</a>
                     </div>
                 </div>
             </div>
@@ -30,17 +30,17 @@
                 <h4 class="widget-title">İletişim</h4>
                 <ul class="address-widget pr-40">
                     <li>
-                        <i class="flaticon-location"></i>
+                        <i class="flaticon-location" style="color:@Model.siteColor"></i>
                         <div class="desc">@Model.adress</div>
                     </li>
                     <li>
-                        <i class="flaticon-call"></i>
+                        <i class="flaticon-call" style="color:@Model.siteColor"></i>
                         <div class="desc">
                             <a href="tel:@Model.phone">@Model.phone</a>
                         </div>
                     </li>
                     <li>
-                        <i class="flaticon-email"></i>
+                        <i class="flaticon-email" style="color:@Model.siteColor"></i>
                         <div class="desc">
                             <a href="mailto:@Model.email">@Model.email</a>
                         </div>
@@ -59,13 +59,15 @@
             </div>
             <div class="col-lg-6 col-md-4 text-right sm-text-center">
                 <ul class="footer-social">
-                    <li><a href="@Model.facebook"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="@Model.instagram"><i class="fa fa-instagram"></i></a></li>
-                    <li><a href="@Model.twitter"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="@Model.linkedin"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a href="@Model.facebook" style="background-color:@Model.siteColor"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="@Model.instagram" style="background-color:@Model.siteColor"><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="@Model.twitter" style="background-color:@Model.siteColor"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="@Model.linkedin" style="background-color:@Model.siteColor"><i class="fa fa-linkedin"></i></a></li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
-
+<div id="scrollUp">
+    <i class="fa fa-angle-up" style="background-color:@Model.siteColor"></i>
+</div>

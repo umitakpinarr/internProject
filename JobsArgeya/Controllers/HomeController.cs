@@ -30,6 +30,7 @@ namespace JobsArgeya.Controllers
         {
             string host = Request.Host.ToString();
             GetDetails details = new GetDetails(_databaseContext, _configuration);
+            ViewData["SiteName"] = details.getSiteDetails(3, host);
             ViewData["PageKeywords"] = details.getSiteDetails(0, host);
             ViewData["PageDescription"] = details.getSiteDetails(1, host);
             return View();

@@ -62,6 +62,10 @@ namespace JobsArgeya.Business
             {
                 return dbSettings.siteColor.ToString();
             }
+            else if(parameter == 3)
+            {
+                return dbSettings.title.ToString();
+            }
             else
             {
                 return "";

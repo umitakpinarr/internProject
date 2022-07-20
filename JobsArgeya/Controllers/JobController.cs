@@ -30,9 +30,11 @@ namespace JobsArgeya.Controllers
         }
         public IActionResult Index()
         {
+            GetDetails details = new GetDetails(_databaseContext, _configuration);
             string host = Request.Host.ToString();
             var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
             ViewData["SiteColor"] = _databaseContext.Settings.Where(x => x.officeId == dbOffice.id).Select(x => x.siteColor).FirstOrDefault();
+            ViewData["SiteName"] = details.getSiteDetails(3, host);
             return View();
         }
         [HttpPost]
@@ -110,9 +112,11 @@ namespace JobsArgeya.Controllers
         [HttpGet]
         public IActionResult Applicant(string id)
         {
+            GetDetails details = new GetDetails(_databaseContext, _configuration);
             string host = Request.Host.ToString();
             var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
             ViewData["SiteColor"] = _databaseContext.Settings.Where(x => x.officeId == dbOffice.id).Select(x => x.siteColor).FirstOrDefault();
+            ViewData["SiteName"] = details.getSiteDetails(3, host);
             List<Jobs> dbJobs = _databaseContext.Jobs.Where(x=> x.officeId == dbOffice.id).ToList();
             List<JobsViewModel> allJobs = new List<JobsViewModel>();
 
@@ -205,9 +209,11 @@ namespace JobsArgeya.Controllers
         [HttpGet]
         public IActionResult Intern()
         {
+            GetDetails details = new GetDetails(_databaseContext, _configuration);
             string host = Request.Host.ToString();
             var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
             ViewData["SiteColor"] = _databaseContext.Settings.Where(x => x.officeId == dbOffice.id).Select(x => x.siteColor).FirstOrDefault();
+            ViewData["SiteName"] = details.getSiteDetails(3, host);
             return View();
         }
         public IActionResult Intern(ApplyModel apply, IFormFile formFile)

@@ -99,7 +99,7 @@ namespace JobsArgeya.Controllers
                                 });
                             }
                             _databaseContext.SaveChanges();
-                            mail.SendMail(id.email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.");
+                            mail.SendMail(id.email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.", host);
                         }
                         else
                         {
@@ -202,7 +202,7 @@ namespace JobsArgeya.Controllers
                                     slug = helper.GenerateSlug(apply.email)
                                 });
                             }
-                            mail.SendMail(apply.email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.");
+                            mail.SendMail(apply.email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.", host);
                             _databaseContext.SaveChanges();
                         }
                         else
@@ -295,7 +295,7 @@ namespace JobsArgeya.Controllers
                                     slug = helper.GenerateSlug(apply.email)
                                 });
                             }
-                            mail.SendMail(apply.email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.");
+                            mail.SendMail(apply.email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.", host);
                             _databaseContext.SaveChanges();
                         }
                         else

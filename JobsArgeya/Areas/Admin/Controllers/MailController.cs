@@ -51,8 +51,9 @@ namespace JobsArgeya.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Send(SendMailModel MailCredentials)
         {
+            string host = Request.Host.ToString();
             Mail mail = new Mail(_databaseContext, _configuration);
-            mail.SendMailList(MailCredentials.MailSubject, MailCredentials.MailContent);
+            mail.SendMailList(MailCredentials.MailSubject, MailCredentials.MailContent, host);
             TempData["successMessage"] = "Mail listesine gönderim başarıyla sağlandı.";
             return View();
         }

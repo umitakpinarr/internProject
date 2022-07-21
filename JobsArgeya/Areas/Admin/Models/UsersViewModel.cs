@@ -13,6 +13,7 @@ namespace JobsArgeya.Areas.Admin.Models
         public string email { get; set; }
         public string password { get; set; }
         public int roleId { get; set; }
+        public string roleName { get; set; }
         public int officeId { get; set; }
         public string officeName { get; set; }
         public string officeDomain { get; set; }

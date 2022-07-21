@@ -67,16 +67,20 @@
                             <i class="dripicons-mail"></i>
                             <span>Mail Listesine Gönder</span>
                         </a>
+                        <a href="/admin/contact/index" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                            <i class="dripicons-mail"></i>
+                            <span>İletişim Formu</span>
+                        </a>
                         @if (User.IsInRole("SuperAdmin"))
                         {
-                        <a href="/admin/user/add" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
-                            <i class="dripicons-user"></i>
-                            <span>Kullanıcı Ekle</span>
-                        </a>
-                        <a href="/admin/user/index" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
-                            <i class="dripicons-network-3"></i>
-                            <span>Kullanıcı & Ofis İşlemleri</span>
-                        </a>
+                            <a href="/admin/user/add" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                <i class="dripicons-user"></i>
+                                <span>Kullanıcı Ekle</span>
+                            </a>
+                            <a href="/admin/user/index" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                <i class="dripicons-network-3"></i>
+                                <span>Kullanıcı & Ofis İşlemleri</span>
+                            </a>
                         }
                         <a href="/admin/settings/" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
                             <i class="dripicons-gear"></i>

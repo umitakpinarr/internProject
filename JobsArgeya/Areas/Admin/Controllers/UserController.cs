@@ -152,11 +152,17 @@ namespace JobsArgeya.Areas.Admin.Controllers
             var office = _databaseContext.Offices.Where(x => x.id == id).FirstOrDefault();
             var user = _databaseContext.Users.Where(x => x.officeId == office.id).FirstOrDefault();
             var settings = _databaseContext.Settings.Where(x => x.officeId == office.id).FirstOrDefault();
+            var jobs = _databaseContext.Jobs.Where(x => x.officeId == office.id).ToList();
+            var applies = _databaseContext.Applies.Where(x => x.officeId == office.id).ToList();
+            var contacts = _databaseContext.Contact.Where(x => x.OfficeId == office.id).ToList();
             if (office != null)
             {
                 _databaseContext.Offices.Remove(office);
                 _databaseContext.Users.Remove(user);
                 _databaseContext.Settings.Remove(settings);
+                _databaseContext.Jobs.RemoveRange(jobs);
+                _databaseContext.Applies.RemoveRange(applies);
+                _databaseContext.Contact.RemoveRange(contacts);
                 _databaseContext.SaveChanges();
                 TempData["successMessage"] = "Ofis başarıyla silindi.";
             }

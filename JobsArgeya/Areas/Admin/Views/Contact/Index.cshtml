@@ -30,7 +30,7 @@
                             <td>@contact.Phone</td>
                             <td>@contact.Subject</td>
                             <td>@contact.Message</td>
-                            <td><a href="/admin/contact/delete/@contact.Id" class="btn btn-danger">Sil</a></td>
+                            <td><a href="/admin/contact/delete/@contact.Id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
                         </tr>
                     }
                 </tbody>

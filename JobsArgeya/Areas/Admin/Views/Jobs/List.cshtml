@@ -26,7 +26,7 @@
                             <td>@jobs.jobTitle</td>
                             <td>@jobs.jobKeywords</td>
                             <td>@jobs.jobDescription</td>
-                            <td><a href="/admin/jobs/edit/@jobs.id" class="btn btn-primary">Düzenle</a> <a href="/admin/jobs/delete/@jobs.id" class="btn btn-danger">Sil</a></td>
+                            <td><a href="/admin/jobs/edit/@jobs.id" class="btn btn-primary">Düzenle</a> <a href="/admin/jobs/delete/@jobs.id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
                         </tr>
                     }
 

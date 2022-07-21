@@ -30,7 +30,7 @@
                             <td>@user.email</td>
                             <td>@user.officeName</td>
                             <td>@user.officeDomain</td>
-                            <td><a data-bs-toggle="modal" data-bs-target="#userEdit" data-id="@user.id" data-name="@user.name" data-surname="@user.surname" data-email="@user.email" class="btn btn-primary userEdit">Kullanıcı Düzenle</a> <a data-bs-toggle="modal" data-bs-target="#officeEdit" data-id="@user.officeId" data-officeName="@user.officeName" data-officeDomain="@user.officeDomain" class="btn btn-primary officeEdit">Ofis Düzenle</a> <a href="/admin/user/delete/@user.officeId" class="btn btn-danger">Sil</a></td>
+                            <td><a data-bs-toggle="modal" data-bs-target="#userEdit" data-id="@user.id" data-name="@user.name" data-surname="@user.surname" data-email="@user.email" class="btn btn-primary userEdit">Kullanıcı Düzenle</a> <a data-bs-toggle="modal" data-bs-target="#officeEdit" data-id="@user.officeId" data-officeName="@user.officeName" data-officeDomain="@user.officeDomain" class="btn btn-primary officeEdit">Ofis Düzenle</a> <a href="/admin/user/delete/@user.officeId" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
                         </tr>
                     }
                 </tbody>

@@ -71,5 +71,26 @@ namespace JobsArgeya.Business
                 return "";
             }
         }
+        public string getUserOffice(int userId, int parameter)
+        {
+            var dbOffice = _databaseContext.Users.Where(x => x.id == userId).FirstOrDefault();
+            var dbUser = _databaseContext.Offices.Where(x => x.id == dbOffice.officeId).FirstOrDefault();
+            if(parameter == 1)
+            {
+                return dbUser.officeName;
+            }
+            else if (parameter == 2)
+            {
+                return dbUser.officeDomain;
+            }
+            else if(parameter == 3)
+            {
+                return dbUser.id.ToString();
+            }           
+            else
+            {
+                return "";
+            }
+        }
     }
 }

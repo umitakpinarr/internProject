@@ -91,6 +91,8 @@ namespace JobsArgeya
                 //endpoints.MapAreaControllerRoute("MailSend", "Admin", "Admin/{controller=Mail}/{action=Send}");
                 endpoints.MapAreaControllerRoute("MailDelete", "Admin", "Admin/{controller=Mail}/{action=Delete}/{id?}");
 
+                endpoints.MapAreaControllerRoute("UserList", "Admin", "Admin/{controller=User}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(name: "captcha", pattern: "argeya-captcha", defaults: new { controller = "captcha", action = "getImage" });
             });
         }

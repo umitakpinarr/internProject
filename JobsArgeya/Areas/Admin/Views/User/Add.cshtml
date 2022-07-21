@@ -1,0 +1,58 @@
+﻿@model List<RoleModel>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["CmsTitle"] = "Kullanıcı Oluştur";
+}
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <form action="/admin/user/add" method="post">
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="email">Kullanıcı Adı</label>
+                    <input class="form-control" name="email" id="email" type="text" placeholder="Kullanıcı Adı">
+                </div>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="name">Adı</label>
+                    <input class="form-control" name="name" id="name" type="text" placeholder="Adı">
+                </div>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="surname">Soyadı</label>
+                    <input class="form-control" name="surname" id="surname" type="text" placeholder="Soyadı">
+                </div>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="password">Şifre</label>
+                    <div class="input-group input-group-merge">
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Şifre giriniz..">
+                        <div class="input-group-append" data-password="false">
+                            <div class="input-group-text">
+                                <span class="password-eye"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label for="roleId">Kullanıcı Rolü</label>
+                    <select name="roleId" id="roleId" class="form-control">
+                        <option selected>Lütfen Seçim Yapınız !</option>
+                        @foreach (RoleModel roles in Model)
+                        {
+                            <option value="@roles.Id">@roles.RoleName</option>
+                        }
+                    </select>
+                </div>
+                <hr />
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="officeName">Ofis Adı</label>
+                    <input class="form-control" name="officeName" id="officeName" type="text" placeholder="Ofis Adı">
+                </div>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="officeDomain">Ofis Domain</label>
+                    <input class="form-control" name="officeDomain" id="officeDomain" type="text" placeholder="Ofis Domain">
+                </div>
+                <br />
+                <button type="submit" class="btn btn-danger w-100">Kullanıcı Oluştur</button>
+            </form>
+
+        </div>
+    </div>
+</div>

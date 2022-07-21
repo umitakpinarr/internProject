@@ -4,14 +4,16 @@ using JobsArgeya.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace JobsArgeya.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220720113308_InitialCreate19")]
+    partial class InitialCreate19
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -137,6 +139,9 @@ namespace JobsArgeya.Migrations
                     b.Property<string>("officeName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("officeSlug")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("id");
 
                     b.ToTable("Offices");
@@ -241,9 +246,6 @@ namespace JobsArgeya.Migrations
 
                     b.Property<string>("password")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("roleId")
-                        .HasColumnType("int");
 
                     b.Property<string>("surname")
                         .HasColumnType("nvarchar(max)");

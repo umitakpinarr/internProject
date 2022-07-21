@@ -37,15 +37,16 @@ namespace JobsArgeya.Areas.Admin.Controllers
             string passwordHashed = MD5Hash.Hash.Content(user.password);
             Users dbUser = _databaseContext.Users.Where(u => u.email == user.email && u.password == passwordHashed).FirstOrDefault();
             Offices dbOffice = _databaseContext.Offices.Where(o => o.id == dbUser.officeId).FirstOrDefault();
+            Roles dbRole = _databaseContext.Roles.Where(x => x.id == dbUser.roleId).FirstOrDefault();
             if(dbUser != null)
             {
                 var claims = new List<Claim>
                 {
                     new Claim("fullName", dbUser.name + " " + dbUser.surname),
-                    new Claim("roleName", "Admin"),
                     new Claim("userId", dbUser.id.ToString()),
                     new Claim("officeId", dbOffice.id.ToString()),
-                    new Claim("officeName", dbOffice.officeName)
+                    new Claim("officeName", dbOffice.officeName),
+                    new Claim(ClaimTypes.Role, dbRole.roleName)
                 };
                 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

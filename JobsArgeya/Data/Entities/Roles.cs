@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace JobsArgeya.Data.Entities
 {
-    public class Offices
+    public class Roles
     {
         public int id { get; set; }
-        public string officeName { get; set; }
-        public string officeDomain { get; set; }
+        public string roleName { get; set; }
     }
 }

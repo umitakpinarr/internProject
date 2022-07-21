@@ -1,0 +1,72 @@
+﻿<div class="leftside-menu">
+
+    <!-- LOGO -->
+    <a href="/admin/home/index" class="logo text-center logo-light">
+        <span class="logo-lg">
+            <img src="~/uploads/@ViewData["NavBarLogo"]" alt="" height="50">
+        </span>
+    </a>
+
+    <!-- LOGO -->
+    <a href="/admin/home/index" class="logo text-center logo-dark">
+        <span class="logo-lg">
+            <img src="~/panel/assets/images/logo-dark.png" alt="" height="50">
+        </span>
+        <span class="logo-sm">
+            <img src="~/panel/assets/images/logo_sm_dark.png" alt="" height="50">
+        </span>
+    </a>
+
+    <div class="h-100" id="leftside-menu-container" data-simplebar>
+
+        <!--- Sidemenu -->
+        <ul class="side-nav">
+
+            <li class="side-nav-title side-nav-item"></li>
+
+            <li class="side-nav-item">
+                <a href="/admin/home/index" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                    <i class="dripicons-clipboard"></i>
+                    <span>Başvurular</span>
+                </a>
+                <a href="/admin/jobs/add" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                    <i class="uil-focus-add"></i>
+                    <span>İlan Ekle</span>
+                </a>
+                <a href="/admin/jobs/list" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                    <i class="dripicons-clipboard"></i>
+                    <span>İlanları Görüntüle</span>
+                </a>
+                <a href="/admin/mail/index" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                    <i class="dripicons-mail"></i>
+                    <span>Mail Listesi</span>
+                </a>
+                <a href="/admin/mail/send" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                    <i class="dripicons-mail"></i>
+                    <span>Mail Listesine Gönder</span>
+                </a>
+                <a href="/admin/contact/index" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                    <i class="dripicons-mail"></i>
+                    <span>İletişim Formu</span>
+                </a>
+                @if (User.IsInRole("SuperAdmin"))
+                {
+                    <a href="/admin/user/add" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                        <i class="dripicons-user"></i>
+                        <span>Kullanıcı Ekle</span>
+                    </a>
+                    <a href="/admin/user/index" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                        <i class="dripicons-network-3"></i>
+                        <span>Kullanıcı & Ofis İşlemleri</span>
+                    </a>
+                }
+                <a href="/admin/settings/" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                    <i class="dripicons-gear"></i>
+                    <span>Site Ayarları</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- Sidebar -left -->
+
+</div>

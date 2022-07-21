@@ -125,7 +125,7 @@ namespace JobsArgeya.Controllers
             var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
             ViewData["SiteColor"] = _databaseContext.Settings.Where(x => x.officeId == dbOffice.id).Select(x => x.siteColor).FirstOrDefault();
             ViewData["SiteName"] = details.getSiteDetails(3, host);
-            List<Jobs> dbJobs = _databaseContext.Jobs.Where(x => x.officeId == dbOffice.id).ToList();
+            List<Jobs> dbJobs = _databaseContext.Jobs.Where(x => x.officeId == dbOffice.id && x.jobSlug == id).ToList();
             List<JobsViewModel> allJobs = new List<JobsViewModel>();
 
             foreach (Jobs jobs in dbJobs)

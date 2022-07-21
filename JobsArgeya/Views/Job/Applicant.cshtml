@@ -39,6 +39,11 @@
     </div>
     <div class="job-apply-form">
         <form action="/Job/Applicant" method="post" enctype="multipart/form-data">
+            <input type="text" name="jobId" id="jobId" value="@Model[0].id" hidden/>
+            <div class="form-group" style="margin-bottom:10px;">
+                <label for="Title"><b>Başvurduğunuz İlan:</b></label>
+                <input type="text" name="Title" class="form-control" value="@Model[0].jobTitle" disabled>
+            </div>
             <div class="form-group" style="margin-bottom:10px;">
                 <label name="fullName"><b>Adınız ve Soydınız:</b></label>
                 <input name="fullName" class="form-control" required>
@@ -69,21 +74,7 @@
                 <input name="faculty" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label><b>Başvuracağınız İlan</b></label>
-                <select name="jobId" class="form-control" required>
-                    <option>Lütfen Bir Seçim Yapınız!</option>
-                    @foreach (JobsViewModel jobs in Model)
-                    {
-                        if (jobs.isActive == "true")
-                        {
-                            <option value="@jobs.id">@jobs.jobTitle</option>
-                        }
-
-                    }
-                </select>
-            </div>
-            <div class="form-group" style="margin-bottom:10px;">
-                <label name="resume"><b>Özgeçmiş:</b></label>
+                <label name="resume"><b>Ön Yazı:</b></label>
                 <textarea name="resume" class="form-control" required></textarea>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
@@ -94,7 +85,7 @@
                 <input type="text" name="captcha" id="captcha" />
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label for="formFile"><b>CV Yükle</b></label>
+                <label for="formFile"><b>Özgeçmiş / CV Yükle (Sadece PDF uzantılı dosyalar kabul edilmektedir)</b></label>
                 <input type="file" class="form-control-file" name="formFile">
             </div>
             <button type="submit" class="btn btn-primary w-100" style="background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];">Başvur</button>

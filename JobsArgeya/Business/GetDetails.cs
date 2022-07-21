@@ -70,6 +70,10 @@ namespace JobsArgeya.Business
             {
                 return dbSettings.adress.ToString();
             }
+            else if(parameter == 5)
+            {
+                return dbSettings.logo.ToString();
+            }
             else
             {
                 return "";

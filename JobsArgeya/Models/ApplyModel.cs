@@ -9,7 +9,7 @@ namespace JobsArgeya.Models
 {
     public class ApplyModel
     {
-        [Required(ErrorMessage ="Lütfen adınız ve soyadınızı girin..")]
+        [Required(ErrorMessage = "Lütfen adınız ve soyadınızı girin..")]
         [StringLength(100)]
         public string fullName { get; set; }
 
@@ -36,6 +36,7 @@ namespace JobsArgeya.Models
         [StringLength(255)]
         public string resume { get; set; }
         public int? jobId { get; set; }
+        public string? JobSlug { get; set; }
         public string captcha { get; set; }
         public string? isIntern { get; set; }
         public DateTime? internStartDate { get; set; }

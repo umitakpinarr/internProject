@@ -29,17 +29,22 @@ namespace JobsArgeya.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
+            GetDetails details = new GetDetails(_databaseContext, _configuration);
+            string host = Request.Host.ToString();
+            ViewData["PanelLogo"] = details.getSiteDetails(5, host);
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Index(UsersModel user)
         {
             string passwordHashed = MD5Hash.Hash.Content(user.password);
-            Users dbUser = _databaseContext.Users.Where(u => u.email == user.email && u.password == passwordHashed).FirstOrDefault();
-            Offices dbOffice = _databaseContext.Offices.Where(o => o.id == dbUser.officeId).FirstOrDefault();
-            Roles dbRole = _databaseContext.Roles.Where(x => x.id == dbUser.roleId).FirstOrDefault();
+            string host = Request.Host.ToString();
+            Offices dbOffice = _databaseContext.Offices.Where(o => o.officeDomain == host).FirstOrDefault();
+            Users dbUser = _databaseContext.Users.Where(u => u.email == user.email && u.password == passwordHashed && u.officeId == dbOffice.id).FirstOrDefault();
+         
             if(dbUser != null)
             {
+                Roles dbRole = _databaseContext.Roles.Where(x => x.id == dbUser.roleId).FirstOrDefault();
                 var claims = new List<Claim>
                 {
                     new Claim("fullName", dbUser.name + " " + dbUser.surname),
@@ -53,7 +58,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
                 return Redirect("/admin/home/index");
             }
-            return View(null);
+            return Redirect("/yonetim");
         }
         public async Task<IActionResult> SignOut()
         {

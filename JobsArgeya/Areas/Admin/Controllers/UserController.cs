@@ -65,53 +65,60 @@ namespace JobsArgeya.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var office = new Offices
+                if(_databaseContext.Offices.Any(x=> x.officeDomain == Model.officeDomain) || _databaseContext.Users.Any(x=> x.email == Model.email))
                 {
-                    officeName = Model.officeName,
-                    officeDomain = Model.officeDomain
-                };
-
-                _databaseContext.Offices.Add(office);
-                _databaseContext.SaveChanges();
-
-                _databaseContext.Users.Add(new Users
+                    TempData["dangerMessage"] = "Bu bilgilerle başka kullanıcı/ofis bulunmakta. Lütfen tekrar deneyiniz.";
+                }
+                else
                 {
-                    name = Model.name,
-                    surname = Model.surname,
-                    email = Model.email,
-                    password = MD5Hash.Hash.Content(Model.password),
-                    officeId = office.id,
-                    roleId = Model.roleId
-                });
-                
-                _databaseContext.SaveChanges();
+                    var office = new Offices
+                    {
+                        officeName = Model.officeName,
+                        officeDomain = Model.officeDomain
+                    };
 
-                _databaseContext.Settings.Add(new Settings
-                {
-                    title = "Lütfen Site Başlığı Girin",
-                    keywords = "Lütfen Site Anahtar Kelimelerini Girin",
-                    description = "Lütfen Site Açıklaması Girin",
-                    email = "Lütfen Email Adresi Girin",
-                    phone = "Lütfen Telefon Nuamrası Girin",
-                    adress = "Lütfen Ofis Adresi Girin",
-                    facebook = "#",
-                    instagram = "#",
-                    twitter = "#",
-                    linkedin = "#",
-                    smtpServer = "smtp.test.com",
-                    smtpUsername = "test@test.com",
-                    smtpPassword = "test",
-                    smtpPort = "465",
-                    logo = "logo.png",
-                    useSSL = "true",
-                    officeId = office.id,
-                    siteColor = "#DC3545"
-                });
-                _databaseContext.SaveChanges();
-                TempData["successMessage"] = "Kullanıcı başarıyla eklendi.";
-                return Redirect("/admin/user/index");
+                    _databaseContext.Offices.Add(office);
+                    _databaseContext.SaveChanges();
+
+                    _databaseContext.Users.Add(new Users
+                    {
+                        name = Model.name,
+                        surname = Model.surname,
+                        email = Model.email,
+                        password = MD5Hash.Hash.Content(Model.password),
+                        officeId = office.id,
+                        roleId = Model.roleId
+                    });
+
+                    _databaseContext.SaveChanges();
+
+                    _databaseContext.Settings.Add(new Settings
+                    {
+                        title = "Lütfen Site Başlığı Girin",
+                        keywords = "Lütfen Site Anahtar Kelimelerini Girin",
+                        description = "Lütfen Site Açıklaması Girin",
+                        email = "Lütfen Email Adresi Girin",
+                        phone = "Lütfen Telefon Nuamrası Girin",
+                        adress = "Lütfen Ofis Adresi Girin",
+                        facebook = "#",
+                        instagram = "#",
+                        twitter = "#",
+                        linkedin = "#",
+                        smtpServer = "smtp.test.com",
+                        smtpUsername = "test@test.com",
+                        smtpPassword = "test",
+                        smtpPort = "465",
+                        logo = "logo.png",
+                        useSSL = "true",
+                        officeId = office.id,
+                        siteColor = "#DC3545"
+                    });
+                    _databaseContext.SaveChanges();
+                    TempData["successMessage"] = "Kullanıcı başarıyla eklendi.";
+                    return Redirect("/admin/user/index");
+                }
             }
-            TempData["dangerMessage"] = "Kullanıcı eklenirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
+            //TempData["dangerMessage"] = "Kullanıcı eklenirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
             return Redirect("/admin/user/index");
         }
         [HttpPost]
@@ -119,14 +126,14 @@ namespace JobsArgeya.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var dbUser = _databaseContext.Users.Where(x => x.id == Model.id).FirstOrDefault();
-                dbUser.name = Model.name;
-                dbUser.surname = Model.surname;
-                dbUser.email = Model.email;
-                dbUser.password = MD5Hash.Hash.Content(Model.password);
-                _databaseContext.SaveChanges();
-                TempData["successMessage"] = "Kullanıcı başarıyla güncellendi.";
-                return Redirect("/admin/user/index");
+                    var dbUser = _databaseContext.Users.Where(x => x.id == Model.id).FirstOrDefault();
+                    dbUser.name = Model.name;
+                    dbUser.surname = Model.surname;
+                    dbUser.email = Model.email;
+                    dbUser.password = MD5Hash.Hash.Content(Model.password);
+                    _databaseContext.SaveChanges();
+                    TempData["successMessage"] = "Kullanıcı başarıyla güncellendi.";
+                    return Redirect("/admin/user/index");
             }
             TempData["dangerMessage"] = "Kullanıcı güncellenirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
             return Redirect("/admin/user/index");
@@ -136,12 +143,12 @@ namespace JobsArgeya.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var dbOffice = _databaseContext.Offices.Where(x => x.id == Model.officeId).FirstOrDefault();
-                dbOffice.officeName = Model.officeName;
-                dbOffice.officeDomain = Model.officeDomain;
-                _databaseContext.SaveChanges();
-                TempData["successMessage"] = "Ofis başarıyla güncellendi.";
-                return Redirect("/admin/user/index");
+                    var dbOffice = _databaseContext.Offices.Where(x => x.id == Model.officeId).FirstOrDefault();
+                    dbOffice.officeName = Model.officeName;
+                    dbOffice.officeDomain = Model.officeDomain;
+                    _databaseContext.SaveChanges();
+                    TempData["successMessage"] = "Ofis başarıyla güncellendi.";
+                    return Redirect("/admin/user/index");
             }
             TempData["dangerMessage"] = "Ofis güncellenirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
             return Redirect("/admin/user/index");

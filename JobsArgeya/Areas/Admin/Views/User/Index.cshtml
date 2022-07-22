@@ -28,9 +28,9 @@
                             <td>@User.Name</td>
                             <td>@User.Surname</td>
                             <td>@User.Email</td>
-                            <td>@User.OfficeName</td>
-                            <td>@User.OfficeDomain</td>
-                            <td><a data-bs-toggle="modal" data-bs-target="#userEdit" data-id="@User.Id" data-name="@User.Name" data-surname="@User.Surname" data-email="@User.Email" class="btn btn-primary userEdit">Kullanıcı Düzenle</a> <a data-bs-toggle="modal" data-bs-target="#officeEdit" data-id="@User.OfficeId" data-officeName="@User.OfficeName" data-officeDomain="@User.OfficeDomain" class="btn btn-primary officeEdit">Ofis Düzenle</a> <a href="/admin/user/delete/@User.OfficeId" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
+                            <td>@User.CompanyName</td>
+                            <td>@User.CompanyDomain</td>
+                            <td><a data-bs-toggle="modal" data-bs-target="#userEdit" data-id="@User.Id" data-name="@User.Name" data-surname="@User.Surname" data-email="@User.Email" class="btn btn-primary userEdit">Kullanıcı Düzenle</a> <a data-bs-toggle="modal" data-bs-target="#officeEdit" data-id="@User.CompanyId" data-officeName="@User.CompanyName" data-officeDomain="@User.CompanyDomain" class="btn btn-primary officeEdit">Ofis Düzenle</a> <a href="/admin/user/delete/@User.CompanyId" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
                         </tr>
                     }
                 </tbody>
@@ -87,16 +87,16 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
             </div>
             <div class="modal-body">
-                <form action="/admin/user/officeedit" method="post">
+                <form action="/admin/user/companyedit" method="post">
 
-                    <input type="text" name="officeId" id="officeId" hidden>
+                    <input type="text" name="CompanyId" id="CompanyId" hidden>
                     <div class="form-group">
-                        <label for="officeName">Ofis Adı</label>
-                        <input type="text" id="officeName" name="officeName" class="form-control">
+                        <label for="CompanyName">Ofis Adı</label>
+                        <input type="text" id="CompanyName" name="CompanyName" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="officeDomain">Ofis Domain</label>
-                        <input type="text" id="officeDomain" name="officeDomain" class="form-control">
+                        <label for="CompanyDomain">Ofis Domain</label>
+                        <input type="text" id="CompanyDomain" name="CompanyDomain" class="form-control">
                     </div>
                     <hr />
                     <input type="submit" value="Ofis Düzenle" class="btn btn-primary btn-block">
@@ -132,9 +132,9 @@
             var dataOfficeName = $(this).attr('data-OfficeName');
             var dataOfficeDomain = $(this).attr('data-OfficeDomain');
 
-            $('#officeId').val(dataId);
-            $("#officeName").val(dataOfficeName);
-            $("#officeDomain").val(dataOfficeDomain);
+            $('#CompanyId').val(dataId);
+            $("#CompanyName").val(dataOfficeName);
+            $("#CompanyDomain").val(dataOfficeDomain);
         });
     </script>
 }

@@ -14,8 +14,8 @@ namespace JobsArgeya.Areas.Admin.Models
         public string Password { get; set; }
         public int RoleId { get; set; }
         public string RoleName { get; set; }
-        public int OfficeId { get; set; }
-        public string OfficeName { get; set; }
-        public string OfficeDomain { get; set; }
+        public int CompanyId { get; set; }
+        public string CompanyName { get; set; }
+        public string CompanyDomain { get; set; }
     }
 }

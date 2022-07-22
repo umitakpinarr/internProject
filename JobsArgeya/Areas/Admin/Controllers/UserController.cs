@@ -38,9 +38,9 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 UserVm.Name = User.Name;
                 UserVm.Surname = User.Surname;
                 UserVm.Email = User.Email;
-                UserVm.OfficeId = Convert.ToInt32(Details.GetUserOffice(User.Id, 3));
-                UserVm.OfficeName = Details.GetUserOffice(User.Id, 1);
-                UserVm.OfficeDomain = Details.GetUserOffice(User.Id, 2);
+                UserVm.CompanyId = Convert.ToInt32(Details.GetUserCompany(User.Id, 3));
+                UserVm.CompanyName = Details.GetUserCompany(User.Id, 1);
+                UserVm.CompanyDomain = Details.GetUserCompany(User.Id, 2);
                 AllUsers.Add(UserVm);
             }
             return View(AllUsers);
@@ -65,7 +65,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(_databaseContext.Companies.Any(x=> x.CompanyDomain == Model.OfficeDomain) || _databaseContext.Users.Any(x=> x.Email == Model.Email))
+                if(_databaseContext.Companies.Any(x=> x.CompanyDomain == Model.CompanyDomain) || _databaseContext.Users.Any(x=> x.Email == Model.Email))
                 {
                     TempData["dangerMessage"] = "Bu bilgilerle başka kullanıcı/ofis bulunmakta. Lütfen tekrar deneyiniz.";
                 }
@@ -73,8 +73,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 {
                     var Office = new Company
                     {
-                        CompanyName = Model.OfficeName,
-                        CompanyDomain = Model.OfficeDomain
+                        CompanyName = Model.CompanyName,
+                        CompanyDomain = Model.CompanyDomain
                     };
 
                     _databaseContext.Companies.Add(Office);
@@ -139,13 +139,13 @@ namespace JobsArgeya.Areas.Admin.Controllers
             return Redirect("/admin/user/index");
         }
         [HttpPost]
-        public IActionResult OfficeEdit(OfficeModel Model)
+        public IActionResult CompanyEdit(CompanyModel Model)
         {
             if (ModelState.IsValid)
             {
-                    var DbCompany = _databaseContext.Companies.Where(x => x.Id == Model.OfficeId).FirstOrDefault();
-                    DbCompany.CompanyName = Model.OfficeName;
-                    DbCompany.CompanyDomain = Model.OfficeDomain;
+                    var DbCompany = _databaseContext.Companies.Where(x => x.Id == Model.CompanyId).FirstOrDefault();
+                    DbCompany.CompanyName = Model.CompanyName;
+                    DbCompany.CompanyDomain = Model.CompanyDomain;
                     _databaseContext.SaveChanges();
                     TempData["successMessage"] = "Ofis başarıyla güncellendi.";
                     return Redirect("/admin/user/index");

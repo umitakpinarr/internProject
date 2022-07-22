@@ -79,7 +79,7 @@ namespace JobsArgeya.Business
                 return "";
             }
         }
-        public string GetUserOffice(int UserId, int Parameter)
+        public string GetUserCompany(int UserId, int Parameter)
         {
             var DbUser = _databaseContext.Users.Where(x => x.Id == UserId).FirstOrDefault();
             var DbCompany = _databaseContext.Companies.Where(x => x.Id == DbUser.CompanyId).FirstOrDefault();

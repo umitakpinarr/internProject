@@ -42,7 +42,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 ContactVm.Phone = Contact.Phone;
                 ContactVm.Subject = Contact.Subject;
                 ContactVm.Message = Contact.Message;
-                ContactVm.OfficeId = Contact.CompanyId;
+                ContactVm.CompanyId = Contact.CompanyId;
                 AllContacts.Add(ContactVm);
             }
             return View(AllContacts);

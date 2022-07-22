@@ -13,7 +13,7 @@ namespace JobsArgeya.Models
         public string Phone { get; set; }
         public string Subject { get; set; }
         public string Message { get; set; }
-        public int OfficeId { get; set; }
+        public int CompanyId { get; set; }
         public string captcha { get; set; }
     }
 }

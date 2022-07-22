@@ -54,5 +54,6 @@ namespace JobsArgeya.Areas.Admin.Models
         public string UseSSL { get; set; }
         public string SiteColor { get; set; }
         public string Logo { get; set; }
+        public string DarkLogo { get; set; }
     }
 }

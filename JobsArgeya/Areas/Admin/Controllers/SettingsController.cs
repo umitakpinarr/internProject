@@ -59,25 +59,30 @@ namespace JobsArgeya.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(SettingsModel Settings, IFormFile Logo)
+        public IActionResult Index(SettingsModel Settings, IFormFile Logo, IFormFile DarkLogo)
         {
             int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
             List<Settings> DbSettings = _databaseContext.Settings.Where(x=> x.CompanyId == OfficeId).ToList();
             List<SettingsViewModel> AllSettings = new List<SettingsViewModel>();
 
-            if(Logo != null)
+            if(Logo != null && DarkLogo != null)
             {
                 if (Logo.ContentType == "image/jpeg" || Logo.ContentType == "image/png" || Logo.ContentType == "image/svg+xml." && Logo != null && Logo.Length > 0)
                 {
                     /*Dosya uzantısını alıyoruz*/
                     var Extension = System.IO.Path.GetExtension(Logo.FileName);
+                    var DarkExtension = System.IO.Path.GetExtension(Logo.FileName);
                     /*Benzersiz bir dosya adı alıp uzantıyla birleştiriyoruz*/
                     var FileName = Guid.NewGuid() + Extension;
+                    var DarkFileName = Guid.NewGuid() + Extension;
                     /*Dosyanın yükleneceği klasörün yolu*/
                     var Path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + FileName;
+                    var DarkPath = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + DarkFileName;
                     /*Dosya oluşturuluyor*/
                     FileStream Stream = new FileStream(Path, FileMode.Create);
+                    FileStream Stream1 = new FileStream(DarkPath, FileMode.Create);
                     Logo.CopyTo(Stream);
+                    DarkLogo.CopyTo(Stream1);
 
                     /*Db den gelen veriler settingsVM e atanıyor*/
                     foreach (Settings Setting in DbSettings)
@@ -107,6 +112,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                         }
                         SettingsVm.SiteColor = Settings.SiteColor;
                         SettingsVm.Logo = FileName;
+                        SettingsVm.DarkLogo = DarkFileName;
 
                         AllSettings.Add(SettingsVm);
                     }
@@ -129,6 +135,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     Db.UseSSL = AllSettings[0].UseSSL;
                     Db.SiteColor = AllSettings[0].SiteColor;
                     Db.Logo = FileName;
+                    Db.DarkLogo = DarkFileName;
                     _databaseContext.SaveChanges();
                 }
             }

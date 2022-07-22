@@ -30,8 +30,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
         {
             /*Detayları çekmek için olşturduğum class ı türetip içersindeki methodlara erişeceğiz*/
             GetDetails Details = new GetDetails(_databaseContext, _configuration);
-            int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
-            List<Apply> DbApplies = _databaseContext.Applies.Where(x => x.CompanyId == OfficeId).ToList();
+            int CompanyId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+            List<Apply> DbApplies = _databaseContext.Applies.Where(x => x.CompanyId == CompanyId).ToList();
             List<AppliesViewModel> AllApplies = new List<AppliesViewModel>();
 
             foreach (Apply Apply in DbApplies)
@@ -72,8 +72,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
 
         public IActionResult Delete(int Id)
         {
-            int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
-            var Apply = _databaseContext.Applies.Where(x => x.Id == Id && x.CompanyId == OfficeId).FirstOrDefault();
+            int CompanyId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+            var Apply = _databaseContext.Applies.Where(x => x.Id == Id && x.CompanyId == CompanyId).FirstOrDefault();
 
             if (Apply != null)
             {
@@ -90,8 +90,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
         public IActionResult ApplyDetail(int Id)
         {
             GetDetails Details = new GetDetails(_databaseContext, _configuration);
-            int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
-            Apply DbApply = _databaseContext.Applies.Where(x => x.Id == Id && x.CompanyId == OfficeId).FirstOrDefault();
+            int CompanyId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+            Apply DbApply = _databaseContext.Applies.Where(x => x.Id == Id && x.CompanyId == CompanyId).FirstOrDefault();
             AppliesViewModel ApplyDetail = new AppliesViewModel();
             if (DbApply != null)
             {

@@ -42,6 +42,7 @@ namespace JobsArgeya.ViewComponents
             AllSettings.SmtpPort = DbSettings.SmtpPort;
             AllSettings.SiteColor = DbSettings.SiteColor;
             AllSettings.Logo = DbSettings.Logo;
+            AllSettings.DarkLogo = DbSettings.DarkLogo;
 
             return View(AllSettings);
         }

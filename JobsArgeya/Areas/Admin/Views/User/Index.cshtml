@@ -1,7 +1,7 @@
 ﻿@model List<UsersViewModel>
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    ViewData["CmsTitle"] = "Kullanıcılar";
+    ViewData["CmsTitle"] = "Kullanıcılar & Şirket İşlemleri";
 }
 @section Styles {
     <link href="~/panel/assets/css/vendor/dataTables.bootstrap5.css" rel="stylesheet" type="text/css" />
@@ -22,15 +22,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (UsersViewModel User in Model)
+                    @foreach (UsersViewModel Users in Model)
                     {
                         <tr>
-                            <td>@User.Name</td>
-                            <td>@User.Surname</td>
-                            <td>@User.Email</td>
-                            <td>@User.CompanyName</td>
-                            <td>@User.CompanyDomain</td>
-                            <td><a data-bs-toggle="modal" data-bs-target="#userEdit" data-id="@User.Id" data-name="@User.Name" data-surname="@User.Surname" data-email="@User.Email" class="btn btn-primary userEdit">Kullanıcı Düzenle</a> <a data-bs-toggle="modal" data-bs-target="#officeEdit" data-id="@User.CompanyId" data-officeName="@User.CompanyName" data-officeDomain="@User.CompanyDomain" class="btn btn-primary officeEdit">Ofis Düzenle</a> <a href="/admin/user/delete/@User.CompanyId" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
+                            <td>@Users.Name</td>
+                            <td>@Users.Surname</td>
+                            <td>@Users.Email</td>
+                            <td>@Users.CompanyName</td>
+                            <td>@Users.CompanyDomain</td>
+                            <td><a data-bs-toggle="modal" data-bs-target="#userEdit" data-id="@Users.Id" data-name="@Users.Name" data-surname="@Users.Surname" data-email="@Users.Email" class="btn btn-primary userEdit">Kullanıcı Düzenle</a> <a data-bs-toggle="modal" data-bs-target="#officeEdit" data-id="@Users.CompanyId" data-officeName="@Users.CompanyName" data-officeDomain="@Users.CompanyDomain" class="btn btn-primary officeEdit">Şirket Düzenle</a> <a href="/admin/user/delete/@Users.Id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Kullanıcıyı Sil</a> <a href="/admin/company/delete/@Users.CompanyId" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Şirketi Sil</a></td>
                         </tr>
                     }
                 </tbody>
@@ -83,23 +83,23 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">Ofis Düzenle</h4>
+                <h4 class="modal-title" id="myLargeModalLabel">Şirket Düzenle</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
             </div>
             <div class="modal-body">
-                <form action="/admin/user/companyedit" method="post">
+                <form action="/admin/company/edit" method="post">
 
                     <input type="text" name="CompanyId" id="CompanyId" hidden>
                     <div class="form-group">
-                        <label for="CompanyName">Ofis Adı</label>
+                        <label for="CompanyName">Şirket Adı</label>
                         <input type="text" id="CompanyName" name="CompanyName" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="CompanyDomain">Ofis Domain</label>
+                        <label for="CompanyDomain">Şirket Domain</label>
                         <input type="text" id="CompanyDomain" name="CompanyDomain" class="form-control">
                     </div>
                     <hr />
-                    <input type="submit" value="Ofis Düzenle" class="btn btn-primary btn-block">
+                    <input type="submit" value="Şirket Düzenle" class="btn btn-primary btn-block">
                 </form>
             </div>
         </div><!-- /.modal-content -->

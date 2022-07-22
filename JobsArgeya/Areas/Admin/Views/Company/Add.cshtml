@@ -1,0 +1,34 @@
+﻿    @model List<UsersModel>
+    @{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["CmsTitle"] = "Şirket Oluştur";
+    }
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form action="/admin/company/add" method="post">
+                    <div class="form-group" style="margin-bottom:10px;">
+                        <label for="CompanyName">Şirket Adı</label>
+                        <input class="form-control" name="CompanyName" id="CompanyName" type="text" placeholder="Şirket Adı">
+                    </div>
+                    <div class="form-group" style="margin-bottom:10px;">
+                        <label for="CompanyDomain">Şirket Domain</label>
+                        <input class="form-control" name="CompanyDomain" id="CompanyDomain" type="text" placeholder="Şirket Domain">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <label for="UserId">Yetkili Kullanıcı</label>
+                        <select name="UserId" id="UserId" class="form-control">
+                            <option selected>Lütfen Seçim Yapınız !</option>
+                            @foreach (UsersModel Users in Model)
+                            {
+                                <option value="@Users.Id">@Users.Name @Users.Surname - @Users.Email</option>
+                            }
+                        </select>
+                    </div>
+                    <br />
+                    <button type="submit" class="btn btn-danger w-100">Şirket Oluştur</button>
+                </form>
+
+            </div>
+        </div>
+    </div>

@@ -2474,3 +2474,4 @@ C:\Users\Freeman\Source\Repos\farukcakal\internProject\JobsArgeya\obj\Debug\net5
 C:\Users\Freeman\Source\Repos\farukcakal\internProject\JobsArgeya\obj\Debug\net5.0\Razor\Views\Contact\Index.cshtml.g.cs
 C:\Users\Freeman\Source\Repos\farukcakal\internProject\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Contact\Index.cshtml.g.cs
 C:\Users\Freeman\Source\Repos\farukcakal\internProject\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Shared\Components\NavBar\Default.cshtml.g.cs
+C:\Users\Freeman\Source\Repos\farukcakal\internProject\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Company\Add.cshtml.g.cs

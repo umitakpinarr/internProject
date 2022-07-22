@@ -24,6 +24,7 @@ namespace JobsArgeya.Data.Entities
         public string SmtpPort { get; set; }
         public string UseSSL { get; set; }
         public string Logo { get; set; }
+        public string DarkLogo { get; set; }
         public string SiteColor { get; set; }
         public int CompanyId { get; set; }
     }

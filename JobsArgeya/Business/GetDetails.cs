@@ -18,82 +18,82 @@ namespace JobsArgeya.Business
             _configuration = configuration;
         }
 
-        public string getJobDetails(int jobId, int parameter)
+        public string GetJobDetails(int JobId, int Parameter)
         {
-            var dbJob = _databaseContext.Jobs.Where(x => x.id == jobId).FirstOrDefault();
-            if(parameter == 0)
+            var DbJob = _databaseContext.Jobs.Where(x => x.Id == JobId).FirstOrDefault();
+            if(Parameter == 0)
             {
-                return dbJob.jobTitle.ToString();
+                return DbJob.JobTitle.ToString();
             }
-            else if(parameter == 1)
+            else if(Parameter == 1)
             {
-                return dbJob.jobKeywords.ToString();
+                return DbJob.JobKeywords.ToString();
             }
-            else if(parameter == 2)
+            else if(Parameter == 2)
             {
-                return dbJob.jobDescription.ToString();
+                return DbJob.JobDescription.ToString();
             }
-            else if(parameter == 3)
+            else if(Parameter == 3)
             {
-                return dbJob.jobContent.ToString();
+                return DbJob.JobContent.ToString();
             }
-            else if(parameter == 4)
+            else if(Parameter == 4)
             {
-                return dbJob.jobSlug.ToString();
+                return DbJob.JobSlug.ToString();
             }
             else
             {
                 return "";
             }
         }
-        public string getSiteDetails(int parameter, string host)
+        public string GetSiteDetails(int Parameter, string Host)
         {
-            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
-            var dbSettings = _databaseContext.Settings.Where(x => x.officeId == dbOffice.id).FirstOrDefault();
-            if(parameter == 0)
+            var DbCompany = _databaseContext.Companies.Where(x => x.CompanyDomain == Host).FirstOrDefault();
+            var DbSettings = _databaseContext.Settings.Where(x => x.CompanyId == DbCompany.Id).FirstOrDefault();
+            if(Parameter == 0)
             {
-                return dbSettings.keywords.ToString();
+                return DbSettings.Keywords.ToString();
             }
-            else if(parameter == 1)
+            else if(Parameter == 1)
             {
-                return dbSettings.description.ToString();
+                return DbSettings.Description.ToString();
             }
-            else if(parameter == 2)
+            else if(Parameter == 2)
             {
-                return dbSettings.siteColor.ToString();
+                return DbSettings.SiteColor.ToString();
             }
-            else if(parameter == 3)
+            else if(Parameter == 3)
             {
-                return dbSettings.title.ToString();
+                return DbSettings.Title.ToString();
             }
-            else if(parameter == 4)
+            else if(Parameter == 4)
             {
-                return dbSettings.adress.ToString();
+                return DbSettings.Adress.ToString();
             }
-            else if(parameter == 5)
+            else if(Parameter == 5)
             {
-                return dbSettings.logo.ToString();
+                return DbSettings.Logo.ToString();
             }
             else
             {
                 return "";
             }
         }
-        public string getUserOffice(int userId, int parameter)
+        public string GetUserOffice(int UserId, int Parameter)
         {
-            var dbOffice = _databaseContext.Users.Where(x => x.id == userId).FirstOrDefault();
-            var dbUser = _databaseContext.Offices.Where(x => x.id == dbOffice.officeId).FirstOrDefault();
-            if(parameter == 1)
+            var DbUser = _databaseContext.Users.Where(x => x.Id == UserId).FirstOrDefault();
+            var DbCompany = _databaseContext.Companies.Where(x => x.Id == DbUser.CompanyId).FirstOrDefault();
+            if(Parameter == 1)
             {
-                return dbUser.officeName;
+                return DbCompany.CompanyName;
             }
-            else if (parameter == 2)
+            else if (Parameter == 2)
             {
-                return dbUser.officeDomain;
+                return DbCompany.CompanyDomain;
             }
-            else if(parameter == 3)
+            else if(Parameter == 3)
             {
-                return dbUser.id.ToString();
+                return DbCompany.Id.ToString();
             }           
             else
             {

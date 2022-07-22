@@ -22,15 +22,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (ContactViewModel contact in Model)
+                    @foreach (ContactViewModel Contact in Model)
                     {
                         <tr>
-                            <td>@contact.Name</td>
-                            <td>@contact.Email</td>
-                            <td>@contact.Phone</td>
-                            <td>@contact.Subject</td>
-                            <td>@contact.Message</td>
-                            <td><a href="/admin/contact/delete/@contact.Id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
+                            <td>@Contact.Name</td>
+                            <td>@Contact.Email</td>
+                            <td>@Contact.Phone</td>
+                            <td>@Contact.Subject</td>
+                            <td>@Contact.Message</td>
+                            <td><a href="/admin/contact/delete/@Contact.Id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
                         </tr>
                     }
                 </tbody>

@@ -7,23 +7,23 @@ namespace JobsArgeya.Areas.Admin.Models
 {
     public class SettingsViewModel
     {
-        public int id { get; set; }
-        public string title { get; set; }
-        public string keywords { get; set; }
-        public string description { get; set; }
-        public string phone { get; set; }
-        public string email { get; set; }
-        public string adress { get; set; }
-        public string facebook { get; set; }
-        public string instagram { get; set; }
-        public string twitter { get; set; }
-        public string linkedin { get; set; }
-        public string smtpServer { get; set; }
-        public string smtpUsername { get; set; }
-        public string smtpPassword { get; set; }
-        public string smtpPort { get; set; }
-        public string useSSL { get; set; }
-        public string siteColor { get; set; }
-        public string logo { get; set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Keywords { get; set; }
+        public string Description { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public string Adress { get; set; }
+        public string Facebook { get; set; }
+        public string Instagram { get; set; }
+        public string Twitter { get; set; }
+        public string Linkedin { get; set; }
+        public string SmtpServer { get; set; }
+        public string SmtpUsername { get; set; }
+        public string SmtpPassword { get; set; }
+        public string SmtpPort { get; set; }
+        public string UseSSL { get; set; }
+        public string SiteColor { get; set; }
+        public string Logo { get; set; }
     }
 }

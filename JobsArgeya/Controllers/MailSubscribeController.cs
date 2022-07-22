@@ -21,9 +21,9 @@ namespace JobsArgeya.Controllers
             _hostingEnvironment = environment;
         }
         [HttpPost]
-        public IActionResult Index(MailSubscribersModel model)
+        public IActionResult Index(MailSubscribersModel Model)
         {
-            SlugHelper helper = new SlugHelper();
+            SlugHelper Helper = new SlugHelper();
             if (ModelState.IsValid)
             {
                 /*_databaseContext.MailSubscribers.Add(new MailSubscribers
@@ -32,7 +32,7 @@ namespace JobsArgeya.Controllers
                     slug = helper.GenerateSlug(model.email)
                 });
                 _databaseContext.SaveChanges();*/
-                if (_databaseContext.MailSubscribers.Any(x => x.email == model.email))
+                if (_databaseContext.MailSubscribers.Any(x => x.Email == Model.Email))
                 {
                     TempData["dangerMessage"] = "Mail listesinde kaydınız bulunmakta. Lütfen tekrar deneyiniz..";
                 }
@@ -40,8 +40,8 @@ namespace JobsArgeya.Controllers
                 {
                     _databaseContext.MailSubscribers.Add(new MailSubscribers
                     {
-                        email = model.email,
-                        slug = helper.GenerateSlug(model.email)
+                        Email = Model.Email,
+                        Slug = Helper.GenerateSlug(Model.Email)
                     });
                     _databaseContext.SaveChanges();
                     TempData["successMessage"] = "Mail listesine kaydınız başarıyla oluşturuldu.";

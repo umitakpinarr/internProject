@@ -35,8 +35,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
             foreach (MailSubscribers subscriber in dbSubscribers)
             {
                 MailSubscribersModel mailVm = new MailSubscribersModel();
-                mailVm.id = subscriber.id;
-                mailVm.email = subscriber.email;
+                mailVm.Id = subscriber.Id;
+                mailVm.Email = subscriber.Email;
 
                 allSubscribers.Add(mailVm);
             }
@@ -59,7 +59,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
         }
         public IActionResult Delete(int id)
         {
-            var subscriber = _databaseContext.MailSubscribers.Where(x => x.id == id).FirstOrDefault();
+            var subscriber = _databaseContext.MailSubscribers.Where(x => x.Id == id).FirstOrDefault();
             if (subscriber != null)
             {
                 _databaseContext.MailSubscribers.Remove(subscriber);

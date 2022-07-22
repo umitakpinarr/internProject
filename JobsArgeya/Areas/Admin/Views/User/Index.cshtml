@@ -22,15 +22,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (UsersViewModel user in Model)
+                    @foreach (UsersViewModel User in Model)
                     {
                         <tr>
-                            <td>@user.name</td>
-                            <td>@user.surname</td>
-                            <td>@user.email</td>
-                            <td>@user.officeName</td>
-                            <td>@user.officeDomain</td>
-                            <td><a data-bs-toggle="modal" data-bs-target="#userEdit" data-id="@user.id" data-name="@user.name" data-surname="@user.surname" data-email="@user.email" class="btn btn-primary userEdit">Kullanıcı Düzenle</a> <a data-bs-toggle="modal" data-bs-target="#officeEdit" data-id="@user.officeId" data-officeName="@user.officeName" data-officeDomain="@user.officeDomain" class="btn btn-primary officeEdit">Ofis Düzenle</a> <a href="/admin/user/delete/@user.officeId" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
+                            <td>@User.Name</td>
+                            <td>@User.Surname</td>
+                            <td>@User.Email</td>
+                            <td>@User.OfficeName</td>
+                            <td>@User.OfficeDomain</td>
+                            <td><a data-bs-toggle="modal" data-bs-target="#userEdit" data-id="@User.Id" data-name="@User.Name" data-surname="@User.Surname" data-email="@User.Email" class="btn btn-primary userEdit">Kullanıcı Düzenle</a> <a data-bs-toggle="modal" data-bs-target="#officeEdit" data-id="@User.OfficeId" data-officeName="@User.OfficeName" data-officeDomain="@User.OfficeDomain" class="btn btn-primary officeEdit">Ofis Düzenle</a> <a href="/admin/user/delete/@User.OfficeId" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
                         </tr>
                     }
                 </tbody>

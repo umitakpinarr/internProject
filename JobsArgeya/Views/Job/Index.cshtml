@@ -40,20 +40,20 @@
     <div class="job-apply-form">
         <form asp-action="Apply" method="post" enctype="multipart/form-data">
             <div class="form-group" style="margin-bottom:10px;">
-                <label asp-for="fullName"><b>Adınız ve Soydınız:</b></label>
-                <input asp-for="fullName" class="form-control" required>
+                <label asp-for="FullName"><b>Adınız ve Soydınız:</b></label>
+                <input asp-for="FullName" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label asp-for="phone"><b>Telefon Numaranız:</b></label>
-                <input asp-for="phone" class="form-control" required>
+                <label asp-for="Phone"><b>Telefon Numaranız:</b></label>
+                <input asp-for="Phone" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label asp-for="email"><b>E-Mail Adresiniz:</b></label>
-                <input type="email" class="form-control" asp-for="email" required>
+                <label asp-for="Email"><b>E-Mail Adresiniz:</b></label>
+                <input type="email" class="form-control" asp-for="Email" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
                 <label><b>Cinsiyetiniz</b></label>
-                <select asp-for="gender" class="form-control" required>
+                <select asp-for="Gender" class="form-control" required>
                     <option value="">Lütfen Bir Seçim Yapınız!</option>
                     <option value="Belirtilmemiş">Belirtmek İstemiyorum</option>
                     <option value="Erkek">Erkek</option>
@@ -61,20 +61,20 @@
                 </select>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label asp-for="university"><b>Okuduğunuz/Mezun Olduğunuz Okul:</b></label>
-                <input asp-for="university" class="form-control" required>
+                <label asp-for="University"><b>Okuduğunuz/Mezun Olduğunuz Okul:</b></label>
+                <input asp-for="University" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label asp-for="faculty"><b>Okuduğunuz/Mezun Olduğunuz Bölüm:</b></label>
-                <input asp-for="faculty" class="form-control" required>
+                <label asp-for="Faculty"><b>Okuduğunuz/Mezun Olduğunuz Bölüm:</b></label>
+                <input asp-for="Faculty" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label asp-for="resume"><b>Ön Yazı:</b></label>
-                <textarea asp-for="resume" class="form-control" required></textarea>
+                <label asp-for="Resume"><b>Ön Yazı:</b></label>
+                <textarea asp-for="Resume" class="form-control" required></textarea>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label for="formFile"><b>Özgeçmiş / CV Yükle (Sadece PDF uzantılı dosyalar kabul edilmektedir)</b></label>
-                <input type="file" class="form-control-file" name="formFile">
+                <label for="FormFile"><b>Özgeçmiş / CV Yükle (Sadece PDF uzantılı dosyalar kabul edilmektedir)</b></label>
+                <input type="file" class="form-control-file" name="FormFile">
             </div>
             <div class="form-group" style="margin-bottom:10px;">
                 <img style="display: inline-block; width: 180px; height: 50px; " id="imgCaptcha" src="/argeya-captcha?@DateTime.Now.ToString("ddMMyyyyHHmmsss")" />

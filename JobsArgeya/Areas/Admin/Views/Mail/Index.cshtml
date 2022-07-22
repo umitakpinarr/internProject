@@ -18,11 +18,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (MailSubscribersModel subscriber in Model)
+                    @foreach (MailSubscribersModel Subscriber in Model)
                     {
                         <tr>
-                            <td>@subscriber.email</td>
-                            <td><a href="/admin/mail/delete/@subscriber.id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
+                            <td>@Subscriber.Email</td>
+                            <td><a href="/admin/mail/delete/@Subscriber.Id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
                         </tr>
                     }
 

@@ -8,15 +8,15 @@ namespace JobsArgeya.Areas.Admin.Models
 {
     public class JobsModel
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         [Required]
-        public string jobTitle { get; set; }
+        public string JobTitle { get; set; }
         [Required]
-        public string jobContent { get; set; }
+        public string JobContent { get; set; }
         [Required]
-        public string jobKeywords { get; set; }
+        public string JobKeywords { get; set; }
         [Required]
-        public string jobDescription { get; set; }
-        public string isActive { get; set; }
+        public string JobDescription { get; set; }
+        public string IsActive { get; set; }
     }
 }

@@ -27,91 +27,91 @@ namespace JobsArgeya.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            GetDetails details = new GetDetails(_databaseContext, _configuration);
-            List<Users> dbUsers = _databaseContext.Users.ToList();
-            List<UsersViewModel> allUsers = new List<UsersViewModel>();
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            List<Users> DbUsers = _databaseContext.Users.ToList();
+            List<UsersViewModel> AllUsers = new List<UsersViewModel>();
 
-            foreach (Users user in dbUsers)
+            foreach (Users User in DbUsers)
             {
-                UsersViewModel userVm = new UsersViewModel();
-                userVm.id = user.id;
-                userVm.name = user.name;
-                userVm.surname = user.surname;
-                userVm.email = user.email;
-                userVm.officeId = Convert.ToInt32(details.getUserOffice(user.id, 3));
-                userVm.officeName = details.getUserOffice(user.id, 1);
-                userVm.officeDomain = details.getUserOffice(user.id, 2);
-                allUsers.Add(userVm);
+                UsersViewModel UserVm = new UsersViewModel();
+                UserVm.Id = User.Id;
+                UserVm.Name = User.Name;
+                UserVm.Surname = User.Surname;
+                UserVm.Email = User.Email;
+                UserVm.OfficeId = Convert.ToInt32(Details.GetUserOffice(User.Id, 3));
+                UserVm.OfficeName = Details.GetUserOffice(User.Id, 1);
+                UserVm.OfficeDomain = Details.GetUserOffice(User.Id, 2);
+                AllUsers.Add(UserVm);
             }
-            return View(allUsers);
+            return View(AllUsers);
         }
         [HttpGet]
         public IActionResult Add()
         {
-            List<Roles> dbRoles = _databaseContext.Roles.ToList();
-            List<RoleModel> allRoles = new List<RoleModel>();
+            List<Roles> DbRoles = _databaseContext.Roles.ToList();
+            List<RoleModel> AllRoles = new List<RoleModel>();
 
-            foreach (Roles role in dbRoles)
+            foreach (Roles Role in DbRoles)
             {
-                RoleModel userRole = new RoleModel();
-                userRole.Id = role.id;
-                userRole.RoleName = role.roleName;
-                allRoles.Add(userRole);
+                RoleModel UserRole = new RoleModel();
+                UserRole.Id = Role.Id;
+                UserRole.RoleName = Role.RoleName;
+                AllRoles.Add(UserRole);
             }
-            return View(allRoles);
+            return View(AllRoles);
         }
         [HttpPost]
         public IActionResult Add(UsersViewModel Model)
         {
             if (ModelState.IsValid)
             {
-                if(_databaseContext.Offices.Any(x=> x.officeDomain == Model.officeDomain) || _databaseContext.Users.Any(x=> x.email == Model.email))
+                if(_databaseContext.Companies.Any(x=> x.CompanyDomain == Model.OfficeDomain) || _databaseContext.Users.Any(x=> x.Email == Model.Email))
                 {
                     TempData["dangerMessage"] = "Bu bilgilerle başka kullanıcı/ofis bulunmakta. Lütfen tekrar deneyiniz.";
                 }
                 else
                 {
-                    var office = new Offices
+                    var Office = new Company
                     {
-                        officeName = Model.officeName,
-                        officeDomain = Model.officeDomain
+                        CompanyName = Model.OfficeName,
+                        CompanyDomain = Model.OfficeDomain
                     };
 
-                    _databaseContext.Offices.Add(office);
+                    _databaseContext.Companies.Add(Office);
                     _databaseContext.SaveChanges();
 
                     _databaseContext.Users.Add(new Users
                     {
-                        name = Model.name,
-                        surname = Model.surname,
-                        email = Model.email,
-                        password = MD5Hash.Hash.Content(Model.password),
-                        officeId = office.id,
-                        roleId = Model.roleId
+                        Name = Model.Name,
+                        Surname = Model.Surname,
+                        Email = Model.Email,
+                        Password = MD5Hash.Hash.Content(Model.Password),
+                        CompanyId = Office.Id,
+                        RoleId = Model.RoleId
                     });
 
                     _databaseContext.SaveChanges();
 
                     _databaseContext.Settings.Add(new Settings
                     {
-                        title = "Lütfen Site Başlığı Girin",
-                        keywords = "Lütfen Site Anahtar Kelimelerini Girin",
-                        description = "Lütfen Site Açıklaması Girin",
-                        email = "Lütfen Email Adresi Girin",
-                        phone = "Lütfen Telefon Nuamrası Girin",
-                        adress = "Lütfen Ofis Adresi Girin",
-                        facebook = "#",
-                        instagram = "#",
-                        twitter = "#",
-                        linkedin = "#",
-                        smtpServer = "smtp.test.com",
-                        smtpUsername = "test@test.com",
-                        smtpPassword = "test",
-                        smtpPort = "465",
-                        logo = "logo.png",
-                        useSSL = "true",
-                        officeId = office.id,
-                        siteColor = "#DC3545"
+                        Title = "Lütfen Site Başlığı Girin",
+                        Keywords = "Lütfen Site Anahtar Kelimelerini Girin",
+                        Description = "Lütfen Site Açıklaması Girin",
+                        Email = "Lütfen Email Adresi Girin",
+                        Phone = "Lütfen Telefon Nuamrası Girin",
+                        Adress = "Lütfen Ofis Adresi Girin",
+                        Facebook = "#",
+                        Instagram = "#",
+                        Twitter = "#",
+                        Linkedin = "#",
+                        SmtpServer = "smtp.test.com",
+                        SmtpUsername = "test@test.com",
+                        SmtpPassword = "test",
+                        SmtpPort = "465",
+                        Logo = "logo.png",
+                        UseSSL = "true",
+                        CompanyId = Office.Id,
+                        SiteColor = "#DC3545"
                     });
                     _databaseContext.SaveChanges();
                     TempData["successMessage"] = "Kullanıcı başarıyla eklendi.";
@@ -126,11 +126,11 @@ namespace JobsArgeya.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                    var dbUser = _databaseContext.Users.Where(x => x.id == Model.id).FirstOrDefault();
-                    dbUser.name = Model.name;
-                    dbUser.surname = Model.surname;
-                    dbUser.email = Model.email;
-                    dbUser.password = MD5Hash.Hash.Content(Model.password);
+                    var DbUser = _databaseContext.Users.Where(x => x.Id == Model.Id).FirstOrDefault();
+                    DbUser.Name = Model.Name;
+                    DbUser.Surname = Model.Surname;
+                    DbUser.Email = Model.Email;
+                    DbUser.Password = MD5Hash.Hash.Content(Model.password);
                     _databaseContext.SaveChanges();
                     TempData["successMessage"] = "Kullanıcı başarıyla güncellendi.";
                     return Redirect("/admin/user/index");
@@ -143,9 +143,9 @@ namespace JobsArgeya.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                    var dbOffice = _databaseContext.Offices.Where(x => x.id == Model.officeId).FirstOrDefault();
-                    dbOffice.officeName = Model.officeName;
-                    dbOffice.officeDomain = Model.officeDomain;
+                    var DbCompany = _databaseContext.Companies.Where(x => x.Id == Model.OfficeId).FirstOrDefault();
+                    DbCompany.CompanyName = Model.OfficeName;
+                    DbCompany.CompanyDomain = Model.OfficeDomain;
                     _databaseContext.SaveChanges();
                     TempData["successMessage"] = "Ofis başarıyla güncellendi.";
                     return Redirect("/admin/user/index");
@@ -154,22 +154,22 @@ namespace JobsArgeya.Areas.Admin.Controllers
             return Redirect("/admin/user/index");
         }
         [HttpGet]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int Id)
         {
-            var office = _databaseContext.Offices.Where(x => x.id == id).FirstOrDefault();
-            var user = _databaseContext.Users.Where(x => x.officeId == office.id).FirstOrDefault();
-            var settings = _databaseContext.Settings.Where(x => x.officeId == office.id).FirstOrDefault();
-            var jobs = _databaseContext.Jobs.Where(x => x.officeId == office.id).ToList();
-            var applies = _databaseContext.Applies.Where(x => x.officeId == office.id).ToList();
-            var contacts = _databaseContext.Contact.Where(x => x.OfficeId == office.id).ToList();
-            if (office != null)
+            var Company = _databaseContext.Companies.Where(x => x.Id == Id).FirstOrDefault();
+            var User = _databaseContext.Users.Where(x => x.CompanyId == Company.Id).FirstOrDefault();
+            var Settings = _databaseContext.Settings.Where(x => x.CompanyId == Company.Id).FirstOrDefault();
+            var Jobs = _databaseContext.Jobs.Where(x => x.CompanyId == Company.Id).ToList();
+            var Applies = _databaseContext.Applies.Where(x => x.CompanyId == Company.Id).ToList();
+            var Contacts = _databaseContext.Contact.Where(x => x.CompanyId == Company.Id).ToList();
+            if (Company != null)
             {
-                _databaseContext.Offices.Remove(office);
-                _databaseContext.Users.Remove(user);
-                _databaseContext.Settings.Remove(settings);
-                _databaseContext.Jobs.RemoveRange(jobs);
-                _databaseContext.Applies.RemoveRange(applies);
-                _databaseContext.Contact.RemoveRange(contacts);
+                _databaseContext.Companies.Remove(Company);
+                _databaseContext.Users.Remove(User);
+                _databaseContext.Settings.Remove(Settings);
+                _databaseContext.Jobs.RemoveRange(Jobs);
+                _databaseContext.Applies.RemoveRange(Applies);
+                _databaseContext.Contact.RemoveRange(Contacts);
                 _databaseContext.SaveChanges();
                 TempData["successMessage"] = "Ofis başarıyla silindi.";
             }

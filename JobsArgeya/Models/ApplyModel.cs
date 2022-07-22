@@ -11,35 +11,35 @@ namespace JobsArgeya.Models
     {
         [Required(ErrorMessage = "Lütfen adınız ve soyadınızı girin..")]
         [StringLength(100)]
-        public string fullName { get; set; }
+        public string FullName { get; set; }
 
         [Required(ErrorMessage = "Lütfen telefonunuzu girin..")]
         [StringLength(11)]
-        public string phone { get; set; }
+        public string Phone { get; set; }
 
         [Required(ErrorMessage = "Lütfen email adresinizi girin..")]
         [StringLength(100)]
-        public string email { get; set; }
+        public string Email { get; set; }
 
         [Required(ErrorMessage = "Lütfen cinsiyet seçimi yapın..")]
-        public string gender { get; set; }
+        public string Gender { get; set; }
 
         [Required(ErrorMessage = "Lütfen üniversite bilginizi girin..")]
         [StringLength(100)]
-        public string university { get; set; }
+        public string University { get; set; }
 
         [Required(ErrorMessage = "Lütfen bölüm bilginizi girin..")]
         [StringLength(100)]
-        public string faculty { get; set; }
+        public string Faculty { get; set; }
 
         [Required(ErrorMessage = "Lütfen özgeçmişinizi girin..")]
         [StringLength(255)]
-        public string resume { get; set; }
-        public int? jobId { get; set; }
+        public string Resume { get; set; }
+        public int? JobId { get; set; }
         public string? JobSlug { get; set; }
         public string captcha { get; set; }
-        public string? isIntern { get; set; }
-        public DateTime? internStartDate { get; set; }
-        public DateTime? internEndDate { get; set; }
+        public string? IsIntern { get; set; }
+        public DateTime? InternStartDate { get; set; }
+        public DateTime? InternEndDate { get; set; }
     }
 }

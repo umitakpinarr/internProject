@@ -7,15 +7,15 @@ namespace JobsArgeya.Areas.Admin.Models
 {
     public class UsersViewModel
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string surname { get; set; }
-        public string email { get; set; }
-        public string password { get; set; }
-        public int roleId { get; set; }
-        public string roleName { get; set; }
-        public int officeId { get; set; }
-        public string officeName { get; set; }
-        public string officeDomain { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public int RoleId { get; set; }
+        public string RoleName { get; set; }
+        public int OfficeId { get; set; }
+        public string OfficeName { get; set; }
+        public string OfficeDomain { get; set; }
     }
 }

@@ -39,26 +39,26 @@
     </div>
     <div class="job-apply-form">
         <form action="/Job/Applicant" method="post" enctype="multipart/form-data">
-            <input type="text" name="jobId" id="jobId" value="@Model[0].id" hidden/>
+            <input type="text" name="jobId" id="jobId" value="@Model[0].Id" hidden/>
             <div class="form-group" style="margin-bottom:10px;">
                 <label for="Title"><b>Başvurduğunuz İlan:</b></label>
-                <input type="text" name="Title" class="form-control" value="@Model[0].jobTitle" disabled>
+                <input type="text" name="Title" class="form-control" value="@Model[0].JobTitle" disabled>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="fullName"><b>Adınız ve Soydınız:</b></label>
-                <input name="fullName" class="form-control" required>
+                <label name="FullName"><b>Adınız ve Soydınız:</b></label>
+                <input name="FullName" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="phone"><b>Telefon Numaranız:</b></label>
-                <input name="phone" class="form-control" required>
+                <label name="Phone"><b>Telefon Numaranız:</b></label>
+                <input name="Phone" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="email"><b>E-Mail Adresiniz:</b></label>
-                <input type="email" class="form-control" name="email" required>
+                <label name="Email"><b>E-Mail Adresiniz:</b></label>
+                <input type="email" name="Email" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
                 <label><b>Cinsiyetiniz</b></label>
-                <select name="gender" class="form-control" required>
+                <select name="Gender" class="form-control" required>
                     <option value="">Lütfen Bir Seçim Yapınız!</option>
                     <option value="Belirtilmemiş">Belirtmek İstemiyorum</option>
                     <option value="Erkek">Erkek</option>
@@ -66,16 +66,16 @@
                 </select>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="university"><b>Okuduğunuz/Mezun Olduğunuz Okul:</b></label>
-                <input name="university" class="form-control" required>
+                <label name="University"><b>Okuduğunuz/Mezun Olduğunuz Okul:</b></label>
+                <input name="University" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="faculty"><b>Okuduğunuz/Mezun Olduğunuz Bölüm:</b></label>
-                <input name="faculty" class="form-control" required>
+                <label name="Faculty"><b>Okuduğunuz/Mezun Olduğunuz Bölüm:</b></label>
+                <input name="Faculty" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="resume"><b>Ön Yazı:</b></label>
-                <textarea name="resume" class="form-control" required></textarea>
+                <label name="Resume"><b>Ön Yazı:</b></label>
+                <textarea name="Resume" class="form-control" required></textarea>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
                 <img style="display: inline-block; width: 180px; height: 50px; " id="imgCaptcha" src="/argeya-captcha?@DateTime.Now.ToString("ddMMyyyyHHmmsss")" />
@@ -85,8 +85,8 @@
                 <input type="text" name="captcha" id="captcha" />
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label for="formFile"><b>Özgeçmiş / CV Yükle (Sadece PDF uzantılı dosyalar kabul edilmektedir)</b></label>
-                <input type="file" class="form-control-file" name="formFile">
+                <label for="FormFile"><b>Özgeçmiş / CV Yükle (Sadece PDF uzantılı dosyalar kabul edilmektedir)</b></label>
+                <input type="file" class="form-control-file" name="FormFile">
             </div>
             <button type="submit" class="btn btn-primary w-100" style="background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];">Başvur</button>
         </form>

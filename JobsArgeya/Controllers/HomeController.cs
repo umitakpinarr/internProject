@@ -28,19 +28,19 @@ namespace JobsArgeya.Controllers
 
         public IActionResult Index()
         {
-            string host = Request.Host.ToString();
-            GetDetails details = new GetDetails(_databaseContext, _configuration);
-            ViewData["SiteName"] = details.getSiteDetails(3, host);
-            ViewData["PageKeywords"] = details.getSiteDetails(0, host);
-            ViewData["PageDescription"] = details.getSiteDetails(1, host);
+            string Host = Request.Host.ToString();
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            ViewData["SiteName"] = Details.GetSiteDetails(3, Host);
+            ViewData["PageKeywords"] = Details.GetSiteDetails(0, Host);
+            ViewData["PageDescription"] = Details.GetSiteDetails(1, Host);
             return View();
         }
-        public IActionResult Unsubscribe(string id)
+        public IActionResult Unsubscribe(string Id)
         {
-            var subscriber = _databaseContext.MailSubscribers.Where(x => x.slug == id).FirstOrDefault();
-            if (subscriber != null && id != null)
+            var Subscriber = _databaseContext.MailSubscribers.Where(x => x.Slug == Id).FirstOrDefault();
+            if (Subscriber != null && Id != null)
             {
-                _databaseContext.MailSubscribers.Remove(subscriber);
+                _databaseContext.MailSubscribers.Remove(Subscriber);
                 _databaseContext.SaveChanges();
                 TempData["successMessage"] = "Mail adresi listeden başarıyla silindi.";
             }

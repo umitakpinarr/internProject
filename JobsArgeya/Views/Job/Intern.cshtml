@@ -42,20 +42,20 @@
     <div class="job-apply-form">
         <form action="/Job/Intern" method="post" enctype="multipart/form-data">
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="fullName"><b>Adınız ve Soydınız:</b></label>
-                <input name="fullName" class="form-control" required>
+                <label name="FullName"><b>Adınız ve Soydınız:</b></label>
+                <input name="FullName" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="phone"><b>Telefon Numaranız:</b></label>
-                <input name="phone" class="form-control" required>
+                <label name="Phone"><b>Telefon Numaranız:</b></label>
+                <input name="Phone" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="email"><b>E-Mail Adresiniz:</b></label>
-                <input type="email" class="form-control" name="email" required>
+                <label name="Email"><b>E-Mail Adresiniz:</b></label>
+                <input type="email" name="Email" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
                 <label><b>Cinsiyetiniz</b></label>
-                <select name="gender" class="form-control" required>
+                <select name="Gender" class="form-control" required>
                     <option value="">Lütfen Bir Seçim Yapınız!</option>
                     <option value="Belirtilmemiş">Belirtmek İstemiyorum</option>
                     <option value="Erkek">Erkek</option>
@@ -63,24 +63,24 @@
                 </select>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="university"><b>Okuduğunuz Okul:</b></label>
-                <input name="university" class="form-control" required>
+                <label name="University"><b>Okuduğunuz Okul:</b></label>
+                <input name="University" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="faculty"><b>Okuduğunuz Bölüm ve Sınıf:</b></label>
-                <input name="faculty" class="form-control" required>
+                <label name="Faculty"><b>Okuduğunuz Bölüm ve Sınıf:</b></label>
+                <input name="Faculty" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label for="internStartDate"><b>Staj Başlangıç Tarihi:</b></label>
-                <input class="form-control" id="internStartDate" name="internStartDate" autocomplete="off">
+                <label for="InternStartDate"><b>Staj Başlangıç Tarihi:</b></label>
+                <input class="form-control" id="InternStartDate" name="InternStartDate" autocomplete="off">
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label for="internEndDate"><b>Staj Bitiş Tarihi:</b></label>
-                <input class="form-control" id="internEndDate" name="internEndDate" autocomplete="off">
+                <label for="InternEndDate"><b>Staj Bitiş Tarihi:</b></label>
+                <input class="form-control" id="InternEndDate" name="InternEndDate" autocomplete="off">
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="resume"><b>Öz Yazı:</b></label>
-                <textarea name="resume" class="form-control" required></textarea>
+                <label name="Resume"><b>Öz Yazı:</b></label>
+                <textarea name="Resume" class="form-control" required></textarea>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
                 <img style="display: inline-block; width: 180px; height: 50px; " id="imgCaptcha" src="/argeya-captcha?@DateTime.Now.ToString("ddMMyyyyHHmmsss")" />
@@ -90,8 +90,8 @@
                 <input type="text" name="captcha" id="captcha" />
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label for="formFile"><b>Özgeçmiş / CV Yükle (Sadece PDF uzantılı dosyalar kabul edilmektedir)</b></label>
-                <input type="file" class="form-control-file" name="formFile">
+                <label for="FormFile"><b>Özgeçmiş / CV Yükle (Sadece PDF uzantılı dosyalar kabul edilmektedir)</b></label>
+                <input type="file" class="form-control-file" name="FormFile">
             </div>
             <button type="submit" class="btn btn-primary w-100" style="background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];">Başvur</button>
         </form>
@@ -105,24 +105,24 @@
         $(document).ready(function () {
 
             $(function () {
-                $("#internStartDate").datepicker({
+                $("#InternStartDate").datepicker({
                     minDate: 0,
                     dateFormat: 'dd.mm.yy',
                     monthNames: ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"],
                     dayNamesMin: ["Pa", "Pt", "Sl", "Ça", "Pe", "Cu", "Ct"]
                 });
-                $("#internEndDate").datepicker({
+                $("#InternEndDate").datepicker({
                     minDate: 0,
                     dateFormat: 'dd.mm.yy',
                     monthNames: ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"],
                     dayNamesMin: ["Pa", "Pt", "Sl", "Ça", "Pe", "Cu", "Ct"]
                 });
 
-                $('#internStartDate').change(function () {
+                $('#InternStartDate').change(function () {
                     startDate = $(this).datepicker('getDate');
                     $("#internEndDate").datepicker("option", "minDate", startDate);
                 });
-                $('#internEndDate').change(function () {
+                $('#InternEndDate').change(function () {
                     endDate = $(this).datepicker('getDate');
                     $("#internStartDate").datepicker("option", "maxDate", endDate);
                 });

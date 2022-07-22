@@ -11,48 +11,48 @@ namespace JobsArgeya.Areas.Admin.Models
     {
         [Required(ErrorMessage = "Lütfen site başlığı girin..")]
         [StringLength(100)]
-        public string title { get; set; }
+        public string Title { get; set; }
 
         [Required(ErrorMessage = "Lütfen anahtar kelime girin..")]
         [StringLength(255)]
-        public string keywords { get; set; }
+        public string Keywords { get; set; }
 
         [Required(ErrorMessage = "Lütfen site açıklaması girin..")]
         [StringLength(255)]
-        public string description { get; set; }
+        public string Description { get; set; }
 
         [Required(ErrorMessage = "Lütfen telefon numarası girin..")]
-        public string phone { get; set; }
+        public string Phone { get; set; }
 
         [Required(ErrorMessage = "Lütfen email adresi girin..")]
         [StringLength(255)]
-        public string email { get; set; }
+        public string Email { get; set; }
 
         [Required(ErrorMessage = "Lütfen adres girin..")]
         [StringLength(100)]
-        public string adress { get; set; }
+        public string Adress { get; set; }
 
         [Required(ErrorMessage = "Lütfen Facebook adresi girin..")]
         [StringLength(255)]
-        public string facebook { get; set; }
+        public string Facebook { get; set; }
 
         [Required(ErrorMessage = "Lütfen Instagram adresi girin..")]
         [StringLength(255)]
-        public string instagram { get; set; }
+        public string Instagram { get; set; }
 
         [Required(ErrorMessage = "Lütfen Twitter adresi girin..")]
         [StringLength(255)]
-        public string twitter { get; set; }
+        public string Twitter { get; set; }
 
         [Required(ErrorMessage = "Lütfen Linkedin adresi girin..")]
         [StringLength(255)]
-        public string linkedin { get; set; }
-        public string smtpServer { get; set; }
-        public string smtpUsername { get; set; }
-        public string smtpPassword { get; set; }
-        public string smtpPort { get; set; }
-        public string useSSL { get; set; }
-        public string siteColor { get; set; }
-        public string logo { get; set; }
+        public string Linkedin { get; set; }
+        public string SmtpServer { get; set; }
+        public string SmtpUsername { get; set; }
+        public string SmtpPassword { get; set; }
+        public string SmtpPort { get; set; }
+        public string UseSSL { get; set; }
+        public string SiteColor { get; set; }
+        public string Logo { get; set; }
     }
 }

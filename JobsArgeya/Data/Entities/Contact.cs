@@ -13,6 +13,6 @@ namespace JobsArgeya.Data.Entities
         public string Phone { get; set; }
         public string Subject { get; set; }
         public string Message { get; set; }
-        public int OfficeId { get; set; }
+        public int CompanyId { get; set; }
     }
 }

@@ -21,29 +21,29 @@ namespace JobsArgeya.ViewComponents
         }
         public IViewComponentResult Invoke()
         {
-            string host = Request.Host.ToString();
-            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
-            Settings dbSettings = _databaseContext.Settings.Where(x => x.officeId == dbOffice.id).FirstOrDefault();
-            SettingsModel allSettings = new SettingsModel();
+            string Host = Request.Host.ToString();
+            var DbCompany = _databaseContext.Companies.Where(x => x.CompanyDomain == Host).FirstOrDefault();
+            Settings DbSettings = _databaseContext.Settings.Where(x => x.CompanyId == DbCompany.Id).FirstOrDefault();
+            SettingsModel AllSettings = new SettingsModel();
 
-            allSettings.title = dbSettings.title;
-            allSettings.keywords = dbSettings.keywords;
-            allSettings.description = dbSettings.description;
-            allSettings.email = dbSettings.email;
-            allSettings.phone = dbSettings.phone;
-            allSettings.adress = dbSettings.adress;
-            allSettings.facebook = dbSettings.facebook;
-            allSettings.instagram = dbSettings.instagram;
-            allSettings.twitter = dbSettings.twitter;
-            allSettings.linkedin = dbSettings.linkedin;
-            allSettings.smtpServer = dbSettings.smtpServer;
-            allSettings.smtpUsername = dbSettings.smtpUsername;
-            allSettings.smtpPassword = dbSettings.smtpPassword;
-            allSettings.smtpPort = dbSettings.smtpPort;
-            allSettings.siteColor = dbSettings.siteColor;
-            allSettings.logo = dbSettings.logo;
+            AllSettings.Title = DbSettings.Title;
+            AllSettings.Keywords = DbSettings.Keywords;
+            AllSettings.Description = DbSettings.Description;
+            AllSettings.Email = DbSettings.Email;
+            AllSettings.Phone = DbSettings.Phone;
+            AllSettings.Adress = DbSettings.Adress;
+            AllSettings.Facebook = DbSettings.Facebook;
+            AllSettings.Instagram = DbSettings.Instagram;
+            AllSettings.Twitter = DbSettings.Twitter;
+            AllSettings.Linkedin = DbSettings.Linkedin;
+            AllSettings.SmtpServer = DbSettings.SmtpServer;
+            AllSettings.SmtpUsername = DbSettings.SmtpUsername;
+            AllSettings.SmtpPassword = DbSettings.SmtpPassword;
+            AllSettings.SmtpPort = DbSettings.SmtpPort;
+            AllSettings.SiteColor = DbSettings.SiteColor;
+            AllSettings.Logo = DbSettings.Logo;
 
-            return View(allSettings);
+            return View(AllSettings);
         }
     }
 }

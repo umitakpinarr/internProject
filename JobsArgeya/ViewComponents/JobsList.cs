@@ -21,27 +21,27 @@ namespace JobsArgeya.ViewComponents
         }
         public IViewComponentResult Invoke()
         {
-            string host = Request.Host.ToString();
-            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
-            List<Jobs> dbJobs = _databaseContext.Jobs.Where(x => x.officeId == dbOffice.id).ToList();
-            List<JobsViewModel> allJobs = new List<JobsViewModel>();
-            var siteColor = _databaseContext.Settings.Where(x => x.officeId == dbOffice.id).Select(x => x.siteColor).FirstOrDefault();
-            ViewData["SiteColor"] = siteColor.ToString();
-            foreach (Jobs jobs in dbJobs)
+            string Host = Request.Host.ToString();
+            var DbCompany = _databaseContext.Companies.Where(x => x.CompanyDomain == Host).FirstOrDefault();
+            List<Jobs> DbJobs = _databaseContext.Jobs.Where(x => x.CompanyId == DbCompany.Id).ToList();
+            List<JobsViewModel> AllJobs = new List<JobsViewModel>();
+            var SiteColor = _databaseContext.Settings.Where(x => x.CompanyId == DbCompany.Id).Select(x => x.SiteColor).FirstOrDefault();
+            ViewData["SiteColor"] = SiteColor.ToString();
+            foreach (Jobs Jobs in DbJobs)
             {
-                JobsViewModel jobsVm = new JobsViewModel();
-                jobsVm.id = jobs.id;
-                jobsVm.jobTitle = jobs.jobTitle;
-                jobsVm.jobKeywords = jobs.jobKeywords;
-                jobsVm.jobDescription = jobs.jobDescription;
-                jobsVm.jobContent = jobs.jobContent;
-                jobsVm.jobSlug = jobs.jobSlug;
-                jobsVm.isActive = jobs.isActive;
+                JobsViewModel JobsVm = new JobsViewModel();
+                JobsVm.Id = Jobs.Id;
+                JobsVm.JobTitle = Jobs.JobTitle;
+                JobsVm.JobKeywords = Jobs.JobKeywords;
+                JobsVm.JobDescription = Jobs.JobDescription;
+                JobsVm.JobContent = Jobs.JobContent;
+                JobsVm.JobSlug = Jobs.JobSlug;
+                JobsVm.IsActive = Jobs.IsActive;
 
-                allJobs.Add(jobsVm);
+                AllJobs.Add(JobsVm);
             }
 
-            return View(allJobs);
+            return View(AllJobs);
         }
     }
 }

@@ -8,66 +8,66 @@
                 <div class="text-start mt-3">
                     <p class="mb-2 font-13">
                         <strong>Adı Soyadı :</strong> <span class="ms-2">
-                            @Model.fullName
+                            @Model.FullName
                         </span>
                     </p>
 
                     <p class="mb-2 font-13">
                         <strong>Telefon :</strong><span class="ms-2">
-                            @Model.phone
+                            @Model.Phone
                         </span>
                     </p>
 
                     <p class="mb-2 font-13">
                         <strong>Email :</strong><span class="ms-2">
-                            @Model.email
+                            @Model.Email
                         </span>
                     </p>
 
                     <p class="mb-2 font-13">
                         <strong>Cinsiyet :</strong><span class="ms-2">
-                            @Model.gender
+                            @Model.Gender
                         </span>
                     </p>
 
                     <p class="mb-2 font-13">
                         <strong>Üniversite :</strong><span class="ms-2">
-                            @Model.university
+                            @Model.University
                         </span>
                     </p>
 
                     <p class="mb-2 font-13">
                         <strong>Bölüm :</strong><span class="ms-2">
-                            @Model.faculty
+                            @Model.Faculty
                         </span>
                     </p>
                     <p class="mb-2 font-13">
                         <strong>Başvuru Tarihi :</strong><span class="ms-2">
-                            @Model.createdAt
+                            @Model.CreatedAt
                         </span>
                     </p>
                     <p class="mb-2 font-13">
                         <strong>Başvurulan İlan :</strong><span class="ms-2">
-                            <a href="/jobdetail/index/@Model.jobSlug">@Model.jobTitle</a>
+                            <a href="/jobdetail/index/@Model.JobSlug">@Model.JobTitle</a>
                         </span>
                     </p>
-                    @if (Model.isIntern == "1")
+                    @if (Model.IsIntern == "1")
                     {
                         <p class="mb-2 font-13">
                             <strong>Staj Başlangıç Tarihi :</strong><span class="ms-2">
-                                @Model.internStartDate
+                                @Model.InternStartDate
                             </span>
                         </p>
                         <p class="mb-2 font-13">
                             <strong>Staj Bitiş Tarihi :</strong><span class="ms-2">
-                                @Model.internEndDate
+                                @Model.InternEndDate
                             </span>
                         </p>
                     }
                     <hr />
                     <h4 class="header-title mt-0 mb-3">Ön Yazı :</h4>
                     <p class="text-muted font-13">
-                        @Model.resume
+                        @Model.Resume
                     </p>
 
                 </div>
@@ -79,7 +79,7 @@
     <div class="col-xl-8 col-lg-7">
         <div class="card">
             <div class="card-body" style="height:800px;">
-                <iframe src="/uploads/@Model.cvPath" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>
+                <iframe src="/uploads/@Model.CvPath" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>
             </div> <!-- end card body -->
         </div> <!-- end card -->
     </div> <!-- end col -->

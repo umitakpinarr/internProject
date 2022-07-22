@@ -44,8 +44,8 @@
                                     <img src="~/panel/assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
                                 </span>
                                 <span>
-                                    <span class="account-user-name">@(User?.Claims?.FirstOrDefault(x=> x.Type == "fullName")?.Value??"")</span>
-                                    <span class="account-position">@(User?.Claims?.FirstOrDefault(x => x.Type == "officeName")?.Value??"")</span>
+                                    <span class="account-user-name">@(User?.Claims?.FirstOrDefault(x=> x.Type == "FullName")?.Value??"")</span>
+                                    <span class="account-position">@(User?.Claims?.FirstOrDefault(x => x.Type == "OfficeName")?.Value??"")</span>
                                 </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown">

@@ -24,27 +24,27 @@ namespace JobsArgeya.Controllers
             _configuration = configuration;
         }
         [HttpGet]
-        public IActionResult Index(string id)
+        public IActionResult Index(string Id)
         {
-            GetDetails details = new GetDetails(_databaseContext, _configuration);
-            string host = Request.Host.ToString();
-            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
-            var siteColor = _databaseContext.Settings.Where(x => x.officeId == dbOffice.id).Select(x => x.siteColor).FirstOrDefault();
-            ViewData["SiteColor"] = siteColor.ToString();
-            ViewData["SiteName"] = details.getSiteDetails(3, host);
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            string Host = Request.Host.ToString();
+            var DbCompany = _databaseContext.Companies.Where(x => x.CompanyDomain == Host).FirstOrDefault();
+            var SiteColor = _databaseContext.Settings.Where(x => x.CompanyId == DbCompany.Id).Select(x => x.SiteColor).FirstOrDefault();
+            ViewData["SiteColor"] = SiteColor.ToString();
+            ViewData["SiteName"] = Details.GetSiteDetails(3, Host);
             /* Method parametresinin ismini değiştirince url deki slug değerini alamıyorum. 
              * Bundan ötürü default yapıdaki id değerini alıyorum. Route yapısını düzenledim ama işin içinden çıkamadım. */
-            var jobDetail = _databaseContext.Jobs.Where(x => x.jobSlug == id && x.officeId == dbOffice.id).FirstOrDefault();
-            if (jobDetail != null && jobDetail.isActive == "true")
+            var JobDetail = _databaseContext.Jobs.Where(x => x.JobSlug == Id && x.CompanyId == DbCompany.Id).FirstOrDefault();
+            if (JobDetail != null && JobDetail.IsActive == "true")
             {
-                JobsViewModel jobsVm = new JobsViewModel();
-                jobsVm.id = jobDetail.id;
-                jobsVm.jobTitle = jobDetail.jobTitle;
-                jobsVm.jobKeywords = jobDetail.jobKeywords;
-                jobsVm.jobDescription = jobDetail.jobDescription;
-                jobsVm.jobContent = jobDetail.jobContent;
-                jobsVm.jobSlug = jobDetail.jobSlug;
-                return View(jobsVm);
+                JobsViewModel JobsVm = new JobsViewModel();
+                JobsVm.Id = JobDetail.Id;
+                JobsVm.JobTitle = JobDetail.JobTitle;
+                JobsVm.JobKeywords = JobDetail.JobKeywords;
+                JobsVm.JobDescription = JobDetail.JobDescription;
+                JobsVm.JobContent = JobDetail.JobContent;
+                JobsVm.JobSlug = JobDetail.JobSlug;
+                return View(JobsVm);
             }
             else
             {

@@ -8,8 +8,8 @@ namespace JobsArgeya.Models
 {
     public class MailSubscribersModel
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         [Required]
-        public string email { get; set; }
+        public string Email { get; set; }
     }
 }

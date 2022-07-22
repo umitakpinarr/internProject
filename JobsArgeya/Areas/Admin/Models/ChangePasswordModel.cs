@@ -7,7 +7,7 @@ namespace JobsArgeya.Areas.Admin.Models
 {
     public class ChangePasswordModel
     {
-        public string password { get; set; }
-        public string passwordVerify { get; set; }
+        public string Password { get; set; }
+        public string PasswordVerify { get; set; }
     }
 }

@@ -27,13 +27,13 @@
                 <tbody>
                     @{ if (Model != null)
                         {
-                            foreach (JobsViewModel jobsVm in Model)
+                            foreach (JobsViewModel JobsVm in Model)
                             {
-            @if (jobsVm.isActive == "true")
+            @if (JobsVm.IsActive == "true")
             {
 <tr>
-    <td class="container border" style="font-size:large; vertical-align:middle; font-weight:bold; text-align:left; padding:30px 50px 30px 50px"><a class="text-body" title="@jobsVm.jobTitle" href="/jobdetail/index/@jobsVm.jobSlug">@jobsVm.jobTitle</a></td>
-    <td class="container border" style="vertical-align:middle;"><a href="/jobdetail/index/@jobsVm.jobSlug" class="btn btn-primary" style="float:right; align-items:center; width:125px; background:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];" type="button" data-bs-target="#demo" title="@jobsVm.jobTitle">İlanı İncele <span style="line-height:12px; font-size:17px;">&#x2192;</span></a></td>
+    <td class="container border" style="font-size:large; vertical-align:middle; font-weight:bold; text-align:left; padding:30px 50px 30px 50px"><a class="text-body" title="@JobsVm.JobTitle" href="/jobdetail/index/@JobsVm.JobSlug">@JobsVm.JobTitle</a></td>
+    <td class="container border" style="vertical-align:middle;"><a href="/jobdetail/index/@JobsVm.JobSlug" class="btn btn-primary" style="float:right; align-items:center; width:125px; background:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];" type="button" data-bs-target="#demo" title="@JobsVm.JobTitle">İlanı İncele <span style="line-height:12px; font-size:17px;">&#x2192;</span></a></td>
 </tr> } }
                                 } }
                 </tbody>

@@ -7,20 +7,20 @@ namespace JobsArgeya.Data.Entities
 {
     public class Apply
     {
-        public int id { get; set; }
-        public string fullName { get; set; }
-        public string phone { get; set; }
-        public string email { get; set; }
-        public string gender { get; set; }
-        public string university { get; set; }
-        public string faculty { get; set; }
-        public string resume { get; set; }
-        public string cvPath { get; set; }
-        public int? jobId { get; set; }
-        public DateTime createdAt { get; set; }
-        public string? isIntern { get; set; }
-        public DateTime? internStartDate { get; set; }
-        public DateTime? internEndDate { get; set; }
-        public int officeId { get; set; }
+        public int Id { get; set; }
+        public string FullName { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public string Gender { get; set; }
+        public string University { get; set; }
+        public string Faculty { get; set; }
+        public string Resume { get; set; }
+        public string CvPath { get; set; }
+        public int? JobId { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public string? IsIntern { get; set; }
+        public DateTime? InternStartDate { get; set; }
+        public DateTime? InternEndDate { get; set; }
+        public int CompanyId { get; set; }
     }
 }

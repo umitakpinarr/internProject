@@ -27,33 +27,33 @@ namespace JobsArgeya.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            string host = Request.Host.ToString();
-            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
+            string Host = Request.Host.ToString();
+            var DbCompany = _databaseContext.Companies.Where(x => x.CompanyDomain == Host).FirstOrDefault();
 
-            List<Contact> dbContacts = _databaseContext.Contact.Where(x => x.OfficeId == dbOffice.id).ToList();
-            List<ContactViewModel> allContacts = new List<ContactViewModel>();
+            List<Contact> DbContacts = _databaseContext.Contact.Where(x => x.CompanyId == DbCompany.Id).ToList();
+            List<ContactViewModel> AllContacts = new List<ContactViewModel>();
 
-            foreach (Contact contact in dbContacts)
+            foreach (Contact Contact in DbContacts)
             {
-                ContactViewModel model = new ContactViewModel();
-                model.Id = contact.Id;
-                model.Name = contact.Name;
-                model.Email = contact.Email;
-                model.Phone = contact.Phone;
-                model.Subject = contact.Subject;
-                model.Message = contact.Message;
-                model.OfficeId = contact.OfficeId;
-                allContacts.Add(model);
+                ContactViewModel ContactVm = new ContactViewModel();
+                ContactVm.Id = Contact.Id;
+                ContactVm.Name = Contact.Name;
+                ContactVm.Email = Contact.Email;
+                ContactVm.Phone = Contact.Phone;
+                ContactVm.Subject = Contact.Subject;
+                ContactVm.Message = Contact.Message;
+                ContactVm.OfficeId = Contact.CompanyId;
+                AllContacts.Add(ContactVm);
             }
-            return View(allContacts);
+            return View(AllContacts);
         }
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int Id)
         {
-            int officeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "officeId").Value);
-            var contact = _databaseContext.Contact.Where(x => x.Id == id && x.OfficeId == officeId).FirstOrDefault();
-            if (contact != null)
+            int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+            var Contact = _databaseContext.Contact.Where(x => x.Id == Id && x.CompanyId == OfficeId).FirstOrDefault();
+            if (Contact != null)
             {
-                _databaseContext.Contact.Remove(contact);
+                _databaseContext.Contact.Remove(Contact);
                 _databaseContext.SaveChanges();
                 TempData["successMessage"] = "Mesaj başarıyla silindi.";
             }

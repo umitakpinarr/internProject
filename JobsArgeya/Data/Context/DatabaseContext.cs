@@ -16,7 +16,7 @@ namespace JobsArgeya.Data.Context
         public DbSet<Users> Users { get; set; }
         public DbSet<Settings> Settings { get; set; }
         public DbSet<MailSubscribers> MailSubscribers { get; set; }
-        public DbSet<Offices> Offices { get; set; }
+        public DbSet<Company> Companies { get; set; }
         public DbSet<Roles> Roles { get; set; }
         public DbSet<Contact> Contact { get; set; }
 

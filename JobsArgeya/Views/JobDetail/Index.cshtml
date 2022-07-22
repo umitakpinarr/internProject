@@ -1,8 +1,8 @@
 ﻿@model JobsViewModel
-@{ ViewData["Title"] = Model.jobTitle;
-                ViewData["BreadcrumbTitle"] = Model.jobTitle;
-                ViewData["PageDescription"] = Model.jobDescription;
-                ViewData["PageKeywords"] = Model.jobKeywords; }
+@{ ViewData["Title"] = Model.JobTitle;
+                ViewData["BreadcrumbTitle"] = Model.JobTitle;
+                ViewData["PageDescription"] = Model.JobDescription;
+                ViewData["PageKeywords"] = Model.JobKeywords; }
 
 
 <div>
@@ -19,13 +19,13 @@
     </section>
     <div class="shadow p-3 mb-5 bg-body rounded">
         <h2 style="text-align:center;">İş İlanı Hakkında</h2>
-        <p>@Html.Raw(@Model.jobContent)</p>
+        <p>@Html.Raw(@Model.JobContent)</p>
     </div>
 
     <div class="row">
         <div class="col">
             <div class="text-center">
-                <a href="/job/applicant/@Model.jobSlug" style="background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];" class="btn btn-primary btn-lg active">Hemen Başvur</a>
+                <a href="/job/applicant/@Model.JobSlug" style="background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];" class="btn btn-primary btn-lg active">Hemen Başvur</a>
             </div>
         </div>
     </div>

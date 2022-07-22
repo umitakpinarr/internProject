@@ -29,55 +29,55 @@ namespace JobsArgeya.Areas.Admin.Controllers
         public IActionResult Index()
         {
             /*Detayları çekmek için olşturduğum class ı türetip içersindeki methodlara erişeceğiz*/
-            GetDetails details = new GetDetails(_databaseContext, _configuration);
-            int officeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "officeId").Value);
-            List <Apply> dbApplies = _databaseContext.Applies.Where(x=>x.officeId == officeId).ToList();
-            List<AppliesViewModel> allApplies = new List<AppliesViewModel>();
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+            List<Apply> DbApplies = _databaseContext.Applies.Where(x => x.CompanyId == OfficeId).ToList();
+            List<AppliesViewModel> AllApplies = new List<AppliesViewModel>();
 
-            foreach (Apply apply in dbApplies)
+            foreach (Apply Apply in DbApplies)
             {
-                AppliesViewModel applyVm = new AppliesViewModel();
-                applyVm.id = apply.id;
-                applyVm.fullName = apply.fullName;
-                applyVm.phone = apply.phone;
-                applyVm.email = apply.email;
-                applyVm.gender = apply.gender;
-                applyVm.university = apply.university;
-                applyVm.faculty = apply.faculty;
-                applyVm.resume = apply.resume;
-                applyVm.cvPath = apply.cvPath;
-                applyVm.createdAt = apply.createdAt;
-                applyVm.jobId = apply.jobId;
+                AppliesViewModel ApplyVm = new AppliesViewModel();
+                ApplyVm.Id = Apply.Id;
+                ApplyVm.FullName = Apply.FullName;
+                ApplyVm.Phone = Apply.Phone;
+                ApplyVm.Email = Apply.Email;
+                ApplyVm.Gender = Apply.Gender;
+                ApplyVm.University = Apply.University;
+                ApplyVm.Faculty = Apply.Faculty;
+                ApplyVm.Resume = Apply.Resume;
+                ApplyVm.CvPath = Apply.CvPath;
+                ApplyVm.CreatedAt = Apply.CreatedAt;
+                ApplyVm.JobId = Apply.JobId;
                 /*DB de jobId varsa classdaki methoda gidip ilgili id ile veritabanından jobTitle return ediliyor ve viewmodele basıyor*/
-                if (apply.jobId != null)
+                if (Apply.JobId != null)
                 {
-                    applyVm.jobTitle = details.getJobDetails((int)apply.jobId, 0);
-                    applyVm.jobSlug = details.getJobDetails((int)apply.jobId, 4);
+                    ApplyVm.JobTitle = Details.GetJobDetails((int)Apply.JobId, 0);
+                    ApplyVm.JobSlug = Details.GetJobDetails((int)Apply.JobId, 4);
                 }
-                else if(apply.isIntern == "1")
+                else if (Apply.IsIntern == "1")
                 {
-                    applyVm.internStartDate = apply.internStartDate;
-                    applyVm.internEndDate = apply.internEndDate;
-                    applyVm.jobTitle = "Stajyer Başvurusu";
+                    ApplyVm.InternStartDate = Apply.InternStartDate;
+                    ApplyVm.InternEndDate = Apply.InternEndDate;
+                    ApplyVm.JobTitle = "Stajyer Başvurusu";
                 }
                 else
                 {
-                    applyVm.jobTitle = "Sadece CV Göndermiş";
+                    ApplyVm.JobTitle = "Sadece CV Göndermiş";
                 }
-                allApplies.Add(applyVm);
+                AllApplies.Add(ApplyVm);
             }
 
-            return View(allApplies);
+            return View(AllApplies);
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int Id)
         {
-            int officeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "officeId").Value);
-            var apply = _databaseContext.Applies.Where(x => x.id == id && x.officeId == officeId).FirstOrDefault();
-            
-            if (apply != null)
+            int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+            var Apply = _databaseContext.Applies.Where(x => x.Id == Id && x.CompanyId == OfficeId).FirstOrDefault();
+
+            if (Apply != null)
             {
-                _databaseContext.Applies.Remove(apply);
+                _databaseContext.Applies.Remove(Apply);
                 _databaseContext.SaveChanges();
                 TempData["successMessage"] = "Başvuru başarıyla silindi.";
             }
@@ -87,42 +87,42 @@ namespace JobsArgeya.Areas.Admin.Controllers
             }
             return Redirect("/admin/home/index");
         }
-        public IActionResult ApplyDetail(int id)
+        public IActionResult ApplyDetail(int Id)
         {
-            GetDetails details = new GetDetails(_databaseContext, _configuration);
-            int officeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "officeId").Value);
-            Apply dbApply = _databaseContext.Applies.Where(x => x.id == id && x.officeId == officeId).FirstOrDefault();
-            AppliesViewModel applyDetail = new AppliesViewModel();
-            if(dbApply != null)
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+            Apply DbApply = _databaseContext.Applies.Where(x => x.Id == Id && x.CompanyId == OfficeId).FirstOrDefault();
+            AppliesViewModel ApplyDetail = new AppliesViewModel();
+            if (DbApply != null)
             {
-                applyDetail.id = dbApply.id;
-                applyDetail.fullName = dbApply.fullName;
-                applyDetail.phone = dbApply.phone;
-                applyDetail.email = dbApply.email;
-                applyDetail.gender = dbApply.gender;
-                applyDetail.university = dbApply.university;
-                applyDetail.faculty = dbApply.faculty;
-                applyDetail.resume = dbApply.resume;
-                applyDetail.cvPath = dbApply.cvPath;
-                applyDetail.createdAt = dbApply.createdAt;
-                if (dbApply.jobId != null)
+                ApplyDetail.Id = DbApply.Id;
+                ApplyDetail.FullName = DbApply.FullName;
+                ApplyDetail.Phone = DbApply.Phone;
+                ApplyDetail.Email = DbApply.Email;
+                ApplyDetail.Gender = DbApply.Gender;
+                ApplyDetail.University = DbApply.University;
+                ApplyDetail.Faculty = DbApply.Faculty;
+                ApplyDetail.Resume = DbApply.Resume;
+                ApplyDetail.CvPath = DbApply.CvPath;
+                ApplyDetail.CreatedAt = DbApply.CreatedAt;
+                if (DbApply.JobId != null)
                 {
-                    applyDetail.jobTitle = details.getJobDetails((int)dbApply.jobId, 0);
-                    applyDetail.jobSlug = details.getJobDetails((int)dbApply.jobId, 4);
+                    ApplyDetail.JobTitle = Details.GetJobDetails((int)DbApply.JobId, 0);
+                    ApplyDetail.JobSlug = Details.GetJobDetails((int)DbApply.JobId, 4);
                 }
-                else if (dbApply.isIntern == "1")
+                else if (DbApply.IsIntern == "1")
                 {
-                    applyDetail.isIntern = "1";
-                    applyDetail.internStartDate = dbApply.internStartDate;
-                    applyDetail.internEndDate = dbApply.internEndDate;
-                    applyDetail.jobTitle = "Stajyer Başvurusu";
+                    ApplyDetail.IsIntern = "1";
+                    ApplyDetail.InternStartDate = DbApply.InternStartDate;
+                    ApplyDetail.InternEndDate = DbApply.InternEndDate;
+                    ApplyDetail.JobTitle = "Stajyer Başvurusu";
                 }
                 else
                 {
-                    applyDetail.jobTitle = "Sadece CV göndermiş.";
+                    ApplyDetail.JobTitle = "Sadece CV göndermiş.";
                 }
 
-                return View(applyDetail);
+                return View(ApplyDetail);
             }
             else
             {
@@ -131,13 +131,14 @@ namespace JobsArgeya.Areas.Admin.Controllers
             return Redirect("/admin/home/index");
         }
         [HttpPost]
-        public IActionResult Password(ChangePasswordModel model)
+        public IActionResult Password(ChangePasswordModel Model)
         {
-            var dbUser = _databaseContext.Users.Where(x => x.id == 1).FirstOrDefault();
-            if(model.password == model.passwordVerify)
+            int UserId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "UserId").Value);
+            var DbUser = _databaseContext.Users.Where(x => x.Id == UserId).FirstOrDefault();
+            if (Model.Password == Model.PasswordVerify)
             {
-                string passwordHashed = MD5Hash.Hash.Content(model.password);
-                dbUser.password = passwordHashed;
+                string PasswordHashed = MD5Hash.Hash.Content(Model.Password);
+                DbUser.Password = PasswordHashed;
                 _databaseContext.SaveChanges();
                 TempData["successMessage"] = "Şifreniz başarıyla güncellendi.";
             }

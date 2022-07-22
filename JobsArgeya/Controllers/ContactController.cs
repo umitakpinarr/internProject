@@ -27,29 +27,29 @@ namespace JobsArgeya.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            GetDetails details = new GetDetails(_databaseContext, _configuration);
-            string host = Request.Host.ToString();
-            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
-            ViewData["SiteColor"] = _databaseContext.Settings.Where(x => x.officeId == dbOffice.id).Select(x => x.siteColor).FirstOrDefault();
-            ViewData["SiteName"] = details.getSiteDetails(3, host);
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            string Host = Request.Host.ToString();
+            var DbCompany = _databaseContext.Companies.Where(x => x.CompanyDomain == Host).FirstOrDefault();
+            ViewData["SiteColor"] = _databaseContext.Settings.Where(x => x.CompanyId == DbCompany.Id).Select(x => x.SiteColor).FirstOrDefault();
+            ViewData["SiteName"] = Details.GetSiteDetails(3, Host);
             return View();
         }
         [HttpPost]
         public IActionResult Index(ContactModel Model)
         {
-            CaptchaController captchaController = new CaptchaController();
-            if (!captchaController.IsValid(Model.captcha, HttpContext.Session))
+            CaptchaController CaptchaController = new CaptchaController();
+            if (!CaptchaController.IsValid(Model.captcha, HttpContext.Session))
             {
                 TempData["dangerMessage"] = "Yanlış captcha girişi yaptınız. Lütfen tekrar deneyiniz.";
                 return Redirect(Request.Headers["Referer"].ToString());
             }
 
-            string host = Request.Host.ToString();
-            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
+            string Host = Request.Host.ToString();
+            var DbCompany = _databaseContext.Companies.Where(x => x.CompanyDomain == Host).FirstOrDefault();
             if(ModelState.IsValid)
             {
-                string regexPattern = @"^(05(\d{9}))$";
-                if (Regex.IsMatch(Model.Phone, regexPattern) == true)
+                string RegexPattern = @"^(05(\d{9}))$";
+                if (Regex.IsMatch(Model.Phone, RegexPattern) == true)
                 {
                     _databaseContext.Contact.Add(new Contact
                     {
@@ -58,7 +58,7 @@ namespace JobsArgeya.Controllers
                         Phone = Model.Phone,
                         Subject = Model.Subject,
                         Message = Model.Message,
-                        OfficeId = dbOffice.id
+                        CompanyId = DbCompany.Id
                     });
                     _databaseContext.SaveChanges();
                     TempData["successMessage"] = "Mesajınızı aldık. En kısa sürede tarafınıza dönüş sağlayacağız.";

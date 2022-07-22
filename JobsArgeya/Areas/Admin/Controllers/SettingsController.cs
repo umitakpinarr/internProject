@@ -27,164 +27,164 @@ namespace JobsArgeya.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            int officeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "officeId").Value);
-            List<Settings> dbSettings = _databaseContext.Settings.Where(x=> x.officeId == officeId).ToList();
-            List<SettingsViewModel> allSettings = new List<SettingsViewModel>();
+            int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+            List<Settings> DbSettings = _databaseContext.Settings.Where(x=> x.CompanyId == OfficeId).ToList();
+            List<SettingsViewModel> AllSettings = new List<SettingsViewModel>();
 
-            foreach (Settings settings in dbSettings)
+            foreach (Settings Settings in DbSettings)
             {
-                SettingsViewModel settingsVm = new SettingsViewModel();
-                settingsVm.title = settings.title;
-                settingsVm.keywords = settings.keywords;
-                settingsVm.description = settings.description;
-                settingsVm.email = settings.email;
-                settingsVm.phone = settings.phone;
-                settingsVm.adress = settings.adress;
-                settingsVm.facebook = settings.facebook;
-                settingsVm.instagram = settings.instagram;
-                settingsVm.twitter = settings.twitter;
-                settingsVm.linkedin = settings.linkedin;
-                settingsVm.smtpServer = settings.smtpServer;
-                settingsVm.smtpUsername = settings.smtpUsername;
-                settingsVm.smtpPassword = settings.smtpPassword;
-                settingsVm.smtpPort = settings.smtpPort;
-                settingsVm.useSSL = settings.useSSL;
-                settingsVm.siteColor = settings.siteColor;
-                settingsVm.logo = settings.logo;
+                SettingsViewModel SettingsVm = new SettingsViewModel();
+                SettingsVm.Title = Settings.Title;
+                SettingsVm.Keywords = Settings.Keywords;
+                SettingsVm.Description = Settings.Description;
+                SettingsVm.Email = Settings.Email;
+                SettingsVm.Phone = Settings.Phone;
+                SettingsVm.Adress = Settings.Adress;
+                SettingsVm.Facebook = Settings.Facebook;
+                SettingsVm.Instagram = Settings.Instagram;
+                SettingsVm.Twitter = Settings.Twitter;
+                SettingsVm.Linkedin = Settings.Linkedin;
+                SettingsVm.SmtpServer = Settings.SmtpServer;
+                SettingsVm.SmtpUsername = Settings.SmtpUsername;
+                SettingsVm.SmtpPassword = Settings.SmtpPassword;
+                SettingsVm.SmtpPort = Settings.SmtpPort;
+                SettingsVm.UseSSL = Settings.UseSSL;
+                SettingsVm.SiteColor = Settings.SiteColor;
+                SettingsVm.Logo = Settings.Logo;
 
-                allSettings.Add(settingsVm);
+                AllSettings.Add(SettingsVm);
             }
 
-            return View(allSettings);
+            return View(AllSettings);
         }
 
         [HttpPost]
-        public IActionResult Index(SettingsModel settings, IFormFile logo)
+        public IActionResult Index(SettingsModel Settings, IFormFile Logo)
         {
-            int officeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "officeId").Value);
-            List<Settings> dbSettings = _databaseContext.Settings.Where(x=> x.officeId == officeId).ToList();
-            List<SettingsViewModel> allSettings = new List<SettingsViewModel>();
+            int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+            List<Settings> DbSettings = _databaseContext.Settings.Where(x=> x.CompanyId == OfficeId).ToList();
+            List<SettingsViewModel> AllSettings = new List<SettingsViewModel>();
 
-            if(logo != null)
+            if(Logo != null)
             {
-                if (logo.ContentType == "image/jpeg" || logo.ContentType == "image/png" || logo.ContentType == "image/svg+xml." && logo != null && logo.Length > 0)
+                if (Logo.ContentType == "image/jpeg" || Logo.ContentType == "image/png" || Logo.ContentType == "image/svg+xml." && Logo != null && Logo.Length > 0)
                 {
                     /*Dosya uzantısını alıyoruz*/
-                    var extension = Path.GetExtension(logo.FileName);
+                    var Extension = System.IO.Path.GetExtension(Logo.FileName);
                     /*Benzersiz bir dosya adı alıp uzantıyla birleştiriyoruz*/
-                    var fileName = Guid.NewGuid() + extension;
+                    var FileName = Guid.NewGuid() + Extension;
                     /*Dosyanın yükleneceği klasörün yolu*/
-                    var path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + fileName;
+                    var Path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + FileName;
                     /*Dosya oluşturuluyor*/
-                    FileStream stream = new FileStream(path, FileMode.Create);
-                    logo.CopyTo(stream);
+                    FileStream Stream = new FileStream(Path, FileMode.Create);
+                    Logo.CopyTo(Stream);
 
                     /*Db den gelen veriler settingsVM e atanıyor*/
-                    foreach (Settings setting in dbSettings)
+                    foreach (Settings Setting in DbSettings)
                     {
-                        SettingsViewModel settingsVm = new SettingsViewModel();
-                        settingsVm.title = settings.title;
-                        settingsVm.keywords = settings.keywords;
-                        settingsVm.description = settings.description;
-                        settingsVm.email = settings.email;
-                        settingsVm.phone = settings.phone;
-                        settingsVm.adress = settings.adress;
-                        settingsVm.facebook = settings.facebook;
-                        settingsVm.instagram = settings.instagram;
-                        settingsVm.twitter = settings.twitter;
-                        settingsVm.linkedin = settings.linkedin;
-                        settingsVm.smtpServer = settings.smtpServer;
-                        settingsVm.smtpUsername = settings.smtpUsername;
-                        settingsVm.smtpPassword = settings.smtpPassword;
-                        settingsVm.smtpPort = settings.smtpPort;
-                        if(settings.useSSL == "on")
+                        SettingsViewModel SettingsVm = new SettingsViewModel();
+                        SettingsVm.Title = Settings.Title;
+                        SettingsVm.Keywords = Settings.Keywords;
+                        SettingsVm.Description = Settings.Description;
+                        SettingsVm.Email = Settings.Email;
+                        SettingsVm.Phone = Settings.Phone;
+                        SettingsVm.Adress = Settings.Adress;
+                        SettingsVm.Facebook = Settings.Facebook;
+                        SettingsVm.Instagram = Settings.Instagram;
+                        SettingsVm.Twitter = Settings.Twitter;
+                        SettingsVm.Linkedin = Settings.Linkedin;
+                        SettingsVm.SmtpServer = Settings.SmtpServer;
+                        SettingsVm.SmtpUsername = Settings.SmtpUsername;
+                        SettingsVm.SmtpPassword = Settings.SmtpPassword;
+                        SettingsVm.SmtpPort = Settings.SmtpPort;
+                        if(Settings.UseSSL == "on")
                         {
-                            settingsVm.useSSL = "true";
+                            SettingsVm.UseSSL = "true";
                         }
                         else
                         {
-                            settingsVm.useSSL = "false";
+                            SettingsVm.UseSSL = "false";
                         }
-                        settingsVm.siteColor = settings.siteColor;
-                        settingsVm.logo = fileName;
+                        SettingsVm.SiteColor = Settings.SiteColor;
+                        SettingsVm.Logo = FileName;
 
-                        allSettings.Add(settingsVm);
+                        AllSettings.Add(SettingsVm);
                     }
                     /* Ayar Update */
-                    var db = _databaseContext.Settings.Where(x => x.officeId == officeId).FirstOrDefault();
-                    db.title = allSettings[0].title;
-                    db.keywords = allSettings[0].keywords;
-                    db.description = allSettings[0].description;
-                    db.email = allSettings[0].email;
-                    db.phone = allSettings[0].phone;
-                    db.adress = allSettings[0].adress;
-                    db.facebook = allSettings[0].facebook;
-                    db.instagram = allSettings[0].instagram;
-                    db.twitter = allSettings[0].twitter;
-                    db.linkedin = allSettings[0].linkedin;
-                    db.smtpServer = allSettings[0].smtpServer;
-                    db.smtpUsername = allSettings[0].smtpUsername;
-                    db.smtpPassword = allSettings[0].smtpPassword;
-                    db.smtpPort = allSettings[0].smtpPort;
-                    db.useSSL = allSettings[0].useSSL;
-                    db.siteColor = allSettings[0].siteColor;
-                    db.logo = fileName;
+                    var Db = _databaseContext.Settings.Where(x => x.CompanyId == OfficeId).FirstOrDefault();
+                    Db.Title = AllSettings[0].Title;
+                    Db.Keywords = AllSettings[0].Keywords;
+                    Db.Description = AllSettings[0].Description;
+                    Db.Email = AllSettings[0].Email;
+                    Db.Phone = AllSettings[0].Phone;
+                    Db.Adress = AllSettings[0].Adress;
+                    Db.Facebook = AllSettings[0].Facebook;
+                    Db.Instagram = AllSettings[0].Instagram;
+                    Db.Twitter = AllSettings[0].Twitter;
+                    Db.Linkedin = AllSettings[0].Linkedin;
+                    Db.SmtpServer = AllSettings[0].SmtpServer;
+                    Db.SmtpUsername = AllSettings[0].SmtpUsername;
+                    Db.SmtpPassword = AllSettings[0].SmtpPassword;
+                    Db.SmtpPort = AllSettings[0].SmtpPort;
+                    Db.UseSSL = AllSettings[0].UseSSL;
+                    Db.SiteColor = AllSettings[0].SiteColor;
+                    Db.Logo = FileName;
                     _databaseContext.SaveChanges();
                 }
             }
             else
             {
-                foreach (Settings setting in dbSettings)
+                foreach (Settings Setting in DbSettings)
                 {
-                    SettingsViewModel settingsVm = new SettingsViewModel();
-                    settingsVm.title = settings.title;
-                    settingsVm.keywords = settings.keywords;
-                    settingsVm.description = settings.description;
-                    settingsVm.email = settings.email;
-                    settingsVm.phone = settings.phone;
-                    settingsVm.adress = settings.adress;
-                    settingsVm.facebook = settings.facebook;
-                    settingsVm.instagram = settings.instagram;
-                    settingsVm.twitter = settings.twitter;
-                    settingsVm.linkedin = settings.linkedin;
-                    settingsVm.smtpServer = settings.smtpServer;
-                    settingsVm.smtpUsername = settings.smtpUsername;
-                    settingsVm.smtpPassword = settings.smtpPassword;
-                    settingsVm.smtpPort = settings.smtpPort;
-                    if(settings.useSSL == "on")
+                    SettingsViewModel SettingsVm = new SettingsViewModel();
+                    SettingsVm.Title = Settings.Title;
+                    SettingsVm.Keywords = Settings.Keywords;
+                    SettingsVm.Description = Settings.Description;
+                    SettingsVm.Email = Settings.Email;
+                    SettingsVm.Phone = Settings.Phone;
+                    SettingsVm.Adress = Settings.Adress;
+                    SettingsVm.Facebook = Settings.Facebook;
+                    SettingsVm.Instagram = Settings.Instagram;
+                    SettingsVm.Twitter = Settings.Twitter;
+                    SettingsVm.Linkedin = Settings.Linkedin;
+                    SettingsVm.SmtpServer = Settings.SmtpServer;
+                    SettingsVm.SmtpUsername = Settings.SmtpUsername;
+                    SettingsVm.SmtpPassword = Settings.SmtpPassword;
+                    SettingsVm.SmtpPort = Settings.SmtpPort;
+                    if(Settings.UseSSL == "on")
                     {
-                        settingsVm.useSSL = "true";
+                        SettingsVm.UseSSL = "true";
                     }
                     else
                     {
-                        settingsVm.useSSL = "false";
+                        SettingsVm.UseSSL = "false";
                     }
-                    settingsVm.siteColor = settings.siteColor;
-                    allSettings.Add(settingsVm);
+                    SettingsVm.SiteColor = Settings.SiteColor;
+                    AllSettings.Add(SettingsVm);
                 }
                 /* Ayar Update */
-                var db = _databaseContext.Settings.Where(x => x.officeId == officeId).FirstOrDefault();
-                db.title = allSettings[0].title;
-                db.keywords = allSettings[0].keywords;
-                db.description = allSettings[0].description;
-                db.email = allSettings[0].email;
-                db.phone = allSettings[0].phone;
-                db.adress = allSettings[0].adress;
-                db.facebook = allSettings[0].facebook;
-                db.instagram = allSettings[0].instagram;
-                db.twitter = allSettings[0].twitter;
-                db.linkedin = allSettings[0].linkedin;
-                db.smtpServer = allSettings[0].smtpServer;
-                db.smtpUsername = allSettings[0].smtpUsername;
-                db.smtpPassword = allSettings[0].smtpPassword;
-                db.smtpPort = allSettings[0].smtpPort;
-                db.useSSL = allSettings[0].useSSL;
-                db.siteColor = allSettings[0].siteColor;
+                var Db = _databaseContext.Settings.Where(x => x.CompanyId == OfficeId).FirstOrDefault();
+                Db.Title = AllSettings[0].Title;
+                Db.Keywords = AllSettings[0].Keywords;
+                Db.Description = AllSettings[0].Description;
+                Db.Email = AllSettings[0].Email;
+                Db.Phone = AllSettings[0].Phone;
+                Db.Adress = AllSettings[0].Adress;
+                Db.Facebook = AllSettings[0].Facebook;
+                Db.Instagram = AllSettings[0].Instagram;
+                Db.Twitter = AllSettings[0].Twitter;
+                Db.Linkedin = AllSettings[0].Linkedin;
+                Db.SmtpServer = AllSettings[0].SmtpServer;
+                Db.SmtpUsername = AllSettings[0].SmtpUsername;
+                Db.SmtpPassword = AllSettings[0].SmtpPassword;
+                Db.SmtpPort = AllSettings[0].SmtpPort;
+                Db.UseSSL = AllSettings[0].UseSSL;
+                Db.SiteColor = AllSettings[0].SiteColor;
                 _databaseContext.SaveChanges();
             }
             
             TempData["successMessage"] = "Site ayarları başarıyla güncellendi.";
-            return View(allSettings);
+            return View(AllSettings);
         }
     }
 }

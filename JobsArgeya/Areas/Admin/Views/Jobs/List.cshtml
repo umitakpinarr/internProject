@@ -20,13 +20,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (JobsViewModel jobs in Model)
+                    @foreach (JobsViewModel Jobs in Model)
                     {
                         <tr>
-                            <td>@jobs.jobTitle</td>
-                            <td>@jobs.jobKeywords</td>
-                            <td>@jobs.jobDescription</td>
-                            <td><a href="/admin/jobs/edit/@jobs.id" class="btn btn-primary">Düzenle</a> <a href="/admin/jobs/delete/@jobs.id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
+                            <td>@Jobs.JobTitle</td>
+                            <td>@Jobs.JobKeywords</td>
+                            <td>@Jobs.JobDescription</td>
+                            <td><a href="/admin/jobs/edit/@Jobs.Id" class="btn btn-primary">Düzenle</a> <a href="/admin/jobs/delete/@Jobs.Id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
                         </tr>
                     }
 

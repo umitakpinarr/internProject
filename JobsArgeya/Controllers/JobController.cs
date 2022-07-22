@@ -31,62 +31,62 @@ namespace JobsArgeya.Controllers
         }
         public IActionResult Index()
         {
-            GetDetails details = new GetDetails(_databaseContext, _configuration);
-            string host = Request.Host.ToString();
-            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
-            ViewData["SiteColor"] = _databaseContext.Settings.Where(x => x.officeId == dbOffice.id).Select(x => x.siteColor).FirstOrDefault();
-            ViewData["SiteName"] = details.getSiteDetails(3, host);
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            string Host = Request.Host.ToString();
+            var DbCompany = _databaseContext.Companies.Where(x => x.CompanyDomain == Host).FirstOrDefault();
+            ViewData["SiteColor"] = _databaseContext.Settings.Where(x => x.CompanyId == DbCompany.Id).Select(x => x.SiteColor).FirstOrDefault();
+            ViewData["SiteName"] = Details.GetSiteDetails(3, Host);
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Apply(ApplyModel id, IFormFile formFile)
+        public async Task<IActionResult> Apply(ApplyModel Model, IFormFile FormFile)
         {
-            CaptchaController captchaController = new CaptchaController();
-            if (!captchaController.IsValid(id.captcha, HttpContext.Session))
+            CaptchaController CaptchaController = new CaptchaController();
+            if (!CaptchaController.IsValid(Model.captcha, HttpContext.Session))
             {
                 TempData["dangerMessage"] = "Yanlış captcha girişi yaptınız. Lütfen tekrar deneyiniz.";
                 return Redirect(Request.Headers["Referer"].ToString());
             }
             /*Requestin geldiği domainin tespiti, ardından gelen domain bilgisine göre office bilgisinin çekilmesi*/
-            string host = Request.Host.ToString();
-            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
+            string Host = Request.Host.ToString();
+            var DbCompany = _databaseContext.Companies.Where(x => x.CompanyDomain == Host).FirstOrDefault();
 
             if (ModelState.IsValid)
             {
-                Mail mail = new Mail(_databaseContext, _configuration);
-                if (formFile != null)
+                Mail Mail = new Mail(_databaseContext, _configuration);
+                if (FormFile != null)
                 {
-                    if (formFile.ContentType == "application/pdf" && formFile.Length > 0)
+                    if (FormFile.ContentType == "application/pdf" && FormFile.Length > 0)
                     {
-                        string regexPattern = @"^(05(\d{9}))$";
-                        if (Regex.IsMatch(id.phone, regexPattern) == true)
+                        string RegexPattern = @"^(05(\d{9}))$";
+                        if (Regex.IsMatch(Model.Phone, RegexPattern) == true)
                         {
-                            SlugHelper helper = new SlugHelper();
+                            SlugHelper Helper = new SlugHelper();
                             /*Dosya uzantısını alıyoruz*/
-                            var extension = Path.GetExtension(formFile.FileName);
+                            var extension = Path.GetExtension(FormFile.FileName);
                             /*Benzersiz bir dosya adı alıp uzantıyla birleştiriyoruz*/
                             var fileName = Guid.NewGuid() + extension;
                             /*Dosyanın yükleneceği klasörün yolu*/
                             var path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + fileName;
                             /*Dosya oluşturuluyor*/
                             FileStream stream = new FileStream(path, FileMode.Create);
-                            formFile.CopyTo(stream);
+                            FormFile.CopyTo(stream);
 
                             /*DB Insert*/
                             _databaseContext.Applies.Add(new Apply
                             {
-                                fullName = id.fullName,
-                                phone = id.phone,
-                                email = id.email,
-                                gender = id.gender,
-                                university = id.university,
-                                faculty = id.faculty,
-                                resume = id.resume,
-                                createdAt = DateTime.Now,
-                                cvPath = fileName,
-                                officeId = dbOffice.id
+                                FullName = Model.FullName,
+                                Phone = Model.Phone,
+                                Email = Model.Email,
+                                Gender = Model.Gender,
+                                University = Model.University,
+                                Faculty = Model.Faculty,
+                                Resume = Model.Resume,
+                                CreatedAt = DateTime.Now,
+                                CvPath = fileName,
+                                CompanyId = DbCompany.Id
                             });
-                            if (_databaseContext.MailSubscribers.Any(x => x.email == id.email))
+                            if (_databaseContext.MailSubscribers.Any(x => x.Email == Model.Email))
                             {
                                 TempData["successMessage"] = "Başvurunuz başarıyla oluşturuldu. En kısa zamanda size dönüş sağlayacağız.";
                             }
@@ -94,12 +94,12 @@ namespace JobsArgeya.Controllers
                             {
                                 _databaseContext.MailSubscribers.Add(new MailSubscribers
                                 {
-                                    email = id.email,
-                                    slug = helper.GenerateSlug(id.email)
+                                    Email = Model.Email,
+                                    Slug = Helper.GenerateSlug(Model.Email)
                                 });
                             }
                             _databaseContext.SaveChanges();
-                            mail.SendMail(id.email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.", host);
+                            Mail.SendMail(Model.Email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.", Host);
                         }
                         else
                         {
@@ -118,79 +118,79 @@ namespace JobsArgeya.Controllers
             return Redirect(Request.Headers["Referer"].ToString());
         }
         [HttpGet]
-        public IActionResult Applicant(string id)
+        public IActionResult Applicant(string Id)
         {
-            GetDetails details = new GetDetails(_databaseContext, _configuration);
-            string host = Request.Host.ToString();
-            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
-            ViewData["SiteColor"] = _databaseContext.Settings.Where(x => x.officeId == dbOffice.id).Select(x => x.siteColor).FirstOrDefault();
-            ViewData["SiteName"] = details.getSiteDetails(3, host);
-            List<Jobs> dbJobs = _databaseContext.Jobs.Where(x => x.officeId == dbOffice.id && x.jobSlug == id).ToList();
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            string Host = Request.Host.ToString();
+            var DbCompany = _databaseContext.Companies.Where(x => x.CompanyDomain == Host).FirstOrDefault();
+            ViewData["SiteColor"] = _databaseContext.Settings.Where(x => x.CompanyId == DbCompany.Id).Select(x => x.SiteColor).FirstOrDefault();
+            ViewData["SiteName"] = Details.GetSiteDetails(3, Host);
+            List<Jobs> DbJobs = _databaseContext.Jobs.Where(x => x.CompanyId == DbCompany.Id && x.JobSlug == Id).ToList();
             List<JobsViewModel> allJobs = new List<JobsViewModel>();
 
-            foreach (Jobs jobs in dbJobs)
+            foreach (Jobs Jobs in DbJobs)
             {
-                JobsViewModel jobsVm = new JobsViewModel();
-                jobsVm.id = jobs.id;
-                jobsVm.jobTitle = jobs.jobTitle;
-                jobsVm.isActive = jobs.isActive;
+                JobsViewModel JobsVm = new JobsViewModel();
+                JobsVm.Id = Jobs.Id;
+                JobsVm.JobTitle = Jobs.JobTitle;
+                JobsVm.IsActive = Jobs.IsActive;
 
-                allJobs.Add(jobsVm);
+                allJobs.Add(JobsVm);
             }
 
             return View(allJobs);
 
         }
         [HttpPost]
-        public IActionResult Applicant(ApplyModel apply, IFormFile formFile)
+        public IActionResult Applicant(ApplyModel Apply, IFormFile FormFile)
         {
-            CaptchaController captchaController = new CaptchaController();
-            if (!captchaController.IsValid(apply.captcha, HttpContext.Session))
+            CaptchaController CaptchaController = new CaptchaController();
+            if (!CaptchaController.IsValid(Apply.captcha, HttpContext.Session))
             {
                 TempData["dangerMessage"] = "Yanlış captcha girişi yaptınız. Lütfen tekrar deneyiniz.";
                 return Redirect(Request.Headers["Referer"].ToString());
             }
-            SlugHelper helper = new SlugHelper();
-            Mail mail = new Mail(_databaseContext, _configuration);
+            SlugHelper Helper = new SlugHelper();
+            Mail Mail = new Mail(_databaseContext, _configuration);
 
             /*Requestin geldiği domainin tespiti, ardından gelen domain bilgisine göre office bilgisinin çekilmesi*/
-            string host = Request.Host.ToString();
-            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
+            string Host = Request.Host.ToString();
+            var DbCompany = _databaseContext.Companies.Where(x => x.CompanyDomain == Host).FirstOrDefault();
             if (ModelState.IsValid)
             {
-                if (formFile != null)
+                if (FormFile != null)
                 {
-                    if (formFile.ContentType == "application/pdf" && formFile.Length > 0)
+                    if (FormFile.ContentType == "application/pdf" && FormFile.Length > 0)
                     {
-                        string regexPattern = @"^(05(\d{9}))$";
-                        if (Regex.IsMatch(apply.phone, regexPattern) == true)
+                        string RegexPattern = @"^(05(\d{9}))$";
+                        if (Regex.IsMatch(Apply.Phone, RegexPattern) == true)
                         {
                             /*Dosya uzantısını alıyoruz*/
-                            var extension = Path.GetExtension(formFile.FileName);
+                            var extension = Path.GetExtension(FormFile.FileName);
                             /*Benzersiz bir dosya adı alıp uzantıyla birleştiriyoruz*/
                             var fileName = Guid.NewGuid() + extension;
                             /*Dosyanın yükleneceği klasörün yolu*/
                             var path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + fileName;
                             /*Dosya oluşturuluyor*/
                             FileStream stream = new FileStream(path, FileMode.Create);
-                            formFile.CopyTo(stream);
+                            FormFile.CopyTo(stream);
 
                             /*DB Insert*/
                             _databaseContext.Applies.Add(new Apply
                             {
-                                fullName = apply.fullName,
-                                phone = apply.phone,
-                                email = apply.email,
-                                gender = apply.gender,
-                                university = apply.university,
-                                faculty = apply.faculty,
-                                resume = apply.resume,
-                                cvPath = fileName,
-                                createdAt = DateTime.Now,
-                                jobId = apply.jobId,
-                                officeId = dbOffice.id
+                                FullName = Apply.FullName,
+                                Phone = Apply.Phone,
+                                Email = Apply.Email,
+                                Gender = Apply.Gender,
+                                University = Apply.University,
+                                Faculty = Apply.Faculty,
+                                Resume = Apply.Resume,
+                                CvPath = fileName,
+                                CreatedAt = DateTime.Now,
+                                JobId = Apply.JobId,
+                                CompanyId = DbCompany.Id
                             });
-                            if (_databaseContext.MailSubscribers.Any(x => x.email == apply.email))
+                            if (_databaseContext.MailSubscribers.Any(x => x.Email == Apply.Email))
                             {
                                 TempData["successMessage"] = "Başvurunuz başarıyla oluşturuldu. En kısa zamanda size dönüş sağlayacağız.";
                             }
@@ -198,11 +198,11 @@ namespace JobsArgeya.Controllers
                             {
                                 _databaseContext.MailSubscribers.Add(new MailSubscribers
                                 {
-                                    email = apply.email,
-                                    slug = helper.GenerateSlug(apply.email)
+                                    Email = Apply.Email,
+                                    Slug = Helper.GenerateSlug(Apply.Email)
                                 });
                             }
-                            mail.SendMail(apply.email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.", host);
+                            Mail.SendMail(Apply.Email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.", Host);
                             _databaseContext.SaveChanges();
                         }
                         else
@@ -224,66 +224,66 @@ namespace JobsArgeya.Controllers
         [HttpGet]
         public IActionResult Intern()
         {
-            GetDetails details = new GetDetails(_databaseContext, _configuration);
-            string host = Request.Host.ToString();
-            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
-            ViewData["SiteColor"] = _databaseContext.Settings.Where(x => x.officeId == dbOffice.id).Select(x => x.siteColor).FirstOrDefault();
-            ViewData["SiteName"] = details.getSiteDetails(3, host);
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            string Host = Request.Host.ToString();
+            var DbCompany = _databaseContext.Companies.Where(x => x.CompanyDomain == Host).FirstOrDefault();
+            ViewData["SiteColor"] = _databaseContext.Settings.Where(x => x.CompanyId == DbCompany.Id).Select(x => x.SiteColor).FirstOrDefault();
+            ViewData["SiteName"] = Details.GetSiteDetails(3, Host);
             return View();
         }
-        public IActionResult Intern(ApplyModel apply, IFormFile formFile)
+        public IActionResult Intern(ApplyModel Apply, IFormFile FormFile)
         {
-            CaptchaController captchaController = new CaptchaController();
-            if (!captchaController.IsValid(apply.captcha, HttpContext.Session))
+            CaptchaController CaptchaController = new CaptchaController();
+            if (!CaptchaController.IsValid(Apply.captcha, HttpContext.Session))
             {
                 TempData["dangerMessage"] = "Yanlış captcha girişi yaptınız. Lütfen tekrar deneyiniz.";
                 return Redirect(Request.Headers["Referer"].ToString());
             }
-            SlugHelper helper = new SlugHelper();
-            Mail mail = new Mail(_databaseContext, _configuration);
+            SlugHelper Helper = new SlugHelper();
+            Mail Mail = new Mail(_databaseContext, _configuration);
 
             /*Requestin geldiği domainin tespiti, ardından gelen domain bilgisine göre office bilgisinin çekilmesi*/
-            string host = Request.Host.ToString();
-            var dbOffice = _databaseContext.Offices.Where(x => x.officeDomain == host).FirstOrDefault();
+            string Host = Request.Host.ToString();
+            var DbCompany = _databaseContext.Companies.Where(x => x.CompanyDomain == Host).FirstOrDefault();
 
             if (ModelState.IsValid)
             {
-                if (formFile != null)
+                if (FormFile != null)
                 {
-                    if (formFile.ContentType == "application/pdf" && formFile.Length > 0)
+                    if (FormFile.ContentType == "application/pdf" && FormFile.Length > 0)
                     {
-                        string regexPattern = @"^(05(\d{9}))$";
-                        if (Regex.IsMatch(apply.phone, regexPattern) == true)
+                        string RegexPattern = @"^(05(\d{9}))$";
+                        if (Regex.IsMatch(Apply.Phone, RegexPattern) == true)
                         {
                             /*Dosya uzantısını alıyoruz*/
-                            var extension = Path.GetExtension(formFile.FileName);
+                            var extension = Path.GetExtension(FormFile.FileName);
                             /*Benzersiz bir dosya adı alıp uzantıyla birleştiriyoruz*/
                             var fileName = Guid.NewGuid() + extension;
                             /*Dosyanın yükleneceği klasörün yolu*/
                             var path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + fileName;
                             /*Dosya oluşturuluyor*/
                             FileStream stream = new FileStream(path, FileMode.Create);
-                            formFile.CopyTo(stream);
+                            FormFile.CopyTo(stream);
 
                             /*DB Insert*/
                             _databaseContext.Applies.Add(new Apply
                             {
-                                fullName = apply.fullName,
-                                phone = apply.phone,
-                                email = apply.email,
-                                gender = apply.gender,
-                                university = apply.university,
-                                faculty = apply.faculty,
-                                resume = apply.resume,
-                                cvPath = fileName,
-                                jobId = apply.jobId,
-                                createdAt = DateTime.Now,
-                                isIntern = "1",
-                                internStartDate = apply.internStartDate,
-                                internEndDate = apply.internEndDate,
-                                officeId = dbOffice.id
+                                FullName = Apply.FullName,
+                                Phone = Apply.Phone,
+                                Email = Apply.Email,
+                                Gender = Apply.Gender,
+                                University = Apply.University,
+                                Faculty = Apply.Faculty,
+                                Resume = Apply.Resume,
+                                CvPath = fileName,
+                                JobId = Apply.JobId,
+                                CreatedAt = DateTime.Now,
+                                IsIntern = "1",
+                                InternStartDate = Apply.InternStartDate,
+                                InternEndDate = Apply.InternStartDate,
+                                CompanyId = DbCompany.Id
                             });
-                            if (_databaseContext.MailSubscribers.Any(x => x.email == apply.email))
+                            if (_databaseContext.MailSubscribers.Any(x => x.Email == Apply.Email))
                             {
                                 TempData["successMessage"] = "Başvurunuz başarıyla oluşturuldu. En kısa zamanda size dönüş sağlayacağız.";
                             }
@@ -291,11 +291,11 @@ namespace JobsArgeya.Controllers
                             {
                                 _databaseContext.MailSubscribers.Add(new MailSubscribers
                                 {
-                                    email = apply.email,
-                                    slug = helper.GenerateSlug(apply.email)
+                                    Email = Apply.Email,
+                                    Slug = Helper.GenerateSlug(Apply.Email)
                                 });
                             }
-                            mail.SendMail(apply.email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.", host);
+                            Mail.SendMail(Apply.Email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.", Host);
                             _databaseContext.SaveChanges();
                         }
                         else

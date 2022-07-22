@@ -7,8 +7,8 @@ namespace JobsArgeya.Data.Entities
 {
     public class MailSubscribers
     {
-        public int id { get; set; }
-        public string email { get; set; }
-        public string slug { get; set; }
+        public int Id { get; set; }
+        public string Email { get; set; }
+        public string Slug { get; set; }
     }
 }

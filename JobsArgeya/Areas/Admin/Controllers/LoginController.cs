@@ -29,33 +29,33 @@ namespace JobsArgeya.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            GetDetails details = new GetDetails(_databaseContext, _configuration);
-            string host = Request.Host.ToString();
-            ViewData["PanelLogo"] = details.getSiteDetails(5, host);
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            string Host = Request.Host.ToString();
+            ViewData["PanelLogo"] = Details.GetSiteDetails(5, Host);
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Index(UsersModel user)
+        public async Task<IActionResult> Index(UsersModel User)
         {
-            string passwordHashed = MD5Hash.Hash.Content(user.password);
-            string host = Request.Host.ToString();
-            Offices dbOffice = _databaseContext.Offices.Where(o => o.officeDomain == host).FirstOrDefault();
-            Users dbUser = _databaseContext.Users.Where(u => u.email == user.email && u.password == passwordHashed && u.officeId == dbOffice.id).FirstOrDefault();
+            string PasswordHashed = MD5Hash.Hash.Content(User.Password);
+            string Host = Request.Host.ToString();
+            Company DbCompany = _databaseContext.Companies.Where(o => o.CompanyDomain == Host).FirstOrDefault();
+            Users DbUser = _databaseContext.Users.Where(u => u.Email == User.Email && u.Password == PasswordHashed && u.CompanyId == DbCompany.Id).FirstOrDefault();
          
-            if(dbUser != null)
+            if(DbUser != null)
             {
-                Roles dbRole = _databaseContext.Roles.Where(x => x.id == dbUser.roleId).FirstOrDefault();
+                Roles dbRole = _databaseContext.Roles.Where(x => x.Id == DbUser.RoleId).FirstOrDefault();
                 var claims = new List<Claim>
                 {
-                    new Claim("fullName", dbUser.name + " " + dbUser.surname),
-                    new Claim("userId", dbUser.id.ToString()),
-                    new Claim("officeId", dbOffice.id.ToString()),
-                    new Claim("officeName", dbOffice.officeName),
-                    new Claim(ClaimTypes.Role, dbRole.roleName)
+                    new Claim("FullName", DbUser.Name + " " + DbUser.Surname),
+                    new Claim("UserId", DbUser.Id.ToString()),
+                    new Claim("OfficeId", DbCompany.Id.ToString()),
+                    new Claim("OfficeName", DbCompany.CompanyName),
+                    new Claim(ClaimTypes.Role, dbRole.RoleName)
                 };
                 
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+                var ClaimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(ClaimsIdentity));
                 return Redirect("/admin/home/index");
             }
             return Redirect("/yonetim");

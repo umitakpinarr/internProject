@@ -16,12 +16,12 @@
         <div class="card-body">
             <form action="/admin/mail/send" method="post">
                 <div class="form-group" style="margin-bottom:10px;">
-                    <label for="mailSubject">Mail Başlığı</label>
-                    <input class="form-control" id="mailSubject" name="mailSubject" type="text" placeholder="Mail Başlığı">
+                    <label for="MailSubject">Mail Başlığı</label>
+                    <input class="form-control" id="MailSubject" name="MailSubject" type="text" placeholder="Mail Başlığı">
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
-                    <label for="mailContent">Mail İçeriği</label>
-                    <textarea id="mailContent" name="mailContent"></textarea>
+                    <label for="MailContent">Mail İçeriği</label>
+                    <textarea id="MailContent" name="MailContent"></textarea>
                 </div>
                 <br />
                 <button type="submit" class="btn btn-danger w-100">Mail Gönder</button>
@@ -35,7 +35,7 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
-            .create(document.querySelector('#mailContent'))
+            .create(document.querySelector('#MailContent'))
             .catch(error => {
                 console.error(error);
             });

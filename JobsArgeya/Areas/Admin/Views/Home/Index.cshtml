@@ -26,31 +26,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (AppliesViewModel apply in Model)
+                    @foreach (AppliesViewModel Apply in Model)
                     {
                     <tr>
-                        <td>@apply.fullName</td>
-                        <td>@apply.phone</td>
-                        <td>@apply.email</td>
-                        <td>@apply.gender</td>
-                        <td>@apply.university</td>
+                        <td>@Apply.FullName</td>
+                        <td>@Apply.Phone</td>
+                        <td>@Apply.Email</td>
+                        <td>@Apply.Gender</td>
+                        <td>@Apply.University</td>
                         <td>
-                            @apply.faculty
+                            @Apply.Faculty
                     </td>
-                    <td>@apply.createdAt</td>
+                    <td>@Apply.CreatedAt</td>
 
-                    @if (@apply.jobId != null)
+                    @if (@Apply.JobId != null)
                     {
-                    <td><a href="/jobdetail/index/@apply.jobSlug" target="_blank">@apply.jobTitle</a></td> 
+                    <td><a href="/jobdetail/index/@Apply.JobSlug" target="_blank">@Apply.JobTitle</a></td> 
                     }
                     else
                     {
-                    <td>@apply.jobTitle</td>
+                    <td>@Apply.JobTitle</td>
                     }
 
 
-                    <td><p style="word-wrap: break-word;">@apply.resume</p></td>
-                    <td><a href="/admin/home/applydetail/@apply.id" class="btn btn-primary">Görüntüle</a> <a href="/admin/home/delete/@apply.id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
+                    <td><p style="word-wrap: break-word;">@Apply.Resume</p></td>
+                    <td><a href="/admin/home/applydetail/@Apply.Id" class="btn btn-primary">Görüntüle</a> <a href="/admin/home/delete/@Apply.Id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
                     </tr>
                     }
                 </tbody>

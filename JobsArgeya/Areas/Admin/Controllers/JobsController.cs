@@ -16,7 +16,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
     [Authorize]
     public class JobsController : Controller
     {
-        SlugHelper helper = new SlugHelper();
+        SlugHelper Helper = new SlugHelper();
         private readonly DatabaseContext _databaseContext;
         private IWebHostEnvironment _hostingEnvironment;
         public JobsController(DatabaseContext databaseContext, IWebHostEnvironment environment)
@@ -26,23 +26,23 @@ namespace JobsArgeya.Areas.Admin.Controllers
         }
         public IActionResult List()
         {
-            int officeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "officeId").Value);
-            List<Jobs> dbJobs = _databaseContext.Jobs.Where(x=> x.officeId == officeId).ToList();
-            List<JobsViewModel> allJobs = new List<JobsViewModel>();
+            int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+            List<Jobs> DbJobs = _databaseContext.Jobs.Where(x=> x.CompanyId == OfficeId).ToList();
+            List<JobsViewModel> AllJobs = new List<JobsViewModel>();
 
-            foreach (Jobs jobs in dbJobs)
+            foreach (Jobs Jobs in DbJobs)
             {
-                JobsViewModel jobsVm = new JobsViewModel();
-                jobsVm.id = jobs.id;
-                jobsVm.jobTitle = jobs.jobTitle;
-                jobsVm.jobKeywords = jobs.jobKeywords;
-                jobsVm.jobDescription = jobs.jobDescription;
-                jobsVm.jobContent = jobs.jobContent;
+                JobsViewModel JobsVm = new JobsViewModel();
+                JobsVm.Id = Jobs.Id;
+                JobsVm.JobTitle = Jobs.JobTitle;
+                JobsVm.JobKeywords = Jobs.JobKeywords;
+                JobsVm.JobDescription = Jobs.JobDescription;
+                JobsVm.JobContent = Jobs.JobContent;
 
-                allJobs.Add(jobsVm);
+                AllJobs.Add(JobsVm);
             }
 
-            return View(allJobs);
+            return View(AllJobs);
         }
         [HttpGet]
         public IActionResult Add()
@@ -50,19 +50,19 @@ namespace JobsArgeya.Areas.Admin.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int Id)
         {
-            int officeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "officeId").Value);
-            Jobs dbJobs = _databaseContext.Jobs.Where(x => x.id == id && x.officeId == officeId).FirstOrDefault();
-            JobsModel jobDetail = new JobsModel();
-            if (dbJobs != null)
+            int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+            Jobs DbJobs = _databaseContext.Jobs.Where(x => x.Id == Id && x.CompanyId == OfficeId).FirstOrDefault();
+            JobsModel JobDetail = new JobsModel();
+            if (DbJobs != null)
             {
-                jobDetail.jobTitle = dbJobs.jobTitle;
-                jobDetail.jobKeywords = dbJobs.jobKeywords;
-                jobDetail.jobDescription = dbJobs.jobDescription;
-                jobDetail.jobContent = dbJobs.jobContent;
-                jobDetail.isActive = dbJobs.isActive;
-                return View(jobDetail);
+                JobDetail.JobTitle = DbJobs.JobTitle;
+                JobDetail.JobKeywords = DbJobs.JobKeywords;
+                JobDetail.JobDescription = DbJobs.JobDescription;
+                JobDetail.JobContent = DbJobs.JobContent;
+                JobDetail.IsActive = DbJobs.IsActive;
+                return View(JobDetail);
             }
             else
             {
@@ -71,20 +71,20 @@ namespace JobsArgeya.Areas.Admin.Controllers
             return Redirect("/admin/home/index");
         }
         [HttpPost]
-        public IActionResult Add(JobsModel jobsModel)
+        public IActionResult Add(JobsModel Model)
         {
-            int officeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "officeId").Value);
+            int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
             if (ModelState.IsValid)
             {
                 _databaseContext.Jobs.Add(new Jobs
                 {
-                    jobTitle = jobsModel.jobTitle,
-                    jobKeywords = jobsModel.jobKeywords,
-                    jobDescription = jobsModel.jobDescription,
-                    jobContent = jobsModel.jobContent,
-                    jobSlug = helper.GenerateSlug(jobsModel.jobTitle),
-                    isActive = "true",
-                    officeId = officeId
+                    JobTitle = Model.JobTitle,
+                    JobKeywords = Model.JobKeywords,
+                    JobDescription = Model.JobDescription,
+                    JobContent = Model.JobContent,
+                    JobSlug = Helper.GenerateSlug(Model.JobTitle),
+                    IsActive = "true",
+                    CompanyId = OfficeId
             });
                 _databaseContext.SaveChanges();
                 TempData["successMessage"] = "İlan başarıyla eklendi.";
@@ -94,18 +94,18 @@ namespace JobsArgeya.Areas.Admin.Controllers
             return Redirect(Request.Headers["Referer"].ToString());
         }
         [HttpPost]
-        public IActionResult Edit(JobsModel jobsModel, int id)
+        public IActionResult Edit(JobsModel Model, int Id)
         {
             if (ModelState.IsValid)
             {
-                int officeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "officeId").Value);
-                var dbJobs = _databaseContext.Jobs.Where(x => x.id == id && x.officeId == officeId).FirstOrDefault();
-                dbJobs.jobTitle = jobsModel.jobTitle;
-                dbJobs.jobKeywords = jobsModel.jobKeywords;
-                dbJobs.jobDescription = jobsModel.jobDescription;
-                dbJobs.jobContent = jobsModel.jobContent;
-                dbJobs.isActive = jobsModel.isActive;
-                dbJobs.jobSlug = helper.GenerateSlug(jobsModel.jobTitle);
+                int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+                var DbJobs = _databaseContext.Jobs.Where(x => x.Id == Id && x.CompanyId == OfficeId).FirstOrDefault();
+                DbJobs.JobTitle = Model.JobTitle;
+                DbJobs.JobKeywords = Model.JobKeywords;
+                DbJobs.JobDescription = Model.JobDescription;
+                DbJobs.JobContent = Model.JobContent;
+                DbJobs.IsActive = Model.IsActive;
+                DbJobs.JobSlug = Helper.GenerateSlug(Model.JobTitle);
                 _databaseContext.SaveChanges();
                 TempData["successMessage"] = "İlan başarıyla güncellendi.";
                 return Redirect(Request.Headers["Referer"].ToString());
@@ -113,13 +113,13 @@ namespace JobsArgeya.Areas.Admin.Controllers
             TempData["dangerMessage"] = "İlan güncellenirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
             return Redirect(Request.Headers["Referer"].ToString());
         }
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int Id)
         {
-            int officeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "officeId").Value);
-            var job = _databaseContext.Jobs.Where(x => x.id == id && x.officeId == officeId).FirstOrDefault();
-            if (job != null)
+            int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+            var Job = _databaseContext.Jobs.Where(x => x.Id == Id && x.CompanyId == OfficeId).FirstOrDefault();
+            if (Job != null)
             {
-                _databaseContext.Jobs.Remove(job);
+                _databaseContext.Jobs.Remove(Job);
                 _databaseContext.SaveChanges();
                 TempData["successMessage"] = "İlan başarıyla silindi.";
             }

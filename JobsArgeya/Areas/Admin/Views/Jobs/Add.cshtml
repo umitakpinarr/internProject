@@ -18,18 +18,18 @@
             <form action="/admin/jobs/add" method="post">
                 <div class="form-group" style="margin-bottom:10px;">
                     <label for="jobTitle">İlan Başlığı</label>
-                    <input class="form-control" asp-for="jobTitle" type="text" placeholder="İlan Başlığı">
+                    <input class="form-control" asp-for="JobTitle" type="text" placeholder="İlan Başlığı">
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
                     <label for="jobKeywords">İlan Anahtar Kelimeleri</label>
-                    <input class="form-control" asp-for="jobKeywords" type="text" placeholder="İlan Anahtar Kelime">
+                    <input class="form-control" asp-for="JobKeywords" type="text" placeholder="İlan Anahtar Kelime">
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
                     <label for="jobDescription">İlan Açıklaması</label>
-                    <input class="form-control" asp-for="jobDescription" type="text" placeholder="İlan Açıklama">
+                    <input class="form-control" asp-for="JobDescription" type="text" placeholder="İlan Açıklama">
                 </div>
                 <label for="jobContent">İlan Açıklaması</label>
-                <textarea asp-for="jobContent"></textarea>
+                <textarea asp-for="JobContent"></textarea>
                 <br />
                 <button type="submit" class="btn btn-danger w-100">İlanı Oluştur</button>
             </form>
@@ -42,7 +42,7 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
-            .create(document.querySelector('#jobContent'))
+            .create(document.querySelector('#JobContent'))
             .catch(error => {
                 console.error(error);
             });

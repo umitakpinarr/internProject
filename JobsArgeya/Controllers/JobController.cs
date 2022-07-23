@@ -39,13 +39,13 @@ namespace JobsArgeya.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Apply(ApplyModel Model, IFormFile FormFile)
+        public async Task<IActionResult> Index(ApplyModel Model, IFormFile FormFile)
         {
             CaptchaController CaptchaController = new CaptchaController();
             if (!CaptchaController.IsValid(Model.captcha, HttpContext.Session))
             {
                 TempData["dangerMessage"] = "Yanlış captcha girişi yaptınız. Lütfen tekrar deneyiniz.";
-                return Redirect(Request.Headers["Referer"].ToString());
+                return View();
             }
             /*Requestin geldiği domainin tespiti, ardından gelen domain bilgisine göre office bilgisinin çekilmesi*/
             string Host = Request.Host.ToString();
@@ -63,14 +63,14 @@ namespace JobsArgeya.Controllers
                         {
                             SlugHelper Helper = new SlugHelper();
                             /*Dosya uzantısını alıyoruz*/
-                            var extension = Path.GetExtension(FormFile.FileName);
+                            var Extension = System.IO.Path.GetExtension(FormFile.FileName);
                             /*Benzersiz bir dosya adı alıp uzantıyla birleştiriyoruz*/
-                            var fileName = Guid.NewGuid() + extension;
+                            var FileName = Guid.NewGuid() + Extension;
                             /*Dosyanın yükleneceği klasörün yolu*/
-                            var path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + fileName;
+                            var Path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + FileName;
                             /*Dosya oluşturuluyor*/
-                            FileStream stream = new FileStream(path, FileMode.Create);
-                            FormFile.CopyTo(stream);
+                            FileStream Stream = new FileStream(Path, FileMode.Create);
+                            FormFile.CopyTo(Stream);
 
                             /*DB Insert*/
                             _databaseContext.Applies.Add(new Apply
@@ -83,7 +83,7 @@ namespace JobsArgeya.Controllers
                                 Faculty = Model.Faculty,
                                 Resume = Model.Resume,
                                 CreatedAt = DateTime.Now,
-                                CvPath = fileName,
+                                CvPath = FileName,
                                 CompanyId = DbCompany.Id
                             });
                             if (_databaseContext.MailSubscribers.Any(x => x.Email == Model.Email))
@@ -100,22 +100,27 @@ namespace JobsArgeya.Controllers
                             }
                             _databaseContext.SaveChanges();
                             Mail.SendMail(Model.Email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.", Host);
+                            TempData["successMessage"] = "Başvurunuz başarıyla oluşturuldu. En kısa zamanda size dönüş sağlayacağız.";
                         }
                         else
                         {
                             TempData["dangerMessage"] = "Telefon numarasını istenilen formatta girmediniz (Örn. 05xxxxxxxxx). Lütfen tekrar deneyiniz.";
                         }
                     }
+                    else
+                    {
+                        TempData["dangerMessage"] = "Sadece .pdf uzantılı dosyaları kabul etmekteyiz. Lütfen tekrar deneyiniz.";
+                    }
                 }
                 else
                 {
-                    TempData["dangerMessage"] = "Başvurunuz oluşturulurken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
+                    TempData["dangerMessage"] = "CV/Özgeçmiş yüklemediniz. Lütfen tekrar deneyiniz.";
                 }
 
                 return Redirect(Request.Headers["Referer"].ToString());
             }
             TempData["dangerMessage"] = "Başvurunuz oluşturulurken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
-            return Redirect(Request.Headers["Referer"].ToString());
+            return View();
         }
         [HttpGet]
         public IActionResult Applicant(string Id)
@@ -166,14 +171,14 @@ namespace JobsArgeya.Controllers
                         if (Regex.IsMatch(Apply.Phone, RegexPattern) == true)
                         {
                             /*Dosya uzantısını alıyoruz*/
-                            var extension = Path.GetExtension(FormFile.FileName);
+                            var Extension = System.IO.Path.GetExtension(FormFile.FileName);
                             /*Benzersiz bir dosya adı alıp uzantıyla birleştiriyoruz*/
-                            var fileName = Guid.NewGuid() + extension;
+                            var FileName = Guid.NewGuid() + Extension;
                             /*Dosyanın yükleneceği klasörün yolu*/
-                            var path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + fileName;
+                            var Path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + FileName;
                             /*Dosya oluşturuluyor*/
-                            FileStream stream = new FileStream(path, FileMode.Create);
-                            FormFile.CopyTo(stream);
+                            FileStream Stream = new FileStream(Path, FileMode.Create);
+                            FormFile.CopyTo(Stream);
 
                             /*DB Insert*/
                             _databaseContext.Applies.Add(new Apply
@@ -185,7 +190,7 @@ namespace JobsArgeya.Controllers
                                 University = Apply.University,
                                 Faculty = Apply.Faculty,
                                 Resume = Apply.Resume,
-                                CvPath = fileName,
+                                CvPath = FileName,
                                 CreatedAt = DateTime.Now,
                                 JobId = Apply.JobId,
                                 CompanyId = DbCompany.Id
@@ -203,6 +208,7 @@ namespace JobsArgeya.Controllers
                                 });
                             }
                             Mail.SendMail(Apply.Email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.", Host);
+                            TempData["successMessage"] = "Başvurunuz başarıyla oluşturuldu. En kısa zamanda size dönüş sağlayacağız.";
                             _databaseContext.SaveChanges();
                         }
                         else
@@ -210,10 +216,14 @@ namespace JobsArgeya.Controllers
                             TempData["dangerMessage"] = "Telefon numarasını istenilen formatta girmediniz (Örn. 05xxxxxxxxx). Lütfen tekrar deneyiniz.";
                         }
                     }
+                    else
+                    {
+                        TempData["dangerMessage"] = "Sadece .pdf uzantılı dosyaları kabul etmekteyiz. Lütfen tekrar deneyiniz.";
+                    }
                 }
                 else
                 {
-                    TempData["dangerMessage"] = "Başvurunuz oluşturulurken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
+                    TempData["dangerMessage"] = "CV/Özgeçmiş yüklemediniz. Lütfen tekrar deneyiniz.";
                 }
 
                 return Redirect(Request.Headers["Referer"].ToString());
@@ -256,14 +266,14 @@ namespace JobsArgeya.Controllers
                         if (Regex.IsMatch(Apply.Phone, RegexPattern) == true)
                         {
                             /*Dosya uzantısını alıyoruz*/
-                            var extension = Path.GetExtension(FormFile.FileName);
+                            var Extension = System.IO.Path.GetExtension(FormFile.FileName);
                             /*Benzersiz bir dosya adı alıp uzantıyla birleştiriyoruz*/
-                            var fileName = Guid.NewGuid() + extension;
+                            var FileName = Guid.NewGuid() + Extension;
                             /*Dosyanın yükleneceği klasörün yolu*/
-                            var path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + fileName;
+                            var Path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + FileName;
                             /*Dosya oluşturuluyor*/
-                            FileStream stream = new FileStream(path, FileMode.Create);
-                            FormFile.CopyTo(stream);
+                            FileStream Stream = new FileStream(Path, FileMode.Create);
+                            FormFile.CopyTo(Stream);
 
                             /*DB Insert*/
                             _databaseContext.Applies.Add(new Apply
@@ -275,7 +285,7 @@ namespace JobsArgeya.Controllers
                                 University = Apply.University,
                                 Faculty = Apply.Faculty,
                                 Resume = Apply.Resume,
-                                CvPath = fileName,
+                                CvPath = FileName,
                                 JobId = Apply.JobId,
                                 CreatedAt = DateTime.Now,
                                 IsIntern = "1",
@@ -296,6 +306,7 @@ namespace JobsArgeya.Controllers
                                 });
                             }
                             Mail.SendMail(Apply.Email, "Başvurunuzu Aldık", "Başvurunuzu aldık. Gerekli değerlendirmeler yapıldıktan sonra tarafınıza dönüş sağlanacaktır.", Host);
+                            TempData["successMessage"] = "Başvurunuz başarıyla oluşturuldu. En kısa zamanda size dönüş sağlayacağız.";
                             _databaseContext.SaveChanges();
                         }
                         else
@@ -303,10 +314,14 @@ namespace JobsArgeya.Controllers
                             TempData["dangerMessage"] = "Telefon numarasını istenilen formatta girmediniz (Örn. 05xxxxxxxxx). Lütfen tekrar deneyiniz.";
                         }
                     }
+                    else
+                    {
+                        TempData["dangerMessage"] = "Sadece .pdf uzantılı dosyaları kabul etmekteyiz. Lütfen tekrar deneyiniz.";
+                    }
                 }
                 else
                 {
-                    TempData["dangerMessage"] = "Başvurunuz oluşturulurken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
+                    TempData["dangerMessage"] = "CV/Özgeçmiş yüklemediniz. Lütfen tekrar deneyiniz.";
                 }
 
                 return Redirect(Request.Headers["Referer"].ToString());

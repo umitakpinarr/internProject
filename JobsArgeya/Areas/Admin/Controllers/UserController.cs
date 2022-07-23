@@ -38,7 +38,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 UserVm.Name = User.Name;
                 UserVm.Surname = User.Surname;
                 UserVm.Email = User.Email;
-                if(User.CompanyId != 0)
+                if (User.CompanyId != 0)
                 {
                     UserVm.CompanyId = Convert.ToInt32(Details.GetUserCompany(User.Id, 3));
                     UserVm.CompanyName = Details.GetUserCompany(User.Id, 1);
@@ -57,24 +57,44 @@ namespace JobsArgeya.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            List<Roles> DbRoles = _databaseContext.Roles.ToList();
-            List<RoleModel> AllRoles = new List<RoleModel>();
+            /*List<Roles> DbRoles = _databaseContext.Roles.ToList();
+            List<Company> DBCompany = _databaseContext.Companies.ToList();
+            List<UsersViewModel> AllCredentials = new List<UsersViewModel>();
 
             foreach (Roles Role in DbRoles)
             {
-                RoleModel UserRole = new RoleModel();
-                UserRole.Id = Role.Id;
-                UserRole.RoleName = Role.RoleName;
-                AllRoles.Add(UserRole);
+                foreach (Company Company in DBCompany)
+                {
+                    UsersViewModel Model = new UsersViewModel();
+                    Model.CompanyId = Company.Id;
+                    Model.CompanyName = Company.CompanyName;
+                    Model.CompanyDomain = Company.CompanyDomain;
+                    Model.RoleId = Role.Id;
+                    Model.RoleName = Role.RoleName;
+                    AllCredentials.Add(Model);
+                }
             }
-            return View(AllRoles);
+            return View(AllCredentials);*/
+
+            List<Company> DBCompany = _databaseContext.Companies.ToList();
+            List<CompanyViewModel> AllCompany = new List<CompanyViewModel>();
+
+            foreach (Company Company in DBCompany)
+            {
+                CompanyViewModel Model = new CompanyViewModel();
+                Model.Id = Company.Id;
+                Model.CompanyName = Company.CompanyName;
+                Model.CompanyDomain = Company.CompanyDomain;
+                AllCompany.Add(Model);
+            }
+            return View(AllCompany);
         }
         [HttpPost]
         public IActionResult Add(UsersViewModel Model)
         {
             if (ModelState.IsValid)
             {
-                if(_databaseContext.Users.Any(x=> x.Email == Model.Email))
+                if (_databaseContext.Users.Any(x => x.Email == Model.Email))
                 {
                     TempData["dangerMessage"] = "Bu bilgilerle başka kullanıcı bulunmakta. Lütfen tekrar deneyiniz.";
                 }
@@ -86,7 +106,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
                         Surname = Model.Surname,
                         Email = Model.Email,
                         Password = MD5Hash.Hash.Content(Model.Password),
-                        RoleId = Model.RoleId
+                        RoleId = 2,
+                        CompanyId = (int)Model.CompanyId
                     });
 
                     _databaseContext.SaveChanges();
@@ -102,14 +123,15 @@ namespace JobsArgeya.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                    var DbUser = _databaseContext.Users.Where(x => x.Id == Model.Id).FirstOrDefault();
-                    DbUser.Name = Model.Name;
-                    DbUser.Surname = Model.Surname;
-                    DbUser.Email = Model.Email;
-                    DbUser.Password = MD5Hash.Hash.Content(Model.password);
-                    _databaseContext.SaveChanges();
-                    TempData["successMessage"] = "Kullanıcı başarıyla güncellendi.";
-                    return Redirect("/admin/user/index");
+                var DbUser = _databaseContext.Users.Where(x => x.Id == Model.Id).FirstOrDefault();
+                DbUser.Name = Model.Name;
+                DbUser.Surname = Model.Surname;
+                DbUser.Email = Model.Email;
+                DbUser.Password = MD5Hash.Hash.Content(Model.Password);
+                DbUser.CompanyId = Model.CompanyId;
+                _databaseContext.SaveChanges();
+                TempData["successMessage"] = "Kullanıcı başarıyla güncellendi.";
+                return Redirect("/admin/user/index");
             }
             TempData["dangerMessage"] = "Kullanıcı güncellenirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
             return Redirect("/admin/user/index");
@@ -120,19 +142,12 @@ namespace JobsArgeya.Areas.Admin.Controllers
             if (Id != 0)
             {
                 var User = _databaseContext.Users.Where(x => x.Id == Id).FirstOrDefault();
-                if (_databaseContext.Companies.Any(x => x.Id == User.CompanyId))
+                if (User != null)
                 {
-                    TempData["dangerMessage"] = "Kullanıcı kaydını silebilmek için Ofis kaydını silmeniz gerekmekte. Lütfen tekrar deneyiniz.";
+                    _databaseContext.Users.Remove(User);
+                    _databaseContext.SaveChanges();
+                    TempData["successMessage"] = "Kayıt başarıyla silindi.";
                 }
-                else
-                {
-                    if (User != null)
-                    {
-                        _databaseContext.Users.Remove(User);
-                        _databaseContext.SaveChanges();
-                        TempData["successMessage"] = "Kayıt başarıyla silindi.";
-                    }
-                }                
             }
             else
             {

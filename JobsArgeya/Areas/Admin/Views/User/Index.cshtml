@@ -1,7 +1,7 @@
 ﻿@model List<UsersViewModel>
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    ViewData["CmsTitle"] = "Kullanıcılar & Şirket İşlemleri";
+    ViewData["CmsTitle"] = "Kullanıcı İşlemleri";
 }
 @section Styles {
     <link href="~/panel/assets/css/vendor/dataTables.bootstrap5.css" rel="stylesheet" type="text/css" />
@@ -10,14 +10,15 @@
 <div class="col-12">
     <div class="card">
         <div class="card-body">
+            <a href="/admin/user/add" class="btn btn-primary w-100">Kullanıcı Ekle</a>
+            <hr />
             <table id="example" class="table dt-responsive nowrap w-100" width="100%">
                 <thead>
                     <tr>
                         <th>Adı</th>
                         <th>Soyadı</th>
                         <th>Kullanıcı Adı</th>
-                        <th>Ofis Adı</th>
-                        <th>Ofis Domain</th>
+                        <th>Ofis</th>
                         <th>İşlemler</th>
                     </tr>
                 </thead>
@@ -29,8 +30,7 @@
                             <td>@Users.Surname</td>
                             <td>@Users.Email</td>
                             <td>@Users.CompanyName</td>
-                            <td>@Users.CompanyDomain</td>
-                            <td><a data-bs-toggle="modal" data-bs-target="#userEdit" data-id="@Users.Id" data-name="@Users.Name" data-surname="@Users.Surname" data-email="@Users.Email" class="btn btn-primary userEdit">Kullanıcı Düzenle</a> <a data-bs-toggle="modal" data-bs-target="#officeEdit" data-id="@Users.CompanyId" data-officeName="@Users.CompanyName" data-officeDomain="@Users.CompanyDomain" class="btn btn-primary officeEdit">Şirket Düzenle</a> <a href="/admin/user/delete/@Users.Id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Kullanıcıyı Sil</a> <a href="/admin/company/delete/@Users.CompanyId" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Şirketi Sil</a></td>
+                            <td><a data-bs-toggle="modal" data-bs-target="#userEdit" data-id="@Users.Id" data-name="@Users.Name" data-surname="@Users.Surname" data-email="@Users.Email" data-companyid="@Users.CompanyId" class="btn btn-primary userEdit">Kullanıcı Düzenle</a>  <a href="/admin/user/delete/@Users.Id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Kullanıcıyı Sil</a></td>
                         </tr>
                     }
                 </tbody>
@@ -48,23 +48,24 @@
             <div class="modal-body">
                 <form action="/admin/user/edit" method="post">
 
-                    <input type="text" name="id" id="id" hidden>
+                    <input type="text" name="Id" id="Id" hidden>
+                    <input type="text" name="CompanyId" id="CompanyId" hidden/>
                     <div class="form-group">
-                        <label for="name">Adı</label>
-                        <input type="text" id="name" name="name" class="form-control">
+                        <label for="Name">Adı</label>
+                        <input type="text" id="Name" name="Name" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="surname">Soyadı</label>
-                        <input type="text" id="surname" name="surname" class="form-control">
+                        <label for="Surname">Soyadı</label>
+                        <input type="text" id="Surname" name="Surname" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Kullanıcı Adı</label>
-                        <input type="text" id="email" name="email" class="form-control">
+                        <label for="Email">Kullanıcı Adı</label>
+                        <input type="text" id="Email" name="Email" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="password">Şifre</label>
+                        <label for="Password">Şifre</label>
                         <div class="input-group input-group-merge">
-                            <input type="password" id="password" name="password" class="form-control" placeholder="Şifre giriniz..">
+                            <input type="password" id="Password" name="Password" class="form-control" placeholder="Şifre giriniz.." required>
                             <div class="input-group-append" data-password="false">
                                 <div class="input-group-text">
                                     <span class="password-eye"></span>
@@ -79,34 +80,6 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<div class="modal fade" id="officeEdit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">Şirket Düzenle</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-            </div>
-            <div class="modal-body">
-                <form action="/admin/company/edit" method="post">
-
-                    <input type="text" name="CompanyId" id="CompanyId" hidden>
-                    <div class="form-group">
-                        <label for="CompanyName">Şirket Adı</label>
-                        <input type="text" id="CompanyName" name="CompanyName" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="CompanyDomain">Şirket Domain</label>
-                        <input type="text" id="CompanyDomain" name="CompanyDomain" class="form-control">
-                    </div>
-                    <hr />
-                    <input type="submit" value="Şirket Düzenle" class="btn btn-primary btn-block">
-                </form>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
 @section Scripts {
     <script src="~/panel/assets/js/vendor/jquery.dataTables.min.js"></script>
     <script src="~/panel/assets/js/vendor/dataTables.bootstrap5.js"></script>
@@ -121,20 +94,13 @@
             var dataName = $(this).attr('data-name');
             var dataSurname = $(this).attr('data-surname');
             var dataEmail = $(this).attr('data-email');
+            var dataCompanyId = $(this).attr('data-companyid');
 
-            $('#id').val(dataId);
-            $("#name").val(dataName);
-            $("#surname").val(dataSurname);
-            $("#email").val(dataEmail);
-        });
-        $(".officeEdit").click(function () {
-            var dataId = $(this).attr('data-id');
-            var dataOfficeName = $(this).attr('data-OfficeName');
-            var dataOfficeDomain = $(this).attr('data-OfficeDomain');
-
-            $('#CompanyId').val(dataId);
-            $("#CompanyName").val(dataOfficeName);
-            $("#CompanyDomain").val(dataOfficeDomain);
+            $('#Id').val(dataId);
+            $("#Name").val(dataName);
+            $("#Surname").val(dataSurname);
+            $("#Email").val(dataEmail);
+            $("#CompanyId").val(dataCompanyId);
         });
     </script>
 }

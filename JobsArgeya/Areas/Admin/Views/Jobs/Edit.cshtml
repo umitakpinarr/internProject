@@ -37,18 +37,18 @@
 
                 <br />
                 <div class="form-group" style="margin-bottom:10px;">
-                    <label for="jobTitle">İlan Başlığı</label>
-                    <input class="form-control" asp-for="JobTitle" type="text" placeholder="İlan Başlığı">
+                    <label for="jobTitle">İlan Başlığı *</label>
+                    <input class="form-control" asp-for="JobTitle" type="text" placeholder="İlan Başlığı" required>
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
-                    <label for="jobKeywords">İlan Anahtar Kelimeleri</label>
-                    <input class="form-control" asp-for="JobKeywords" type="text" placeholder="İlan Anahtar Kelime">
+                    <label for="jobKeywords">İlan Anahtar Kelimeleri *</label>
+                    <input class="form-control" asp-for="JobKeywords" type="text" placeholder="İlan Anahtar Kelime" required>
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
-                    <label for="jobDescription">İlan Açıklaması</label>
-                    <input class="form-control" asp-for="JobDescription" type="text" placeholder="İlan Açıklama">
+                    <label for="jobDescription">İlan Özeti *</label>
+                    <input class="form-control" asp-for="JobDescription" type="text" placeholder="İlan Açıklama" required>
                 </div>
-                <label for="jobContent">İlan Açıklaması</label>
+                <label for="jobContent">İlan Açıklaması *</label>
                 <textarea asp-for="JobContent" style="min-height:500px;"></textarea>
                 <br />
                 <button type="submit" class="btn btn-danger w-100">İlanı Güncelle</button>

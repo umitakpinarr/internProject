@@ -53,8 +53,15 @@ namespace JobsArgeya.Areas.Admin.Controllers
         {
             string host = Request.Host.ToString();
             Mail mail = new Mail(_databaseContext, _configuration);
-            mail.SendMailList(MailCredentials.MailSubject, MailCredentials.MailContent, host);
-            TempData["successMessage"] = "Mail listesine gönderim başarıyla sağlandı.";
+            if(ModelState.IsValid)
+            {
+                mail.SendMailList(MailCredentials.MailSubject, MailCredentials.MailContent, host);
+                TempData["successMessage"] = "Mail listesine gönderim başarıyla sağlandı.";
+            }
+            else
+            {
+                TempData["dangerMessage"] = "Lütfen zorunlu alanları doldurup tekrar deneyiniz.";
+            }
             return View();
         }
         public IActionResult Delete(int id)
@@ -68,7 +75,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
             }
             else
             {
-                TempData["dangerMessage"] = "Mail adresi listeden silinirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
+                TempData["dangerMessage"] = "Geçersiz mail adresini silmeye çalıştınız. Lütfen tekrar deneyiniz.";
             }
             return Redirect("/admin/mail/");
         }

@@ -65,12 +65,12 @@ namespace JobsArgeya.Controllers
                 }
                 else
                 {
-                    TempData["dangerMessage"] = "Telefon numarasını istenilen formatta girmediniz. Lütfen tekrar deneyiniz.";
+                    TempData["dangerMessage"] = "Telefon numarasını istenilen formatta girmediniz. (Örn. 05XXXXXXXXX) Lütfen tekrar deneyiniz.";
                 }
             }
             else
             {
-                TempData["dangerMessage"] = "Mesajınız gönderilemedi. Lütfen daha sonra tekrar deneyiniz.";
+                TempData["dangerMessage"] = "Lütfen doldurulması gereken alanları doldup tekrar deneyin.";
             }
 
             return Redirect("/contact");

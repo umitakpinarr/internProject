@@ -31,32 +31,43 @@ namespace JobsArgeya.Areas.Admin.Controllers
         {
             GetDetails Details = new GetDetails(_databaseContext, _configuration);
             string Host = Request.Host.ToString();
-            ViewData["PanelLogo"] = Details.GetSiteDetails(5, Host);
+            ViewData["LightLogo"] = Details.GetSiteDetails(5, Host);
+            ViewData["DarkLogo"] = Details.GetSiteDetails(6, Host);
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Index(UsersModel User)
         {
-            string PasswordHashed = MD5Hash.Hash.Content(User.Password);
-            string Host = Request.Host.ToString();
-            Company DbCompany = _databaseContext.Companies.Where(o => o.CompanyDomain == Host).FirstOrDefault();
-            Users DbUser = _databaseContext.Users.Where(u => u.Email == User.Email && u.Password == PasswordHashed && u.CompanyId == DbCompany.Id).FirstOrDefault();
-         
-            if(DbUser != null)
+            if (ModelState.IsValid)
             {
-                Roles dbRole = _databaseContext.Roles.Where(x => x.Id == DbUser.RoleId).FirstOrDefault();
-                var claims = new List<Claim>
+                string PasswordHashed = MD5Hash.Hash.Content(User.Password);
+                string Host = Request.Host.ToString();
+                Company DbCompany = _databaseContext.Companies.Where(o => o.CompanyDomain == Host).FirstOrDefault();
+                Users DbUser = _databaseContext.Users.Where(u => u.Email == User.Email && u.Password == PasswordHashed && u.CompanyId == DbCompany.Id).FirstOrDefault();
+                if (DbUser != null)
                 {
-                    new Claim("FullName", DbUser.Name + " " + DbUser.Surname),
-                    new Claim("UserId", DbUser.Id.ToString()),
-                    new Claim("OfficeId", DbCompany.Id.ToString()),
-                    new Claim("OfficeName", DbCompany.CompanyName),
-                    new Claim(ClaimTypes.Role, dbRole.RoleName)
-                };
-                
-                var ClaimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(ClaimsIdentity));
-                return Redirect("/admin/home/index");
+                    Roles dbRole = _databaseContext.Roles.Where(x => x.Id == DbUser.RoleId).FirstOrDefault();
+                        var claims = new List<Claim>
+                        {
+                            new Claim("FullName", DbUser.Name + " " + DbUser.Surname),
+                            new Claim("UserId", DbUser.Id.ToString()),
+                            new Claim("OfficeId", DbCompany.Id.ToString()),
+                            new Claim("OfficeName", DbCompany.CompanyName),
+                            new Claim(ClaimTypes.Role, dbRole.RoleName)
+                        };
+
+                    var ClaimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(ClaimsIdentity));
+                    return Redirect("/admin/home/index");
+                }
+                else
+                {
+                    TempData["DangerMessage"] = "Kullanıcı adı veya şifre hatalı. Lütfen tekrar deneyiniz.";
+                }
+            }
+            else
+            {
+                TempData["DangerMessage"] = "Lütfen boş bırakılan alanları doldurun ve tekrar deneyin.";
             }
             return Redirect("/yonetim");
         }

@@ -28,7 +28,8 @@ namespace JobsArgeya.Areas.Admin.ViewComponents
         {
             string Host = Request.Host.ToString();
             GetDetails Details = new GetDetails(_databaseContext, _configuration);
-            ViewData["NavBarLogo"] = Details.GetSiteDetails(5, Host);
+            ViewData["LightLogo"] = Details.GetSiteDetails(5, Host);
+            ViewData["DarkLogo"] = Details.GetSiteDetails(6, Host);
             return View();
         }
     }

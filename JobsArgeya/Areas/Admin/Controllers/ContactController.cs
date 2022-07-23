@@ -59,7 +59,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
             }
             else
             {
-                TempData["dangerMessage"] = "Mesaj silinirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
+                TempData["dangerMessage"] = "Geçersiz mesaj silmeye çalıştınız. Lütfen tekrar deneyiniz.";
             }
             return Redirect("/admin/contact/index");
         }

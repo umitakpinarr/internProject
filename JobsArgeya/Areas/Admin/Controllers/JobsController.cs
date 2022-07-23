@@ -90,7 +90,10 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 TempData["successMessage"] = "İlan başarıyla eklendi.";
                 return Redirect(Request.Headers["Referer"].ToString());
             }
-            TempData["dangerMessage"] = "İlan eklenirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
+            else
+            {
+                TempData["dangerMessage"] = "Lütfen zorunlu alanları doldurup tekrar deneyiniz.";
+            }
             return Redirect(Request.Headers["Referer"].ToString());
         }
         [HttpPost]
@@ -110,7 +113,10 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 TempData["successMessage"] = "İlan başarıyla güncellendi.";
                 return Redirect(Request.Headers["Referer"].ToString());
             }
-            TempData["dangerMessage"] = "İlan güncellenirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
+            else
+            {
+                TempData["dangerMessage"] = "Lütfen zorunlu alanları doldurup tekrar deneyiniz.";
+            }
             return Redirect(Request.Headers["Referer"].ToString());
         }
         public IActionResult Delete(int Id)
@@ -125,7 +131,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
             }
             else
             {
-                TempData["dangerMessage"] = "İlan silinirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
+                TempData["dangerMessage"] = "Geçersiz ilanı silmeye çalıştınız. Lütfen tekrar deneyiniz.";
             }
             return Redirect("/admin/jobs/list");
         }

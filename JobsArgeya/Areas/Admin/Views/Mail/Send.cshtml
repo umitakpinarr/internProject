@@ -16,11 +16,11 @@
         <div class="card-body">
             <form action="/admin/mail/send" method="post">
                 <div class="form-group" style="margin-bottom:10px;">
-                    <label for="MailSubject">Mail Başlığı</label>
-                    <input class="form-control" id="MailSubject" name="MailSubject" type="text" placeholder="Mail Başlığı">
+                    <label for="MailSubject">Mail Başlığı *</label>
+                    <input class="form-control" id="MailSubject" name="MailSubject" type="text" placeholder="Mail Başlığı" required>
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
-                    <label for="MailContent">Mail İçeriği</label>
+                    <label for="MailContent">Mail İçeriği *</label>
                     <textarea id="MailContent" name="MailContent"></textarea>
                 </div>
                 <br />

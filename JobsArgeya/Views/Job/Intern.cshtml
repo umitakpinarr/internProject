@@ -42,19 +42,19 @@
     <div class="job-apply-form">
         <form action="/Job/Intern" method="post" enctype="multipart/form-data">
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="FullName"><b>Adınız ve Soydınız:</b></label>
+                <label name="FullName"><b>Adınız ve Soydınız: *</b></label>
                 <input name="FullName" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="Phone"><b>Telefon Numaranız:</b></label>
-                <input name="Phone" class="form-control" required>
+                <label name="Phone"><b>Telefon Numaranız: *</b></label>
+                <input name="Phone" class="form-control" required placeholder="05XXXXXXXXX">
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="Email"><b>E-Mail Adresiniz:</b></label>
+                <label name="Email"><b>E-Mail Adresiniz: *</b></label>
                 <input type="email" name="Email" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label><b>Cinsiyetiniz</b></label>
+                <label><b>Cinsiyetiniz *</b></label>
                 <select name="Gender" class="form-control" required>
                     <option value="">Lütfen Bir Seçim Yapınız!</option>
                     <option value="Belirtilmemiş">Belirtmek İstemiyorum</option>
@@ -63,35 +63,35 @@
                 </select>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="University"><b>Okuduğunuz Okul:</b></label>
+                <label name="University"><b>Okuduğunuz Okul: *</b></label>
                 <input name="University" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="Faculty"><b>Okuduğunuz Bölüm ve Sınıf:</b></label>
+                <label name="Faculty"><b>Okuduğunuz Bölüm ve Sınıf: *</b></label>
                 <input name="Faculty" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label for="InternStartDate"><b>Staj Başlangıç Tarihi:</b></label>
-                <input class="form-control" id="InternStartDate" name="InternStartDate" autocomplete="off">
+                <label for="InternStartDate"><b>Staj Başlangıç Tarihi: *</b></label>
+                <input class="form-control" id="InternStartDate" name="InternStartDate" autocomplete="off" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label for="InternEndDate"><b>Staj Bitiş Tarihi:</b></label>
-                <input class="form-control" id="InternEndDate" name="InternEndDate" autocomplete="off">
+                <label for="InternEndDate"><b>Staj Bitiş Tarihi: *</b></label>
+                <input class="form-control" id="InternEndDate" name="InternEndDate" autocomplete="off" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="Resume"><b>Öz Yazı:</b></label>
+                <label name="Resume"><b>Öz Yazı: *</b></label>
                 <textarea name="Resume" class="form-control" required></textarea>
+            </div>
+            <div class="form-group" style="margin-bottom:10px;">
+                <label for="FormFile"><b>Özgeçmiş / CV Yükle (Sadece PDF uzantılı dosyalar kabul edilmektedir) *</b></label>
+                <input type="file" class="form-control-file" name="FormFile" accept="application/pdf" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
                 <img style="display: inline-block; width: 180px; height: 50px; " id="imgCaptcha" src="/argeya-captcha?@DateTime.Now.ToString("ddMMyyyyHHmmsss")" />
                 <a class="btn btn-sm small gray" style="display: inline-block; padding: 8px; cursor: pointer; vertical-align: top; background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"]; color: #fff !important; text-decoration: none;" onclick="var today = new Date(); document.getElementById('imgCaptcha').src = '/argeya-captcha?r=' + today; return false;">
                     <i class="fa fa-refresh" aria-hidden="true" style="font-size: 30px;"></i>
                 </a>
-                <input type="text" name="captcha" id="captcha" />
-            </div>
-            <div class="form-group" style="margin-bottom:10px;">
-                <label for="FormFile"><b>Özgeçmiş / CV Yükle (Sadece PDF uzantılı dosyalar kabul edilmektedir)</b></label>
-                <input type="file" class="form-control-file" name="FormFile">
+                <input type="text" name="captcha" id="captcha" required/>
             </div>
             <button type="submit" class="btn btn-primary w-100" style="background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];">Başvur</button>
         </form>

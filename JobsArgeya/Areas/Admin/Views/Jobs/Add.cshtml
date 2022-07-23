@@ -17,18 +17,18 @@
         <div class="card-body">
             <form action="/admin/jobs/add" method="post">
                 <div class="form-group" style="margin-bottom:10px;">
-                    <label for="jobTitle">İlan Başlığı</label>
-                    <input class="form-control" asp-for="JobTitle" type="text" placeholder="İlan Başlığı">
+                    <label for="jobTitle">İlan Başlığı *</label>
+                    <input class="form-control" asp-for="JobTitle" type="text" placeholder="İlan Başlığı" required>
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
-                    <label for="jobKeywords">İlan Anahtar Kelimeleri</label>
-                    <input class="form-control" asp-for="JobKeywords" type="text" placeholder="İlan Anahtar Kelime">
+                    <label for="jobKeywords">İlan Anahtar Kelimeleri *</label>
+                    <input class="form-control" asp-for="JobKeywords" type="text" placeholder="İlan Anahtar Kelime" required>
                 </div>
                 <div class="form-group" style="margin-bottom:10px;">
-                    <label for="jobDescription">İlan Açıklaması</label>
-                    <input class="form-control" asp-for="JobDescription" type="text" placeholder="İlan Açıklama">
+                    <label for="jobDescription">İlan Özeti *</label>
+                    <input class="form-control" asp-for="JobDescription" type="text" placeholder="İlan Açıklama" required>
                 </div>
-                <label for="jobContent">İlan Açıklaması</label>
+                <label for="jobContent">İlan Açıklaması *</label>
                 <textarea asp-for="JobContent"></textarea>
                 <br />
                 <button type="submit" class="btn btn-danger w-100">İlanı Oluştur</button>
@@ -41,7 +41,7 @@
     <script src="~/panel/assets/js/vendor/jquery.dataTables.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
     <script>
-        ClassicEditor
+        var Editor = ClassicEditor
             .create(document.querySelector('#JobContent'))
             .catch(error => {
                 console.error(error);

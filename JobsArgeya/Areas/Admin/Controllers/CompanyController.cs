@@ -1,9 +1,11 @@
 ﻿using JobsArgeya.Areas.Admin.Models;
+using JobsArgeya.Business;
 using JobsArgeya.Data.Context;
 using JobsArgeya.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,10 +25,28 @@ namespace JobsArgeya.Areas.Admin.Controllers
             _databaseContext = databaseContext;
             _hostingEnvironment = environment;
         }
+
+        [HttpGet]
+        public IActionResult Index()
+        {
+            List<Company> DbCompany = _databaseContext.Companies.ToList();
+            List<CompanyViewModel> AllCompanies = new List<CompanyViewModel>();
+
+            foreach(Company Company in DbCompany)
+            {
+                CompanyViewModel CompanyVm = new CompanyViewModel();
+                CompanyVm.Id = Company.Id;
+                CompanyVm.CompanyName = Company.CompanyName;
+                CompanyVm.CompanyDomain = Company.CompanyDomain;
+                AllCompanies.Add(CompanyVm);
+            }
+
+            return View(AllCompanies);
+        }
         [HttpGet]
         public IActionResult Add()
         {
-            List<Users> DbUsers = _databaseContext.Users.Where(x => x.CompanyId == 0).ToList();
+            /*List<Users> DbUsers = _databaseContext.Users.Where(x => x.CompanyId == 0).ToList();
             List<UsersModel> AllUsers = new List<UsersModel>();
 
             foreach (Users Users in DbUsers)
@@ -38,7 +58,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 Model.Email = Users.Email;
                 AllUsers.Add(Model);
             }
-            return View(AllUsers);
+            return View(AllUsers);*/
+            return View();
         }
         [HttpPost]
         public IActionResult Add(CompanyViewModel Model)
@@ -59,13 +80,6 @@ namespace JobsArgeya.Areas.Admin.Controllers
 
                     _databaseContext.Companies.Add(Company);
                     _databaseContext.SaveChanges();
-
-                    var User = _databaseContext.Users.Where(x => x.Id == Model.UserId).FirstOrDefault();
-                    if(User != null)
-                    {
-                        User.CompanyId = Company.Id;
-                        _databaseContext.SaveChanges();
-                    }
 
                     _databaseContext.Settings.Add(new Settings
                     {
@@ -90,10 +104,11 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     });
                     _databaseContext.SaveChanges();
                     TempData["successMessage"] = "Şirket başarıyla eklendi.";
-                    return Redirect("/admin/user/index");
+                    return Redirect("/admin/company/index");
                 }
             }
-            return Redirect("/admin/user/index");
+            TempData["dangerMessage"] = "Zorunlu olan alanları doldurup tekrar deneyiniz.";
+            return Redirect("/admin/company/index");
         }
         [HttpPost]
         public IActionResult Edit(CompanyModel Model)
@@ -104,11 +119,11 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 DbCompany.CompanyName = Model.CompanyName;
                 DbCompany.CompanyDomain = Model.CompanyDomain;
                 _databaseContext.SaveChanges();
-                TempData["successMessage"] = "Ofis başarıyla güncellendi.";
+                TempData["successMessage"] = "Şirket başarıyla güncellendi.";
                 return Redirect("/admin/user/index");
             }
-            TempData["dangerMessage"] = "Ofis güncellenirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
-            return Redirect("/admin/user/index");
+            TempData["dangerMessage"] = "Şirket güncellenirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
+            return Redirect("/admin/company/index");
         }
         [HttpGet]
         public IActionResult Delete(int Id)
@@ -133,19 +148,19 @@ namespace JobsArgeya.Areas.Admin.Controllers
                         User.CompanyId = 0;
                     }
                     _databaseContext.SaveChanges();
-                    TempData["successMessage"] = "Kayıt başarıyla silindi.";
+                    TempData["successMessage"] = "Şirket başarıyla silindi.";
                 }
                 else
                 {
-                    TempData["dangerMessage"] = "Kayıt silinirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
+                    TempData["dangerMessage"] = "Şirket silinirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
                 }
             }
             else
             {
-                TempData["dangerMessage"] = "Kayıt silinirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
+                TempData["dangerMessage"] = "Şirket silinirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
             }
 
-            return Redirect("/admin/user/index");
+            return Redirect("/admin/company/index");
         }
     }
 }

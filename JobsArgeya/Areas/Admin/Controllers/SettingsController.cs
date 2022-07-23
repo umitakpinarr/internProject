@@ -51,6 +51,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 SettingsVm.UseSSL = Settings.UseSSL;
                 SettingsVm.SiteColor = Settings.SiteColor;
                 SettingsVm.Logo = Settings.Logo;
+                SettingsVm.DarkLogo = Settings.DarkLogo;
 
                 AllSettings.Add(SettingsVm);
             }

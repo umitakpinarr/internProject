@@ -74,6 +74,10 @@ namespace JobsArgeya.Business
             {
                 return DbSettings.Logo.ToString();
             }
+            else if (Parameter == 6)
+            {
+                return DbSettings.DarkLogo.ToString();
+            }
             else
             {
                 return "";

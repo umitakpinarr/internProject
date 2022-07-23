@@ -38,22 +38,22 @@
     </div>
   
     <div class="job-apply-form">
-        <form asp-action="Apply" method="post" enctype="multipart/form-data">
+        <form action="/Job" method="post" enctype="multipart/form-data">
             <div class="form-group" style="margin-bottom:10px;">
-                <label asp-for="FullName"><b>Adınız ve Soydınız:</b></label>
-                <input asp-for="FullName" class="form-control" required>
+                <label for="FullName"><b>Adınız ve Soydınız: *</b></label>
+                <input name="FullName" id="FullName" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label asp-for="Phone"><b>Telefon Numaranız:</b></label>
-                <input asp-for="Phone" class="form-control" required>
+                <label for="Phone"><b>Telefon Numaranız: *</b></label>
+                <input name="Phone" id="Phone" class="form-control" placeholder="05XXXXXXXXX" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label asp-for="Email"><b>E-Mail Adresiniz:</b></label>
-                <input type="email" class="form-control" asp-for="Email" required>
+                <label for="Email"><b>E-Mail Adresiniz: *</b></label>
+                <input type="email" name="Email" id="Email" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label><b>Cinsiyetiniz</b></label>
-                <select asp-for="Gender" class="form-control" required>
+                <label for="Gender"><b>Cinsiyetiniz *</b></label>
+                <select name="Gender" id="Gender" class="form-control" required>
                     <option value="">Lütfen Bir Seçim Yapınız!</option>
                     <option value="Belirtilmemiş">Belirtmek İstemiyorum</option>
                     <option value="Erkek">Erkek</option>
@@ -61,27 +61,27 @@
                 </select>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label asp-for="University"><b>Okuduğunuz/Mezun Olduğunuz Okul:</b></label>
-                <input asp-for="University" class="form-control" required>
+                <label for="University"><b>Okuduğunuz/Mezun Olduğunuz Okul: *</b></label>
+                <input name="University" id="University" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label asp-for="Faculty"><b>Okuduğunuz/Mezun Olduğunuz Bölüm:</b></label>
-                <input asp-for="Faculty" class="form-control" required>
+                <label for="Faculty"><b>Okuduğunuz/Mezun Olduğunuz Bölüm: *</b></label>
+                <input name="Faculty" id="Faculty" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label asp-for="Resume"><b>Ön Yazı:</b></label>
-                <textarea asp-for="Resume" class="form-control" required></textarea>
+                <label for="Resume"><b>Ön Yazı: *</b></label>
+                <textarea name="Resume" id="Resume" class="form-control" required></textarea>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label for="FormFile"><b>Özgeçmiş / CV Yükle (Sadece PDF uzantılı dosyalar kabul edilmektedir)</b></label>
-                <input type="file" class="form-control-file" name="FormFile">
+                <label for="FormFile"><b>Özgeçmiş / CV Yükle (Sadece PDF uzantılı dosyalar kabul edilmektedir) *</b></label>
+                <input type="file" name="FormFile" id="FormFile" class="form-control-file" accept="application/pdf" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
                 <img style="display: inline-block; width: 180px; height: 50px; " id="imgCaptcha" src="/argeya-captcha?@DateTime.Now.ToString("ddMMyyyyHHmmsss")" />
                 <a class="btn btn-sm small gray" style="display: inline-block; padding: 8px; cursor: pointer; vertical-align: top; background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"]; color: #fff !important; text-decoration: none;" onclick="var today = new Date(); document.getElementById('imgCaptcha').src = '/argeya-captcha?r=' + today; return false;">
                     <i class="fa fa-refresh" aria-hidden="true" style="font-size: 30px;"></i>
                 </a>
-                <input type="text" asp-for="captcha"/>
+                <input type="text" name="captcha" id="captcha" required/>
             </div>
             <button type="submit" class="btn btn-primary w-100" style="background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];">Başvur</button>
         </form>

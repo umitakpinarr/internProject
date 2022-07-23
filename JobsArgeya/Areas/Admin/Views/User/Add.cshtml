@@ -1,4 +1,4 @@
-﻿@model List<RoleModel>
+﻿@model List<CompanyViewModel>
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     ViewData["CmsTitle"] = "Kullanıcı Oluştur";
@@ -31,12 +31,12 @@
                     </div>
                 </div>
                 <div class="form-group" style="margin-bottom: 10px;">
-                    <label for="RoleId">Kullanıcı Rolü</label>
-                    <select name="RoleId" id="RoleId" class="form-control">
+                    <label for="CompanyId">Şirket</label>
+                    <select name="CompanyId" id="CompanyId" class="form-control">
                         <option selected>Lütfen Seçim Yapınız !</option>
-                        @foreach (RoleModel Roles in Model)
+                        @foreach (CompanyViewModel Company in Model)
                         {
-                            <option value="@Roles.Id">@Roles.RoleName</option>
+                            <option value="@Company.Id">@Company.CompanyName - @Company.CompanyDomain</option>
                         }
                     </select>
                 </div>

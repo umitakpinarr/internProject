@@ -45,7 +45,7 @@ namespace JobsArgeya.Controllers
             if (!CaptchaController.IsValid(Model.captcha, HttpContext.Session))
             {
                 TempData["dangerMessage"] = "Yanlış captcha girişi yaptınız. Lütfen tekrar deneyiniz.";
-                return View();
+                return Redirect("/job");
             }
             /*Requestin geldiği domainin tespiti, ardından gelen domain bilgisine göre office bilgisinin çekilmesi*/
             string Host = Request.Host.ToString();

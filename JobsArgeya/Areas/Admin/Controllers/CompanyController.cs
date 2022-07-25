@@ -206,7 +206,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
 
             if (Logo != null && DarkLogo != null)
             {
-                if (Logo.ContentType == "image/jpeg" || Logo.ContentType == "image/png" || Logo.ContentType == "image/svg+xml." && Logo != null && Logo.Length > 0)
+                if (Logo.ContentType == "image/jpeg" || Logo.ContentType == "image/png" || Logo.ContentType == "image/svg+xml." && Logo != null && Logo.Length > 0 && DarkLogo != null && DarkLogo.Length > 0)
                 {
                     /*Dosya uzantısını alıyoruz*/
                     var Extension = System.IO.Path.GetExtension(Logo.FileName);
@@ -275,6 +275,140 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     Db.SiteColor = AllSettings[0].SiteColor;
                     Db.Logo = FileName;
                     Db.DarkLogo = DarkFileName;
+                    _databaseContext.SaveChanges();
+                }
+            }
+            else if(Logo != null)
+            {
+                if (Logo.ContentType == "image/jpeg" || Logo.ContentType == "image/png" || Logo.ContentType == "image/svg+xml." && Logo != null && Logo.Length > 0)
+                {
+                    /*Dosya uzantısını alıyoruz*/
+                    var Extension = System.IO.Path.GetExtension(Logo.FileName);
+                    /*Benzersiz bir dosya adı alıp uzantıyla birleştiriyoruz*/
+                    var FileName = Guid.NewGuid() + Extension;
+                    /*Dosyanın yükleneceği klasörün yolu*/
+                    var Path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + FileName;
+                    /*Dosya oluşturuluyor*/
+                    FileStream Stream = new FileStream(Path, FileMode.Create);
+                    Logo.CopyTo(Stream);
+
+                    /*Db den gelen veriler settingsVM e atanıyor*/
+                    foreach (Settings Setting in DbSettings)
+                    {
+                        SettingsViewModel SettingsVm = new SettingsViewModel();
+                        SettingsVm.Title = Settings.Title;
+                        SettingsVm.Keywords = Settings.Keywords;
+                        SettingsVm.Description = Settings.Description;
+                        SettingsVm.Email = Settings.Email;
+                        SettingsVm.Phone = Settings.Phone;
+                        SettingsVm.Adress = Settings.Adress;
+                        SettingsVm.Facebook = Settings.Facebook;
+                        SettingsVm.Instagram = Settings.Instagram;
+                        SettingsVm.Twitter = Settings.Twitter;
+                        SettingsVm.Linkedin = Settings.Linkedin;
+                        SettingsVm.SmtpServer = Settings.SmtpServer;
+                        SettingsVm.SmtpUsername = Settings.SmtpUsername;
+                        SettingsVm.SmtpPassword = Settings.SmtpPassword;
+                        SettingsVm.SmtpPort = Settings.SmtpPort;
+                        if (Settings.UseSSL == "on")
+                        {
+                            SettingsVm.UseSSL = "true";
+                        }
+                        else
+                        {
+                            SettingsVm.UseSSL = "false";
+                        }
+                        SettingsVm.SiteColor = Settings.SiteColor;
+                        SettingsVm.Logo = FileName;
+
+                        AllSettings.Add(SettingsVm);
+                    }
+                    /* Ayar Update */
+                    var Db = _databaseContext.Settings.Where(x => x.CompanyId == CompanyId).FirstOrDefault();
+                    Db.Title = AllSettings[0].Title;
+                    Db.Keywords = AllSettings[0].Keywords;
+                    Db.Description = AllSettings[0].Description;
+                    Db.Email = AllSettings[0].Email;
+                    Db.Phone = AllSettings[0].Phone;
+                    Db.Adress = AllSettings[0].Adress;
+                    Db.Facebook = AllSettings[0].Facebook;
+                    Db.Instagram = AllSettings[0].Instagram;
+                    Db.Twitter = AllSettings[0].Twitter;
+                    Db.Linkedin = AllSettings[0].Linkedin;
+                    Db.SmtpServer = AllSettings[0].SmtpServer;
+                    Db.SmtpUsername = AllSettings[0].SmtpUsername;
+                    Db.SmtpPassword = AllSettings[0].SmtpPassword;
+                    Db.SmtpPort = AllSettings[0].SmtpPort;
+                    Db.UseSSL = AllSettings[0].UseSSL;
+                    Db.SiteColor = AllSettings[0].SiteColor;
+                    Db.Logo = FileName;
+                    _databaseContext.SaveChanges();
+                }
+            }
+            else if(DarkLogo != null)
+            {
+                if (DarkLogo.ContentType == "image/jpeg" || DarkLogo.ContentType == "image/png" || DarkLogo.ContentType == "image/svg+xml." && DarkLogo != null && DarkLogo.Length > 0)
+                {
+                    /*Dosya uzantısını alıyoruz*/
+                    var Extension = System.IO.Path.GetExtension(DarkLogo.FileName);
+                    /*Benzersiz bir dosya adı alıp uzantıyla birleştiriyoruz*/
+                    var FileName = Guid.NewGuid() + Extension;
+                    /*Dosyanın yükleneceği klasörün yolu*/
+                    var Path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + FileName;
+                    /*Dosya oluşturuluyor*/
+                    FileStream Stream = new FileStream(Path, FileMode.Create);
+                    Logo.CopyTo(Stream);
+
+                    /*Db den gelen veriler settingsVM e atanıyor*/
+                    foreach (Settings Setting in DbSettings)
+                    {
+                        SettingsViewModel SettingsVm = new SettingsViewModel();
+                        SettingsVm.Title = Settings.Title;
+                        SettingsVm.Keywords = Settings.Keywords;
+                        SettingsVm.Description = Settings.Description;
+                        SettingsVm.Email = Settings.Email;
+                        SettingsVm.Phone = Settings.Phone;
+                        SettingsVm.Adress = Settings.Adress;
+                        SettingsVm.Facebook = Settings.Facebook;
+                        SettingsVm.Instagram = Settings.Instagram;
+                        SettingsVm.Twitter = Settings.Twitter;
+                        SettingsVm.Linkedin = Settings.Linkedin;
+                        SettingsVm.SmtpServer = Settings.SmtpServer;
+                        SettingsVm.SmtpUsername = Settings.SmtpUsername;
+                        SettingsVm.SmtpPassword = Settings.SmtpPassword;
+                        SettingsVm.SmtpPort = Settings.SmtpPort;
+                        if (Settings.UseSSL == "on")
+                        {
+                            SettingsVm.UseSSL = "true";
+                        }
+                        else
+                        {
+                            SettingsVm.UseSSL = "false";
+                        }
+                        SettingsVm.SiteColor = Settings.SiteColor;
+                        SettingsVm.DarkLogo = FileName;
+
+                        AllSettings.Add(SettingsVm);
+                    }
+                    /* Ayar Update */
+                    var Db = _databaseContext.Settings.Where(x => x.CompanyId == CompanyId).FirstOrDefault();
+                    Db.Title = AllSettings[0].Title;
+                    Db.Keywords = AllSettings[0].Keywords;
+                    Db.Description = AllSettings[0].Description;
+                    Db.Email = AllSettings[0].Email;
+                    Db.Phone = AllSettings[0].Phone;
+                    Db.Adress = AllSettings[0].Adress;
+                    Db.Facebook = AllSettings[0].Facebook;
+                    Db.Instagram = AllSettings[0].Instagram;
+                    Db.Twitter = AllSettings[0].Twitter;
+                    Db.Linkedin = AllSettings[0].Linkedin;
+                    Db.SmtpServer = AllSettings[0].SmtpServer;
+                    Db.SmtpUsername = AllSettings[0].SmtpUsername;
+                    Db.SmtpPassword = AllSettings[0].SmtpPassword;
+                    Db.SmtpPort = AllSettings[0].SmtpPort;
+                    Db.UseSSL = AllSettings[0].UseSSL;
+                    Db.SiteColor = AllSettings[0].SiteColor;
+                    Db.DarkLogo = FileName;
                     _databaseContext.SaveChanges();
                 }
             }

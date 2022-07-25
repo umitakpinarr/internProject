@@ -15,6 +15,7 @@
             <table id="example" class="table dt-responsive nowrap w-100" width="100%">
                 <thead>
                     <tr>
+                        <th>Aktif/Pasif</th>
                         <th>Adı</th>
                         <th>Soyadı</th>
                         <th>Kullanıcı Adı</th>
@@ -26,11 +27,19 @@
                     @foreach (UsersViewModel Users in Model)
                     {
                         <tr>
+                            @if(Users.IsActive == 1)
+                                {
+                                <td>Aktif</td>
+                                }
+                            else
+                                {
+                                <td>Pasif</td>
+                                }
                             <td>@Users.Name</td>
                             <td>@Users.Surname</td>
                             <td>@Users.Email</td>
                             <td>@Users.CompanyName</td>
-                            <td><a data-bs-toggle="modal" data-bs-target="#userEdit" data-id="@Users.Id" data-name="@Users.Name" data-surname="@Users.Surname" data-email="@Users.Email" data-companyid="@Users.CompanyId" class="btn btn-primary userEdit">Kullanıcı Düzenle</a>  <a href="/admin/user/delete/@Users.Id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Kullanıcıyı Sil</a></td>
+                            <td><a href="/admin/user/setstatus/@Users.Id" onclick="return confirm('İlgili kayıdın aktif/pasif durumu değiştirilsin mi ?');" class="btn btn-primary">Durum Değiştir</a> <a data-bs-toggle="modal" data-bs-target="#userEdit" data-id="@Users.Id" data-name="@Users.Name" data-surname="@Users.Surname" data-email="@Users.Email" data-companyid="@Users.CompanyId" class="btn btn-primary userEdit">Düzenle</a>  <a href="/admin/user/delete/@Users.Id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
                         </tr>
                     }
                 </tbody>

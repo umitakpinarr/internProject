@@ -1,0 +1,111 @@
+﻿@model List<SettingsViewModel>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["CmsTitle"] = "Site Ayarları";
+}
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/3.4.0/css/bootstrap-colorpicker.css" integrity="sha512-HcfKB3Y0Dvf+k1XOwAD6d0LXRFpCnwsapllBQIvvLtO2KMTa0nI5MtuTv3DuawpsiA0ztTeu690DnMux/SuXJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+}
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <form action="/admin/company/settings" method="post" enctype="multipart/form-data">
+                <input type="text" name="CompanyId" value="@Model[0].CompanyId" hidden/>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="title">Site Başlığı *</label>
+                    <input class="form-control" type="text" value="@Model[0].Title" name="Title" id="Title" placeholder="Site Başlığı">
+                </div>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="keywords">Site Anahtar Kelimeleri *</label>
+                    <input class="form-control" type="text" value="@Model[0].Keywords" name="Keywords" id="Keywords" placeholder="Site Anahtar Kelime">
+                </div>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="description">Site Açıklama *</label>
+                    <input class="form-control" type="text" value="@Model[0].Description" name="Description" id="Description" placeholder="Site Açıklama">
+                </div>
+                <hr />
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="siteColor">Site Renk *</label>
+                    <input id="siteColor" name="SiteColor" type="text" class="form-control" value="@Model[0].SiteColor" />
+                </div>
+                <hr />
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="phone">Email *</label>
+                    <input class="form-control" type="text" value="@Model[0].Email" name="Email" id="Email" placeholder="Email">
+                </div>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="jobDescription">Telefon *</label>
+                    <input class="form-control" type="text" value="@Model[0].Phone" name="Phone" id="Phone" placeholder="Telefon">
+                </div>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="adress">Adres *</label>
+                    <input class="form-control" type="text" value="@Model[0].Adress" name="Adress" id="Adress" placeholder="Adres">
+                </div>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="facebook">Facebook Adresi *</label>
+                    <input class="form-control" type="text" value="@Model[0].Facebook" name="Facebook" id="Facebook" placeholder="Facebook Adresi">
+                </div>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="instagram">Instagram Adresi *</label>
+                    <input class="form-control" type="text" value="@Model[0].Instagram" name="Instagram" id="Instagram" placeholder="Instagram Adresi">
+                </div>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="twitter">Twitter Adresi *</label>
+                    <input class="form-control" type="text" value="@Model[0].Twitter" name="Twitter" id="Twitter" placeholder="Twitter Adresi">
+                </div>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="linkedin">Linkedin Adresi *</label>
+                    <input class="form-control" type="text" value="@Model[0].Linkedin" name="Linkedin" id="Linkedin" placeholder="Linkedin Adresi">
+                </div>
+                <hr />
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="smtpServer">SMTP Sunucusu *</label>
+                    <input class="form-control" type="text" value="@Model[0].SmtpServer" name="SmtpServer" id="SmtpServer" placeholder="SMTP Sunucusu">
+                </div>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="smtpUsername">SMTP Kullanıcı Adı *</label>
+                    <input class="form-control" type="text" value="@Model[0].SmtpUsername" name="SmtpUsername" id="SmtpUsername" placeholder="SMTP Kullanıcı Adı">
+                </div>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="smtpPassword">SMTP Şifresi *</label>
+                    <input class="form-control" type="text" value="@Model[0].SmtpPassword" name="SmtpPassword" id="SmtpPassword" placeholder="SMTP Şifresi">
+                </div>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="smtpPort">SMTP Port *</label>
+                    <input class="form-control" type="text" value="@Model[0].SmtpPort" name="SmtpPort" id="SmtpPort" placeholder="SMTP Port">
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="UseSSL" id="UseSSL" @(Model[0].UseSSL == "true" ? "checked" : "")>
+                    <label class="form-check-label" for="useSSL">
+                        SSL *
+                    </label>
+                </div>
+                <hr />
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label>Site Logoları (Önerilen Çözünürlük 1065x230)</label>
+                </div>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="Logo">Light Logo *</label>
+                    <input type="file" class="form-control-file" id="Logo" name="Logo">
+                    <img src="/uploads/@Model[0].Logo" height="20px" />
+                </div>
+                <div class="form-group">
+                    <label for="DarkLogo">Dark Logo *</label>
+                    <input type="file" class="form-control-file" id="DarkLogo" name="DarkLogo">
+                    <img src="/uploads/@Model[0].DarkLogo" height="20px" />
+                </div>
+                <br />
+                <button type="submit" class="btn btn-danger w-100">Ayarları Kaydet</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/3.4.0/js/bootstrap-colorpicker.min.js" integrity="sha512-94dgCw8xWrVcgkmOc2fwKjO4dqy/X3q7IjFru6MHJKeaAzCvhkVtOS6S+co+RbcZvvPBngLzuVMApmxkuWZGwQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(function () {
+            $('#siteColor').colorpicker();
+        });
+    </script>
+}

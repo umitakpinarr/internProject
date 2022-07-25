@@ -38,6 +38,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 UserVm.Name = User.Name;
                 UserVm.Surname = User.Surname;
                 UserVm.Email = User.Email;
+                UserVm.IsActive = User.IsActive;
                 if (User.CompanyId != 0)
                 {
                     UserVm.CompanyId = Convert.ToInt32(Details.GetUserCompany(User.Id, 3));
@@ -57,25 +58,6 @@ namespace JobsArgeya.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            /*List<Roles> DbRoles = _databaseContext.Roles.ToList();
-            List<Company> DBCompany = _databaseContext.Companies.ToList();
-            List<UsersViewModel> AllCredentials = new List<UsersViewModel>();
-
-            foreach (Roles Role in DbRoles)
-            {
-                foreach (Company Company in DBCompany)
-                {
-                    UsersViewModel Model = new UsersViewModel();
-                    Model.CompanyId = Company.Id;
-                    Model.CompanyName = Company.CompanyName;
-                    Model.CompanyDomain = Company.CompanyDomain;
-                    Model.RoleId = Role.Id;
-                    Model.RoleName = Role.RoleName;
-                    AllCredentials.Add(Model);
-                }
-            }
-            return View(AllCredentials);*/
-
             List<Company> DBCompany = _databaseContext.Companies.ToList();
             List<CompanyViewModel> AllCompany = new List<CompanyViewModel>();
 
@@ -148,12 +130,47 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     _databaseContext.SaveChanges();
                     TempData["successMessage"] = "Kayıt başarıyla silindi.";
                 }
+                else
+                {
+                    TempData["dangerMessage"] = "Kullanıcı bulunamadı. Lütfen tekrar deneyiniz.";
+                }
             }
             else
             {
-                TempData["dangerMessage"] = "Kayıt silinirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
+                TempData["dangerMessage"] = "Geçersiz ID bilgisi. Lütfen tekrar deneyiniz.";
             }
 
+            return Redirect("/admin/user/index");
+        }
+        [HttpGet]
+        public IActionResult SetStatus(int Id)
+        {
+            if(Id!=0)
+            {
+                var User = _databaseContext.Users.Where(x => x.Id == Id).FirstOrDefault();
+                if(User != null)
+                {
+                    if(User.IsActive == 0)
+                    {
+                        User.IsActive = 1;
+                        _databaseContext.SaveChanges();
+                    }
+                    else
+                    {
+
+                        User.IsActive = 0;
+                        _databaseContext.SaveChanges();
+                    }
+                }
+                else
+                {
+                    TempData["dangerMessage"] = "Kullanıcı bulunamadı. Lütfen tekrar deneyiniz.";
+                }
+            }
+            else
+            {
+                TempData["dangerMessage"] = "Geçersiz ID bilgisi. Lütfen tekrar deneyiniz.";
+            }
             return Redirect("/admin/user/index");
         }
     }

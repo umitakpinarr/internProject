@@ -44,7 +44,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 string Host = Request.Host.ToString();
                 Company DbCompany = _databaseContext.Companies.Where(o => o.CompanyDomain == Host).FirstOrDefault();
                 Users DbUser = _databaseContext.Users.Where(u => u.Email == User.Email && u.Password == PasswordHashed && u.CompanyId == DbCompany.Id).FirstOrDefault();
-                if (DbUser != null)
+                if (DbUser != null && DbUser.IsActive == 1)
                 {
                     Roles dbRole = _databaseContext.Roles.Where(x => x.Id == DbUser.RoleId).FirstOrDefault();
                         var claims = new List<Claim>

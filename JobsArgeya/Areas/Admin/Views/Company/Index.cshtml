@@ -26,7 +26,7 @@
                         <tr>
                             <td>@Company.CompanyName</td>
                             <td>@Company.CompanyDomain</td>
-                            <td><a href="/test" class="btn btn-primary">Site Ayar</a> <a data-bs-toggle="modal" data-bs-target="#officeEdit" data-id="@Company.Id" data-officeName="@Company.CompanyName" data-officeDomain="@Company.CompanyDomain" class="btn btn-primary officeEdit">Şirket Düzenle</a> <a href="/admin/company/delete/@Company.Id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Şirketi Sil</a></td>
+                            <td><a href="/admin/company/settings/@Company.Id" class="btn btn-primary">Site Ayar</a> <a data-bs-toggle="modal" data-bs-target="#officeEdit" data-id="@Company.Id" data-officeName="@Company.CompanyName" data-officeDomain="@Company.CompanyDomain" class="btn btn-primary officeEdit">Şirket Düzenle</a> <a href="/admin/company/delete/@Company.Id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Şirketi Sil</a></td>
                         </tr>
                         }
                     </tbody>

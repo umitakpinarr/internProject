@@ -9,6 +9,7 @@ namespace JobsArgeya.Areas.Admin.Models
 {
     public class SettingsModel
     {
+        public int CompanyId { get; set; } 
         [Required(ErrorMessage = "Lütfen site başlığı girin..")]
         [StringLength(100)]
         public string Title { get; set; }

@@ -14,5 +14,6 @@ namespace JobsArgeya.Data.Entities
         public string Password { get; set; }
         public int CompanyId { get; set; }
         public int RoleId { get; set; }
+        public int IsActive { get; set; }
     }
 }

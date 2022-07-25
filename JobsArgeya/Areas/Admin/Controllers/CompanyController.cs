@@ -464,7 +464,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
             }
 
             TempData["successMessage"] = "Site ayarları başarıyla güncellendi.";
-            return View(AllSettings);
+            return Redirect("/admin/company/settings/"+CompanyId);
         }
     }
 }

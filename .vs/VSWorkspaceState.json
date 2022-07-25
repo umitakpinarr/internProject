@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\JobsArgeya",
+    "\\JobsArgeya\\Areas",
+    "\\JobsArgeya\\Areas\\Admin",
+    "\\JobsArgeya\\Areas\\Admin\\Controllers"
   ],
-  "SelectedNode": "\\JobsArgeya.sln",
+  "SelectedNode": "\\JobsArgeya\\Areas\\Admin\\Controllers\\UserController.cs",
   "PreviewInSolutionExplorer": false
 }

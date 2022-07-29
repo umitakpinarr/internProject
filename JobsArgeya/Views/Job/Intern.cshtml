@@ -31,7 +31,7 @@
         </div>
     </div>
 </section>
-<div class="container">
+<div class="container shadow-sm mb--5 p-3 rounded bg-body">
     <div class="title text-center">
         <h1>Başvuru Formu</h1>
         <p>
@@ -82,18 +82,22 @@
                 <label name="Resume"><b>Öz Yazı: *</b></label>
                 <textarea name="Resume" class="form-control" required></textarea>
             </div>
-            <div class="form-group" style="margin-bottom:10px;">
-                <label for="FormFile"><b>Özgeçmiş / CV Yükle (Sadece PDF uzantılı dosyalar kabul edilmektedir) *</b></label>
-                <input type="file" class="form-control-file" name="FormFile" accept="application/pdf" required>
+            <div class="d-flex flex-row">
+                <div class="form-group mr-auto p-2" style="margin-bottom:10px;">
+                    <label for="FormFile"><b>Özgeçmiş / CV Yükle (Sadece PDF uzantılı dosyalar kabul edilmektedir) *</b></label>
+                    <input type="file" class="form-control-file" name="FormFile" accept="application/pdf" required>
+                </div>
+                <div class="form-group p-2" style="margin-bottom:10px;">
+                    <img style="display: inline-block; width: 180px; height: 50px; " id="imgCaptcha" src="/argeya-captcha?@DateTime.Now.ToString("ddMMyyyyHHmmsss")" />
+                    <a class="btn btn-sm small gray" style="display: inline-block; padding: 8px; cursor: pointer; vertical-align: top; background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"]; color: #fff !important; text-decoration: none;" onclick="var today = new Date(); document.getElementById('imgCaptcha').src = '/argeya-captcha?r=' + today; return false;">
+                        <i class="fa fa-refresh" aria-hidden="true" style="font-size: 30px;"></i>
+                    </a>
+                    <input type="text" name="captcha" id="captcha" required />
+                </div>
             </div>
-            <div class="form-group" style="margin-bottom:10px;">
-                <img style="display: inline-block; width: 180px; height: 50px; " id="imgCaptcha" src="/argeya-captcha?@DateTime.Now.ToString("ddMMyyyyHHmmsss")" />
-                <a class="btn btn-sm small gray" style="display: inline-block; padding: 8px; cursor: pointer; vertical-align: top; background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"]; color: #fff !important; text-decoration: none;" onclick="var today = new Date(); document.getElementById('imgCaptcha').src = '/argeya-captcha?r=' + today; return false;">
-                    <i class="fa fa-refresh" aria-hidden="true" style="font-size: 30px;"></i>
-                </a>
-                <input type="text" name="captcha" id="captcha" required/>
+            <div class="container text-center">
+                <button type="submit" class="btn btn-primary btn-lg active w-50" style="background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];">Başvur</button>
             </div>
-            <button type="submit" class="btn btn-primary w-100" style="background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];">Başvur</button>
         </form>
     </div>
 </div>

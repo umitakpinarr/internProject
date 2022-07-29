@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using JobsArgeya.Business;
 
 namespace JobsArgeya.Areas.Admin.Controllers
 {
@@ -22,15 +24,21 @@ namespace JobsArgeya.Areas.Admin.Controllers
 
         private readonly DatabaseContext _databaseContext;
         private IWebHostEnvironment _hostingEnvironment;
-        public CompanyController(DatabaseContext databaseContext, IWebHostEnvironment environment)
+        private readonly IConfiguration _configuration;
+        public CompanyController(DatabaseContext databaseContext, IWebHostEnvironment environment, IConfiguration configuration)
         {
             _databaseContext = databaseContext;
             _hostingEnvironment = environment;
+            _configuration = configuration;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            string Host = Request.Host.ToString();
+            ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
+            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
             List<Company> DbCompany = _databaseContext.Companies.ToList();
             List<CompanyViewModel> AllCompanies = new List<CompanyViewModel>();
 
@@ -48,6 +56,10 @@ namespace JobsArgeya.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Add()
         {
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            string Host = Request.Host.ToString();
+            ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
+            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
             /*List<Users> DbUsers = _databaseContext.Users.Where(x => x.CompanyId == 0).ToList();
             List<UsersModel> AllUsers = new List<UsersModel>();
 
@@ -215,8 +227,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     var FileName = Guid.NewGuid() + Extension;
                     var DarkFileName = Guid.NewGuid() + Extension;
                     /*Dosyanın yükleneceği klasörün yolu*/
-                    var Path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + FileName;
-                    var DarkPath = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + DarkFileName;
+                    var Path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + "\\images\\" + FileName;
+                    var DarkPath = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + "\\images\\" + DarkFileName;
                     /*Dosya oluşturuluyor*/
                     FileStream Stream = new FileStream(Path, FileMode.Create);
                     FileStream Stream1 = new FileStream(DarkPath, FileMode.Create);
@@ -287,7 +299,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     /*Benzersiz bir dosya adı alıp uzantıyla birleştiriyoruz*/
                     var FileName = Guid.NewGuid() + Extension;
                     /*Dosyanın yükleneceği klasörün yolu*/
-                    var Path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + FileName;
+                    var Path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads" + "\\images\\" + FileName;
                     /*Dosya oluşturuluyor*/
                     FileStream Stream = new FileStream(Path, FileMode.Create);
                     Logo.CopyTo(Stream);
@@ -354,10 +366,10 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     /*Benzersiz bir dosya adı alıp uzantıyla birleştiriyoruz*/
                     var FileName = Guid.NewGuid() + Extension;
                     /*Dosyanın yükleneceği klasörün yolu*/
-                    var Path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + FileName;
+                    var DarkPath = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads" + "\\images\\" + FileName;
                     /*Dosya oluşturuluyor*/
-                    FileStream Stream = new FileStream(Path, FileMode.Create);
-                    Logo.CopyTo(Stream);
+                    FileStream Stream1 = new FileStream(DarkPath, FileMode.Create);
+                    DarkLogo.CopyTo(Stream1);
 
                     /*Db den gelen veriler settingsVM e atanıyor*/
                     foreach (Settings Setting in DbSettings)

@@ -29,6 +29,11 @@ namespace JobsArgeya.Areas.Admin.Controllers
         [Area("Admin")]
         public IActionResult Index()
         {
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            string Host = Request.Host.ToString();
+            ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
+            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
+            ViewData["DarkLogo"] = Details.GetSiteDetails(6, Host);
             List<MailSubscribers> dbSubscribers = _databaseContext.MailSubscribers.ToList();
             List<MailSubscribersModel> allSubscribers = new List<MailSubscribersModel>();
 
@@ -46,6 +51,10 @@ namespace JobsArgeya.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Send()
         {
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            string Host = Request.Host.ToString();
+            ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
+            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
             return View();
         }
         [HttpPost]
@@ -78,6 +87,43 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 TempData["dangerMessage"] = "Geçersiz mail adresini silmeye çalıştınız. Lütfen tekrar deneyiniz.";
             }
             return Redirect("/admin/mail/");
+        }
+        public IActionResult MailLog()
+        {
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            string Host = Request.Host.ToString();
+            ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
+            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
+            ViewData["DarkLogo"] = Details.GetSiteDetails(6, Host);
+            List<MailLog> DbMailLogs = _databaseContext.MailLog.ToList();
+            List<MailLogModel> AllLogs = new List<MailLogModel>();
+
+            foreach (MailLog Logs in DbMailLogs)
+            {
+                MailLogModel MailLogVm = new MailLogModel();
+                MailLogVm.Id = Logs.Id;
+                MailLogVm.Mail = Logs.Mail;
+                MailLogVm.Status = Logs.Status;
+                MailLogVm.StatusMessage = Logs.StatusMessage;
+                AllLogs.Add(MailLogVm);
+            }
+
+            return View(AllLogs);
+        }
+        public IActionResult MailLogDelete(int Id)
+        {
+            var Log = _databaseContext.MailLog.Where(x => x.Id == Id).FirstOrDefault();
+            if (Log != null)
+            {
+                _databaseContext.MailLog.Remove(Log);
+                _databaseContext.SaveChanges();
+                TempData["successMessage"] = "Log kaydı listeden başarıyla silindi.";
+            }
+            else
+            {
+                TempData["dangerMessage"] = "Geçersiz log kaydını silmeye çalıştınız. Lütfen tekrar deneyiniz.";
+            }
+            return Redirect("/admin/mail/maillog");
         }
     }
 }

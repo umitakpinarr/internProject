@@ -33,6 +33,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
             string Host = Request.Host.ToString();
             ViewData["LightLogo"] = Details.GetSiteDetails(5, Host);
             ViewData["DarkLogo"] = Details.GetSiteDetails(6, Host);
+            ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
+            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
             return View();
         }
         [HttpPost]
@@ -44,7 +46,24 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 string Host = Request.Host.ToString();
                 Company DbCompany = _databaseContext.Companies.Where(o => o.CompanyDomain == Host).FirstOrDefault();
                 Users DbUser = _databaseContext.Users.Where(u => u.Email == User.Email && u.Password == PasswordHashed && u.CompanyId == DbCompany.Id).FirstOrDefault();
-                if (DbUser != null && DbUser.IsActive == 1)
+                Users DbUser2 = _databaseContext.Users.Where(u => u.Email == User.Email && u.Password == PasswordHashed && u.RoleId == 1).FirstOrDefault();
+                if (DbUser2 != null && DbUser2.IsActive == 1)
+                {
+                    Roles dbRole = _databaseContext.Roles.Where(x => x.Id == DbUser2.RoleId).FirstOrDefault();
+                    var claims = new List<Claim>
+                        {
+                            new Claim("FullName", DbUser2.Name + " " + DbUser2.Surname),
+                            new Claim("UserId", DbUser2.Id.ToString()),
+                            new Claim("OfficeId", DbCompany.Id.ToString()),   
+                            new Claim("OfficeName", DbCompany.CompanyName),
+                            new Claim(ClaimTypes.Role, dbRole.RoleName)
+                        };
+
+                    var ClaimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(ClaimsIdentity));
+                    return Redirect("/admin/home/index");
+                }
+                else if (DbUser != null && DbUser.IsActive == 1)
                 {
                     Roles dbRole = _databaseContext.Roles.Where(x => x.Id == DbUser.RoleId).FirstOrDefault();
                         var claims = new List<Claim>

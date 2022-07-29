@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using JobsArgeya.Business;
 
 namespace JobsArgeya.Areas.Admin.Controllers
 {
@@ -19,15 +21,20 @@ namespace JobsArgeya.Areas.Admin.Controllers
     {
         private readonly DatabaseContext _databaseContext;
         private IWebHostEnvironment _hostingEnvironment;
-        public ContactController(DatabaseContext databaseContext, IWebHostEnvironment environment)
+        private readonly IConfiguration _configuration;
+        public ContactController(DatabaseContext databaseContext, IWebHostEnvironment environment, IConfiguration configuration)
         {
             _databaseContext = databaseContext;
             _hostingEnvironment = environment;
+            _configuration = configuration;
         }
         [HttpGet]
         public IActionResult Index()
         {
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
             string Host = Request.Host.ToString();
+            ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
+            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
             var DbCompany = _databaseContext.Companies.Where(x => x.CompanyDomain == Host).FirstOrDefault();
 
             List<Contact> DbContacts = _databaseContext.Contact.Where(x => x.CompanyId == DbCompany.Id).ToList();

@@ -27,5 +27,6 @@ namespace JobsArgeya.Areas.Admin.Models
         public string Logo { get; set; }
         public string DarkLogo { get; set; }
         public int? CompanyId { get; set; }
+        public string FavIcon { get; set; }
     }
 }

@@ -37,7 +37,7 @@
                         <td>
                             @Apply.Faculty
                     </td>
-                    <td>@Apply.CreatedAt</td>
+                        <td> @(((DateTime)Apply.CreatedAt).ToString("dd-MM-yyyy"))</td>
 
                     @if (@Apply.JobId != null)
                     {

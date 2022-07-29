@@ -327,6 +327,14 @@
         "runtime": {
           "JobsArgeya.dll": {}
         },
+        "resources": {
+          "en/JobsArgeya.resources.dll": {
+            "locale": "en"
+          },
+          "tr/JobsArgeya.resources.dll": {
+            "locale": "tr"
+          }
+        },
         "compile": {
           "JobsArgeya.dll": {}
         }

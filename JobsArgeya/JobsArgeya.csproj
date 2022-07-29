@@ -22,6 +22,10 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Helpers\" />
     <Folder Include="wwwroot\panel\" />
+    <Folder Include="wwwroot\uploads\cv\intern\" />
+    <Folder Include="wwwroot\uploads\cv\applicant\" />
+    <Folder Include="wwwroot\uploads\cv\job\" />
+    <Folder Include="wwwroot\uploads\images\" />
   </ItemGroup>
 
 </Project>

@@ -32,6 +32,7 @@ namespace JobsArgeya.Controllers
             var DbCompany = _databaseContext.Companies.Where(x => x.CompanyDomain == Host).FirstOrDefault();
             ViewData["SiteColor"] = _databaseContext.Settings.Where(x => x.CompanyId == DbCompany.Id).Select(x => x.SiteColor).FirstOrDefault();
             ViewData["SiteName"] = Details.GetSiteDetails(3, Host);
+            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
             return View();
         }
         [HttpPost]

@@ -18,7 +18,10 @@
 
 
 <div class="container">
-    <div class="form-box">
+    <div class="text-center">
+        <h3>Bizimle İletişime Geçin</h3>
+    </div>
+    <div class="form-box pl-2">
         <form action="/contact" method="post">
             <div class="form-group">
                 <label for="Name">Adınız *</label>
@@ -47,7 +50,9 @@
                 </a>
                 <input type="text" name="captcha" id="captcha" required/>
             </div>
-            <input class="btn btn-primary btn-block" style="background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];" type="submit" value="Gönder" />
+            <div class="container align-items-center">
+                <input class="btn btn-primary btn-block btn-lg active w-50" style="background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];" type="submit" value="Gönder" />
+            </div>
         </form>
     </div>
 </div>

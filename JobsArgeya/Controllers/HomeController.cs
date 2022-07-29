@@ -33,6 +33,7 @@ namespace JobsArgeya.Controllers
             ViewData["SiteName"] = Details.GetSiteDetails(3, Host);
             ViewData["PageKeywords"] = Details.GetSiteDetails(0, Host);
             ViewData["PageDescription"] = Details.GetSiteDetails(1, Host);
+            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
             return View();
         }
         public IActionResult Unsubscribe(string Id)

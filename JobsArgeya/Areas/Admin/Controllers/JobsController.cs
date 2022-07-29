@@ -9,6 +9,8 @@ using JobsArgeya.Data.Context;
 using JobsArgeya.Data.Entities;
 using Slugify;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
+using JobsArgeya.Business;
 
 namespace JobsArgeya.Areas.Admin.Controllers
 {
@@ -19,17 +21,22 @@ namespace JobsArgeya.Areas.Admin.Controllers
         SlugHelper Helper = new SlugHelper();
         private readonly DatabaseContext _databaseContext;
         private IWebHostEnvironment _hostingEnvironment;
-        public JobsController(DatabaseContext databaseContext, IWebHostEnvironment environment)
+        private readonly IConfiguration _configuration;
+        public JobsController(DatabaseContext databaseContext, IWebHostEnvironment environment, IConfiguration configuration)
         {
             _databaseContext = databaseContext;
             _hostingEnvironment = environment;
+            _configuration = configuration;
         }
         public IActionResult List()
         {
             int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
-            List<Jobs> DbJobs = _databaseContext.Jobs.Where(x=> x.CompanyId == OfficeId).ToList();
+            List<Jobs> DbJobs = _databaseContext.Jobs.Where(x => x.CompanyId == OfficeId).ToList();
             List<JobsViewModel> AllJobs = new List<JobsViewModel>();
-
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            string Host = Request.Host.ToString();
+            ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
+            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
             foreach (Jobs Jobs in DbJobs)
             {
                 JobsViewModel JobsVm = new JobsViewModel();
@@ -47,11 +54,19 @@ namespace JobsArgeya.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Add()
         {
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            string Host = Request.Host.ToString();
+            ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
+            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
             return View();
         }
         [HttpGet]
         public IActionResult Edit(int Id)
         {
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            string Host = Request.Host.ToString();
+            ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
+            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
             int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
             Jobs DbJobs = _databaseContext.Jobs.Where(x => x.Id == Id && x.CompanyId == OfficeId).FirstOrDefault();
             JobsModel JobDetail = new JobsModel();
@@ -73,6 +88,10 @@ namespace JobsArgeya.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Add(JobsModel Model)
         {
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            string Host = Request.Host.ToString();
+            ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
+            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
             int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
             if (ModelState.IsValid)
             {
@@ -85,7 +104,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     JobSlug = Helper.GenerateSlug(Model.JobTitle),
                     IsActive = "true",
                     CompanyId = OfficeId
-            });
+                });
                 _databaseContext.SaveChanges();
                 TempData["successMessage"] = "İlan başarıyla eklendi.";
                 return Redirect(Request.Headers["Referer"].ToString());

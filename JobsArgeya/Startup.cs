@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Globalization;
 
 namespace JobsArgeya
 {
@@ -39,6 +40,11 @@ namespace JobsArgeya
                 options.LoginPath = "/admin/login";
                 options.LogoutPath = "/admin/logout";
             });
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+            services.AddMvc()
+                .AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,9 +65,18 @@ namespace JobsArgeya
             app.UseStaticFiles();
 
             app.UseRouting();
-
             app.UseAuthorization();
             app.UseSession();
+            var cultures = new List<CultureInfo> {
+                new CultureInfo("en"),
+                new CultureInfo("tr")
+            };
+            app.UseRequestLocalization(options =>
+            {
+                options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("tr");
+                options.SupportedCultures = cultures;
+                options.SupportedUICultures = cultures;
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

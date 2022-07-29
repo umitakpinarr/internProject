@@ -19,7 +19,7 @@ namespace JobsArgeya.Data.Context
         public DbSet<Company> Companies { get; set; }
         public DbSet<Roles> Roles { get; set; }
         public DbSet<Contact> Contact { get; set; }
-
+        public DbSet<MailLog> MailLog { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Primary Key identity e Seed değeri atar.

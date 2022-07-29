@@ -43,7 +43,7 @@
                     </p>
                     <p class="mb-2 font-13">
                         <strong>Başvuru Tarihi :</strong><span class="ms-2">
-                            @Model.CreatedAt
+                            @(((DateTime)Model.CreatedAt).ToString("dd-MM-yyyy"))
                         </span>
                     </p>
                     <p class="mb-2 font-13">
@@ -53,17 +53,16 @@
                     </p>
                     @if (Model.IsIntern == "1")
                     {
-                        <p class="mb-2 font-13">
-                            <strong>Staj Başlangıç Tarihi :</strong><span class="ms-2">
-                                @Model.InternStartDate
-                            </span>
-                        </p>
+        <p class="mb-2 font-13">
+            <strong>Staj Başlangıç Tarihi :</strong><span class="ms-2">
+                @(((DateTime)Model.InternStartDate).ToString("dd-MM-yyyy"))
+            </span>
+        </p>
                         <p class="mb-2 font-13">
                             <strong>Staj Bitiş Tarihi :</strong><span class="ms-2">
-                                @Model.InternEndDate
+                                @(((DateTime)Model.InternEndDate).ToString("dd-MM-yyyy"))
                             </span>
-                        </p>
-                    }
+                        </p>}
                     <hr />
                     <h4 class="header-title mt-0 mb-3">Ön Yazı :</h4>
                     <p class="text-muted font-13">
@@ -79,7 +78,16 @@
     <div class="col-xl-8 col-lg-7">
         <div class="card">
             <div class="card-body" style="height:800px;">
-                <iframe src="/uploads/@Model.CvPath" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>
+                @if (Model.IsIntern == "1")
+                {
+            <iframe src="/uploads/cv/intern/@Model.CvPath" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe> }
+        else if (Model.JobSlug != null)
+        {
+            <iframe src="/uploads/cv/applicant/@Model.CvPath" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>}
+        else
+        {
+            <iframe src="/uploads/cv/job/@Model.CvPath" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>
+                        }
             </div> <!-- end card body -->
         </div> <!-- end card -->
     </div> <!-- end col -->

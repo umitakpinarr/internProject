@@ -44,10 +44,29 @@ namespace JobsArgeya.Business
             Email.Body = bodyBuilder.ToMessageBody();
             /*Smtp bağlantısı için SmtpClient nesnesi türetiyoruz*/
             using var smtp = new SmtpClient();
-            smtp.Connect(dbSettings.SmtpServer.ToString(), Convert.ToInt32(dbSettings.SmtpPort), Convert.ToBoolean(dbSettings.UseSSL));
-            smtp.Authenticate(dbSettings.SmtpUsername.ToString(), dbSettings.SmtpPassword.ToString());
-            smtp.Send(Email);
-            smtp.Disconnect(true);
+            try
+            {
+                smtp.Connect(dbSettings.SmtpServer.ToString(), Convert.ToInt32(dbSettings.SmtpPort), Convert.ToBoolean(dbSettings.UseSSL));
+                smtp.Authenticate(dbSettings.SmtpUsername.ToString(), dbSettings.SmtpPassword.ToString());
+                smtp.Send(Email);
+                smtp.Disconnect(true);
+                _databaseContext.MailLog.Add(new MailLog
+                {
+                    Mail = ApplyMail,
+                    Status = "Başarılı",
+                    StatusMessage = "Mail başarıyla gönderildi."
+                });
+            }
+            catch (Exception ex)
+            {
+                _databaseContext.MailLog.Add(new MailLog
+                {
+                    Mail = ApplyMail,
+                    Status = "Hata",
+                    StatusMessage = ex.Message
+                });
+            }
+            
         }
         public void SendMailList(string Subject, string Body, string Host)
         {

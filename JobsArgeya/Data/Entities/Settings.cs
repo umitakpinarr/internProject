@@ -27,5 +27,7 @@ namespace JobsArgeya.Data.Entities
         public string DarkLogo { get; set; }
         public string SiteColor { get; set; }
         public int CompanyId { get; set; }
+        public string FavIcon { get; set; }
+       
     }
 }

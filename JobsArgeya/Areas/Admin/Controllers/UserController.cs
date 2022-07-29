@@ -28,6 +28,9 @@ namespace JobsArgeya.Areas.Admin.Controllers
         public IActionResult Index()
         {
             GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            string Host = Request.Host.ToString();
+            ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
+            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
             List<Users> DbUsers = _databaseContext.Users.ToList();
             List<UsersViewModel> AllUsers = new List<UsersViewModel>();
 
@@ -58,6 +61,10 @@ namespace JobsArgeya.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Add()
         {
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            string Host = Request.Host.ToString();
+            ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
+            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
             List<Company> DBCompany = _databaseContext.Companies.ToList();
             List<CompanyViewModel> AllCompany = new List<CompanyViewModel>();
 

@@ -154,6 +154,27 @@ namespace JobsArgeya.Migrations
                     b.ToTable("Jobs");
                 });
 
+            modelBuilder.Entity("JobsArgeya.Data.Entities.MailLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Mail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StatusMessage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MailLog");
+                });
+
             modelBuilder.Entity("JobsArgeya.Data.Entities.MailSubscribers", b =>
                 {
                     b.Property<int>("Id")
@@ -210,6 +231,9 @@ namespace JobsArgeya.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Facebook")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FavIcon")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Instagram")

@@ -36,6 +36,7 @@ namespace JobsArgeya.Controllers
             var DbCompany = _databaseContext.Companies.Where(x => x.CompanyDomain == Host).FirstOrDefault();
             ViewData["SiteColor"] = _databaseContext.Settings.Where(x => x.CompanyId == DbCompany.Id).Select(x => x.SiteColor).FirstOrDefault();
             ViewData["SiteName"] = Details.GetSiteDetails(3, Host);
+            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
             return View();
         }
         [HttpPost]
@@ -65,9 +66,9 @@ namespace JobsArgeya.Controllers
                             /*Dosya uzantısını alıyoruz*/
                             var Extension = System.IO.Path.GetExtension(FormFile.FileName);
                             /*Benzersiz bir dosya adı alıp uzantıyla birleştiriyoruz*/
-                            var FileName = Guid.NewGuid() + Extension;
+                            var FileName = Helper.GenerateSlug(Model.FullName + "-" + DateTime.Today) + Extension;
                             /*Dosyanın yükleneceği klasörün yolu*/
-                            var Path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + FileName;
+                            var Path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads" + "\\cv\\" + "\\job\\" + FileName;
                             /*Dosya oluşturuluyor*/
                             FileStream Stream = new FileStream(Path, FileMode.Create);
                             FormFile.CopyTo(Stream);
@@ -130,6 +131,7 @@ namespace JobsArgeya.Controllers
             var DbCompany = _databaseContext.Companies.Where(x => x.CompanyDomain == Host).FirstOrDefault();
             ViewData["SiteColor"] = _databaseContext.Settings.Where(x => x.CompanyId == DbCompany.Id).Select(x => x.SiteColor).FirstOrDefault();
             ViewData["SiteName"] = Details.GetSiteDetails(3, Host);
+            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
             List<Jobs> DbJobs = _databaseContext.Jobs.Where(x => x.CompanyId == DbCompany.Id && x.JobSlug == Id).ToList();
             List<JobsViewModel> allJobs = new List<JobsViewModel>();
 
@@ -173,9 +175,9 @@ namespace JobsArgeya.Controllers
                             /*Dosya uzantısını alıyoruz*/
                             var Extension = System.IO.Path.GetExtension(FormFile.FileName);
                             /*Benzersiz bir dosya adı alıp uzantıyla birleştiriyoruz*/
-                            var FileName = Guid.NewGuid() + Extension;
+                            var FileName = Helper.GenerateSlug(Apply.FullName + "-" + DateTime.Today) + Extension;
                             /*Dosyanın yükleneceği klasörün yolu*/
-                            var Path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + FileName;
+                            var Path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads" + "\\cv\\" + "\\applicant\\" + FileName;
                             /*Dosya oluşturuluyor*/
                             FileStream Stream = new FileStream(Path, FileMode.Create);
                             FormFile.CopyTo(Stream);
@@ -239,6 +241,7 @@ namespace JobsArgeya.Controllers
             var DbCompany = _databaseContext.Companies.Where(x => x.CompanyDomain == Host).FirstOrDefault();
             ViewData["SiteColor"] = _databaseContext.Settings.Where(x => x.CompanyId == DbCompany.Id).Select(x => x.SiteColor).FirstOrDefault();
             ViewData["SiteName"] = Details.GetSiteDetails(3, Host);
+            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
             return View();
         }
         public IActionResult Intern(ApplyModel Apply, IFormFile FormFile)
@@ -268,9 +271,9 @@ namespace JobsArgeya.Controllers
                             /*Dosya uzantısını alıyoruz*/
                             var Extension = System.IO.Path.GetExtension(FormFile.FileName);
                             /*Benzersiz bir dosya adı alıp uzantıyla birleştiriyoruz*/
-                            var FileName = Guid.NewGuid() + Extension;
+                            var FileName = Helper.GenerateSlug(Apply.FullName + "-" + DateTime.Today) + Extension;
                             /*Dosyanın yükleneceği klasörün yolu*/
-                            var Path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads\\" + FileName;
+                            var Path = Directory.GetCurrentDirectory() + "\\wwwroot" + "\\uploads" + "\\cv\\" + "\\intern\\" + FileName;
                             /*Dosya oluşturuluyor*/
                             FileStream Stream = new FileStream(Path, FileMode.Create);
                             FormFile.CopyTo(Stream);
@@ -290,7 +293,7 @@ namespace JobsArgeya.Controllers
                                 CreatedAt = DateTime.Now,
                                 IsIntern = "1",
                                 InternStartDate = Apply.InternStartDate,
-                                InternEndDate = Apply.InternStartDate,
+                                InternEndDate = Apply.InternEndDate,
                                 CompanyId = DbCompany.Id
                             });
                             if (_databaseContext.MailSubscribers.Any(x => x.Email == Apply.Email))

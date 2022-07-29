@@ -20,6 +20,7 @@ namespace JobsArgeya.Business
 
         public string GetJobDetails(int JobId, int Parameter)
         {
+            
             var DbJob = _databaseContext.Jobs.Where(x => x.Id == JobId).FirstOrDefault();
             if (Parameter == 0)
             {
@@ -77,6 +78,10 @@ namespace JobsArgeya.Business
             else if (Parameter == 6)
             {
                 return DbSettings.DarkLogo.ToString();
+            }
+            else if (Parameter == 7)
+            {
+                return DbSettings.FavIcon.ToString();
             }
             else
             {

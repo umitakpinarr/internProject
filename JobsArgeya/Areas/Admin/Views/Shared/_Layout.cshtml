@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>CMS</title>
+    <title>@ViewData["CmsTitle"] - @ViewData["CmsSiteName"]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="~/panel/assets/images/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="~/uploads/images/@ViewData["FavIcon"]">
 
     <!-- App css -->
     <link href="~/panel/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
@@ -30,42 +30,67 @@
             <div class="content">
                 <!-- Topbar Start -->
                 <div class="navbar-custom">
-                    <ul class="list-unstyled topbar-menu float-end mb-0">
-                        <li class="dropdown notification-list d-lg-none">
-                            <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <i class="dripicons-search noti-icon"></i>
-                            </a>
-                        </li>
+                    <div class="flex-lg-row">
 
-                        <li class="dropdown notification-list">
-                            <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
-                               aria-expanded="false">
-                                <span class="account-user-avatar">
-                                    <img src="~/panel/assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
-                                </span>
-                                <span>
-                                    <span class="account-user-name">@(User?.Claims?.FirstOrDefault(x=> x.Type == "FullName")?.Value??"")</span>
-                                    <span class="account-position">@(User?.Claims?.FirstOrDefault(x => x.Type == "OfficeName")?.Value??"")</span>
-                                </span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
-                                <a href="#exampleModal" data-bs-toggle="modal" class="dropdown-item notify-item">
-                                    <i class="mdi mdi-key me-1"></i>
-                                    <span>Şifre Değiştir</span>
+                        <ul class="list-unstyled topbar-menu float-end mb-0">
+                            <li class="dropdown notification-list d-lg-none">
+                                <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                    <i class="dripicons-search noti-icon"></i>
                                 </a>
-                                <!-- item-->
-                                <a href="/yonetim/login/signout" class="dropdown-item notify-item">
-                                    <i class="mdi mdi-logout me-1"></i>
-                                    <span>Çıkış Yap</span>
-                                </a>
-                            </div>
-                        </li>
+                            </li>
 
+                            <li class="dropdown notification-list">
+                                <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+                                   aria-expanded="false">
+                                    <span class="account-user-avatar">
+                                        <img src="~/panel/assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
+                                    </span>
+                                    <span>
+                                        <span class="account-user-name">@(User?.Claims?.FirstOrDefault(x=> x.Type == "FullName")?.Value??"")</span>
+                                        <span class="account-position">@(User?.Claims?.FirstOrDefault(x => x.Type == "OfficeName")?.Value??"")</span>
+                                    </span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+                                    <a href="#exampleModal" data-bs-toggle="modal" class="dropdown-item notify-item">
+                                        <i class="mdi mdi-key me-1"></i>
+                                        <span>Şifre Değiştir</span>
+                                    </a>
+                                    <!-- item-->
+                                    <a href="/yonetim/login/signout" class="dropdown-item notify-item">
+                                        <i class="mdi mdi-logout me-1"></i>
+                                        <span>Çıkış Yap</span>
+                                    </a>
+                                </div>
+                            </li>
+
+                        </ul>
+                        <ul class="list-unstyled topbar-menu float-end mb-0">
+                            <li class="dropdown notification-list d-lg-none">
+                                <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                    <i class="dripicons-search noti-icon"></i>
+                                </a>
+                            </li>
+                            @if (User.IsInRole("SuperAdmin")) { 
+                            <li class="dropdown notification-list verticalal ">
+                                <a style="padding:calc(31px / 2) 20px calc(31px / 2) 20px!important;" class="nav-link dropdown-toggle nav-user arrow-none me-0 " data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+                                   aria-expanded="false">
+                                    <span class="logo-lg">
+                                        <img src="~/uploads/images/@ViewData["DarkLogo"]" alt="image" height="40" width="140">
+                                    </span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+                                    <a href="/admin/home/index/1">Argeya</a>
+                                    <a href="/admin/home/index/2">Splay</a>
+                                </div>
+                                
+                            </li>   
+                    }
                     </ul>
-                    <button class="button-menu-mobile open-left">
+                    <button class="button-menu-mobile open-left end-0">
                         <i class="mdi mdi-menu"></i>
                     </button>
-
+                </div>
+                  
                 </div>
                 <!-- end Topbar -->
                 <!-- Start Content-->

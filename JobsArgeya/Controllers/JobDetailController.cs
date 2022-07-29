@@ -32,6 +32,7 @@ namespace JobsArgeya.Controllers
             var SiteColor = _databaseContext.Settings.Where(x => x.CompanyId == DbCompany.Id).Select(x => x.SiteColor).FirstOrDefault();
             ViewData["SiteColor"] = SiteColor.ToString();
             ViewData["SiteName"] = Details.GetSiteDetails(3, Host);
+            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
             /* Method parametresinin ismini değiştirince url deki slug değerini alamıyorum. 
              * Bundan ötürü default yapıdaki id değerini alıyorum. Route yapısını düzenledim ama işin içinden çıkamadım. */
             var JobDetail = _databaseContext.Jobs.Where(x => x.JobSlug == Id && x.CompanyId == DbCompany.Id).FirstOrDefault();

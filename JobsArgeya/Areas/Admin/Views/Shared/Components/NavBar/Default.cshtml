@@ -33,7 +33,7 @@
                     <i class="uil-focus-add"></i>
                     <span>İlan Ekle</span>
                 </a>
-                <a href="/admin/jobs/list" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                <a href="/admin/jobs/list/@Context.Request.RouteValues["id"]" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
                     <i class="dripicons-clipboard"></i>
                     <span>İlanları Görüntüle</span>
                 </a>
@@ -44,10 +44,6 @@
                 <a href="/admin/mail/send" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
                     <i class="dripicons-mail"></i>
                     <span>Mail Listesine Gönder</span>
-                </a>
-                <a href="/admin/mail/maillog" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
-                    <i class="dripicons-mail"></i>
-                    <span>Mail Log Kayıtları</span>
                 </a>
                 <a href="/admin/contact/index" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
                     <i class="dripicons-mail"></i>
@@ -66,6 +62,10 @@
                 <a href="/admin/settings/" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
                     <i class="dripicons-gear"></i>
                     <span>Site Ayarları</span>
+                </a>
+                <a href="/admin/mail/maillog" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                    <i class="dripicons-mail"></i>
+                    <span>Mail Log Kayıtları</span>
                 </a>
             </li>
         </ul>

@@ -6,6 +6,6 @@
     "\\JobsArgeya\\Areas\\Admin",
     "\\JobsArgeya\\Areas\\Admin\\Controllers"
   ],
-  "SelectedNode": "\\JobsArgeya\\Areas\\Admin\\Controllers\\UserController.cs",
+  "SelectedNode": "\\JobsArgeya\\Areas\\Admin\\Controllers\\LoginController.cs",
   "PreviewInSolutionExplorer": false
 }

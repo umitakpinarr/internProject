@@ -28,10 +28,18 @@ namespace JobsArgeya.Areas.Admin.Controllers
             _hostingEnvironment = environment;
             _configuration = configuration;
         }
-        public IActionResult List()
+        public IActionResult List(int Id)
         {
-            int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
-            List<Jobs> DbJobs = _databaseContext.Jobs.Where(x => x.CompanyId == OfficeId).ToList();
+            int CompanyId;
+            if (Id != 0)
+            {
+                CompanyId = _databaseContext.Companies.Where(x => x.Id == Id).Select(x => x.Id).FirstOrDefault();
+            }
+            else
+            {
+                CompanyId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+            }
+            List<Jobs> DbJobs = _databaseContext.Jobs.Where(x => x.CompanyId == CompanyId).ToList();
             List<JobsViewModel> AllJobs = new List<JobsViewModel>();
             GetDetails Details = new GetDetails(_databaseContext, _configuration);
             string Host = Request.Host.ToString();
@@ -67,8 +75,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
             string Host = Request.Host.ToString();
             ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
             ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
-            int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
-            Jobs DbJobs = _databaseContext.Jobs.Where(x => x.Id == Id && x.CompanyId == OfficeId).FirstOrDefault();
+            //int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+            Jobs DbJobs = _databaseContext.Jobs.Where(x => x.Id == Id).FirstOrDefault();
             JobsModel JobDetail = new JobsModel();
             if (DbJobs != null)
             {
@@ -121,7 +129,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
-                var DbJobs = _databaseContext.Jobs.Where(x => x.Id == Id && x.CompanyId == OfficeId).FirstOrDefault();
+                var DbJobs = _databaseContext.Jobs.Where(x => x.Id == Id).FirstOrDefault();
                 DbJobs.JobTitle = Model.JobTitle;
                 DbJobs.JobKeywords = Model.JobKeywords;
                 DbJobs.JobDescription = Model.JobDescription;

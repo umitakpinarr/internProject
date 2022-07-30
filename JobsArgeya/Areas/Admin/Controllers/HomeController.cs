@@ -41,7 +41,6 @@ namespace JobsArgeya.Areas.Admin.Controllers
             int CompanyId;
             if(Id != 0)
             {
-                //Company DbCompany = _databaseContext.Companies.Where(x => x.Id == Id).FirstOrDefault();
                 CompanyId = _databaseContext.Companies.Where(x => x.Id == Id).Select(x=>x.Id).FirstOrDefault();
             }
             else

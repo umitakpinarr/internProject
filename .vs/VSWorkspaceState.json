@@ -4,8 +4,12 @@
     "\\JobsArgeya",
     "\\JobsArgeya\\Areas",
     "\\JobsArgeya\\Areas\\Admin",
-    "\\JobsArgeya\\Areas\\Admin\\Controllers"
+    "\\JobsArgeya\\Areas\\Admin\\Controllers",
+    "\\JobsArgeya\\Areas\\Admin\\Views",
+    "\\JobsArgeya\\Areas\\Admin\\Views\\Shared",
+    "\\JobsArgeya\\Areas\\Admin\\Views\\Shared\\Components",
+    "\\JobsArgeya\\Areas\\Admin\\Views\\Shared\\Components\\NavBar"
   ],
-  "SelectedNode": "\\JobsArgeya\\Areas\\Admin\\Controllers\\LoginController.cs",
+  "SelectedNode": "\\JobsArgeya\\Areas\\Admin\\Views\\Shared\\Components\\NavBar\\Default.cshtml",
   "PreviewInSolutionExplorer": false
 }

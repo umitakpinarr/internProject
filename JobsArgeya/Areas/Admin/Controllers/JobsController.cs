@@ -31,7 +31,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
         public IActionResult List(int Id)
         {
             int CompanyId;
-            if (Id != 0)
+            if (Id != 0 && User.IsInRole("SuperAdmin"))
             {
                 CompanyId = _databaseContext.Companies.Where(x => x.Id == Id).Select(x => x.Id).FirstOrDefault();
             }
@@ -75,8 +75,18 @@ namespace JobsArgeya.Areas.Admin.Controllers
             string Host = Request.Host.ToString();
             ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
             ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
-            //int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
-            Jobs DbJobs = _databaseContext.Jobs.Where(x => x.Id == Id).FirstOrDefault();
+            Jobs DbJobs;
+            int CompanyId;
+            if (User.IsInRole("SuperAdmin"))
+            {
+                DbJobs = _databaseContext.Jobs.Where(x => x.Id == Id).FirstOrDefault();
+            }
+            else
+            {
+                CompanyId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+                DbJobs = _databaseContext.Jobs.Where(x => x.Id == Id && x.CompanyId == CompanyId).FirstOrDefault();
+            }
+            
             JobsModel JobDetail = new JobsModel();
             if (DbJobs != null)
             {
@@ -128,8 +138,17 @@ namespace JobsArgeya.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
-                var DbJobs = _databaseContext.Jobs.Where(x => x.Id == Id).FirstOrDefault();
+                Jobs DbJobs;
+                int CompanyId;
+                if (User.IsInRole("SuperAdmin"))
+                {
+                    DbJobs = _databaseContext.Jobs.Where(x => x.Id == Id).FirstOrDefault();
+                }
+                else
+                {
+                    CompanyId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+                    DbJobs = _databaseContext.Jobs.Where(x => x.Id == Id && x.CompanyId == CompanyId).FirstOrDefault();
+                }
                 DbJobs.JobTitle = Model.JobTitle;
                 DbJobs.JobKeywords = Model.JobKeywords;
                 DbJobs.JobDescription = Model.JobDescription;
@@ -148,11 +167,20 @@ namespace JobsArgeya.Areas.Admin.Controllers
         }
         public IActionResult Delete(int Id)
         {
-            int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
-            var Job = _databaseContext.Jobs.Where(x => x.Id == Id && x.CompanyId == OfficeId).FirstOrDefault();
-            if (Job != null)
+            Jobs DbJobs;
+            int CompanyId;
+            if (User.IsInRole("SuperAdmin"))
             {
-                _databaseContext.Jobs.Remove(Job);
+                DbJobs = _databaseContext.Jobs.Where(x => x.Id == Id).FirstOrDefault();
+            }
+            else
+            {
+                CompanyId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+                DbJobs = _databaseContext.Jobs.Where(x => x.Id == Id && x.CompanyId == CompanyId).FirstOrDefault();
+            }
+            if (DbJobs != null)
+            {
+                _databaseContext.Jobs.Remove(DbJobs);
                 _databaseContext.SaveChanges();
                 TempData["successMessage"] = "İlan başarıyla silindi.";
             }

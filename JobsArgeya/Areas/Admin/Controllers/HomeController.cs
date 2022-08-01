@@ -39,7 +39,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
             ViewData["Logo"] = Details.GetSiteDetails(5, Host);
             ViewData["DarkLogo"] = Details.GetSiteDetails(6, Host);
             int CompanyId;
-            if(Id != 0)
+            if(Id != 0 && User.IsInRole("SuperAdmin"))
             {
                 CompanyId = _databaseContext.Companies.Where(x => x.Id == Id).Select(x=>x.Id).FirstOrDefault();
             }

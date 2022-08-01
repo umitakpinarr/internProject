@@ -91,6 +91,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 ViewData["FavIcon"] = Details.GetSiteDetails(7, Company.CompanyDomain);
                 ViewData["Logo"] = Details.GetSiteDetails(5, Company.CompanyDomain);
                 ViewData["DarkLogo"] = Details.GetSiteDetails(6, Company.CompanyDomain);
+                ViewData["CompanyRoute"] = Company.Id;
             }
             else
             {
@@ -100,6 +101,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 ViewData["FavIcon"] = Details.GetSiteDetails(7, Company.CompanyDomain);
                 ViewData["Logo"] = Details.GetSiteDetails(5, Company.CompanyDomain);
                 ViewData["DarkLogo"] = Details.GetSiteDetails(6, Company.CompanyDomain);
+                ViewData["CompanyRoute"] = OfficeId;
             }
             return View();
         }
@@ -121,6 +123,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     ViewData["FavIcon"] = Details.GetSiteDetails(7, Company.CompanyDomain);
                     ViewData["Logo"] = Details.GetSiteDetails(5, Company.CompanyDomain);
                     ViewData["DarkLogo"] = Details.GetSiteDetails(6, Company.CompanyDomain);
+                    ViewData["CompanyRoute"] = Company.Id;
                 }
                 else
                 {
@@ -136,6 +139,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
                 ViewData["Logo"] = Details.GetSiteDetails(5, Host);
                 ViewData["DarkLogo"] = Details.GetSiteDetails(6, Host);
+                ViewData["CompanyRoute"] = ClaimCompany;
             }
             
             JobsModel JobDetail = new JobsModel();
@@ -156,15 +160,18 @@ namespace JobsArgeya.Areas.Admin.Controllers
         }
         [HttpPost]
         public IActionResult Add(JobsModel Model)
+        
         {
             GetDetails Details = new GetDetails(_databaseContext, _configuration);
             string Host = Request.Host.ToString();
             ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
             ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
-            if(Model.CompanyId == null)
+            ViewData["CompanyRoute"] = Model.CompanyId;
+            if (Model.CompanyId == null)
             {
                 int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
                 Model.CompanyId = OfficeId;
+                ViewData["CompanyRoute"] = OfficeId;
             }
             if (ModelState.IsValid)
             {

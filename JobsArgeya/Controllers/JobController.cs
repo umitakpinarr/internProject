@@ -292,6 +292,8 @@ namespace JobsArgeya.Controllers
                                 JobId = Apply.JobId,
                                 CreatedAt = DateTime.Now,
                                 IsIntern = "1",
+                                IsDocsDone = 0,
+                                IsHired = 0,
                                 InternStartDate = Apply.InternStartDate,
                                 InternEndDate = Apply.InternEndDate,
                                 CompanyId = DbCompany.Id

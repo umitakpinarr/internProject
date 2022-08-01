@@ -53,16 +53,32 @@
                     </p>
                     @if (Model.IsIntern == "1")
                     {
-        <p class="mb-2 font-13">
-            <strong>Staj Başlangıç Tarihi :</strong><span class="ms-2">
-                @(((DateTime)Model.InternStartDate).ToString("dd-MM-yyyy"))
-            </span>
-        </p>
-                        <p class="mb-2 font-13">
-                            <strong>Staj Bitiş Tarihi :</strong><span class="ms-2">
-                                @(((DateTime)Model.InternEndDate).ToString("dd-MM-yyyy"))
-                            </span>
-                        </p>}
+                <p class="mb-2 font-13">
+                    <strong>Staj Başlangıç Tarihi :</strong><span class="ms-2">
+                        @(((DateTime)Model.InternStartDate).ToString("dd-MM-yyyy"))
+                    </span>
+                </p>
+                                <p class="mb-2 font-13">
+                                    <strong>Staj Bitiş Tarihi :</strong><span class="ms-2">
+                                        @(((DateTime)Model.InternEndDate).ToString("dd-MM-yyyy"))
+                                    </span>
+                                </p>
+                                                <p class="mb-2 font-13">
+                                                    <strong>Belgeleri Tam Mı ? :</strong><span class="ms-2">
+                                                        @(Model.IsDocsDone == 1 ? "Evet" : "Hayır")
+                                                    </span>
+                                                </p>
+                                                                <p class="mb-2 font-13">
+                                                                    <strong>İstihdam Edildi Mi ? :</strong><span class="ms-2">
+                                                                        @(Model.IsHired == 1 ? "Evet" : "Hayır")
+                                                                    </span>
+                                                                </p>
+                                                                <p class="mb-2 font-13">
+                                                                    <strong>Kalan Gün ? :</strong><span class="ms-2">
+                                                                        @Model.RemainingTime
+                                                                    </span>
+                                                                </p>
+                                                                }
                     <hr />
                     <h4 class="header-title mt-0 mb-3">Ön Yazı :</h4>
                     <p class="text-muted font-13">

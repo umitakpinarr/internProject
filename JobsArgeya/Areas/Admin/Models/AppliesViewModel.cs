@@ -21,7 +21,10 @@ namespace JobsArgeya.Areas.Admin.Models
         public string? JobTitle { get; set; }
         public string? JobSlug { get; set; }
         public string? IsIntern { get; set; }
+        public int? IsHired { get; set; }
+        public int? IsDocsDone { get; set; }
         public DateTime? InternStartDate { get; set; }
         public DateTime? InternEndDate { get; set; }
+        public double? RemainingTime { get; set; }
     }
 }

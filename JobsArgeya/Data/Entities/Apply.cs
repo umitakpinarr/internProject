@@ -19,6 +19,8 @@ namespace JobsArgeya.Data.Entities
         public int? JobId { get; set; }
         public DateTime CreatedAt { get; set; }
         public string? IsIntern { get; set; }
+        public int? IsDocsDone { get; set; }
+        public int? IsHired { get; set; }
         public DateTime? InternStartDate { get; set; }
         public DateTime? InternEndDate { get; set; }
         public int CompanyId { get; set; }

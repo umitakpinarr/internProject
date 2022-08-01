@@ -25,19 +25,19 @@
             <li class="side-nav-title side-nav-item"></li>
 
             <li class="side-nav-item">
-                <a href="/admin/home/index/@(Convert.ToInt32(Context.Request.RouteValues["CompanyId"]) == 0 ? "" : Context.Request.RouteValues["CompanyId"])" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                <a href="/admin/home/index/@(ViewData["CompanyRoute"] != null ? ViewData["CompanyRoute"] : "")" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
                     <i class="dripicons-clipboard"></i>
                     <span>Başvurular</span>
                 </a>
-                <a href="/admin/jobs/add/@(Convert.ToInt32(Context.Request.RouteValues["CompanyId"]) == 0 ? "" : Context.Request.RouteValues["CompanyId"])" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                <a href="/admin/jobs/add/@(ViewData["CompanyRoute"] != null ? ViewData["CompanyRoute"] : "")" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
                     <i class="uil-focus-add"></i>
                     <span>İlan Ekle</span>
                 </a>
-                <a href="/admin/jobs/list/@(Convert.ToInt32(Context.Request.RouteValues["CompanyId"]) == 0 ? "" : Context.Request.RouteValues["CompanyId"])" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                <a href="/admin/jobs/list/@(ViewData["CompanyRoute"] != null ? ViewData["CompanyRoute"] : "")" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
                     <i class="dripicons-clipboard"></i>
                     <span>İlanları Görüntüle</span>
                 </a>
-                <a href="/admin/mail/index" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                <a href="/admin/mail/index/" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
                     <i class="dripicons-mail"></i>
                     <span>Mail Listesi</span>
                 </a>

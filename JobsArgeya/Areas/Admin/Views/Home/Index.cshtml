@@ -20,6 +20,55 @@
                         <th>Üniversitesi</th>
                         <th>Bölümü</th>
                         <th>Başvuru Tarihi</th>
+                        <th>Staj Başlangıç</th>
+                        <th>Staj Bitiş</th>
+                        <th>Belgeleri Tam mı ?</th>
+                        <th>İşe Alındı mı ?</th>
+                        <th>Kalan Gün</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (AppliesViewModel Intern in Model)
+                    {
+                        @if (Intern.JobId == null && Intern.IsIntern == "1")
+                        {
+                        <tr>
+                            <td>@Intern.FullName</td>
+                            <td>@Intern.Phone</td>
+                            <td>@Intern.Email</td>
+                            <td>@Intern.Gender</td>
+                            <td>@Intern.University</td>
+                            <td>@Intern.Faculty</td>
+                            <td>@(((DateTime)Intern.CreatedAt).ToString("dd-MM-yyyy"))</td>
+                            <td>@(((DateTime)Intern.InternStartDate).ToString("dd-MM-yyyy"))</td>
+                            <td>@(((DateTime)Intern.InternEndDate).ToString("dd-MM-yyyy"))</td>
+                            <td>@(Intern.IsDocsDone == 0 ? "Hayır" : "Evet" )</td>
+                            <td>@(Intern.IsHired == 0 ? "Hayır" : "Evet")</td>
+                            <td>@Intern.RemainingTime</td>
+                            <td><a href="/admin/home/applydetail/@(ViewData["CompanyRoute"] != null ? ViewData["CompanyRoute"]+"/" : "")@Intern.Id" class="btn btn-primary">Görüntüle</a> <a href="/admin/home/docstatus/@Intern.Id" onclick="return confirm('İlgili kişinin belgelerini teslim aldım ?');" class="btn btn-danger">Belge Durumu Güncelle</a> <a href="/admin/home/hire/@Intern.Id" onclick="return confirm('İlgili kişiyi istihdam ediyorum ?');" class="btn btn-danger">İstihdam Durumu Güncelle</a> <a href="/admin/home/delete/@Intern.Id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
+                        </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <table id="example" class="table dt-responsive nowrap w-100" width="100%">
+                <thead>
+                    <tr>
+                        <th>Adı Soyadı</th>
+                        <th>Telefonu</th>
+                        <th>E-Maili</th>
+                        <th>Cinsiyeti</th>
+                        <th>Üniversitesi</th>
+                        <th>Bölümü</th>
+                        <th>Başvuru Tarihi</th>
                         <th>Başvurulan İlan</th>
                         <th>Ön Yazı</th>
                         <th>İşlemler</th>
@@ -28,30 +77,30 @@
                 <tbody>
                     @foreach (AppliesViewModel Apply in Model)
                     {
+                        @if (Apply.IsIntern != "1")
+                        {
                     <tr>
                         <td>@Apply.FullName</td>
                         <td>@Apply.Phone</td>
                         <td>@Apply.Email</td>
                         <td>@Apply.Gender</td>
                         <td>@Apply.University</td>
-                        <td>
-                            @Apply.Faculty
-                    </td>
+                        <td>@Apply.Faculty</td>
                         <td> @(((DateTime)Apply.CreatedAt).ToString("dd-MM-yyyy"))</td>
 
-                    @if (@Apply.JobId != null)
-                    {
-                    <td><a href="/jobdetail/index/@Apply.JobSlug" target="_blank">@Apply.JobTitle</a></td> 
-                    }
-                    else
-                    {
-                    <td>@Apply.JobTitle</td>
-                    }
-
-
-                    <td><p style="word-wrap: break-word;">@Apply.Resume</p></td>
-                    <td><a href="/admin/home/applydetail/@Apply.Id" class="btn btn-primary">Görüntüle</a> <a href="/admin/home/delete/@Apply.Id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
+                        @if (@Apply.JobId != null)
+                        {
+                            <td><a href="/jobdetail/index/@Apply.JobSlug" target="_blank">@Apply.JobTitle</a></td>
+                        }
+                        else
+                        {
+                            <td>@Apply.JobTitle</td>                    
+                        }
+                        <td><p style="word-wrap: break-word;">@Apply.Resume</p></td>
+                        <td><a href="/admin/home/applydetail/@Apply.Id" class="btn btn-primary">Görüntüle</a> <a href="/admin/home/delete/@Apply.Id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
                     </tr>
+                        }
+                        
                     }
                 </tbody>
             </table>

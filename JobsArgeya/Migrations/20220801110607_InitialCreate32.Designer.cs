@@ -4,14 +4,16 @@ using JobsArgeya.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace JobsArgeya.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220801110607_InitialCreate32")]
+    partial class InitialCreate32
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,9 +56,6 @@ namespace JobsArgeya.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("IsDocsDone")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IsHired")
                         .HasColumnType("int");
 
                     b.Property<string>("IsIntern")

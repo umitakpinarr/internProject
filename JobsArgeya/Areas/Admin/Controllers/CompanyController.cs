@@ -39,6 +39,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
             string Host = Request.Host.ToString();
             ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
             ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
+            ViewData["Logo"] = Details.GetSiteDetails(5, Host);
+            ViewData["DarkLogo"] = Details.GetSiteDetails(6, Host);
             List<Company> DbCompany = _databaseContext.Companies.ToList();
             List<CompanyViewModel> AllCompanies = new List<CompanyViewModel>();
 

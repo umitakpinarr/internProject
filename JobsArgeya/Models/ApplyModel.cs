@@ -39,6 +39,8 @@ namespace JobsArgeya.Models
         public string? JobSlug { get; set; }
         public string captcha { get; set; }
         public string? IsIntern { get; set; }
+        public int? IsDocsDone { get; set; }
+        public int? IsHired { get; set; }
         public DateTime? InternStartDate { get; set; }
         public DateTime? InternEndDate { get; set; }
     }

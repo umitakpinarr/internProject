@@ -39,17 +39,17 @@ namespace JobsArgeya.Areas.Admin.Controllers
             if (CompanyId != 0 && User.IsInRole("SuperAdmin"))
             {
                 Company = _databaseContext.Companies.Where(x => x.Id == CompanyId).FirstOrDefault();
-                DbApplies = _databaseContext.Applies.Where(x => x.CompanyId == Company.Id).ToList();
-                if(DbApplies != null)
+                if(Company != null)
                 {
+                    DbApplies = _databaseContext.Applies.Where(x => x.CompanyId == Company.Id).ToList();
                     ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Company.CompanyDomain);
                     ViewData["FavIcon"] = Details.GetSiteDetails(7, Company.CompanyDomain);
                     ViewData["Logo"] = Details.GetSiteDetails(5, Company.CompanyDomain);
                     ViewData["DarkLogo"] = Details.GetSiteDetails(6, Company.CompanyDomain);
+                    ViewData["CompanyRoute"] = CompanyId;
                 }
                 else
                 {
-                    TempData["dangerMessage"] = "Tanımsız işyeri bilgisi. Lütfen tekrar deneyiniz.";
                     return Redirect("/admin/home/index");
                 }
             }
@@ -62,6 +62,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 ViewData["FavIcon"] = Details.GetSiteDetails(7, Company.CompanyDomain);
                 ViewData["Logo"] = Details.GetSiteDetails(5, Company.CompanyDomain);
                 ViewData["DarkLogo"] = Details.GetSiteDetails(6, Company.CompanyDomain);
+                ViewData["CompanyRoute"] = OfficeId;
             }
             List<AppliesViewModel> AllApplies = new List<AppliesViewModel>();
 
@@ -89,7 +90,21 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 {
                     ApplyVm.InternStartDate = Apply.InternStartDate;
                     ApplyVm.InternEndDate = Apply.InternEndDate;
+                    ApplyVm.IsHired = Apply.IsHired;
+                    ApplyVm.IsDocsDone = Apply.IsDocsDone;
+                    ApplyVm.IsIntern = "1";
                     ApplyVm.JobTitle = "Stajyer Başvurusu";
+                    if (DateTime.Now >= ApplyVm.InternStartDate)
+                    {
+                        TimeSpan DiffDates = (TimeSpan)(ApplyVm.InternEndDate - DateTime.Now);
+                        ApplyVm.RemainingTime = DiffDates.TotalDays;
+                    }
+                    else
+                    {
+
+                        TimeSpan DiffDates = (TimeSpan)(ApplyVm.InternStartDate - DateTime.Now);
+                        ApplyVm.RemainingTime = DiffDates.TotalDays;
+                    }
                 }
                 else
                 {
@@ -110,6 +125,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
             {
                 _databaseContext.Applies.Remove(Apply);
                 _databaseContext.SaveChanges();
+                ViewData["CompanyRoute"] = CompanyId;
                 TempData["successMessage"] = "Başvuru başarıyla silindi.";
             }
             else
@@ -119,23 +135,43 @@ namespace JobsArgeya.Areas.Admin.Controllers
             return Redirect("/admin/home/index");
         }
 
-        public IActionResult ApplyDetail(int Id)
+        public IActionResult ApplyDetail(int CompanyId,int Id)
         {
             GetDetails Details = new GetDetails(_databaseContext, _configuration);
             string Host = Request.Host.ToString();
             ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
             ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
             Apply DbApply;
-            int CompanyId;
-            
-            if (User.IsInRole("SuperAdmin"))
+            int DbCompany;
+            Company Company = _databaseContext.Companies.Where(x => x.Id == CompanyId).FirstOrDefault();
+
+            if (User.IsInRole("SuperAdmin") && CompanyId != 0)
             {
                 DbApply = _databaseContext.Applies.Where(x => x.Id == Id).FirstOrDefault();
+                ViewData["CompanyRoute"] = "";
+                if (Company != null)
+                {
+                    ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Company.CompanyDomain);
+                    ViewData["FavIcon"] = Details.GetSiteDetails(7, Company.CompanyDomain);
+                    ViewData["Logo"] = Details.GetSiteDetails(5, Company.CompanyDomain);
+                    ViewData["DarkLogo"] = Details.GetSiteDetails(6, Company.CompanyDomain);
+                }
+                else
+                {
+                    TempData["dangerMessage"] = "Tanımsız işyeri bilgisi. Lütfen tekrar deneyiniz.";
+                    return Redirect("/admin/home/index");
+                }
+                
             }
             else
             {
-                CompanyId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
-                DbApply = _databaseContext.Applies.Where(x => x.Id == Id && x.CompanyId == CompanyId).FirstOrDefault();
+                DbCompany = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+                DbApply = _databaseContext.Applies.Where(x => x.Id == CompanyId && x.CompanyId == DbCompany).FirstOrDefault();
+                ViewData["CompanyRoute"] = "";
+                ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
+                ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
+                ViewData["Logo"] = Details.GetSiteDetails(5, Host);
+                ViewData["DarkLogo"] = Details.GetSiteDetails(6, Host);
             }
             AppliesViewModel ApplyDetail = new AppliesViewModel();
             if (DbApply != null)
@@ -158,9 +194,22 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 else if (DbApply.IsIntern == "1")
                 {
                     ApplyDetail.IsIntern = "1";
+                    ApplyDetail.IsHired = DbApply.IsHired;
+                    ApplyDetail.IsDocsDone = DbApply.IsDocsDone;
                     ApplyDetail.InternStartDate = DbApply.InternStartDate;
                     ApplyDetail.InternEndDate = DbApply.InternEndDate;
                     ApplyDetail.JobTitle = "Stajyer Başvurusu";
+                    if(DateTime.Now>=ApplyDetail.InternStartDate)
+                    {
+                        TimeSpan DiffDates = (TimeSpan)(ApplyDetail.InternEndDate - DateTime.Now);
+                        ApplyDetail.RemainingTime = DiffDates.TotalDays;
+                    }
+                    else
+                    {
+
+                        TimeSpan DiffDates = (TimeSpan)(ApplyDetail.InternStartDate - DateTime.Now);
+                        ApplyDetail.RemainingTime = DiffDates.TotalDays;
+                    }
                 }
                 else
                 {
@@ -192,6 +241,38 @@ namespace JobsArgeya.Areas.Admin.Controllers
             {
                 TempData["dangerMessage"] = "Şifreniz güncellenirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
             }
+            return Redirect("/admin/home/index");
+        }
+        public IActionResult DocStatus(int CompanyId)
+        {
+            Apply Apply = _databaseContext.Applies.Where(x => x.Id == CompanyId).FirstOrDefault();
+            if(Apply.IsDocsDone == 0)
+            {
+                Apply.IsDocsDone = 1;
+                _databaseContext.SaveChanges();
+            }
+            else
+            {
+                Apply.IsDocsDone = 0;
+                _databaseContext.SaveChanges();
+            }
+            TempData["successMessage"] = "Stajyerin belge durumu güncellendi.";
+            return Redirect("/admin/home/index");
+        }
+        public IActionResult Hire(int CompanyId)
+        {
+            Apply Apply = _databaseContext.Applies.Where(x => x.Id == CompanyId).FirstOrDefault();
+            if (Apply.IsHired == 0)
+            {
+                Apply.IsHired = 1;
+                _databaseContext.SaveChanges();
+            }
+            else
+            {
+                Apply.IsHired = 0;
+                _databaseContext.SaveChanges();
+            }
+            TempData["successMessage"] = "Stajyerin istihdam durumu güncellendi.";
             return Redirect("/admin/home/index");
         }
     }

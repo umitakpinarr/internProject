@@ -35,6 +35,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
             string Host = Request.Host.ToString();
             ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
             ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
+            ViewData["Logo"] = Details.GetSiteDetails(5, Host);
+            ViewData["DarkLogo"] = Details.GetSiteDetails(6, Host);
             var DbCompany = _databaseContext.Companies.Where(x => x.CompanyDomain == Host).FirstOrDefault();
 
             List<Contact> DbContacts = _databaseContext.Contact.Where(x => x.CompanyId == DbCompany.Id).ToList();

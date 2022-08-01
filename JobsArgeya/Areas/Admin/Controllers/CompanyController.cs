@@ -111,10 +111,12 @@ namespace JobsArgeya.Areas.Admin.Controllers
                         SmtpUsername = "test@test.com",
                         SmtpPassword = "test",
                         SmtpPort = "465",
-                        Logo = "logo.png",
+                        Logo = "51026498-c6ac-4804-91f8-4785f88c237a.png",
                         UseSSL = "true",
                         CompanyId = Company.Id,
-                        SiteColor = "#DC3545"
+                        SiteColor = "#DC3545",
+                        DarkLogo = "51026498-c6ac-4804-91f8-4785f88c237a.png",
+                        FavIcon = "8f400127-a0e6-461a-962e-4ae9dc58f87d.png"
                     });
                     _databaseContext.SaveChanges();
                     TempData["successMessage"] = "Şirket başarıyla eklendi.";
@@ -140,11 +142,11 @@ namespace JobsArgeya.Areas.Admin.Controllers
             return Redirect("/admin/company/index");
         }
         [HttpGet]
-        public IActionResult Delete(int Id)
+        public IActionResult Delete(int CompanyId)
         {
-            if (Id != 0)
+            if (CompanyId != 0)
             {
-                var Company = _databaseContext.Companies.Where(x => x.Id == Id).FirstOrDefault();
+                var Company = _databaseContext.Companies.Where(x => x.Id == CompanyId).FirstOrDefault();
                 var User = _databaseContext.Users.Where(x => x.CompanyId == Company.Id).FirstOrDefault();
                 var Settings = _databaseContext.Settings.Where(x => x.CompanyId == Company.Id).FirstOrDefault();
                 var Jobs = _databaseContext.Jobs.Where(x => x.CompanyId == Company.Id).ToList();

@@ -89,15 +89,15 @@ namespace JobsArgeya
                     name: "jobDetail",
                     pattern: "{controller=JobDetail}/{action=Index}/{slug?}");*/
 
-                endpoints.MapAreaControllerRoute("Admin", "Admin", "Admin/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapAreaControllerRoute("Admin", "Admin", "Admin/{controller=Home}/{action=Index}/{CompanyId}/{id?}");
                 endpoints.MapAreaControllerRoute("AdminLogin", "Admin", "/yonetim/{controller=login}/{action=Index}");
                 endpoints.MapAreaControllerRoute("Logout", "Admin", "/yonetim/{controller=login}/{action=SignOut}");
 
                 endpoints.MapAreaControllerRoute("ApplyDelete", "Admin", "Admin/{controller=Home}/{action=Delete}/{id?}");
 
-                endpoints.MapAreaControllerRoute("JobsList", "Admin", "Admin/{controller=Jobs}/{action=List}");
+                endpoints.MapAreaControllerRoute("JobsList", "Admin", "Admin/{controller=Jobs}/{action=List}/{CompanyId}");
                 endpoints.MapAreaControllerRoute("JobsAdd", "Admin", "Admin/{controller=Jobs}/{action=Add}");
-                endpoints.MapAreaControllerRoute("JobsEdit", "Admin", "Admin/{controller=Jobs}/{action=Edit}/{id?}");
+                endpoints.MapAreaControllerRoute("JobsEdit", "Admin", "Admin/{controller=Jobs}/{action=Edit}/{CompanyId}/{id?}");
                 endpoints.MapAreaControllerRoute("JobsDelete", "Admin", "Admin/{controller=Jobs}/{action=Delete}/{id?}");
 
                 endpoints.MapAreaControllerRoute("Settings", "Admin", "Admin/{controller=Settings}/{action=Index}");

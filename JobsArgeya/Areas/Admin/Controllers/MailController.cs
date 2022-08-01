@@ -49,12 +49,26 @@ namespace JobsArgeya.Areas.Admin.Controllers
             return View(allSubscribers);
         }
         [HttpGet]
-        public IActionResult Send()
+        public IActionResult Send(int Id)
         {
             GetDetails Details = new GetDetails(_databaseContext, _configuration);
             string Host = Request.Host.ToString();
-            ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
-            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
+            Company Company;
+            if (Id != 0 && User.IsInRole("SuperAdmin"))
+            {
+                Company = _databaseContext.Companies.Where(x => x.Id == Id).FirstOrDefault();
+                ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Company.CompanyDomain);
+                ViewData["FavIcon"] = Details.GetSiteDetails(7, Company.CompanyDomain);
+                ViewData["Logo"] = Details.GetSiteDetails(5, Company.CompanyDomain);
+                ViewData["DarkLogo"] = Details.GetSiteDetails(6, Company.CompanyDomain);
+            }
+            else
+            {
+                ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
+                ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
+                ViewData["Logo"] = Details.GetSiteDetails(5, Host);
+                ViewData["DarkLogo"] = Details.GetSiteDetails(6, Host);
+            }
             return View();
         }
         [HttpPost]
@@ -88,7 +102,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
             }
             return Redirect("/admin/mail/");
         }
-        public IActionResult MailLog()
+        public IActionResult MailLog(int Id)
         {
             GetDetails Details = new GetDetails(_databaseContext, _configuration);
             string Host = Request.Host.ToString();

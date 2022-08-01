@@ -2495,3 +2495,4 @@ C:\Users\Sony\Desktop\internProject-main\JobsArgeya\obj\Debug\net5.0\Razor\Areas
 C:\Users\Sony\Desktop\internProject-main\JobsArgeya\obj\Debug\net5.0\Razor\Views\Contact\Index.cshtml.g.cs
 C:\Users\Sony\Desktop\internProject-main\JobsArgeya\obj\Debug\net5.0\Razor\Views\Job\Intern.cshtml.g.cs
 C:\Users\Freeman\Source\Repos\farukcakal\internProject\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Mail\MailLog.cshtml.g.cs
+C:\Users\Freeman\Source\Repos\farukcakal\internProject\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Shared\Components\CompanySelector\Default.cshtml.g.cs

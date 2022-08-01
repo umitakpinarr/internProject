@@ -16,6 +16,7 @@
     <div class="card">
         <div class="card-body">
             <form action="/admin/jobs/add" method="post">
+                <input name="CompanyId" id="CompanyId" value="@Context.Request.RouteValues["CompanyId"]" hidden />
                 <div class="form-group" style="margin-bottom:10px;">
                     <label for="jobTitle">İlan Başlığı *</label>
                     <input class="form-control" asp-for="JobTitle" type="text" placeholder="İlan Başlığı" required>

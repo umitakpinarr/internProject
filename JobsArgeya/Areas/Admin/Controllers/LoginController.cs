@@ -61,7 +61,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
 
                     var ClaimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(ClaimsIdentity));
-                    return Redirect("/admin/home/index");
+                    return Redirect("/admin/home/index/"+DbCompany.Id);
                 }
                 else if (DbUser != null && DbUser.IsActive == 1)
                 {

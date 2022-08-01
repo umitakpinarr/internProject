@@ -70,27 +70,15 @@
                                     <i class="dripicons-search noti-icon"></i>
                                 </a>
                             </li>
-                            @if (User.IsInRole("SuperAdmin")) { 
-                            <li class="dropdown notification-list verticalal ">
-                                <a style="padding:calc(31px / 2) 20px calc(31px / 2) 20px!important;" class="nav-link dropdown-toggle nav-user arrow-none me-0 " data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
-                                   aria-expanded="false">
-                                    <span class="logo-lg">
-                                        <img src="~/uploads/images/@ViewData["DarkLogo"]" alt="image" height="40" width="140">
-                                    </span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
-                                    <a href="/admin/home/index/1">Argeya</a>
-                                    <a href="/admin/home/index/2">Splay</a>
-                                </div>
-                                
-                            </li>   
-                    }
-                    </ul>
-                    <button class="button-menu-mobile open-left end-0">
-                        <i class="mdi mdi-menu"></i>
-                    </button>
-                </div>
-                  
+                            @if (User.IsInRole("SuperAdmin"))
+                            {
+                @await Component.InvokeAsync("CompanySelector")}
+                        </ul>
+                        <button class="button-menu-mobile open-left end-0">
+                            <i class="mdi mdi-menu"></i>
+                        </button>
+                    </div>
+
                 </div>
                 <!-- end Topbar -->
                 <!-- Start Content-->
@@ -106,16 +94,14 @@
 
                                 @if (TempData["successMessage"] != null)
                                 {
-                                    <div class="alert alert-success" role="alert">
-                                        @TempData["successMessage"]
-                                    </div>
-                                }
+                    <div class="alert alert-success" role="alert">
+                        @TempData["successMessage"]
+                    </div>}
                                 @if (TempData["dangerMessage"] != null)
                                 {
-                                    <div class="alert alert-danger" role="alert">
-                                        @TempData["dangerMessage"]
-                                    </div>
-                                }
+                    <div class="alert alert-danger" role="alert">
+                        @TempData["dangerMessage"]
+                    </div>}
 
                                 @RenderBody()
                             </div>

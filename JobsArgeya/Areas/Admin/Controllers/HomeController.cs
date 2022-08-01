@@ -29,86 +29,41 @@ namespace JobsArgeya.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(int Id)
+        public IActionResult Index(int CompanyId)
         {
             /*Detayları çekmek için olşturduğum class ı türetip içersindeki methodlara erişeceğiz*/
             GetDetails Details = new GetDetails(_databaseContext, _configuration);
             string Host = Request.Host.ToString();
-            ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
-            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
-            ViewData["Logo"] = Details.GetSiteDetails(5, Host);
-            ViewData["DarkLogo"] = Details.GetSiteDetails(6, Host);
-            int CompanyId;
-            if(Id != 0 && User.IsInRole("SuperAdmin"))
+            Company Company;
+            List<Apply> DbApplies;
+            if (CompanyId != 0 && User.IsInRole("SuperAdmin"))
             {
-                CompanyId = _databaseContext.Companies.Where(x => x.Id == Id).Select(x=>x.Id).FirstOrDefault();
-            }
-            else
-            {
-               CompanyId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
-            }
-            List<Apply> DbApplies = _databaseContext.Applies.Where(x => x.CompanyId == CompanyId).ToList();
-            int UserId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
-            List<AppliesViewModel> AllApplies = new List<AppliesViewModel>();
-
-            foreach (Apply Apply in DbApplies)
-            {
-                AppliesViewModel ApplyVm = new AppliesViewModel();
-                ApplyVm.Id = Apply.Id;
-                ApplyVm.FullName = Apply.FullName;
-                ApplyVm.Phone = Apply.Phone;
-                ApplyVm.Email = Apply.Email;
-                ApplyVm.Gender = Apply.Gender;
-                ApplyVm.University = Apply.University;
-                ApplyVm.Faculty = Apply.Faculty;
-                ApplyVm.Resume = Apply.Resume;
-                ApplyVm.CvPath = Apply.CvPath;
-                ApplyVm.CreatedAt = Apply.CreatedAt;
-                ApplyVm.JobId = Apply.JobId;
-                /*DB de jobId varsa classdaki methoda gidip ilgili id ile veritabanından jobTitle return ediliyor ve viewmodele basıyor*/
-                if (Apply.JobId != null)
+                Company = _databaseContext.Companies.Where(x => x.Id == CompanyId).FirstOrDefault();
+                DbApplies = _databaseContext.Applies.Where(x => x.CompanyId == Company.Id).ToList();
+                if(DbApplies != null)
                 {
-                    ApplyVm.JobTitle = Details.GetJobDetails((int)Apply.JobId, 0);
-                    ApplyVm.JobSlug = Details.GetJobDetails((int)Apply.JobId, 4);
-                }
-                else if (Apply.IsIntern == "1")
-                {
-                    ApplyVm.InternStartDate = Apply.InternStartDate;
-                    ApplyVm.InternEndDate = Apply.InternEndDate;
-                    ApplyVm.JobTitle = "Stajyer Başvurusu";
+                    ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Company.CompanyDomain);
+                    ViewData["FavIcon"] = Details.GetSiteDetails(7, Company.CompanyDomain);
+                    ViewData["Logo"] = Details.GetSiteDetails(5, Company.CompanyDomain);
+                    ViewData["DarkLogo"] = Details.GetSiteDetails(6, Company.CompanyDomain);
                 }
                 else
                 {
-                    ApplyVm.JobTitle = "Sadece CV Göndermiş";
+                    TempData["dangerMessage"] = "Tanımsız işyeri bilgisi. Lütfen tekrar deneyiniz.";
+                    return Redirect("/admin/home/index");
                 }
-                AllApplies.Add(ApplyVm);
-            }
-
-            return View(AllApplies);
-        }
-
-        [HttpPost]
-        public IActionResult Index(AppliesViewModel Model)
-        {
-            
-            /*Detayları çekmek için olşturduğum class ı türetip içersindeki methodlara erişeceğiz*/
-            GetDetails Details = new GetDetails(_databaseContext, _configuration);
-            string Host = Request.Host.ToString();
-            ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
-            Settings DbCompany = _databaseContext.Settings.Where(x => x.CompanyId == Model.Id).FirstOrDefault();
-            if (DbCompany.CompanyId == 2)
-            {
-                ViewData["DarkLogo"] = Details.GetSiteDetails(6, "localhost:5003");
             }
             else
             {
-                ViewData["DarkLogo"] = Details.GetSiteDetails(6, "localhost:5001");
+                int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+                Company = _databaseContext.Companies.Where(x => x.Id == OfficeId).FirstOrDefault();
+                DbApplies = _databaseContext.Applies.Where(x => x.CompanyId == Company.Id).ToList();
+                ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Company.CompanyDomain);
+                ViewData["FavIcon"] = Details.GetSiteDetails(7, Company.CompanyDomain);
+                ViewData["Logo"] = Details.GetSiteDetails(5, Company.CompanyDomain);
+                ViewData["DarkLogo"] = Details.GetSiteDetails(6, Company.CompanyDomain);
             }
-            ViewData["Logo"] = Details.GetSiteDetails(5, Host);
-            int CompanyId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
-            List<Apply> DbApplies = _databaseContext.Applies.Where(x => x.CompanyId == Model.Id).ToList();
             List<AppliesViewModel> AllApplies = new List<AppliesViewModel>();
-            
 
             foreach (Apply Apply in DbApplies)
             {
@@ -170,94 +125,56 @@ namespace JobsArgeya.Areas.Admin.Controllers
             string Host = Request.Host.ToString();
             ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
             ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
-            int CompanyId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
-            int RoleId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "UserId").Value);
+            Apply DbApply;
+            int CompanyId;
             
-            Users DbUsers = _databaseContext.Users.Where(x => x.Id == RoleId).FirstOrDefault();
-            AppliesViewModel ApplyDetail = new AppliesViewModel();
-            if(DbUsers.RoleId == 1)
+            if (User.IsInRole("SuperAdmin"))
             {
-                Apply DbApply = _databaseContext.Applies.Where(x => x.Id == Id).FirstOrDefault();
-
-                if (DbApply != null)
-                {
-                    ApplyDetail.Id = DbApply.Id;
-                    ApplyDetail.FullName = DbApply.FullName;
-                    ApplyDetail.Phone = DbApply.Phone;
-                    ApplyDetail.Email = DbApply.Email;
-                    ApplyDetail.Gender = DbApply.Gender;
-                    ApplyDetail.University = DbApply.University;
-                    ApplyDetail.Faculty = DbApply.Faculty;
-                    ApplyDetail.Resume = DbApply.Resume;
-                    ApplyDetail.CvPath = DbApply.CvPath;
-                    ApplyDetail.CreatedAt = DbApply.CreatedAt;
-                    if (DbApply.JobId != null)
-                    {
-                        ApplyDetail.JobTitle = Details.GetJobDetails((int)DbApply.JobId, 0);
-                        ApplyDetail.JobSlug = Details.GetJobDetails((int)DbApply.JobId, 4);
-                    }
-                    else if (DbApply.IsIntern == "1")
-                    {
-                        ApplyDetail.IsIntern = "1";
-                        ApplyDetail.InternStartDate = DbApply.InternStartDate;
-                        ApplyDetail.InternEndDate = DbApply.InternEndDate;
-                        ApplyDetail.JobTitle = "Stajyer Başvurusu";
-                    }
-                    else
-                    {
-                        ApplyDetail.JobTitle = "Sadece CV göndermiş.";
-                    }
-
-                    return View(ApplyDetail);
-                }
-                else
-                {
-                    TempData["dangerMessage"] = "Geçersiz kayıt! Lütfen tekrar deneyiniz.";
-                }
-                return Redirect("/admin/home/index");
-
+                DbApply = _databaseContext.Applies.Where(x => x.Id == Id).FirstOrDefault();
             }
             else
             {
-                Apply DbApply = _databaseContext.Applies.Where(x => x.Id == Id && x.CompanyId == CompanyId).FirstOrDefault();
-                if (DbApply != null)
+                CompanyId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+                DbApply = _databaseContext.Applies.Where(x => x.Id == Id && x.CompanyId == CompanyId).FirstOrDefault();
+            }
+            AppliesViewModel ApplyDetail = new AppliesViewModel();
+            if (DbApply != null)
+            {
+                ApplyDetail.Id = DbApply.Id;
+                ApplyDetail.FullName = DbApply.FullName;
+                ApplyDetail.Phone = DbApply.Phone;
+                ApplyDetail.Email = DbApply.Email;
+                ApplyDetail.Gender = DbApply.Gender;
+                ApplyDetail.University = DbApply.University;
+                ApplyDetail.Faculty = DbApply.Faculty;
+                ApplyDetail.Resume = DbApply.Resume;
+                ApplyDetail.CvPath = DbApply.CvPath;
+                ApplyDetail.CreatedAt = DbApply.CreatedAt;
+                if (DbApply.JobId != null)
                 {
-                    ApplyDetail.Id = DbApply.Id;
-                    ApplyDetail.FullName = DbApply.FullName;
-                    ApplyDetail.Phone = DbApply.Phone;
-                    ApplyDetail.Email = DbApply.Email;
-                    ApplyDetail.Gender = DbApply.Gender;
-                    ApplyDetail.University = DbApply.University;
-                    ApplyDetail.Faculty = DbApply.Faculty;
-                    ApplyDetail.Resume = DbApply.Resume;
-                    ApplyDetail.CvPath = DbApply.CvPath;
-                    ApplyDetail.CreatedAt = DbApply.CreatedAt;
-                    if (DbApply.JobId != null)
-                    {
-                        ApplyDetail.JobTitle = Details.GetJobDetails((int)DbApply.JobId, 0);
-                        ApplyDetail.JobSlug = Details.GetJobDetails((int)DbApply.JobId, 4);
-                    }
-                    else if (DbApply.IsIntern == "1")
-                    {
-                        ApplyDetail.IsIntern = "1";
-                        ApplyDetail.InternStartDate = DbApply.InternStartDate;
-                        ApplyDetail.InternEndDate = DbApply.InternEndDate;
-                        ApplyDetail.JobTitle = "Stajyer Başvurusu";
-                    }
-                    else
-                    {
-                        ApplyDetail.JobTitle = "Sadece CV göndermiş.";
-                    }
-
-                    return View(ApplyDetail);
+                    ApplyDetail.JobTitle = Details.GetJobDetails((int)DbApply.JobId, 0);
+                    ApplyDetail.JobSlug = Details.GetJobDetails((int)DbApply.JobId, 4);
+                }
+                else if (DbApply.IsIntern == "1")
+                {
+                    ApplyDetail.IsIntern = "1";
+                    ApplyDetail.InternStartDate = DbApply.InternStartDate;
+                    ApplyDetail.InternEndDate = DbApply.InternEndDate;
+                    ApplyDetail.JobTitle = "Stajyer Başvurusu";
                 }
                 else
                 {
-                    TempData["dangerMessage"] = "Geçersiz kayıt! Lütfen tekrar deneyiniz.";
+                    ApplyDetail.JobTitle = "Sadece CV göndermiş.";
                 }
-                return Redirect("/admin/home/index");
+
+                return View(ApplyDetail);
             }
-            
+            else
+            {
+                TempData["dangerMessage"] = "Geçersiz kayıt! Lütfen tekrar deneyiniz.";
+            }
+            return Redirect("/admin/home/index");
+
         }
         [HttpPost]
         public IActionResult Password(ChangePasswordModel Model)

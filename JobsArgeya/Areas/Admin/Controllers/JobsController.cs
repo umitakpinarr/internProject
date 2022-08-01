@@ -28,23 +28,40 @@ namespace JobsArgeya.Areas.Admin.Controllers
             _hostingEnvironment = environment;
             _configuration = configuration;
         }
-        public IActionResult List(int Id)
+        public IActionResult List(int CompanyId)
         {
-            int CompanyId;
-            if (Id != 0 && User.IsInRole("SuperAdmin"))
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            Company Company;
+            if (CompanyId != 0 && User.IsInRole("SuperAdmin"))
             {
-                CompanyId = _databaseContext.Companies.Where(x => x.Id == Id).Select(x => x.Id).FirstOrDefault();
+                Company = _databaseContext.Companies.Where(x => x.Id == CompanyId).FirstOrDefault();
+                if(Company != null)
+                {
+                    ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Company.CompanyDomain);
+                    ViewData["FavIcon"] = Details.GetSiteDetails(7, Company.CompanyDomain);
+                    ViewData["Logo"] = Details.GetSiteDetails(5, Company.CompanyDomain);
+                    ViewData["DarkLogo"] = Details.GetSiteDetails(6, Company.CompanyDomain);
+                    ViewData["CompanyRoute"] = Company.Id;
+                }
+                else
+                {
+                    TempData["dangerMessage"] = "Tanımsız işyeri bilgisi. Lütfen tekrar deneyiniz.";
+                    return Redirect("/admin/home/index");
+                }
             }
             else
             {
-                CompanyId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+                int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+                Company = _databaseContext.Companies.Where(x => x.Id == OfficeId).FirstOrDefault();
+                ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Company.CompanyDomain);
+                ViewData["FavIcon"] = Details.GetSiteDetails(7, Company.CompanyDomain);
+                ViewData["Logo"] = Details.GetSiteDetails(5, Company.CompanyDomain);
+                ViewData["DarkLogo"] = Details.GetSiteDetails(6, Company.CompanyDomain);
+                ViewData["CompanyRoute"] = OfficeId;
             }
-            List<Jobs> DbJobs = _databaseContext.Jobs.Where(x => x.CompanyId == CompanyId).ToList();
+            List<Jobs> DbJobs = _databaseContext.Jobs.Where(x => x.CompanyId == Company.Id).ToList();
             List<JobsViewModel> AllJobs = new List<JobsViewModel>();
-            GetDetails Details = new GetDetails(_databaseContext, _configuration);
-            string Host = Request.Host.ToString();
-            ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
-            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
+
             foreach (Jobs Jobs in DbJobs)
             {
                 JobsViewModel JobsVm = new JobsViewModel();
@@ -60,31 +77,65 @@ namespace JobsArgeya.Areas.Admin.Controllers
             return View(AllJobs);
         }
         [HttpGet]
-        public IActionResult Add()
+        public IActionResult Add(int CompanyId)
         {
             GetDetails Details = new GetDetails(_databaseContext, _configuration);
-            string Host = Request.Host.ToString();
+            Company Company;
+            /*string Host = Request.Host.ToString();
             ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
-            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
+            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);*/
+            if (CompanyId != 0 && User.IsInRole("SuperAdmin"))
+            {
+                Company = _databaseContext.Companies.Where(x => x.Id == CompanyId).FirstOrDefault();
+                ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Company.CompanyDomain);
+                ViewData["FavIcon"] = Details.GetSiteDetails(7, Company.CompanyDomain);
+                ViewData["Logo"] = Details.GetSiteDetails(5, Company.CompanyDomain);
+                ViewData["DarkLogo"] = Details.GetSiteDetails(6, Company.CompanyDomain);
+            }
+            else
+            {
+                int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+                Company = _databaseContext.Companies.Where(x => x.Id == OfficeId).FirstOrDefault();
+                ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Company.CompanyDomain);
+                ViewData["FavIcon"] = Details.GetSiteDetails(7, Company.CompanyDomain);
+                ViewData["Logo"] = Details.GetSiteDetails(5, Company.CompanyDomain);
+                ViewData["DarkLogo"] = Details.GetSiteDetails(6, Company.CompanyDomain);
+            }
             return View();
         }
         [HttpGet]
-        public IActionResult Edit(int Id)
+        public IActionResult Edit(int Id, int CompanyId)
         {
             GetDetails Details = new GetDetails(_databaseContext, _configuration);
             string Host = Request.Host.ToString();
             ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
             ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
             Jobs DbJobs;
-            int CompanyId;
-            if (User.IsInRole("SuperAdmin"))
+            if (User.IsInRole("SuperAdmin") && CompanyId != 0)
             {
                 DbJobs = _databaseContext.Jobs.Where(x => x.Id == Id).FirstOrDefault();
+                Company Company = _databaseContext.Companies.Where(x => x.Id == CompanyId).FirstOrDefault();
+                if(Company != null)
+                {
+                    ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Company.CompanyDomain);
+                    ViewData["FavIcon"] = Details.GetSiteDetails(7, Company.CompanyDomain);
+                    ViewData["Logo"] = Details.GetSiteDetails(5, Company.CompanyDomain);
+                    ViewData["DarkLogo"] = Details.GetSiteDetails(6, Company.CompanyDomain);
+                }
+                else
+                {
+                    TempData["dangerMessage"] = "Tanımsız işyeri bilgisi. Lütfen tekrar deneyiniz.";
+                    return Redirect("/admin/home/index");
+                }
             }
             else
             {
-                CompanyId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
-                DbJobs = _databaseContext.Jobs.Where(x => x.Id == Id && x.CompanyId == CompanyId).FirstOrDefault();
+                int ClaimCompany = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+                DbJobs = _databaseContext.Jobs.Where(x => x.Id == Id && x.CompanyId == ClaimCompany).FirstOrDefault();
+                ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
+                ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
+                ViewData["Logo"] = Details.GetSiteDetails(5, Host);
+                ViewData["DarkLogo"] = Details.GetSiteDetails(6, Host);
             }
             
             JobsModel JobDetail = new JobsModel();
@@ -110,7 +161,11 @@ namespace JobsArgeya.Areas.Admin.Controllers
             string Host = Request.Host.ToString();
             ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
             ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
-            int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+            if(Model.CompanyId == null)
+            {
+                int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+                Model.CompanyId = OfficeId;
+            }
             if (ModelState.IsValid)
             {
                 _databaseContext.Jobs.Add(new Jobs
@@ -121,7 +176,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     JobContent = Model.JobContent,
                     JobSlug = Helper.GenerateSlug(Model.JobTitle),
                     IsActive = "true",
-                    CompanyId = OfficeId
+                    CompanyId = (int)Model.CompanyId
                 });
                 _databaseContext.SaveChanges();
                 TempData["successMessage"] = "İlan başarıyla eklendi.";

@@ -10,6 +10,6 @@
     "\\JobsArgeya\\Areas\\Admin\\Views\\Shared\\Components",
     "\\JobsArgeya\\Areas\\Admin\\Views\\Shared\\Components\\NavBar"
   ],
-  "SelectedNode": "\\JobsArgeya\\Areas\\Admin\\Controllers\\JobsController.cs",
+  "SelectedNode": "\\JobsArgeya\\Areas\\Admin\\Controllers\\HomeController.cs",
   "PreviewInSolutionExplorer": false
 }

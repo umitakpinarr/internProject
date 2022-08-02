@@ -74,6 +74,12 @@ namespace JobsArgeya.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Index(SettingsModel Settings, IFormFile Logo, IFormFile DarkLogo, IFormFile FavIcon)
         {
+            GetDetails Details = new GetDetails(_databaseContext, _configuration);
+            string Host = Request.Host.ToString();
+            ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
+            ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);
+            ViewData["Logo"] = Details.GetSiteDetails(5, Host);
+            ViewData["DarkLogo"] = Details.GetSiteDetails(6, Host);
             int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
             List<Settings> DbSettings = _databaseContext.Settings.Where(x=> x.CompanyId == OfficeId).ToList();
             List<SettingsViewModel> AllSettings = new List<SettingsViewModel>();

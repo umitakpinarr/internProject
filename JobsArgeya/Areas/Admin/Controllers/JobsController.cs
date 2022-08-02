@@ -250,7 +250,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
             {
                 TempData["dangerMessage"] = "Geçersiz ilanı silmeye çalıştınız. Lütfen tekrar deneyiniz.";
             }
-            return Redirect("/admin/jobs/list");
+            return Redirect(Request.Headers["Referer"].ToString());
         }
     }
 }

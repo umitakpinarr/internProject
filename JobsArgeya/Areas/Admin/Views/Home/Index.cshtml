@@ -97,7 +97,7 @@
                             <td>@Apply.JobTitle</td>                    
                         }
                         <td><p style="word-wrap: break-word;">@Apply.Resume</p></td>
-                        <td><a href="/admin/home/applydetail/@Apply.Id" class="btn btn-primary">Görüntüle</a> <a href="/admin/home/delete/@Apply.Id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
+                        <td><a href="/admin/home/applydetail/@(ViewData["CompanyRoute"] != null ? ViewData["CompanyRoute"]+"/" : "")@Apply.Id" class="btn btn-primary">Görüntüle</a> <a href="/admin/home/delete/@Apply.Id" onclick="return confirm('İlgili kayıt silinsin mi ?');" class="btn btn-danger">Sil</a></td>
                     </tr>
                         }
                         

@@ -128,11 +128,11 @@ namespace JobsArgeya.Areas.Admin.Controllers
             return Redirect("/admin/user/index");
         }
         [HttpGet]
-        public IActionResult Delete(int Id)
+        public IActionResult Delete(int CompanyId)
         {
-            if (Id != 0)
+            if (CompanyId != 0)
             {
-                var User = _databaseContext.Users.Where(x => x.Id == Id).FirstOrDefault();
+                var User = _databaseContext.Users.Where(x => x.Id == CompanyId).FirstOrDefault();
                 if (User != null)
                 {
                     _databaseContext.Users.Remove(User);
@@ -152,11 +152,11 @@ namespace JobsArgeya.Areas.Admin.Controllers
             return Redirect("/admin/user/index");
         }
         [HttpGet]
-        public IActionResult SetStatus(int Id)
+        public IActionResult SetStatus(int CompanyId)
         {
-            if(Id!=0)
+            if(CompanyId != 0)
             {
-                var User = _databaseContext.Users.Where(x => x.Id == Id).FirstOrDefault();
+                var User = _databaseContext.Users.Where(x => x.Id == CompanyId).FirstOrDefault();
                 if(User != null)
                 {
                     if(User.IsActive == 0)

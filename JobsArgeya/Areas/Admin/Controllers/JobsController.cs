@@ -227,18 +227,18 @@ namespace JobsArgeya.Areas.Admin.Controllers
             }
             return Redirect(Request.Headers["Referer"].ToString());
         }
-        public IActionResult Delete(int Id)
+        public IActionResult Delete(int CompanyId)
         {
             Jobs DbJobs;
-            int CompanyId;
+            int OfficeId;
             if (User.IsInRole("SuperAdmin"))
             {
-                DbJobs = _databaseContext.Jobs.Where(x => x.Id == Id).FirstOrDefault();
+                DbJobs = _databaseContext.Jobs.Where(x => x.Id == CompanyId).FirstOrDefault();
             }
             else
             {
-                CompanyId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
-                DbJobs = _databaseContext.Jobs.Where(x => x.Id == Id && x.CompanyId == CompanyId).FirstOrDefault();
+                OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+                DbJobs = _databaseContext.Jobs.Where(x => x.Id == CompanyId && x.CompanyId == OfficeId).FirstOrDefault();
             }
             if (DbJobs != null)
             {

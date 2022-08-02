@@ -98,12 +98,15 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     {
                         TimeSpan DiffDates = (TimeSpan)(ApplyVm.InternEndDate - DateTime.Now);
                         ApplyVm.RemainingTime = DiffDates.TotalDays;
+                        ApplyVm.RemainingTime = Math.Round(DiffDates.TotalDays, 0);
                     }
                     else
                     {
 
-                        TimeSpan DiffDates = (TimeSpan)(ApplyVm.InternStartDate - DateTime.Now);
+
+                        TimeSpan DiffDates = (TimeSpan)(ApplyVm.InternEndDate - DateTime.Now);
                         ApplyVm.RemainingTime = DiffDates.TotalDays;
+                        ApplyVm.RemainingTime = Math.Round(DiffDates.TotalDays, 0);
                     }
                 }
                 else
@@ -116,16 +119,16 @@ namespace JobsArgeya.Areas.Admin.Controllers
             return View(AllApplies);
         }
 
-        public IActionResult Delete(int Id)
+        public IActionResult Delete(int CompanyId)
         {
-            int CompanyId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
-            var Apply = _databaseContext.Applies.Where(x => x.Id == Id && x.CompanyId == CompanyId).FirstOrDefault();
+            int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
+            var Apply = _databaseContext.Applies.Where(x => x.Id == CompanyId && x.CompanyId == OfficeId).FirstOrDefault();
 
             if (Apply != null)
             {
                 _databaseContext.Applies.Remove(Apply);
                 _databaseContext.SaveChanges();
-                ViewData["CompanyRoute"] = CompanyId;
+                ViewData["CompanyRoute"] = OfficeId;
                 TempData["successMessage"] = "Başvuru başarıyla silindi.";
             }
             else
@@ -155,6 +158,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     ViewData["FavIcon"] = Details.GetSiteDetails(7, Company.CompanyDomain);
                     ViewData["Logo"] = Details.GetSiteDetails(5, Company.CompanyDomain);
                     ViewData["DarkLogo"] = Details.GetSiteDetails(6, Company.CompanyDomain);
+                    
                 }
                 else
                 {
@@ -199,16 +203,18 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     ApplyDetail.InternStartDate = DbApply.InternStartDate;
                     ApplyDetail.InternEndDate = DbApply.InternEndDate;
                     ApplyDetail.JobTitle = "Stajyer Başvurusu";
-                    if(DateTime.Now>=ApplyDetail.InternStartDate)
+                    if (DateTime.Now >= ApplyDetail.InternStartDate)
                     {
                         TimeSpan DiffDates = (TimeSpan)(ApplyDetail.InternEndDate - DateTime.Now);
                         ApplyDetail.RemainingTime = DiffDates.TotalDays;
+                        ApplyDetail.RemainingTime = Math.Round(DiffDates.TotalDays, 0);
                     }
                     else
                     {
 
-                        TimeSpan DiffDates = (TimeSpan)(ApplyDetail.InternStartDate - DateTime.Now);
+                        TimeSpan DiffDates = (TimeSpan)(ApplyDetail.InternEndDate - DateTime.Now);
                         ApplyDetail.RemainingTime = DiffDates.TotalDays;
+                        ApplyDetail.RemainingTime = Math.Round(DiffDates.TotalDays, 0);
                     }
                 }
                 else

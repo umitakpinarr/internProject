@@ -56,10 +56,10 @@ namespace JobsArgeya.Areas.Admin.Controllers
             }
             return View(AllContacts);
         }
-        public IActionResult Delete(int Id)
+        public IActionResult Delete(int CompanyId)
         {
             int OfficeId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "OfficeId").Value);
-            var Contact = _databaseContext.Contact.Where(x => x.Id == Id && x.CompanyId == OfficeId).FirstOrDefault();
+            var Contact = _databaseContext.Contact.Where(x => x.Id == CompanyId && x.CompanyId == OfficeId).FirstOrDefault();
             if (Contact != null)
             {
                 _databaseContext.Contact.Remove(Contact);

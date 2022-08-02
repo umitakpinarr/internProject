@@ -138,7 +138,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 DbCompany.CompanyDomain = Model.CompanyDomain;
                 _databaseContext.SaveChanges();
                 TempData["successMessage"] = "Şirket başarıyla güncellendi.";
-                return Redirect("/admin/user/index");
+                return Redirect("/admin/company/index");
             }
             TempData["dangerMessage"] = "Şirket güncellenirken hatayla karşılaşıldı. Lütfen tekrar deneyiniz.";
             return Redirect("/admin/company/index");

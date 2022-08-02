@@ -87,9 +87,9 @@ namespace JobsArgeya.Areas.Admin.Controllers
             }
             return View();
         }
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int CompanyId)
         {
-            var subscriber = _databaseContext.MailSubscribers.Where(x => x.Id == id).FirstOrDefault();
+            var subscriber = _databaseContext.MailSubscribers.Where(x => x.Id == CompanyId).FirstOrDefault();
             if (subscriber != null)
             {
                 _databaseContext.MailSubscribers.Remove(subscriber);
@@ -100,7 +100,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
             {
                 TempData["dangerMessage"] = "Geçersiz mail adresini silmeye çalıştınız. Lütfen tekrar deneyiniz.";
             }
-            return Redirect("/admin/mail/");
+            return Redirect("/admin/mail/Index");
         }
         public IActionResult MailLog(int Id)
         {
@@ -124,9 +124,9 @@ namespace JobsArgeya.Areas.Admin.Controllers
 
             return View(AllLogs);
         }
-        public IActionResult MailLogDelete(int Id)
+        public IActionResult MailLogDelete(int CompanyId)
         {
-            var Log = _databaseContext.MailLog.Where(x => x.Id == Id).FirstOrDefault();
+            var Log = _databaseContext.MailLog.Where(x => x.Id == CompanyId).FirstOrDefault();
             if (Log != null)
             {
                 _databaseContext.MailLog.Remove(Log);

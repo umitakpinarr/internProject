@@ -1,0 +1,24 @@
+﻿@model List<LangCode>
+
+@{ Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+                ViewData["CmsTitle"] = "Sözlük"; }
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <form action="/admin/dictionary/adddictionary" method="post">
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="Language">Dil Adı</label>
+                    <input class="form-control" name="Language" id="Language" type="text" placeholder="Dil Adı">
+                </div>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="Code">Dil Kodu</label>
+                    <input class="form-control" name="Code" id="Code" type="text" placeholder="Dil Kodu">
+                </div>
+                <br />
+                <button type="submit" class="btn btn-danger w-100">Dil Ekle</button>
+            </form>
+
+        </div>
+    </div>
+</div>

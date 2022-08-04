@@ -1,52 +1,59 @@
-﻿@model JobsModel
-@{
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    ViewData["CmsTitle"] = "İlan Oluştur";
-}
-@section Styles {
-    <style>
-        /*Textbox*/
-        .ck-editor__editable {
-            min-height: 500px;
-            max-height: 500px;
-        }
-    </style>
-}
-<div class="col-12">
-    <div class="card">
-        <div class="card-body">
-            <form action="/admin/jobs/add" method="post">
-                <input name="CompanyId" id="CompanyId" value="@Context.Request.RouteValues["CompanyId"]" hidden />
-                <div class="form-group" style="margin-bottom:10px;">
-                    <label for="jobTitle">İlan Başlığı *</label>
-                    <input class="form-control" asp-for="JobTitle" type="text" placeholder="İlan Başlığı" required>
-                </div>
-                <div class="form-group" style="margin-bottom:10px;">
-                    <label for="jobKeywords">İlan Anahtar Kelimeleri *</label>
-                    <input class="form-control" asp-for="JobKeywords" type="text" placeholder="İlan Anahtar Kelime" required>
-                </div>
-                <div class="form-group" style="margin-bottom:10px;">
-                    <label for="jobDescription">İlan Özeti *</label>
-                    <input class="form-control" asp-for="JobDescription" type="text" placeholder="İlan Açıklama" required>
-                </div>
-                <label for="jobContent">İlan Açıklaması *</label>
-                <textarea asp-for="JobContent"></textarea>
-                <br />
-                <button type="submit" class="btn btn-danger w-100">İlanı Oluştur</button>
-            </form>
+﻿@model List<LangCode>
+    @{ Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+                    ViewData["CmsTitle"] = "İlan Oluştur"; }
+    @section Styles {
+        <style>
+            /*Textbox*/
+            .ck-editor__editable {
+                min-height: 500px;
+                max-height: 500px;
+            }
+        </style>
+    }
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form action="/admin/jobs/add" method="post">
+                    <input name="CompanyId" id="CompanyId" value="@Context.Request.RouteValues["CompanyId"]" hidden />
+                    <div class="form-group" style="margin-bottom:10px;">
+                        <label for="jobTitle">İlan Başlığı *</label>
+                        <input class="form-control" name="JobTitle" id="jobTitle" type="text" placeholder="İlan Başlığı" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom:10px;">
+                        <label for="jobKeywords">İlan Anahtar Kelimeleri *</label>
+                        <input class="form-control" name="JobKeywords" id="jobKeywords" type="text" placeholder="İlan Anahtar Kelime" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom:10px;">
+                        <label for="jobDescription">İlan Özeti *</label>
+                        <input class="form-control" name="JobDescription" id="jobDescription" type="text" placeholder="İlan Açıklama" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom:10px;">
+                        <label for="LangCode">İlan Dili</label>
+                        <select name="LangCode" id="LangCode" class="form-control">
+                            @foreach (LangCode Language in Model)
+                            {
+                                <option value="@Language.Code">@Language.Language</option>
+                            }
+                        </select>
+                    </div>
+                    <label for="jobContent">İlan Açıklaması *</label>
+                    <textarea name="JobContent" id="jobContent"></textarea>
+                    <br />
+                    <button type="submit" class="btn btn-danger w-100">İlanı Oluştur</button>
+                </form>
 
+            </div>
         </div>
     </div>
-</div>
-@section Scripts {
-    <script src="~/panel/assets/js/vendor/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
-    <script>
-        var Editor = ClassicEditor
-            .create(document.querySelector('#JobContent'))
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
-}
+    @section Scripts {
+        <script src="~/panel/assets/js/vendor/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
+        <script>
+            var Editor = ClassicEditor
+                .create(document.querySelector('#jobContent'))
+                .catch(error => {
+                    console.error(error);
+                });
+        </script>
+    }
 

@@ -13,6 +13,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Globalization;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 namespace JobsArgeya
 {
@@ -28,6 +30,7 @@ namespace JobsArgeya
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
             services.AddMvc();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
@@ -40,6 +43,10 @@ namespace JobsArgeya
                 options.LoginPath = "/admin/login";
                 options.LogoutPath = "/admin/logout";
             });
+            services.AddTransient<ILocalizer, Localizer>();
+
+            services.AddSingleton(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.BasicLatin, UnicodeRanges.Latin1Supplement, UnicodeRanges.CurrencySymbols, UnicodeRanges.LatinExtendedB, UnicodeRanges.LatinExtendedC, UnicodeRanges.LatinExtendedA, UnicodeRanges.Cyrillic, UnicodeRanges.CyrillicExtendedA }));
+
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddMvc()
                 .AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix)
@@ -69,7 +76,8 @@ namespace JobsArgeya
             app.UseSession();
             var cultures = new List<CultureInfo> {
                 new CultureInfo("en"),
-                new CultureInfo("tr")
+                new CultureInfo("tr"),
+                new CultureInfo("ru")
             };
             app.UseRequestLocalization(options =>
             {
@@ -77,19 +85,20 @@ namespace JobsArgeya
                 options.SupportedCultures = cultures;
                 options.SupportedUICultures = cultures;
             });
+            RequestLocalizationOptions requestLocalizationOptions = new RequestLocalizationOptions();
+
+            requestLocalizationOptions.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("tr");
+            requestLocalizationOptions.SupportedCultures = requestLocalizationOptions.SupportedUICultures =
+              new CultureInfo[] { new CultureInfo("tr"), new CultureInfo("en"), new CultureInfo("ru") }.ToList();
+            requestLocalizationOptions.RequestCultureProviders.Insert(0, new RouteValueRequestCultureProvider() { Options = requestLocalizationOptions });
+
+            app.UseRequestLocalization(requestLocalizationOptions);
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "index",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                /*endpoints.MapControllerRoute(
-                    name:"office",
-                    pattern:"{controller=Office}/{action=Index}/{id?}");*/
-                /*endpoints.MapControllerRoute(
-                    name: "jobDetail",
-                    pattern: "{controller=JobDetail}/{action=Index}/{slug?}");*/
 
                 endpoints.MapAreaControllerRoute("Admin", "Admin", "Admin/{controller=Home}/{action=Index}/{CompanyId}/{id?}");
+                //endpoints.MapAreaControllerRoute("AdminLogin0", "Admin", "/yonetim");
                 endpoints.MapAreaControllerRoute("AdminLogin", "Admin", "/yonetim/{controller=login}/{action=Index}");
                 endpoints.MapAreaControllerRoute("Logout", "Admin", "/yonetim/{controller=login}/{action=SignOut}");
 
@@ -107,8 +116,13 @@ namespace JobsArgeya
                 endpoints.MapAreaControllerRoute("MailDelete", "Admin", "Admin/{controller=Mail}/{action=Delete}/{id?}");
 
                 endpoints.MapAreaControllerRoute("UserList", "Admin", "Admin/{controller=User}/{action=Index}/{id?}");
+                endpoints.MapAreaControllerRoute("SaveKey", "Admin", "Admin/{controller=Dictionary}/{action=SaveKey}");
 
                 endpoints.MapControllerRoute(name: "captcha", pattern: "argeya-captcha", defaults: new { controller = "captcha", action = "getImage" });
+
+                endpoints.MapControllerRoute(
+                    name: "index",
+                    pattern: "{culture=tr}/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

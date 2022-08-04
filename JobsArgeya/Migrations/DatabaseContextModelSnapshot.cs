@@ -127,6 +127,30 @@ namespace JobsArgeya.Migrations
                     b.ToTable("Contact");
                 });
 
+            modelBuilder.Entity("JobsArgeya.Data.Entities.Dictionary", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Key")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("LangCode")
+                        .HasMaxLength(2)
+                        .HasColumnType("nvarchar(2)");
+
+                    b.Property<string>("Value")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Dictionaries");
+                });
+
             modelBuilder.Entity("JobsArgeya.Data.Entities.Jobs", b =>
                 {
                     b.Property<int>("Id")
@@ -155,9 +179,27 @@ namespace JobsArgeya.Migrations
                     b.Property<string>("JobTitle")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("LangCode")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Jobs");
+                });
+
+            modelBuilder.Entity("JobsArgeya.Data.Entities.LangCode", b =>
+                {
+                    b.Property<string>("Code")
+                        .HasMaxLength(2)
+                        .HasColumnType("nvarchar(2)");
+
+                    b.Property<string>("Language")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.HasKey("Code");
+
+                    b.ToTable("LangCodes");
                 });
 
             modelBuilder.Entity("JobsArgeya.Data.Entities.MailLog", b =>

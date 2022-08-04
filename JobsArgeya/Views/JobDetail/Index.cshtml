@@ -10,22 +10,22 @@
         <div class="container">
             <div class="t-row">
                 <div class="d-table-cell">
-                    <a class="btn btn-primary" style="margin-top:25px; margin-bottom:25px; background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];" href="/" title="Geri">
-                        <span style="line-height: 12px; font-size: 20px;">&#x2190;</span> Geri Git
+                    <a class="btn btn-primary" style="margin-top:25px; margin-bottom:25px; background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];" href="/@Context.Request.RouteValues["culture"]" title="@Localizer.Get("jobdetail_back_button")">
+                        <span style="line-height: 12px; font-size: 20px;">&#x2190;</span> @Localizer.Get("jobdetail_back_button")
                     </a>
                 </div>
             </div>
         </div>
     </section>
     <div class="shadow p-3 mb-5 bg-body rounded">
-        <h2 style="text-align:center;">İş İlanı Hakkında</h2>
+        <h2 style="text-align:center;">@Localizer.Get("jobdetail_card_title")</h2>
         <p>@Html.Raw(@Model.JobContent)</p>
     </div>
 
     <div class="row">
         <div class="col">
             <div class="text-center">
-                <a href="/job/applicant/@Model.JobSlug" style="background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];" class="btn btn-primary btn-lg active">Hemen Başvur</a>
+                <a href="/@Context.Request.RouteValues["culture"]/job/applicant/@Model.JobSlug" style="background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];" class="btn btn-primary btn-lg active">@Localizer.Get("jobdetail_apply_button")</a>
             </div>
         </div>
     </div>

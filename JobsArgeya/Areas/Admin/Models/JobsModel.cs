@@ -19,5 +19,7 @@ namespace JobsArgeya.Areas.Admin.Models
         public string JobDescription { get; set; }
         public string IsActive { get; set; }
         public int? CompanyId { get; set; }
+        public string LangCode { get; set; }
+        public string Language { get; set; }
     }
 }

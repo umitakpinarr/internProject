@@ -10,13 +10,19 @@
                     </ul>
                 </div>
             </div>
+            
+           
             <div class="col-md-7">
                 <div class="toolbar-sl-share">
                     <ul>
+
                         <li><a href="@Model.Facebook" target="_blank"><i class="fa-brands fa-facebook"></i></a></li>
                         <li><a href="@Model.Instagram" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
                         <li><a href="@Model.Twitter" target="_blank"><i class="fa-brands fa-twitter"></i></a></li>
                         <li><a href="@Model.Linkedin" target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
+                        <li style="margin-left:5px"><a href="/tr"><i class="flag flag-tr"></a></i></li>
+                        <li> <a href="/en"><i class="flag flag-uk"></i></a></li>
+                        <li> <a href="/ru"><i class="flag flag-ru"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -27,12 +33,12 @@
     <div class="menu-area menu-sticky">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <div class="logo-area">
-                        <a href="/"><img src="/uploads/images/@Model.Logo" alt="logo" style="max-height:40px; height:40px;"></a>
+                        <a href="/@Context.Request.RouteValues["culture"]"><img src="/uploads/images/@Model.Logo" alt="logo" style="max-height:40px; height:40px;"></a>
                     </div>
                 </div>
-                <div class="col-lg-4 text-right">
+                <div class="col-lg-5 text-right">
                     <div class="rs-menu-area">
                         <div class="main-menu">
                             <div class="mobile-menu">
@@ -43,10 +49,10 @@
                             <nav class="rs-menu pr-65">
                                 <ul class="nav-menu">
                                     <li>
-                                        <a href="/">Açık Pozisyonlar</a>
+                                        <a href="/@Context.Request.RouteValues["culture"]/">@Localizer.Get("header_openpositions")</a>
                                     </li>
                                     <li>
-                                        <a href="/contact">Bize Ulaşın</a>
+                                        <a href="/@Context.Request.RouteValues["culture"]/contact">@Localizer.Get("header_contactus")</a>
                                     </li>
                                 </ul>
                             </nav>

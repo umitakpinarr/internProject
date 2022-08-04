@@ -15,5 +15,6 @@ namespace JobsArgeya.Data.Entities
         public string JobDescription { get; set; }
         public string IsActive { get; set; }
         public int CompanyId { get; set; }
+        public string LangCode { get; set; }
     }
 }

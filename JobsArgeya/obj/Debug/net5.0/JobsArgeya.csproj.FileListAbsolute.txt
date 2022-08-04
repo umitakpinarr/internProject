@@ -2923,3 +2923,5 @@ C:\Users\root\Desktop\internProject-main\JobsArgeya\obj\Debug\net5.0\JobsArgeya.
 C:\Users\root\Desktop\internProject-main\JobsArgeya\obj\Debug\net5.0\ref\JobsArgeya.dll
 C:\Users\root\Desktop\internProject-main\JobsArgeya\obj\Debug\net5.0\JobsArgeya.pdb
 C:\Users\root\Desktop\internProject-main\JobsArgeya\obj\Debug\net5.0\JobsArgeya.genruntimeconfig.cache
+C:\Users\Freeman\Source\Repos\farukcakal\internProject\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Dictionary\Index.cshtml.g.cs
+C:\Users\Freeman\Source\Repos\farukcakal\internProject\JobsArgeya\obj\Debug\net5.0\Razor\Areas\Admin\Views\Dictionary\AddDictionary.cshtml.g.cs

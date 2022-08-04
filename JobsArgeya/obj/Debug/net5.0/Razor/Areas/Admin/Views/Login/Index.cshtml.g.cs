@@ -40,8 +40,15 @@ using JobsArgeya.Business;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Users\Freeman\Source\Repos\farukcakal\internProject\JobsArgeya\Areas\Admin\Views\_ViewImports.cshtml"
+using JobsArgeya.Data.Entities;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d16cc81c2638ea8b1d9f7fd5c018df958e0b6b3b", @"/Areas/Admin/Views/Login/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"e132fafa218d2fa3e61abc3075a7a88ecf0a1023", @"/Areas/Admin/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"fcb0f0c5d712905f755b54476f993838c16b9839", @"/Areas/Admin/Views/_ViewImports.cshtml")]
     public class Areas_Admin_Views_Login_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<UsersModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("rel", new global::Microsoft.AspNetCore.Html.HtmlString("shortcut icon"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -81,7 +88,7 @@ using JobsArgeya.Business;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             WriteLiteral("<!DOCTYPE html>\n<html lang=\"en\">\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d16cc81c2638ea8b1d9f7fd5c018df958e0b6b3b7031", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d16cc81c2638ea8b1d9f7fd5c018df958e0b6b3b7248", async() => {
                 WriteLiteral("\n    <meta charset=\"utf-8\" />\n    <title>Giriş Yap | ");
 #nullable restore
 #line 6 "C:\Users\Freeman\Source\Repos\farukcakal\internProject\JobsArgeya\Areas\Admin\Views\Login\Index.cshtml"
@@ -96,7 +103,7 @@ using JobsArgeya.Business;
     <meta content=""Coderthemes"" name=""author"" />
     <!-- App favicon -->
     ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "d16cc81c2638ea8b1d9f7fd5c018df958e0b6b3b7899", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "d16cc81c2638ea8b1d9f7fd5c018df958e0b6b3b8116", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -140,7 +147,7 @@ AddHtmlAttributeValue("", 478, ViewData["FavIcon"], 478, 20, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\n\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d16cc81c2638ea8b1d9f7fd5c018df958e0b6b3b10710", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d16cc81c2638ea8b1d9f7fd5c018df958e0b6b3b10927", async() => {
                 WriteLiteral(@"
     <div class=""account-pages pt-2 pt-sm-5 pb-4 pb-sm-5"">
         <div class=""container"">
@@ -152,7 +159,7 @@ AddHtmlAttributeValue("", 478, ViewData["FavIcon"], 478, 20, false);
                         <div class=""card-header pt-4 pb-4 text-center bg-white"">
                             <a href=""index.html"">
                                 <span>");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "d16cc81c2638ea8b1d9f7fd5c018df958e0b6b3b11420", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "d16cc81c2638ea8b1d9f7fd5c018df958e0b6b3b11637", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -212,7 +219,7 @@ AddHtmlAttributeValue("", 1383, ViewData["LightLogo"], 1383, 22, false);
 #line hidden
 #nullable disable
                 WriteLiteral("                            ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d16cc81c2638ea8b1d9f7fd5c018df958e0b6b3b14675", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d16cc81c2638ea8b1d9f7fd5c018df958e0b6b3b14892", async() => {
                     WriteLiteral(@"
 
                                 <div class=""mb-3"">

@@ -40,8 +40,15 @@ using JobsArgeya.Business;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Users\Freeman\Source\Repos\farukcakal\internProject\JobsArgeya\Areas\Admin\Views\_ViewImports.cshtml"
+using JobsArgeya.Data.Entities;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"12e598c71754abd2011a17e7b1764515e274dfb4", @"/Areas/Admin/Views/Home/ApplyDetail.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"e132fafa218d2fa3e61abc3075a7a88ecf0a1023", @"/Areas/Admin/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"fcb0f0c5d712905f755b54476f993838c16b9839", @"/Areas/Admin/Views/_ViewImports.cshtml")]
     public class Areas_Admin_Views_Home_ApplyDetail : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<AppliesViewModel>
     {
         #pragma warning disable 1998

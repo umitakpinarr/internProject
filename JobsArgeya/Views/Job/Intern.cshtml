@@ -1,7 +1,7 @@
 ﻿@model ApplyModel
 @{
-    ViewData["Title"] = "Stajyerlik Başvurusu";
-    ViewData["BreadcrumbTitle"] = "Stajyerlik Başvurusu";
+    ViewData["Title"] = Localizer.Get("job_internshipbreadcrumb_title");
+    ViewData["BreadcrumbTitle"] = Localizer.Get("job_internshipbreadcrumb_title");
 }
 
 @if (TempData["successMessage"] != null)
@@ -25,7 +25,7 @@
         <div class="t-row">
             <div class="d-table-cell">
                 <a class="btn btn-primary" style="margin-top:25px; margin-bottom:25px; background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];" href="/" title="Geri">
-                    <span style="line-height: 12px; font-size: 20px;">&#x2190;</span> Geri Git
+                    <span style="line-height: 12px; font-size: 20px;">&#x2190;</span> @Localizer.Get("job_applicant_back")
                 </a>
             </div>
         </div>
@@ -33,58 +33,57 @@
 </section>
 <div class="container shadow-sm mb--5 p-3 rounded bg-body">
     <div class="title text-center">
-        <h1>Başvuru Formu</h1>
+        <h1>@Localizer.Get("job_internship_title")</h1>
         <p>
-            Hem gelişmek hem de öğrenmek mi istiyorsun? Projeler geliştirip kendini iş hayatına alıştırmak mı istiyorsun?
-            <br />Önünde mükemmel duran bir fırsat var.
+            @Localizer.Get("job_internship_desc")
         </p>
     </div>
     <div class="job-apply-form">
         <form action="/Job/Intern" method="post" enctype="multipart/form-data">
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="FullName"><b>Adınız ve Soydınız: *</b></label>
+                <label name="FullName"><b>@Localizer.Get("job_form_fullname")</b></label>
                 <input name="FullName" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="Phone"><b>Telefon Numaranız: *</b></label>
+                <label name="Phone"><b>@Localizer.Get("job_form_phone")</b></label>
                 <input name="Phone" class="form-control" required placeholder="05XXXXXXXXX">
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="Email"><b>E-Mail Adresiniz: *</b></label>
+                <label name="Email"><b>@Localizer.Get("job_form_email")</b></label>
                 <input type="email" name="Email" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label><b>Cinsiyetiniz *</b></label>
+                <label><b>@Localizer.Get("job_form_gender")</b></label>
                 <select name="Gender" class="form-control" required>
-                    <option value="">Lütfen Bir Seçim Yapınız!</option>
-                    <option value="Belirtilmemiş">Belirtmek İstemiyorum</option>
-                    <option value="Erkek">Erkek</option>
-                    <option value="Kadın">Kadın</option>
+                    <option value="">@Localizer.Get("gender_nonselected")</option>
+                    <option value="Belirtilmemiş">@Localizer.Get("gender_nonspecify")</option>
+                    <option value="Erkek">@Localizer.Get("gender_male")</option>
+                    <option value="Kadın">@Localizer.Get("gender_female")</option>
                 </select>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="University"><b>Okuduğunuz Okul: *</b></label>
+                <label name="University"><b>@Localizer.Get("job_form_university")</b></label>
                 <input name="University" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="Faculty"><b>Okuduğunuz Bölüm ve Sınıf: *</b></label>
+                <label name="Faculty"><b>@Localizer.Get("job_form_faculty")</b></label>
                 <input name="Faculty" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label for="InternStartDate"><b>Staj Başlangıç Tarihi: *</b></label>
+                <label for="InternStartDate"><b>@Localizer.Get("job_internship_start")</b></label>
                 <input class="form-control" id="InternStartDate" name="InternStartDate" autocomplete="off" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label for="InternEndDate"><b>Staj Bitiş Tarihi: *</b></label>
+                <label for="InternEndDate"><b>@Localizer.Get("job_internship_end")</b></label>
                 <input class="form-control" id="InternEndDate" name="InternEndDate" autocomplete="off" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label name="Resume"><b>Öz Yazı: *</b></label>
+                <label name="Resume"><b>@Localizer.Get("job_form_resume")</b></label>
                 <textarea name="Resume" class="form-control" required></textarea>
             </div>
             <div class="d-flex flex-row">
                 <div class="form-group mr-auto p-2" style="margin-bottom:10px;">
-                    <label for="FormFile"><b>Özgeçmiş / CV Yükle (Sadece PDF uzantılı dosyalar kabul edilmektedir) *</b></label>
+                    <label for="FormFile"><b>@Localizer.Get("job_form_upload")</b></label>
                     <input type="file" class="form-control-file" name="FormFile" accept="application/pdf" required>
                 </div>
                 <div class="form-group p-2" style="margin-bottom:10px;">
@@ -96,7 +95,7 @@
                 </div>
             </div>
             <div class="container text-center">
-                <button type="submit" class="btn btn-primary btn-lg active w-50" style="background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];">Başvur</button>
+                <button type="submit" class="btn btn-primary btn-lg active w-50" style="background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];">@Localizer.Get("job_form_submit")</button>
             </div>
         </form>
     </div>

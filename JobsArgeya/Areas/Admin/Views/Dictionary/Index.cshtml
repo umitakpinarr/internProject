@@ -1,0 +1,65 @@
+﻿@model List<List<Dictionary>>
+@{ 
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["CmsTitle"] = "Sözlük";
+    var languages = (List<LangCode>)ViewBag.Languages;
+ }
+<div class="card">
+    <div class="card-body">
+        <form action="/admin/dictionary/savekey" method="post">
+            <div class="col-md-3">
+                <textarea name="keyList" class="form-control"></textarea>
+                <br />
+                <button class="btn btn-primary w-100">Anahtar Kaydet</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <form method="post" action="/admin/dictionary/savelang">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            Anahtar
+                        </th>
+                        @foreach (LangCode language in languages)
+                        {
+                            <th>
+                                @language.Language
+                            </th>
+                        }
+                    </tr>
+                </thead>
+
+
+                <tbody>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        List<Dictionary> entryList = Model[i];
+                        <tr>
+                            <td>
+                                <input type="text" readonly value="@entryList[0].Key" />
+                            </td>
+
+                            @for (int k = 0; k < languages.Count; k++)
+                            {
+                                <td>
+                                    <input type="hidden" asp-for="@Model[i][k].Id" />
+                                    <input type="hidden" asp-for="@Model[i][k].Key" />
+                                    <input type="text" asp-for="@Model[i][k].Value" />
+                                    <input type="hidden" asp-for="@Model[i][k].LangCode" />
+                                </td>
+                            }
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+            <br />
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </form>
+    </div>
+</div>

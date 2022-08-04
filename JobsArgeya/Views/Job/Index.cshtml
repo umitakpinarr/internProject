@@ -1,6 +1,6 @@
 ﻿@{
-    ViewData["Title"] = "Kariyer";
-    ViewData["BreadcrumbTitle"] = "CV'ni Gönder";
+    ViewData["Title"] = Localizer.Get("home_breadcrumb_title");
+    ViewData["BreadcrumbTitle"] = Localizer.Get("job_breadcrumb_title");
 }
 @model ApplyModel
 
@@ -21,8 +21,8 @@
     <div class="container">
         <div class="t-row">
             <div class="d-table-cell">
-                <a class="btn btn-primary" style="margin-top:25px; margin-bottom:25px; background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];" href="/" title="Geri">
-                    <span style="line-height: 12px; font-size: 20px;">&#x2190;</span> Geri Git
+                <a class="btn btn-primary" style="margin-top:25px; margin-bottom:25px; background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];" href="/@Context.Request.RouteValues["culture"]" title="@Localizer.Get("job_onlycv_back")">
+                    <span style="line-height: 12px; font-size: 20px;">&#x2190;</span> @Localizer.Get("job_onlycv_back")
                 </a>
             </div>
         </div>
@@ -30,51 +30,50 @@
 </section>
 <div class="container shadow-sm p-3 mb--20 bg-body rounded">
     <div class="title text-center">
-        <h1>Başvuru Formu</h1>
+        <h1>@Localizer.Get("job_onlycv_title")</h1>
         <p>
-            Gelişimin ve eğlencenin tadını aynı anda çıkarmak mı? Neden olmasın?
-            <br> Kendi başarı hikayeni, aynı dili konuştuğun bir ekiple birlikte yazmak ister misin?</br>
+            @Localizer.Get("job_onlycv_desc")
         </p>
     </div>
   
     <div class="job-apply-form">
         <form action="/Job" method="post" enctype="multipart/form-data">
             <div class="form-group" style="margin-bottom:10px;">
-                <label for="FullName"><b>Adınız ve Soydınız: *</b></label>
+                <label for="FullName"><b>@Localizer.Get("job_form_fullname")</b></label>
                 <input name="FullName" id="FullName" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label for="Phone"><b>Telefon Numaranız: *</b></label>
+                <label for="Phone"><b>@Localizer.Get("job_form_phone")</b></label>
                 <input name="Phone" id="Phone" class="form-control" placeholder="05XXXXXXXXX" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label for="Email"><b>E-Mail Adresiniz: *</b></label>
+                <label for="Email"><b>@Localizer.Get("job_form_email")</b></label>
                 <input type="email" name="Email" id="Email" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label for="Gender"><b>Cinsiyetiniz *</b></label>
+                <label for="Gender"><b>@Localizer.Get("job_form_gender")</b></label>
                 <select name="Gender" id="Gender" class="form-control" required>
-                    <option value="">Lütfen Bir Seçim Yapınız!</option>
-                    <option value="Belirtilmemiş">Belirtmek İstemiyorum</option>
-                    <option value="Erkek">Erkek</option>
-                    <option value="Kadın">Kadın</option>
+                    <option value="">@Localizer.Get("gender_nonselected")</option>
+                    <option value="Belirtilmemiş">@Localizer.Get("gender_nonspecify")</option>
+                    <option value="Erkek">@Localizer.Get("gender_male")</option>
+                    <option value="Kadın">@Localizer.Get("gender_female")</option>
                 </select>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label for="University"><b>Okuduğunuz/Mezun Olduğunuz Okul: *</b></label>
+                <label for="University"><b>@Localizer.Get("job_form_university")</b></label>
                 <input name="University" id="University" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label for="Faculty"><b>Okuduğunuz/Mezun Olduğunuz Bölüm: *</b></label>
+                <label for="Faculty"><b>@Localizer.Get("job_form_faculty")</b></label>
                 <input name="Faculty" id="Faculty" class="form-control" required>
             </div>
             <div class="form-group" style="margin-bottom:10px;">
-                <label for="Resume"><b>Ön Yazı: *</b></label>
+                <label for="Resume"><b>@Localizer.Get("job_form_resume")</b></label>
                 <textarea name="Resume" id="Resume" class="form-control" required></textarea>
             </div>
             <div class="d-flex flex-row">
                 <div class="form-group mr-auto p-2" style="margin-bottom:10px;">
-                    <label for="FormFile"><b>Özgeçmiş / CV Yükle (Sadece PDF uzantılı dosyalar kabul edilmektedir) *</b></label>
+                    <label for="FormFile"><b>@Localizer.Get("job_form_upload")</b></label>
                     <input type="file" name="FormFile" id="FormFile" class="form-control-file" accept="application/pdf" required>
                 </div>
                 <div class="form-group p-2" style="margin-bottom:10px;">
@@ -86,7 +85,7 @@
                 </div>
             </div>
             <div class="container text-center">
-                <button type="submit" class="btn btn-primary btn-lg active w-75" style="background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];">Başvur</button>
+                <button type="submit" class="btn btn-primary btn-lg active w-75" style="background-color:@ViewData["SiteColor"]; border-color:@ViewData["SiteColor"];">@Localizer.Get("job_onlycv_submit")</button>
             </div>
         </form>
     </div>

@@ -84,6 +84,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
             /*string Host = Request.Host.ToString();
             ViewData["CmsSiteName"] = Details.GetSiteDetails(3, Host);
             ViewData["FavIcon"] = Details.GetSiteDetails(7, Host);*/
+            List<LangCode> langCode = _databaseContext.LangCodes.ToList();
             if (CompanyId != 0 && User.IsInRole("SuperAdmin"))
             {
                 Company = _databaseContext.Companies.Where(x => x.Id == CompanyId).FirstOrDefault();
@@ -103,7 +104,7 @@ namespace JobsArgeya.Areas.Admin.Controllers
                 ViewData["DarkLogo"] = Details.GetSiteDetails(6, Company.CompanyDomain);
                 ViewData["CompanyRoute"] = OfficeId;
             }
-            return View();
+            return View(langCode);
         }
         [HttpGet]
         public IActionResult Edit(int Id, int CompanyId)
@@ -160,7 +161,6 @@ namespace JobsArgeya.Areas.Admin.Controllers
         }
         [HttpPost]
         public IActionResult Add(JobsModel Model)
-        
         {
             GetDetails Details = new GetDetails(_databaseContext, _configuration);
             string Host = Request.Host.ToString();
@@ -183,7 +183,8 @@ namespace JobsArgeya.Areas.Admin.Controllers
                     JobContent = Model.JobContent,
                     JobSlug = Helper.GenerateSlug(Model.JobTitle),
                     IsActive = "true",
-                    CompanyId = (int)Model.CompanyId
+                    CompanyId = (int)Model.CompanyId,
+                    LangCode = Model.LangCode
                 });
                 _databaseContext.SaveChanges();
                 TempData["successMessage"] = "İlan başarıyla eklendi.";

@@ -40,8 +40,15 @@ using JobsArgeya.Business;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Users\Freeman\Source\Repos\farukcakal\internProject\JobsArgeya\Areas\Admin\Views\_ViewImports.cshtml"
+using JobsArgeya.Data.Entities;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"947b25d6d8338052eb6a904c052f044903728d74", @"/Areas/Admin/Views/User/Add.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"e132fafa218d2fa3e61abc3075a7a88ecf0a1023", @"/Areas/Admin/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"fcb0f0c5d712905f755b54476f993838c16b9839", @"/Areas/Admin/Views/_ViewImports.cshtml")]
     public class Areas_Admin_Views_User_Add : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<List<CompanyViewModel>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("action", new global::Microsoft.AspNetCore.Html.HtmlString("/admin/user/add"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -82,7 +89,7 @@ using JobsArgeya.Business;
 #line hidden
 #nullable disable
             WriteLiteral("<div class=\"col-12\">\n    <div class=\"card\">\n        <div class=\"card-body\">\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "947b25d6d8338052eb6a904c052f044903728d744947", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "947b25d6d8338052eb6a904c052f044903728d745164", async() => {
                 WriteLiteral(@"
                 <div class=""form-group"" style=""margin-bottom:10px;"">
                     <label for=""Email"">Kullanıcı Adı</label>
@@ -112,7 +119,7 @@ using JobsArgeya.Business;
                     <label for=""CompanyId"">Şirket</label>
                     <select name=""CompanyId"" id=""CompanyId"" class=""form-control"">
                         ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "947b25d6d8338052eb6a904c052f044903728d746965", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "947b25d6d8338052eb6a904c052f044903728d747182", async() => {
                     WriteLiteral("Lütfen Seçim Yapınız !");
                 }
                 );
@@ -138,7 +145,7 @@ using JobsArgeya.Business;
 #line hidden
 #nullable disable
                 WriteLiteral("                            ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "947b25d6d8338052eb6a904c052f044903728d748655", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "947b25d6d8338052eb6a904c052f044903728d748872", async() => {
 #nullable restore
 #line 39 "C:\Users\Freeman\Source\Repos\farukcakal\internProject\JobsArgeya\Areas\Admin\Views\User\Add.cshtml"
                                                    Write(Company.CompanyName);

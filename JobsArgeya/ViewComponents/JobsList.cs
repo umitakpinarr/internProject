@@ -37,6 +37,7 @@ namespace JobsArgeya.ViewComponents
                 JobsVm.JobContent = Jobs.JobContent;
                 JobsVm.JobSlug = Jobs.JobSlug;
                 JobsVm.IsActive = Jobs.IsActive;
+                JobsVm.LangCode = Jobs.LangCode;
 
                 AllJobs.Add(JobsVm);
             }
